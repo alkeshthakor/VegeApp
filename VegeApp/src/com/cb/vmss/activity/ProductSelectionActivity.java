@@ -1,5 +1,6 @@
 package com.cb.vmss.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -13,7 +14,7 @@ public class ProductSelectionActivity extends FragmentActivity{
 
 	//private ViewPagerAdapter mViewPagerAdapter;
 	private String catList[];
-	private int defaultPosition;
+	public int defaultPosition;
 	
 	private FragmentTabHost mTabHost;
 	
@@ -24,9 +25,15 @@ public class ProductSelectionActivity extends FragmentActivity{
 		
 		mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup(this,getSupportFragmentManager(), R.id.realtabcontent);
-
-        mTabHost.addTab(mTabHost.newTabSpec("fragment_product_vegetable").setIndicator("Vegetable"),ProductSelectionFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("fragment_product_fruite").setIndicator("Fruits"),ProductSelectionFragment.class, null);
+        mTabHost.setBackgroundColor(Color.GREEN);
+        Bundle veg = new Bundle();
+        veg.putString("Category", "Vegetables");
+        
+        Bundle fruit = new Bundle();
+        fruit.putString("Category", "Fruits");
+        
+        mTabHost.addTab(mTabHost.newTabSpec("fragment_product_vegetable").setIndicator("Vegetables"),ProductSelectionFragment.class, veg);
+        mTabHost.addTab(mTabHost.newTabSpec("fragment_product_fruite").setIndicator("Fruits"),ProductSelectionFragment.class, fruit);
        
 		catList=getIntent().getStringArrayExtra("cat_list");
 		defaultPosition=Integer.parseInt(getIntent().getStringExtra("tabposition"));

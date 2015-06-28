@@ -1,19 +1,32 @@
 package com.cb.vmss.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cb.vmss.R;
+import com.cb.vmss.activity.ProductSelectionActivity;
+import com.cb.vmss.adapter.ProductAdapter;
+import com.cb.vmss.model.Category;
+import com.cb.vmss.model.Product;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.ServerConnector;
@@ -31,6 +44,8 @@ public class ProductSelectionFragment extends Fragment {
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
+	private String productNameList[];
+	public static List<Product> mProductList;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -64,8 +79,12 @@ public class ProductSelectionFragment extends Fragment {
 			
 		 
 		 mServiceUrl=Constant.HOST+Constant.SERVICE_PRODUCT_BY_CAT_ID;
-		 
-		 new LoadProdcutByCategoryTask().execute(mServiceUrl,"cat_id=10");
+		 if(argumentBundle.getString("Category").equalsIgnoreCase("Vegetables")) {
+			 new LoadProdcutByCategoryTask().execute(mServiceUrl,"cat_id=10");
+		 } else {
+			 new LoadProdcutByCategoryTask().execute(mServiceUrl,"cat_id=11");
+		 }
+		
 		 
 		 return view;
 		 
@@ -91,7 +110,38 @@ public class ProductSelectionFragment extends Fragment {
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
 			mProgressDialog.dismiss();
+			
+			parseResponse(result);
+			
 		}
 	}
 	
+	private void parseResponse(JSONObject responseData) {
+		if(responseData!=null&&responseData.length()>0) {
+			try {
+				 JSONArray productArray=responseData.getJSONArray("DATA");
+				 if(productArray.length()>0){
+					
+				     mProductList=new ArrayList<Product>();
+				     productNameList=new String[productArray.length()];
+				     
+				     for(int i=0;i<productArray.length();i++){
+				    	 Product productItem=new Product();
+				    	 productItem.setProductId(productArray.getJSONObject(i).getString("prd_id"));
+				    	 productItem.setProductName(productArray.getJSONObject(i).getString("prd_name"));
+				    	 productItem.setProductImage(productArray.getJSONObject(i).getString("prd_mainimage"));
+				    	 mProductList.add(productItem);
+					    
+				    	 productNameList[i]=productItem.getProductName();
+				   }
+				     mProductListView.setAdapter(new ProductAdapter(mActivity,productNameList));
+				 }else{
+					 
+				 }
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+		}
 }
