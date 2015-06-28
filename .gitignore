@@ -1,0 +1,14 @@
+/VegeApp/bin/resources.ap_
+/VegeApp/bin/classes
+/VegeApp/bin/dexedLibs
+/VegeApp/bin/res
+/VegeApp/bin/AndroidManifest.xml
+/VegeApp/bin/classes.dex
+/VegeApp/bin/R.txt
+/VegeApp/bin/*
+/VegeApp/bin/*.xml
+/VegeApp/bin/*.dex
+/VegeApp/bin/*.txt
+/VegeApp/bin/*.ap_
+/VegeApp/gen
+/VegeApp/.settings

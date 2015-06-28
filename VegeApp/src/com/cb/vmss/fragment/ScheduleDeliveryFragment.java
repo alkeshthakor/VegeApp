@@ -1,0 +1,32 @@
+package com.cb.vmss.fragment;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+public class ScheduleDeliveryFragment extends Fragment
+{
+
+
+    public ScheduleDeliveryFragment()
+    {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate (savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        // Inflate the layout for this fragment
+        return inflater.inflate (com.cb.vmss.R.layout.fragment_schedule_delivery, container, false);
+    }
+}
