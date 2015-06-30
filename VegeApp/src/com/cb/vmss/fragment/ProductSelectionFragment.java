@@ -44,7 +44,8 @@ public class ProductSelectionFragment extends Fragment {
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
-	private String productNameList[];
+	private ArrayList<Product> productArrayList = new ArrayList<Product>();
+	
 	public static List<Product> mProductList;
 	
 	@Override
@@ -123,18 +124,26 @@ public class ProductSelectionFragment extends Fragment {
 				 if(productArray.length()>0){
 					
 				     mProductList=new ArrayList<Product>();
-				     productNameList=new String[productArray.length()];
 				     
 				     for(int i=0;i<productArray.length();i++){
 				    	 Product productItem=new Product();
 				    	 productItem.setProductId(productArray.getJSONObject(i).getString("prd_id"));
 				    	 productItem.setProductName(productArray.getJSONObject(i).getString("prd_name"));
 				    	 productItem.setProductImage(productArray.getJSONObject(i).getString("prd_mainimage"));
+				    	 
+				    	 productItem.setProductMainPrice(productArray.getJSONObject(i).getString("prd_mainprice"));
+				    	 productItem.setProductDisplayPrice(productArray.getJSONObject(i).getString("prd_displayprice"));
+				    	 productItem.setProductUnitId(productArray.getJSONObject(i).getString("prd_unit_id"));
+				    	 
+				    	 productItem.setCategoryId(productArray.getJSONObject(i).getString("cat_id"));
+				    	 productItem.setCategoryName(productArray.getJSONObject(i).getString("cat_name"));
+				    	 productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
+				    	 productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
+				    	 
 				    	 mProductList.add(productItem);
 					    
-				    	 productNameList[i]=productItem.getProductName();
 				   }
-				     mProductListView.setAdapter(new ProductAdapter(mActivity,productNameList));
+				     mProductListView.setAdapter(new ProductAdapter(mActivity,mProductList));
 				 }else{
 					 
 				 }

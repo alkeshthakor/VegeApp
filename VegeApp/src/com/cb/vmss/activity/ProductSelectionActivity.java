@@ -36,9 +36,8 @@ public class ProductSelectionActivity extends FragmentActivity{
         mTabHost.addTab(mTabHost.newTabSpec("fragment_product_fruite").setIndicator("Fruits"),ProductSelectionFragment.class, fruit);
        
 		catList=getIntent().getStringArrayExtra("cat_list");
-		defaultPosition=Integer.parseInt(getIntent().getStringExtra("tabposition"));
 
-		mTabHost.setCurrentTab(defaultPosition);
+		mTabHost.setCurrentTabByTag(getIntent().getStringExtra("tabposition"));
 		
 	}
 }
