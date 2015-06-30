@@ -18,7 +18,15 @@ public class Product implements Serializable{
 	private String unit_key;
 	private String unit_value;
 	private String categoryName;
+	private int productQty;
+
 	
+	public int getProductQty() {
+		return productQty;
+	}
+	public void setProductQty(int productQty) {
+		this.productQty = productQty;
+	}
 	public String getProductId() {
 		return productId;
 	}

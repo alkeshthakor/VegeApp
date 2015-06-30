@@ -139,6 +139,8 @@ public class ProductSelectionFragment extends Fragment {
 				    	 productItem.setCategoryName(productArray.getJSONObject(i).getString("cat_name"));
 				    	 productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
 				    	 productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
+				    	 productItem.setProductQty(0);
+				    	 
 				    	 
 				    	 mProductList.add(productItem);
 					    

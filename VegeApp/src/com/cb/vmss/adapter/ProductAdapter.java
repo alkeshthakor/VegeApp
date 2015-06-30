@@ -46,8 +46,8 @@ public class ProductAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder = null;
-        Product rowItem = (Product) getItem(position);
+        final ViewHolder holder;
+        final Product rowItem = (Product) getItem(position);
          
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_product_item, null);
@@ -64,11 +64,25 @@ public class ProductAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         
+        
+        
+        holder.txtViewQty.setText(rowItem.getProductQty()+"");
+        
+        
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Log.i("Qty", "icoMinus");
+				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())-1;
+				if(qty<=0){
+					holder.txtViewQty.setText("0");
+					rowItem.setProductQty(0);
+				}else{
+					holder.txtViewQty.setText(""+qty);
+					rowItem.setProductQty(qty);
+				}
+				
 				
 			}
 		});
@@ -78,16 +92,22 @@ public class ProductAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Log.i("Qty", "icoPlus");
+				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())+1;
+			    holder.txtViewQty.setText(""+qty);
+				rowItem.setProductQty(qty);				
 				
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
         //holder.txtViewProductWeight.setText(rowItem.getProductUnitId());
         holder.txtViewProductPrice.setText(rowItem.getProductMainPrice());
+        
+        
+        
         return convertView;
 	}
 
-	static private class ViewHolder {
+	static class ViewHolder {
 		TextView txtViewProductName;
 		TextView txtViewProductWeight;
 		TextView txtViewProductPrice;
