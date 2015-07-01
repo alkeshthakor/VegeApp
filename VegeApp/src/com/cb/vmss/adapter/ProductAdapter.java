@@ -21,11 +21,19 @@ public class ProductAdapter extends BaseAdapter {
 	Context context;
 	LayoutInflater inflater;
 	private ArrayList<Product> mProductRowItem = new ArrayList<Product>();
+	private int totalCount = 0;
+	
+	public interface ITotalCount {
+		public void getTotalCount(int count);
+	}
+	
+	ITotalCount iTotalCount = null;
 	
 	public ProductAdapter(Context context, List<Product> mProductList) {
 		this.context = context;
 		this.mProductRowItem = (ArrayList<Product>) mProductList;
 		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		iTotalCount = (ITotalCount) context;
 	}
 	
 	@Override
@@ -77,6 +85,11 @@ public class ProductAdapter extends BaseAdapter {
 					holder.txtViewQty.setText(""+qty);
 					rowItem.setProductQty(qty);
 				}
+				totalCount = totalCount - 1;
+				if(totalCount<=0) {
+					totalCount = 0;
+				}
+				iTotalCount.getTotalCount(totalCount);
 			}
 		});
         
@@ -86,8 +99,10 @@ public class ProductAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Log.i("Qty", "icoPlus");
 				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())+1;
-			    holder.txtViewQty.setText(""+qty);
+				holder.txtViewQty.setText(""+qty);
 				rowItem.setProductQty(qty);
+				totalCount = totalCount + 1;
+			    iTotalCount.getTotalCount(totalCount);
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
