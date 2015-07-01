@@ -18,7 +18,7 @@
 
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
+                layout="@layout/top_bar_address" />
         </LinearLayout>
 
         <FrameLayout

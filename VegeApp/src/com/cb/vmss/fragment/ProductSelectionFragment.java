@@ -67,7 +67,7 @@ public class ProductSelectionFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub		
-		 View view=inflater.inflate(R.layout.fragment_layout_product_selection, container,false);
+		 View view=inflater.inflate(R.layout.fragment_layout_product_selection2, container,false);
 		 mProductListView=(ListView)view.findViewById(R.id.productList);
 		 argumentBundle=this.getArguments();
 		 mContext = mActivity.getApplicationContext();
@@ -142,6 +142,11 @@ public class ProductSelectionFragment extends Fragment {
 				    	 productItem.setProductQty(0);
 				    	 
 				    	 
+				    	 mProductList.add(productItem);
+				    	 mProductList.add(productItem);
+				    	 mProductList.add(productItem);
+				    	 mProductList.add(productItem);
+				    	 mProductList.add(productItem);
 				    	 mProductList.add(productItem);
 					    
 				   }

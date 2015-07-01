@@ -63,12 +63,7 @@ public class ProductAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
-        
-        
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
-        
-        
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -82,8 +77,6 @@ public class ProductAdapter extends BaseAdapter {
 					holder.txtViewQty.setText(""+qty);
 					rowItem.setProductQty(qty);
 				}
-				
-				
 			}
 		});
         
@@ -94,16 +87,11 @@ public class ProductAdapter extends BaseAdapter {
 				Log.i("Qty", "icoPlus");
 				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())+1;
 			    holder.txtViewQty.setText(""+qty);
-				rowItem.setProductQty(qty);				
-				
+				rowItem.setProductQty(qty);
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
-        //holder.txtViewProductWeight.setText(rowItem.getProductUnitId());
         holder.txtViewProductPrice.setText(rowItem.getProductMainPrice());
-        
-        
-        
         return convertView;
 	}
 
