@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name=".activity.AddAddressActivity"
+            android:name=".CheckOutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ProductSelectionActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!--
         <activity
             android:name=".activity.MainActivity"
@@ -35,27 +40,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        -->
-        <activity
-            android:name=".activity.ProductSelectionActivity"
-            android:screenOrientation="portrait" >
         </activity>
+        
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/title_activity_add_address"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".activity.CheckOutActivity"
+            android:name=".CheckOutActivity"
             android:label="@string/title_activity_check_out" >
         </activity>
+        
+        -->
+        
         <activity
-            android:name=".activity.VerifyPhoneActivity"
+            android:name=".VerifyPhoneActivity"
             android:label="@string/title_activity_verify_phone" >
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity

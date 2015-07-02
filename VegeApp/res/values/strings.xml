@@ -23,11 +23,29 @@
     <string name="lbl_add_city">City/State</string>
     <string name="lbl_add_create">Create</string>
     <string name="lbl_add_logout">Logout</string>
+    
+    <string name="lbl_sub_total">Sub Total</string>
+    <string name="lbl_delivery_charges">Delivery Charges</string>
+    <string name="lbl_free">Free</string>
+    <string name="lbl_total_amount">Total Amount</string>
+    <string name="lbl_apply_promo_code">Apply Promo Code</string>
+    <string name="lbl_today">Today</string>
+    <string name="lbl_tomorrow">Tomorrow</string>
+    <string name="lbl_dayafter">Day After</string>
+    <string name="lbl_back">Back</string>
+    <string name="lbl_place_order">Place Order</string>
+    <string name="lbl_zero">0</string>
+    <string name="lbl_time">04:30 PM</string>
+    
+        
     <string name="lbl_title_check_out">Check Out</string>
     <string name="lbl_title_add_address">Add Address</string>
     <string name="lbl_title_verifing_phone">Verifing Phone</string>
     <string name="lbl_title_login">Login or Signup</string>
     <string name="lbl_title_choose_address">Choose Address</string>
+    
+    <string name="lbl_term_service">By using this application, you agree to the Term of Service and Privacy Police</string>
+    
 
     <!-- navigation drawer item labels -->
     <string-array name="nav_drawer_labels">

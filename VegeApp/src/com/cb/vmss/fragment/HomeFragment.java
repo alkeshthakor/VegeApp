@@ -29,8 +29,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cb.vmss.ProductSelectionActivity;
 import com.cb.vmss.R;
-import com.cb.vmss.activity.ProductSelectionActivity;
 import com.cb.vmss.model.Category;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;

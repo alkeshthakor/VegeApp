@@ -1,11 +1,10 @@
-package com.cb.vmss.activity;
+package com.cb.vmss;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 
-import com.cb.vmss.R;
 import com.cb.vmss.fragment.ProductSelectionFragment;
 
 

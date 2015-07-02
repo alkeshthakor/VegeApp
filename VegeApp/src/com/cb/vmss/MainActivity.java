@@ -1,4 +1,4 @@
-package com.cb.vmss.activity;
+package com.cb.vmss;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.cb.vmss.R;
 import com.cb.vmss.fragment.CalenderFragment;
 import com.cb.vmss.fragment.FragmentDrawer;
 import com.cb.vmss.fragment.GroupsFragment;
