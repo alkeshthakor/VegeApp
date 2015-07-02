@@ -17,7 +17,7 @@ public class ProductSelectionActivity extends FragmentActivity  implements ITota
 	public int defaultPosition;
 	
 	private FragmentTabHost mTabHost;
-	private Fragment currentFragment;
+	public static Fragment currentFragment;
 	public interface ITotalCountActivity {
 		public void getTotalCountActivity(int count);
 	}

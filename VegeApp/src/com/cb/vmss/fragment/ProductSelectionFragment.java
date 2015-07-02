@@ -40,7 +40,8 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 	private Activity mActivity;
 
 	ListView mProductListView;
-	RelativeLayout relLayout;
+	RelativeLayout relLayout, qtyCountRelLayoutObj;
+	TextView txtQtyCountObj;
 	Bundle argumentBundle;
 	private String mServiceUrl;
 	
@@ -73,8 +74,12 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub		
 		 View view=inflater.inflate(R.layout.fragment_layout_product_selection2, container,false);
+		 ProductSelectionActivity.currentFragment = ProductSelectionFragment.this;
 		 mProductListView=(ListView)view.findViewById(R.id.productList);
 		 relLayout = (RelativeLayout) view.findViewById(R.id.relLayout);
+		 qtyCountRelLayoutObj = (RelativeLayout) view.findViewById(R.id.qtyCountRelLayout);
+		 txtQtyCountObj = (TextView) view.findViewById(R.id.txtQtyCount);
+		 
 		 argumentBundle=this.getArguments();
 		 mContext = mActivity.getApplicationContext();
 	
@@ -165,9 +170,12 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 	@Override
 	public void getTotalCountActivity(int count) {
 		Log.i("Count", ""+count);
-		/*if(count <= 0)
+		if(count <= 0) {
 			relLayout.setVisibility(View.GONE);
-		else if(count > 0)
-			relLayout.setVisibility(View.VISIBLE);*/
+			txtQtyCountObj.setText(""+count);
+		} else if(count > 0) {
+			relLayout.setVisibility(View.VISIBLE);
+			txtQtyCountObj.setText(""+count);
+		}
 	}
 }

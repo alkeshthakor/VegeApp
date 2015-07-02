@@ -78,16 +78,18 @@ public class ProductAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Log.i("Qty", "icoMinus");
 				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())-1;
+				if(qty>=0) {
+					totalCount = totalCount - 1;
+					if(totalCount<=0) {
+						totalCount = 0;
+					}
+				}
 				if(qty<=0){
 					holder.txtViewQty.setText("0");
 					rowItem.setProductQty(0);
 				}else{
 					holder.txtViewQty.setText(""+qty);
 					rowItem.setProductQty(qty);
-				}
-				totalCount = totalCount - 1;
-				if(totalCount<=0) {
-					totalCount = 0;
 				}
 				iTotalCount.getTotalCount(totalCount);
 			}
