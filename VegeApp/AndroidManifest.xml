@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name=".CheckOutActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -50,16 +50,27 @@
         -->
         
         <activity
+            android:name=".AddAddressActivity" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+          <activity
+            android:name=".CheckOutActivity"
+             android:screenOrientation="portrait"
+             >
+        </activity>
+        
+        <activity
             android:name=".VerifyPhoneActivity"
-            android:label="@string/title_activity_verify_phone" >
+             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ChoseeAddressActivity"
-            android:label="@string/title_activity_chosee_address" >
+         android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package com.cb.vmss;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +10,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.cb.vmss.fragment.CalenderFragment;
 import com.cb.vmss.fragment.FragmentDrawer;
 import com.cb.vmss.fragment.GroupsFragment;
 import com.cb.vmss.fragment.HomeFragment;
@@ -86,32 +86,51 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				title = getString(R.string.title_home);
 				break;
 			case 1 :
-				fragment = new CalenderFragment();
-				title = getString(R.string.title_calender);
+//				fragment = new CalenderFragment();
+//				title = getString(R.string.title_calender);
+				Intent addressIntent=new Intent(getApplicationContext(), AddAddressActivity.class);
+				startActivity(addressIntent);
 				break;
 			case 2 :
-				fragment = new OverviewFragment();
-				title = getString(R.string.title_overview);
+//				fragment = new OverviewFragment();
+//				title = getString(R.string.title_overview);
+//				loadFragment(fragment,title);
+				
+				Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+				startActivity(checkoutIntent);
 				break;
 			case 3 :
-				fragment = new GroupsFragment();
+				/*fragment = new GroupsFragment();
 				title = getString(R.string.title_groups);
+				loadFragment(fragment,title);*/
+				
+				Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
+				startActivity(loginIntent);
+				
 				break;
 			case 4 :
 				fragment = new ListsFragment();
 				title = getString(R.string.title_lists);
+				loadFragment(fragment,title);
+
 				break;
 			case 5 :
 				fragment = new ProfileFragment();
 				title = getString(R.string.title_profile);
+				loadFragment(fragment,title);
+
 				break;
 			case 6 :
 				fragment = new ScheduleDeliveryFragment();
 				title = getString(R.string.title_schedule_delivery);
+				loadFragment(fragment,title);
+
 				break;
 			case 7 :
 				fragment = new SettingsFragment();
 				title = getString(R.string.title_settings);
+				loadFragment(fragment,title);
+
 				break;
 			case 8 :
 				/*
@@ -123,6 +142,20 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				break;
 		}
 
+	/*	if (fragment != null)
+		{
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			fragmentTransaction.replace(R.id.container_body, fragment);
+			fragmentTransaction.commit();
+
+			// set the toolbar title
+			getSupportActionBar().setTitle(title);
+		}*/
+	}
+	
+	
+	private void loadFragment(Fragment fragment,String title){
 		if (fragment != null)
 		{
 			FragmentManager fragmentManager = getSupportFragmentManager();

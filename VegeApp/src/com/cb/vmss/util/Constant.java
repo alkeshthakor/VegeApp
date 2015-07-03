@@ -11,11 +11,16 @@ public class Constant {
 
 	public static final String HOST="http://45.55.152.215/dev/sabjiatdoor/services/";
 	
-	
+	public static final String PREF_USER_ID = "PREF_USER_ID";
+	public static final String PREF_PHONE_NUMBER= "PREF_PHONE_NUMBER";
+
 	
 	public static final String SERVICE_GET_ALL_CATEGORY = "category/getallcategory";
 	public static final String SERVICE_GET_ALL_PRODUCT = "PREF_VMSS";
 	public static final String SERVICE_PRODUCT_BY_CAT_ID = "product/getproductbycatid";
+	public static final String SERVICE_ADD_ADDRESS = "user/addaddress";
+	public static final String SERVICE_USER_CREATION = "user/adduser";
+	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
 
 	
 	/*

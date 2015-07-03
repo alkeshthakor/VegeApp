@@ -9,6 +9,12 @@
         android:id="@+id/toolbar"
         layout="@layout/top_bar_address" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -16,96 +22,129 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+            android:layout_marginTop="60dp"
+            android:orientation="vertical" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lbl_add_name"
-                android:textAllCaps="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:text="@string/lbl_sms_waiting"
                 android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addNameEditText"
+            <TextView
+                android:id="@+id/phoneNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
+                android:layout_marginTop="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.2dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/lbl_Or"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.2dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/lbl_add_house_no"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text="@string/lbl_manual_code_enter"
                 android:textSize="12sp" />
 
             <EditText
-                android:id="@+id/addHouseEditText"
+                android:id="@+id/manualCodeVerifyEdittext"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/black"
+                android:hint="@string/lbl_enter_code" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="100dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/lbl_add_street"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/btnResendCodePhoneVerify"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/round_corner_button_background"
+                    android:text="@string/lbl_resend_verification"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addStreetEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/lbl_add_area"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/addAreaEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                                android:textSize="14sp"
-                
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/lbl_add_city"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/addCityEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
-
-            <Button
-                android:id="@+id/btnLogut"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center|bottom"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/btn_background"
-                android:text="@string/lbl_add_create"
-                android:textColor="#FFF" />
+                <Button
+                    android:id="@+id/btnNextPhoneVerify"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/round_corner_button_background_with_color"
+                    android:text="@string/lbl_next"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
