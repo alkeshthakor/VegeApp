@@ -19,7 +19,7 @@ public class ProductSelectionActivity extends FragmentActivity  implements ITota
 	private FragmentTabHost mTabHost;
 	public static Fragment currentFragment;
 	public interface ITotalCountActivity {
-		public void getTotalCountActivity(int count);
+		public void getTotalActivity(int count, int prize);
 	}
 	ITotalCountActivity iTotalCountActivity = null;
 	
@@ -51,8 +51,7 @@ public class ProductSelectionActivity extends FragmentActivity  implements ITota
 	}
 
 	@Override
-	public void getTotalCount(int count) {
-		iTotalCountActivity.getTotalCountActivity(count);
-		
+	public void getTotal(int count, int prize) {
+		iTotalCountActivity.getTotalActivity(count, prize);
 	}
 }

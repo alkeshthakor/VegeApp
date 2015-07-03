@@ -41,7 +41,7 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 
 	ListView mProductListView;
 	RelativeLayout relLayout, qtyCountRelLayoutObj;
-	TextView txtQtyCountObj;
+	TextView txtQtyCountObj,productPriceTextViewObj;
 	Bundle argumentBundle;
 	private String mServiceUrl;
 	
@@ -79,6 +79,7 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 		 relLayout = (RelativeLayout) view.findViewById(R.id.relLayout);
 		 qtyCountRelLayoutObj = (RelativeLayout) view.findViewById(R.id.qtyCountRelLayout);
 		 txtQtyCountObj = (TextView) view.findViewById(R.id.txtQtyCount);
+		 productPriceTextViewObj = (TextView) view.findViewById(R.id.productPriceTextView);
 		 
 		 argumentBundle=this.getArguments();
 		 mContext = mActivity.getApplicationContext();
@@ -141,7 +142,7 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 				 if(productArray.length()>0){
 					
 				     mProductList=new ArrayList<Product>();
-				     
+
 				     for(int i=0;i<productArray.length();i++){
 				    	 Product productItem=new Product();
 				    	 productItem.setProductId(productArray.getJSONObject(i).getString("prd_id"));
@@ -156,7 +157,7 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 				    	 productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
 				    	 productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
 				    	 productItem.setProductQty(0);
-				    
+				    	 productItem.setProductBitmap(null);
 				    	 mProductList.add(productItem);
 				     }
 				     mProductListView.setAdapter(new ProductAdapter(mActivity,mProductList));
@@ -168,14 +169,16 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 	}
 
 	@Override
-	public void getTotalCountActivity(int count) {
+	public void getTotalActivity(int count, int prize) {
 		Log.i("Count", ""+count);
 		if(count <= 0) {
 			relLayout.setVisibility(View.GONE);
 			txtQtyCountObj.setText(""+count);
+			productPriceTextViewObj.setText(""+prize);
 		} else if(count > 0) {
 			relLayout.setVisibility(View.VISIBLE);
 			txtQtyCountObj.setText(""+count);
+			productPriceTextViewObj.setText(""+prize);
 		}
 	}
 }

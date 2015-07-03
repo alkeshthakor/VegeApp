@@ -2,6 +2,8 @@ package com.cb.vmss.model;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 public class Product implements Serializable{
 	/**
 	 * 
@@ -19,7 +21,7 @@ public class Product implements Serializable{
 	private String unit_value;
 	private String categoryName;
 	private int productQty;
-
+	private Bitmap productBitmap;
 	
 	public int getProductQty() {
 		return productQty;
@@ -87,5 +89,10 @@ public class Product implements Serializable{
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
+	public Bitmap getProductBitmap() {
+		return productBitmap;
+	}
+	public void setProductBitmap(Bitmap productBitmap) {
+		this.productBitmap = productBitmap;
+	}
 }

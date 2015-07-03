@@ -1,9 +1,17 @@
 package com.cb.vmss.adapter;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +30,11 @@ public class ProductAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	private ArrayList<Product> mProductRowItem = new ArrayList<Product>();
 	private int totalCount = 0;
+	private int totalPrize = 0;
+	//private HashMap<Integer,Bitmap> productImageMap = new HashMap<Integer, Bitmap>();
 	
 	public interface ITotalCount {
-		public void getTotalCount(int count);
+		public void getTotal(int count,int prize);
 	}
 	
 	ITotalCount iTotalCount = null;
@@ -66,20 +76,24 @@ public class ProductAdapter extends BaseAdapter {
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
             holder.icoPlus= (ImageView)convertView.findViewById(R.id.iconPlus);
             holder.icoMinus= (ImageView)convertView.findViewById(R.id.iconMinus);
-            
+            holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
             convertView.setTag(holder);
+            
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.txtViewQty.setText(rowItem.getProductQty()+"");
+        
         holder.icoMinus.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Log.i("Qty", "icoMinus");
 				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())-1;
 				if(qty>=0) {
 					totalCount = totalCount - 1;
+					totalPrize = totalPrize - Integer.parseInt(holder.txtViewProductPrice.getText().toString());
+					if(totalPrize<=0) {
+						totalPrize = 0;
+					}
 					if(totalCount<=0) {
 						totalCount = 0;
 					}
@@ -91,24 +105,31 @@ public class ProductAdapter extends BaseAdapter {
 					holder.txtViewQty.setText(""+qty);
 					rowItem.setProductQty(qty);
 				}
-				iTotalCount.getTotalCount(totalCount);
+				iTotalCount.getTotal(totalCount,totalPrize);
 			}
 		});
         
         holder.icoPlus.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Log.i("Qty", "icoPlus");
 				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())+1;
+				totalPrize = totalPrize + Integer.parseInt(holder.txtViewProductPrice.getText().toString());
 				holder.txtViewQty.setText(""+qty);
 				rowItem.setProductQty(qty);
 				totalCount = totalCount + 1;
-			    iTotalCount.getTotalCount(totalCount);
+			    iTotalCount.getTotal(totalCount,totalPrize);
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
         holder.txtViewProductPrice.setText(rowItem.getProductMainPrice());
+        holder.txtViewQty.setText(rowItem.getProductQty()+"");
+        if(rowItem.getProductBitmap() != null) {
+        	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
+            holder.productImageObj.setImageDrawable(imageDrawable);
+        } else 
+        	new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        
         return convertView;
 	}
 
@@ -119,5 +140,36 @@ public class ProductAdapter extends BaseAdapter {
 		TextView txtViewQty;
 		ImageView icoPlus;
 		ImageView icoMinus;
+		ImageView productImageObj;
     }
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+		ImageView bmImage;
+		int position;
+		public DownloadImageTask(int position,ImageView bmImage) {
+			this.position = position;
+			this.bmImage = bmImage;
+		}
+
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap mIcon11 = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+			return mIcon11;
+		}
+
+		@SuppressLint("NewApi")
+		protected void onPostExecute(Bitmap result) {
+			//productImageMap.put(this.position, result);
+			mProductRowItem.get(this.position).setProductBitmap(result);
+			Drawable imageDrawable = new BitmapDrawable(context.getResources(), result);
+			bmImage.setImageDrawable(imageDrawable);
+		}
+	}
 }
