@@ -84,12 +84,14 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			case 0 :
 				fragment = new HomeFragment();
 				title = getString(R.string.title_home);
+				loadFragment(fragment,title);
 				break;
 			case 1 :
 //				fragment = new CalenderFragment();
 //				title = getString(R.string.title_calender);
 				Intent addressIntent=new Intent(getApplicationContext(), AddAddressActivity.class);
 				startActivity(addressIntent);
+				
 				break;
 			case 2 :
 //				fragment = new OverviewFragment();
