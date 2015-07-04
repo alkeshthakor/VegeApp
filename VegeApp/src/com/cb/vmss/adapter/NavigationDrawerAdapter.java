@@ -30,7 +30,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         inflater = LayoutInflater.from (context);
         this.data = data;
         //nav_icon = context.getResources ().getStringArray (R.array.nav_drawer_icon);
-        nav_icon = context.getResources ().obtainTypedArray (com.cb.vmss.R.array.nav_drawer_icon);
+        nav_icon = context.getResources ().obtainTypedArray (R.array.nav_drawer_icon);
     }
 
     public void delete(int position)
@@ -42,7 +42,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = inflater.inflate (com.cb.vmss.R.layout.nav_drawer_row, parent, false);
+        View view = inflater.inflate (R.layout.nav_drawer_row, parent, false);
         MyViewHolder holder = new MyViewHolder (view);
         return holder;
     }

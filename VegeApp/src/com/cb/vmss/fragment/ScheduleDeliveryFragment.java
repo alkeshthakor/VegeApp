@@ -1,5 +1,8 @@
 package com.cb.vmss.fragment;
 
+
+import com.cb.vmss.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +30,6 @@ public class ScheduleDeliveryFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate (com.cb.vmss.R.layout.fragment_schedule_delivery, container, false);
+        return inflater.inflate (R.layout.fragment_schedule_delivery, container, false);
     }
 }

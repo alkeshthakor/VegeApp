@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/top_bar_address" />
+        
+			<ListView 
+			    android:paddingLeft="10dp"
+            	android:paddingRight="10dp"
+			    android:layout_marginTop="20dp"
+			    android:layout_weight="1"
+			    android:layout_width="match_parent"
+			    android:layout_height="0dp"
+			    android:id="@+id/addressListView">
+			    
+			</ListView>
+            
+
+			<Button
+                    android:id="@+id/btnAddAddressChose"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/round_corner_button_background"
+                    android:text="@string/lbl_add_another_address"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+			
+</LinearLayout>

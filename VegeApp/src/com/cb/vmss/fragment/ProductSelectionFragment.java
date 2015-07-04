@@ -7,35 +7,36 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
+import com.cb.vmss.ProductSelectionActivity;
+import com.cb.vmss.ProductSelectionActivity.ITotalCountActivity;
 import com.cb.vmss.R;
-import com.cb.vmss.activity.ProductSelectionActivity;
 import com.cb.vmss.adapter.ProductAdapter;
-import com.cb.vmss.model.Category;
 import com.cb.vmss.model.Product;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.ServerConnector;
 
-public class ProductSelectionFragment extends Fragment {
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class ProductSelectionFragment extends Fragment implements ITotalCountActivity {
 
 	private Activity mActivity;
 
 	ListView mProductListView;
+	RelativeLayout relLayout, qtyCountRelLayoutObj;
+	TextView txtQtyCountObj,productPriceTextViewObj;
 	Bundle argumentBundle;
 	private String mServiceUrl;
 	
@@ -67,8 +68,14 @@ public class ProductSelectionFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub		
-		 View view=inflater.inflate(R.layout.fragment_layout_product_selection, container,false);
+		 View view=inflater.inflate(R.layout.fragment_layout_product_selection2, container,false);
+		 ProductSelectionActivity.currentFragment = ProductSelectionFragment.this;
 		 mProductListView=(ListView)view.findViewById(R.id.productList);
+		 relLayout = (RelativeLayout) view.findViewById(R.id.relLayout);
+		 qtyCountRelLayoutObj = (RelativeLayout) view.findViewById(R.id.qtyCountRelLayout);
+		 txtQtyCountObj = (TextView) view.findViewById(R.id.txtQtyCount);
+		 productPriceTextViewObj = (TextView) view.findViewById(R.id.productPriceTextView);
+		 
 		 argumentBundle=this.getArguments();
 		 mContext = mActivity.getApplicationContext();
 	
@@ -86,9 +93,15 @@ public class ProductSelectionFragment extends Fragment {
 			 new LoadProdcutByCategoryTask().execute(mServiceUrl,"cat_id=11");
 		 }
 		
-		 
+		 relLayout.setVisibility(View.GONE);
 		 return view;
 		 
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		((ProductSelectionActivity) getActivity()).getCount();
 	}
 	
 	private class LoadProdcutByCategoryTask extends AsyncTask<String, Void, JSONObject> {
@@ -124,7 +137,7 @@ public class ProductSelectionFragment extends Fragment {
 				 if(productArray.length()>0){
 					
 				     mProductList=new ArrayList<Product>();
-				     
+
 				     for(int i=0;i<productArray.length();i++){
 				    	 Product productItem=new Product();
 				    	 productItem.setProductId(productArray.getJSONObject(i).getString("prd_id"));
@@ -134,23 +147,33 @@ public class ProductSelectionFragment extends Fragment {
 				    	 productItem.setProductMainPrice(productArray.getJSONObject(i).getString("prd_mainprice"));
 				    	 productItem.setProductDisplayPrice(productArray.getJSONObject(i).getString("prd_displayprice"));
 				    	 productItem.setProductUnitId(productArray.getJSONObject(i).getString("prd_unit_id"));
-				    	 
 				    	 productItem.setCategoryId(productArray.getJSONObject(i).getString("cat_id"));
 				    	 productItem.setCategoryName(productArray.getJSONObject(i).getString("cat_name"));
 				    	 productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
 				    	 productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
-				    	 
+				    	 productItem.setProductQty(0);
+				    	 productItem.setProductBitmap(null);
 				    	 mProductList.add(productItem);
-					    
-				   }
+				     }
 				     mProductListView.setAdapter(new ProductAdapter(mActivity,mProductList));
-				 }else{
-					 
 				 }
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
+	}
+
+	@Override
+	public void getTotalActivity(int count, int prize) {
+		Log.i("Count", ""+count);
+		if(count <= 0) {
+			relLayout.setVisibility(View.GONE);
+			txtQtyCountObj.setText(""+count);
+			productPriceTextViewObj.setText(""+prize);
+		} else if(count > 0) {
+			relLayout.setVisibility(View.VISIBLE);
+			txtQtyCountObj.setText(""+count);
+			productPriceTextViewObj.setText(""+prize);
 		}
+	}
 }

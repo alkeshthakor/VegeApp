@@ -17,7 +17,23 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name="com.cb.vmss.activity.MainActivity"
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProductSelectionActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!--
+        <activity
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +41,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProductSelectionActivity" >
+        
+        <activity
+            android:name=".CheckOutActivity"
+            android:label="@string/title_activity_check_out" >
+        </activity>
+        
+        -->
+        
+        <activity
+            android:name=".AddAddressActivity" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+          <activity
+            android:name=".CheckOutActivity"
+             android:screenOrientation="portrait"
+             >
+        </activity>
+        
+        <activity
+            android:name=".VerifyPhoneActivity"
+             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ChoseeAddressActivity"
+         android:screenOrientation="portrait" >
         </activity>
     </application>
 
