@@ -22,7 +22,7 @@ public class ChoseeAddressActivity extends Activity implements OnClickListener{
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
-			mTitle.setText(getResources().getString(R.string.lbl_add_address));
+			mTitle.setText(getResources().getString(R.string.lbl_title_choose_address));
 			closeImageView=(ImageView)toolbar.findViewById(R.id.imgeCloseTopBar);
 			closeImageView.setOnClickListener(this);
 		}

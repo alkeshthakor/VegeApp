@@ -46,6 +46,7 @@
     <string name="lbl_tomorrow">Tomorrow</string>
     <string name="lbl_dayafter">Day After</string>
     <string name="lbl_back">Back</string>
+    <string name="lbl_add_another_address">Add another address</string>
     <string name="lbl_place_order">Place Order</string>
     <string name="lbl_zero">0</string>
     <string name="lbl_time">04:30 PM</string>
