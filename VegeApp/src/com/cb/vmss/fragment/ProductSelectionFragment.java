@@ -49,6 +49,17 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 	
 	public static List<Product> mProductList;
 	
+	
+	 public static final String ARG_SCROLL_Y = "ARG_SCROLL_Y";
+
+	    public void setArguments(int scrollY) {
+	        if (0 <= scrollY) {
+	            Bundle args = new Bundle();
+	            args.putInt(ARG_SCROLL_Y, scrollY);
+	            setArguments(args);
+	        }
+	    }
+	    
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
@@ -68,7 +79,7 @@ public class ProductSelectionFragment extends Fragment implements ITotalCountAct
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub		
-		 View view=inflater.inflate(R.layout.fragment_layout_product_selection2, container,false);
+		 View view=inflater.inflate(R.layout.fragment_layout_product_selection, container,false);
 		 ProductSelectionActivity.currentFragment = ProductSelectionFragment.this;
 		 mProductListView=(ListView)view.findViewById(R.id.productList);
 		 relLayout = (RelativeLayout) view.findViewById(R.id.relLayout);

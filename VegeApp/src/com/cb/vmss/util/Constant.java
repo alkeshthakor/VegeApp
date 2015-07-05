@@ -21,6 +21,9 @@ public class Constant {
 	public static final String SERVICE_ADD_ADDRESS = "user/addaddress";
 	public static final String SERVICE_USER_CREATION = "user/adduser";
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
+	
+	public static final String PREF_QTY_COUNT = "PREF_QTY_COUNT";
+	public static final String PREF_TOTAL_AMOUT = "PREF_TOTAL_AMOUNT";
 
 	
 	/*

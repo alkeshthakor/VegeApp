@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cb.vmss.ProductSelectionActivity;
+import com.cb.vmss.ProductSelectionActivity2;
 import com.cb.vmss.R;
 import com.cb.vmss.model.Category;
 import com.cb.vmss.util.ConnectionDetector;
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment {
 	private String mCatServiceUrl;
 	private LinearLayout mCategoryLinearLayout;
 	private String categoryStringList[];
-	public static List<com.cb.vmss.model.Category> mCategoryList;
+	public static List<Category> mCategoryList;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -119,7 +120,7 @@ public class HomeFragment extends Fragment {
 						catItem.setCategoryName(categoryArray.getJSONObject(i).getString("cat_name"));
 						catItem.setCategoryImage(categoryArray.getJSONObject(i).getString("cat_image"));
 					    mCategoryList.add(catItem);
-					    categoryStringList[i]=catItem.getCategoryName();
+					    categoryStringList[i]=catItem.getCategoryName().toUpperCase();
 					     View view = new View(mContext);
 				         view = mActivity.getLayoutInflater().inflate(R.layout.layout_category_item, null);
 						 TextView mNameTextView=(TextView)view.findViewById(R.id.categoryNameTextView);
@@ -133,9 +134,11 @@ public class HomeFragment extends Fragment {
 							
 							@Override
 							public void onClick(View v) {
-								Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
+								//Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
+								Intent productIntent=new Intent(mContext,ProductSelectionActivity2.class);
 								productIntent.putExtra("cat_list",categoryStringList);	
-								productIntent.putExtra("tabposition",mCategoryList.get(v.getId()).getCategoryName());
+								productIntent.putExtra("tabposition",v.getId()+"");
+								productIntent.putExtra("cat_name",mCategoryList.get(v.getId()).getCategoryName());
 								startActivity(productIntent);
 							}
 						 });
