@@ -30,7 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cb.vmss.ProductSelectionActivity;
-import com.cb.vmss.ProductSelectionActivity2;
 import com.cb.vmss.R;
 import com.cb.vmss.model.Category;
 import com.cb.vmss.util.ConnectionDetector;
@@ -134,8 +133,7 @@ public class HomeFragment extends Fragment {
 							
 							@Override
 							public void onClick(View v) {
-								//Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
-								Intent productIntent=new Intent(mContext,ProductSelectionActivity2.class);
+								Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
 								productIntent.putExtra("cat_list",categoryStringList);	
 								productIntent.putExtra("tabposition",v.getId()+"");
 								productIntent.putExtra("cat_name",mCategoryList.get(v.getId()).getCategoryName());

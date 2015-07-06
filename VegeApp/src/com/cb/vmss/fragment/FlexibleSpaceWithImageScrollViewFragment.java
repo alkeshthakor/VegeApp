@@ -16,16 +16,16 @@
 
 package com.cb.vmss.fragment;
 
-import com.cb.vmss.ProductSelectionActivity2;
-import com.cb.vmss.R;
-import com.cb.vmss.fadingactionbar.observablescrollview.ObservableScrollView;
-import com.cb.vmss.fadingactionbar.observablescrollview.ScrollUtils;
-import com.cb.vmss.fadingactionbar.observablescrollview.Scrollable;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.cb.vmss.ProductSelectionActivity;
+import com.cb.vmss.R;
+import com.cb.vmss.fadingactionbar.observablescrollview.ObservableScrollView;
+import com.cb.vmss.fadingactionbar.observablescrollview.ScrollUtils;
+import com.cb.vmss.fadingactionbar.observablescrollview.Scrollable;
 
 
 public class FlexibleSpaceWithImageScrollViewFragment extends FlexibleSpaceWithImageBaseFragment<ObservableScrollView> {
@@ -78,8 +78,8 @@ public class FlexibleSpaceWithImageScrollViewFragment extends FlexibleSpaceWithI
         ObservableScrollView scrollView = (ObservableScrollView) view.findViewById(R.id.scroll);
 
         // Also pass this event to parent Activity
-        ProductSelectionActivity2 parentActivity =
-                (ProductSelectionActivity2) getActivity();
+        ProductSelectionActivity parentActivity =
+                (ProductSelectionActivity) getActivity();
         if (parentActivity != null) {
             parentActivity.onScrollChanged(scrollY, scrollView);
         }

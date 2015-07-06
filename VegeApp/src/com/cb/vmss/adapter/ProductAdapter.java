@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cb.vmss.R;
+import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
+import com.cb.vmss.database.VegAppDatabaseHelper;
 import com.cb.vmss.model.Product;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,12 +31,11 @@ public class ProductAdapter extends BaseAdapter {
 	Context context;
 	LayoutInflater inflater;
 	private ArrayList<Product> mProductRowItem = new ArrayList<Product>();
-	private int totalCount = 0;
-	private int totalPrize = 0;
-	//private HashMap<Integer,Bitmap> productImageMap = new HashMap<Integer, Bitmap>();
+	private VegAppDatabaseHelper mDatabaseHelper;
+	
 	
 	public interface ITotalCount {
-		public void getTotal(int count,int prize);
+		public void getTotal(int updateValue,int prize);
 	}
 	
 	ITotalCount iTotalCount = null;
@@ -43,6 +45,7 @@ public class ProductAdapter extends BaseAdapter {
 		this.mProductRowItem = (ArrayList<Product>) mProductList;
 		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		iTotalCount = (ITotalCount) context;
+		mDatabaseHelper=new VegAppDatabaseHelper(context);
 	}
 	
 	@Override
@@ -85,39 +88,68 @@ public class ProductAdapter extends BaseAdapter {
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("Qty", "icoMinus");
-				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())-1;
-				if(qty>=0) {
-					totalCount = totalCount - 1;
-					totalPrize = totalPrize - Integer.parseInt(holder.txtViewProductPrice.getText().toString());
-					if(totalPrize<=0) {
-						totalPrize = 0;
-					}
-					if(totalCount<=0) {
-						totalCount = 0;
-					}
+				
+				mDatabaseHelper.open();
+				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
+				
+				if(productQtyInCart!=-1){
+			     	productQtyInCart-=1;
+			     	
+			     	if(productQtyInCart<=0){
+			     		productQtyInCart=0;
+			     		mDatabaseHelper.deleteMyCartItem(rowItem.getProductId());
+			     	} else {
+			     		int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+				     	ContentValues cartValue=new ContentValues();
+				     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
+				     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
+				     	mDatabaseHelper.updateMyCart(rowItem.getProductId(),cartValue);
+			     	}
+			     	mDatabaseHelper.close();
+			     	holder.txtViewQty.setText(""+productQtyInCart);
+					rowItem.setProductQty(productQtyInCart);
+					iTotalCount.getTotal(-1,Integer.parseInt(rowItem.getProductMainPrice()));
 				}
-				if(qty<=0){
-					holder.txtViewQty.setText("0");
-					rowItem.setProductQty(0);
-				}else{
-					holder.txtViewQty.setText(""+qty);
-					rowItem.setProductQty(qty);
-				}
-				iTotalCount.getTotal(totalCount,totalPrize);
 			}
 		});
         
         holder.icoPlus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("Qty", "icoPlus");
-				int qty=Integer.parseInt(holder.txtViewQty.getText().toString())+1;
-				totalPrize = totalPrize + Integer.parseInt(holder.txtViewProductPrice.getText().toString());
-				holder.txtViewQty.setText(""+qty);
-				rowItem.setProductQty(qty);
-				totalCount = totalCount + 1;
-			    iTotalCount.getTotal(totalCount,totalPrize);
+				mDatabaseHelper.open();
+				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
+				if(productQtyInCart!=-1){
+					productQtyInCart+=1;
+			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     	ContentValues cartValue=new ContentValues();
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
+			     	mDatabaseHelper.updateMyCart(rowItem.getProductId(),cartValue);
+				} else {
+			     	productQtyInCart=1;
+			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+
+			     	ContentValues cartValue=new ContentValues();
+			     	
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_ID,rowItem.getProductId());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_NAME,rowItem.getProductName());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_IMAGE_URL,rowItem.getProductImage());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_MAIN_PRICE,rowItem.getProductMainPrice());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_DISPLAY_PRICE,rowItem.getProductDisplayPrice());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_UNIT_ID,rowItem.getProductUnitId());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_UNIT_KEY,rowItem.getUnit_key());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_UNIT_VALUE,rowItem.getUnit_value());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_CAT_ID,rowItem.getCategoryId());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_CAT_NAME,rowItem.getCategoryName());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
+			     	mDatabaseHelper.addInToMyCart(cartValue);
+			    }
+				
+				holder.txtViewQty.setText(""+productQtyInCart);
+				rowItem.setProductQty(productQtyInCart);				
+				mDatabaseHelper.close();
+				iTotalCount.getTotal(1,Integer.parseInt(rowItem.getProductMainPrice()));
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());

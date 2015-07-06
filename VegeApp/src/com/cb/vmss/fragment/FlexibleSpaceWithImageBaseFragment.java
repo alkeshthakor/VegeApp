@@ -17,14 +17,14 @@
 package com.cb.vmss.fragment;
 
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.View;
+
 import com.cb.vmss.R;
 import com.cb.vmss.fadingactionbar.observablescrollview.ObservableScrollViewCallbacks;
 import com.cb.vmss.fadingactionbar.observablescrollview.ScrollState;
 import com.cb.vmss.fadingactionbar.observablescrollview.Scrollable;
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.View;
 
 
 public abstract class FlexibleSpaceWithImageBaseFragment<S extends Scrollable> extends Fragment
