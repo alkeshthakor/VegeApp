@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -47,7 +48,7 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
-			mTitle.setText(getResources().getString(R.string.lbl_title_verifing_phone));
+			mTitle.setText(getResources().getString(R.string.lbl_title_verifying_phone));
 			closeImageView=(ImageView)toolbar.findViewById(R.id.imgeCloseTopBar);
 			closeImageView.setOnClickListener(this);
 		}
@@ -127,8 +128,9 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 	private void phoneVerificationResponse(JSONObject result){
 		try {
 			if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-				Toast.makeText(mContext,"Phone number verified successfully",Toast.LENGTH_SHORT).show();;
-				finish();
+				Toast.makeText(mContext,"Phone number verification success",Toast.LENGTH_SHORT).show();;
+				 Intent checkOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+				 startActivity(checkOutIntent);				 
 			}else{
 				Toast.makeText(mContext,"Phone number verification fail",Toast.LENGTH_SHORT).show();;
 			}

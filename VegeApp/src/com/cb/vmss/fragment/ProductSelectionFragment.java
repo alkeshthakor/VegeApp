@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.cb.vmss.ProductSelectionActivity;
 import com.cb.vmss.R;
 import com.cb.vmss.adapter.ProductAdapter;
+import com.cb.vmss.database.VegAppDatabaseHelper;
 import com.cb.vmss.fadingactionbar.observablescrollview.ObservableListView;
 import com.cb.vmss.fadingactionbar.observablescrollview.ScrollUtils;
 import com.cb.vmss.model.Product;
@@ -45,6 +46,8 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 	ServerConnector connector;
 	Context mContext;
 	public static List<Product> mProductList;
+
+	private VegAppDatabaseHelper mDatabaseHelper;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -106,9 +109,11 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		}
 		mProductListView.setScrollViewCallbacks(this);
 		updateFlexibleSpace(0, view);
-		ProductSelectionActivity.currentFragment = ProductSelectionFragment.this;
+		//ProductSelectionActivity.currentFragment = ProductSelectionFragment.this;
 		argumentBundle = this.getArguments();
 		mContext = mActivity.getApplicationContext();
+		mDatabaseHelper=new VegAppDatabaseHelper(mContext);
+
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
 		mProgressDialog = new ProgressDialog(mActivity);
@@ -149,6 +154,7 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		if (responseData != null && responseData.length() > 0) {
 			try {
 				JSONArray productArray = responseData.getJSONArray("DATA");
+				mDatabaseHelper.open();
 				if (productArray.length() > 0) {
 
 					mProductList = new ArrayList<Product>();
@@ -164,7 +170,14 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 						productItem.setCategoryName(productArray.getJSONObject(i).getString("cat_name"));
 						productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
 						productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
+						
+					
+						int productQtyInCart=mDatabaseHelper.getCartProductQty(productItem.getProductId());
+						if(productQtyInCart!=-1)
+						productItem.setProductQty(productQtyInCart);
+						else
 						productItem.setProductQty(0);
+						
 						productItem.setProductBitmap(null);
 						mProductList.add(productItem);
 					}

@@ -1,5 +1,8 @@
 package com.cb.vmss;
 
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +29,7 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 	private Button btnPlaceOrder;
 	private Button btnPromoCode;
 	
+	private int totalAmount;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,16 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		subTotalTextView.setText(totalAmount+"");
+		totalTextView.setText(totalAmount+"");
+		
+	}
+	
+	@Override
 	public void onClick(View view) {
 		switch(view.getId()){
 		case R.id.imgeCloseTopBar:
@@ -81,6 +95,8 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 		case R.id.btnDayAfterCheckOut:
 			break;
 		case R.id.btnBackCheckOut:
+			finish();
+			
 			break;
 		case R.id.btnPlaceOrderCheckOut:
 			break;			

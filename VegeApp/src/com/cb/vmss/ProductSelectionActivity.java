@@ -36,7 +36,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 
 	RelativeLayout relLayout, qtyCountRelLayoutObj;
 	TextView txtQtyCountObj, productPriceTextViewObj;
-	public static Fragment currentFragment;
+	//public static Fragment currentFragment;
 	
 	// Fading action bar
 	private ViewPager mPager;
@@ -55,7 +55,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		setContentView(R.layout.activity_product_selection);
 		mContext = this;
 		Constant.CONTEXT = mContext;
-		currentFragment = new ProductSelectionFragment(HomeFragment.mCategoryList.get(0).getCategoryId());
+		///currentFragment = new ProductSelectionFragment(HomeFragment.mCategoryList.get(0).getCategoryId());
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mPagerAdapter);
@@ -94,6 +94,12 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			}
 		});
 
+			}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 		if (totalQtyCount > 0) {
@@ -101,8 +107,11 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			txtQtyCountObj.setText("" + totalQtyCount);
 			productPriceTextViewObj.setText("" + totalAmount);
 		}
-	}
 
+		
+	}
+	
+	
 	@Override
 	public void getTotal(int updateValue, int prize) {
 

@@ -50,7 +50,7 @@
     <string name="lbl_checkout">CheckOut</string>
     
     <string name="lbl_title_add_address">Add Address</string>
-    <string name="lbl_title_verifing_phone">Verifing Phone</string>
+    <string name="lbl_title_verifying_phone">Verifying Phone</string>
     <string name="lbl_title_login">Login or Signup</string>
     <string name="lbl_title_choose_address">Choose Address</string>
     <string name="lbl_term_service">By using this application, you agree to the Term of Service and Privacy Police</string>

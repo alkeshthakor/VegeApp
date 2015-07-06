@@ -44,7 +44,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
-			mTitle.setText(getResources().getString(R.string.lbl_add_address));
+			mTitle.setText(getResources().getString(R.string.lbl_title_login));
 			closeImageView=(ImageView)toolbar.findViewById(R.id.imgeCloseTopBar);
 			closeImageView.setOnClickListener(this);
 		}
@@ -131,7 +131,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 					
 					finish();
 				}else{
-					Toast.makeText(mContext,"User creation fail",Toast.LENGTH_SHORT).show();;
+					Toast.makeText(mContext,"User creation fail or login fail",Toast.LENGTH_SHORT).show();;
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

@@ -9,6 +9,18 @@
         android:id="@+id/toolbar"
         layout="@layout/top_bar_address" />
 
+    <LinearLayout
+        android:id="@+id/topBarMyCart"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+         android:layout_marginTop="10dp"
+        android:paddingLeft="12dp"
+        android:paddingStart="12dp" >
+    </LinearLayout>
+
     <ListView
         android:id="@+id/myCartListView"
         android:layout_width="match_parent"
@@ -18,7 +30,7 @@
     <LinearLayout
         android:id="@+id/bottomBarMyCart"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:background="@android:color/holo_green_light"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -31,7 +43,14 @@
             android:layout_weight="1"
             android:text="@string/lbl_checkout"
             android:textColor="#FFF"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="1dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_indian_rupee_16" />
 
         <TextView
             android:id="@+id/priceTextViewMyCart"
@@ -41,11 +60,11 @@
             android:layout_marginRight="10dp"
             android:text="@string/lbl_zero"
             android:textColor="#FFF"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/nextButtonMyCart"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@android:color/holo_green_light"
             android:gravity="center_vertical" >
@@ -59,5 +78,5 @@
                 android:src="@drawable/icon_checkout2" />
         </LinearLayout>
     </LinearLayout>
-  
+
 </LinearLayout>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
-import com.cb.vmss.model.CartItem;
+import com.cb.vmss.model.Product;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,7 +17,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract.Constants;
 import android.util.Log;
 
 public class VegAppDatabaseHelper
@@ -207,10 +206,10 @@ public class VegAppDatabaseHelper
     }
     
     
-    public List<CartItem> getMyCartList()
+    public List<Product> getMyCartList()
     {
         Cursor cartCursor = null;
-        List<CartItem> myCartList = new ArrayList<CartItem>();
+        List<Product> myCartList = new ArrayList<Product>();
         
         try
         {
@@ -222,10 +221,10 @@ public class VegAppDatabaseHelper
                 while (!cartCursor.isAfterLast())
                 {
                    
-                	CartItem mCartItem=new CartItem();
+                	/*CartItem mCartItem=new CartItem();
                 	
                 	mCartItem.setCartId(cartCursor.getString(0));
-                	mCartItem.setCartProductId(cartCursor.getString(0));
+                	mCartItem.setCartProductId(cartCursor.getString(1));
                 	mCartItem.setCartProductCatName(cartCursor.getString(0));
                 	mCartItem.setCartProductImageUrl(cartCursor.getString(0));
                 	mCartItem.setCartProductMainPrice(cartCursor.getString(0));
@@ -238,7 +237,28 @@ public class VegAppDatabaseHelper
                 	mCartItem.setCartProductCatId(cartCursor.getString(0));
                 	mCartItem.setCartProductCatName(cartCursor.getString(0));
                 	mCartItem.setCartProductQty(cartCursor.getString(0));
-                	mCartItem.setCartProductSubTotal(cartCursor.getString(0));
+                	mCartItem.setCartProductSubTotal(cartCursor.getString(0));*/
+                	
+                	Product mCartItem=new Product();
+                	
+                	//mCartItem.setCartId(cartCursor.getString(0));
+                	mCartItem.setProductId(cartCursor.getString(1));
+                	mCartItem.setProductName(cartCursor.getString(2));
+                	mCartItem.setProductImage(cartCursor.getString(3));
+                	mCartItem.setProductMainPrice(cartCursor.getString(4));
+                	mCartItem.setProductDisplayPrice(cartCursor.getString(5));
+                	
+                	mCartItem.setProductUnitId(cartCursor.getString(6));
+                	mCartItem.setUnit_key(cartCursor.getString(7));
+                	mCartItem.setUnit_value(cartCursor.getString(8));
+                	mCartItem.setProductQty(Integer.parseInt(cartCursor.getString(9)));
+                	
+                	mCartItem.setCategoryId(cartCursor.getString(11));
+                	mCartItem.setCategoryName(cartCursor.getString(12));
+                
+                	//mCartItem.setCartProductSubTotal(cartCursor.getString(0));
+                	myCartList.add(mCartItem);
+                	
 
                     cartCursor.moveToNext();
                     
