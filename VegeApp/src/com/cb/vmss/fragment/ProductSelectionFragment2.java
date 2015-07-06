@@ -120,7 +120,7 @@ public class ProductSelectionFragment2 extends FlexibleSpaceWithImageBaseFragmen
 
 		updateFlexibleSpace(0, view);
 
-		ProductSelectionActivity.currentFragment = ProductSelectionFragment2.this;
+		ProductSelectionActivity2.currentFragment = ProductSelectionFragment2.this;
 		// mProductListView=(ListView)view.findViewById(R.id.productList);
 		/*relLayout = (RelativeLayout) view.findViewById(R.id.relLayout);
 		qtyCountRelLayoutObj = (RelativeLayout) view.findViewById(R.id.qtyCountRelLayout);

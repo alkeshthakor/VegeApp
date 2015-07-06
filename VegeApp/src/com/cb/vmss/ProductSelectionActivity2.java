@@ -36,7 +36,8 @@ public class ProductSelectionActivity2 extends BaseActivity implements ITotalCou
 
 	RelativeLayout relLayout, qtyCountRelLayoutObj;
 	TextView txtQtyCountObj, productPriceTextViewObj;
-
+	public static Fragment currentFragment;
+	
 	// Fading action bar
 	private ViewPager mPager;
 	private NavigationAdapter mPagerAdapter;
@@ -54,7 +55,7 @@ public class ProductSelectionActivity2 extends BaseActivity implements ITotalCou
 		setContentView(R.layout.activity_product_selection2);
 		mContext = this;
 		Constant.CONTEXT = mContext;
-
+		currentFragment = new ProductSelectionFragment2(HomeFragment.mCategoryList.get(0).getCategoryId());
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mPagerAdapter);
