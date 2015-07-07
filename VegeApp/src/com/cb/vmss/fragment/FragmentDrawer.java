@@ -113,7 +113,8 @@ public class FragmentDrawer extends Fragment {
                 toolbar.setAlpha(1 - slideOffset / 2);
             }
         };
-
+        mDrawerToggle.setHomeAsUpIndicator(R.drawable.icon_menu);
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
             @Override

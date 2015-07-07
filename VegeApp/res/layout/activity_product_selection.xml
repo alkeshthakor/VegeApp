@@ -154,10 +154,11 @@
             android:id="@+id/icoCheckout"
             android:layout_width="30dp"
             android:layout_height="20dp"
+            android:layout_alignBottom="@+id/icoShopping"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/productPriceTextView"
             android:layout_margin="2dp"
             android:src="@drawable/icon_checkout2" />
+
     </RelativeLayout>
 
 </LinearLayout>

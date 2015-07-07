@@ -1,6 +1,7 @@
 package com.cb.vmss;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,10 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.cb.vmss.fragment.FragmentDrawer;
-import com.cb.vmss.fragment.GroupsFragment;
 import com.cb.vmss.fragment.HomeFragment;
 import com.cb.vmss.fragment.ListsFragment;
-import com.cb.vmss.fragment.OverviewFragment;
 import com.cb.vmss.fragment.ProfileFragment;
 import com.cb.vmss.fragment.ScheduleDeliveryFragment;
 import com.cb.vmss.fragment.SettingsFragment;
@@ -39,7 +38,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		{
 			setSupportActionBar(mToolbar);
 		}
-
+		mToolbar.setTitleTextColor(Color.BLACK);
+		
 		//setSupportActionBar (mToolbar);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
