@@ -1,5 +1,8 @@
 package com.cb.vmss;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,13 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cb.vmss.fragment.FragmentDrawer;
 import com.cb.vmss.fragment.HomeFragment;
-import com.cb.vmss.fragment.ListsFragment;
-import com.cb.vmss.fragment.ProfileFragment;
-import com.cb.vmss.fragment.ScheduleDeliveryFragment;
-import com.cb.vmss.fragment.SettingsFragment;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener
 {
@@ -31,7 +33,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		Constant.CONTEXT = this;
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 		if (mToolbar != null)
@@ -70,11 +72,18 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	 */
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Constant.CONTEXT = this;
+	}
+	@Override
 	public void onDrawerItemSelected(View view, int position)
 	{
 		displayView(position);
 	}
 
+	@SuppressLint("ShowToast")
 	private void displayView(int position)
 	{
 		Fragment fragment = null;
@@ -86,31 +95,44 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				title = getString(R.string.title_home);
 				loadFragment(fragment,title);
 				break;
+			
 			case 1 :
 //				fragment = new CalenderFragment();
 //				title = getString(R.string.title_calender);
-				Intent addressIntent=new Intent(getApplicationContext(), AddAddressActivity.class);
-				startActivity(addressIntent);
-				
+				Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
+				startActivity(chooseAddressIntent);
 				break;
+			
 			case 2 :
 //				fragment = new OverviewFragment();
 //				title = getString(R.string.title_overview);
 //				loadFragment(fragment,title);
-				
-				Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
-				startActivity(checkoutIntent);
+				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
+					Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+					startActivity(checkoutIntent);
+		        } else {
+		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
+		        	startActivity(loginIntent);
+		        }
 				break;
+			
 			case 3 :
 				/*fragment = new GroupsFragment();
 				title = getString(R.string.title_groups);
 				loadFragment(fragment,title);*/
-				
-				Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-				startActivity(loginIntent);
-				
+				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
+				startActivity(cartIntent);
 				break;
-			case 4 :
+			
+			case 10 :
+				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
+					showConfirmLogout();
+		        } else {
+		        	Toast.makeText(MainActivity.this, "Already Logout", Toast.LENGTH_LONG);
+		        }
+				break;
+			
+			/*case 4 :
 				fragment = new ListsFragment();
 				title = getString(R.string.title_lists);
 				loadFragment(fragment,title);
@@ -135,12 +157,14 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 				break;
 			case 8 :
-				/*
+				
 				 * fragment = new (); title = getString (R.string.title_settings);
-				 */
+				 
 				// Operation for logout
 				break;
-			default :
+			 */
+				
+				default :
 				break;
 		}
 
@@ -168,5 +192,40 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			// set the toolbar title
 			getSupportActionBar().setTitle(title);
 		}
+	}
+	
+	private void showConfirmLogout() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				MainActivity.this);
+ 
+			// set title
+			alertDialogBuilder.setTitle("Logout");
+ 
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Are you sure?")
+				.setCancelable(false)
+				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+						//MainActivity.this.finish();
+						Pref.setValue(Constant.PREF_PHONE_NUMBER, "0");
+						
+					}
+				  })
+				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
 	}
 }

@@ -1,10 +1,13 @@
 package com.cb.vmss.fragment;
 
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -17,10 +20,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cb.vmss.R;
 import com.cb.vmss.adapter.NavigationDrawerAdapter;
 import com.cb.vmss.model.NavDrawerItem;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 
 
 public class FragmentDrawer extends Fragment {
@@ -34,7 +41,10 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
-
+    private TextView mPhoneNumberTextView;
+    private TextView orderItemCountTextView;
+    private ImageView mPhoneIcon;
+    
     public FragmentDrawer() {
 
     }
@@ -69,8 +79,12 @@ public class FragmentDrawer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflating view layout
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        
+        mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
+        
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-
+        mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
+        
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -89,7 +103,18 @@ public class FragmentDrawer extends Fragment {
 
         return layout;
     }
+    
+    @Override
+    public void onAttach(Activity activity) {
+    	super.onAttach(activity);
+    	Constant.CONTEXT = activity;
+    }
 
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	
+    }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
@@ -98,6 +123,13 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
+                	mPhoneNumberTextView.setText(Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").toString());
+                	mPhoneIcon.setVisibility(View.VISIBLE);
+                }else{
+                	mPhoneNumberTextView.setText("Welcome");
+                	mPhoneIcon.setVisibility(View.GONE);
+                }
                 getActivity().invalidateOptionsMenu();
             }
 

@@ -99,8 +99,14 @@ public class MyCartActivity extends Activity implements OnClickListener,IUpdateM
 			finish();
 			break;
 		case R.id.bottomBarMyCart:
-			Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-			startActivity(loginIntent);
+			if(!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+				startActivity(checkoutIntent);
+			} else {
+				Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
+				//loginIntent.putExtra("fromScreen", "MyCartActivity");
+				startActivity(loginIntent);
+			}
 			break;
 		}
 	}

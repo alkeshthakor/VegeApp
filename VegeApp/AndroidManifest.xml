@@ -65,7 +65,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ChoseeAddressActivity"
+            android:name=".ChooseAddressActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

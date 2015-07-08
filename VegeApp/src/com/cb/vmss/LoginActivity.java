@@ -122,14 +122,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
 					Toast.makeText(mContext,"User created successfully",Toast.LENGTH_SHORT).show();
 					JSONObject returnObject=result.getJSONObject("DATA");
-					Pref.setValue(Constant.PREF_USER_ID,returnObject.getString("usr_id"));
-					Pref.setValue(Constant.PREF_PHONE_NUMBER,returnObject.getString("usr_phone"));
 					
 					Intent verifyPhoneIntent=new Intent(getApplicationContext(),VerifyPhoneActivity.class);
+					verifyPhoneIntent.putExtra(Constant.PREF_USER_ID, returnObject.getString("usr_id"));
+					verifyPhoneIntent.putExtra(Constant.PREF_PHONE_NUMBER, returnObject.getString("usr_phone"));
 					startActivity(verifyPhoneIntent);
-					
-					
 					finish();
+					
 				}else{
 					Toast.makeText(mContext,"User creation fail or login fail",Toast.LENGTH_SHORT).show();;
 				}

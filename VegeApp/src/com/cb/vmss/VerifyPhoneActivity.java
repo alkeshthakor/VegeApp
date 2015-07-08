@@ -1,5 +1,6 @@
 package com.cb.vmss;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +40,8 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 	Context mContext;
 	private String mServiceUrl;
 	private String mVerificationBody;
+	private String mPhoneNumber;
+	private String mUserId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,9 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 		resendCodeButton.setOnClickListener(this);
 		nextButton.setOnClickListener(this);
 		phoneNumberTextView.setText("+91 "+Pref.getValue(Constant.PREF_PHONE_NUMBER,""));
-		
+
+		mPhoneNumber=getIntent().getStringExtra(Constant.PREF_PHONE_NUMBER);
+		mUserId=getIntent().getStringExtra(Constant.PREF_USER_ID);
 	}
 
 	@Override
@@ -82,13 +87,13 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btnResendCodePhoneVerify:
 			 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
-			 mVerificationBody="usr_phone="+Pref.getValue(Constant.PREF_PHONE_NUMBER,"0");
+			 mVerificationBody="usr_phone="+mPhoneNumber;
 			new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"CODE_RESEND");
 			break;
 		case R.id.btnNextPhoneVerify:
 			if(manualCodeEditText.getText().toString().length()>0){
 				 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_VERIFY;
-				 mVerificationBody="usr_id="+Pref.getValue(Constant.PREF_USER_ID,"0")+"&sms_code="+manualCodeEditText.getText().toString();
+				 mVerificationBody="usr_id="+mUserId+"&sms_code="+manualCodeEditText.getText().toString();
 				 new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"PHONE_VERIFICATION");
 			}else{
 				Toast.makeText(getApplicationContext(),"Code should not be blank",Toast.LENGTH_SHORT).show();
@@ -128,9 +133,13 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 	private void phoneVerificationResponse(JSONObject result){
 		try {
 			if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-				Toast.makeText(mContext,"Phone number verification success",Toast.LENGTH_SHORT).show();;
-				 Intent checkOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
-				 startActivity(checkOutIntent);				 
+				    Toast.makeText(mContext,"Phone number verification success",Toast.LENGTH_SHORT).show();
+				    JSONArray dataArray=result.getJSONArray("DATA");    
+				    Pref.setValue(Constant.PREF_USER_ID,dataArray.getJSONObject(0).getString("usr_id"));
+					Pref.setValue(Constant.PREF_PHONE_NUMBER,dataArray.getJSONObject(0).getString("usr_phone"));
+				
+				 //Intent checkOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+				 //startActivity(checkOutIntent);				 
 			}else{
 				Toast.makeText(mContext,"Phone number verification fail",Toast.LENGTH_SHORT).show();;
 			}
@@ -143,9 +152,10 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 	private void codeResendResponse(JSONObject result){
 		try {
 			if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-				JSONObject returnObject=result.getJSONObject("DATA");
-				Pref.setValue(Constant.PREF_USER_ID,returnObject.getString("usr_id"));
-				Pref.setValue(Constant.PREF_PHONE_NUMBER,returnObject.getString("usr_phone"));				
+				//JSONObject returnObject=result.getJSONObject("DATA");
+				//Pref.setValue(Constant.PREF_USER_ID,returnObject.getString("usr_id"));
+				//Pref.setValue(Constant.PREF_PHONE_NUMBER,returnObject.getString("usr_phone"));	
+				
 			}else{
 				Toast.makeText(mContext,"Resend verification code request fail",Toast.LENGTH_SHORT).show();;
 			}
