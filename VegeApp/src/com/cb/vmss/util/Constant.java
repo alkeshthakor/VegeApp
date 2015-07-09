@@ -19,6 +19,7 @@ public class Constant {
 	public static final String SERVICE_GET_ALL_PRODUCT = "PREF_VMSS";
 	public static final String SERVICE_PRODUCT_BY_CAT_ID = "product/getproductbycatid";
 	public static final String SERVICE_ADD_ADDRESS = "user/addaddress";
+	public static final String SERVICE_FETCH_ADDRESS = "user/getaddressbyusrid";
 	public static final String SERVICE_USER_CREATION = "user/adduser";
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
 	
