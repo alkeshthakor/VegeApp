@@ -43,8 +43,9 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		mToolbar.setTitleTextColor(Color.BLACK);
 		
 		//setSupportActionBar (mToolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 		drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 		drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
 		drawerFragment.setDrawerListener(this);

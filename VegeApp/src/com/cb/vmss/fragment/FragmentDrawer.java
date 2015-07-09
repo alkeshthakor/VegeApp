@@ -1,13 +1,11 @@
 package com.cb.vmss.fragment;
 
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +17,7 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -145,9 +144,17 @@ public class FragmentDrawer extends Fragment {
                 toolbar.setAlpha(1 - slideOffset / 2);
             }
         };
-        mDrawerToggle.setHomeAsUpIndicator(R.drawable.icon_menu);
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        mDrawerToggle.setToolbarNavigationClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (isDrawerOpen()) {
+					 closeDrawer();
+				  } else openDrawer();
+			}
+		});
         mDrawerLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -201,6 +208,26 @@ public class FragmentDrawer extends Fragment {
         }
     }
 
+    public boolean isDrawerOpen() {
+		return mDrawerLayout != null
+				&& mDrawerLayout.isDrawerOpen(containerView);
+	}
+    
+    public void openDrawer() {
+		//if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
+			mDrawerLayout.openDrawer(containerView);
+			mDrawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+			mDrawerLayout.setFocusableInTouchMode(false);
+		//}
+	}
+	
+	public void closeDrawer() {
+		if (mDrawerLayout != null) {
+			mDrawerLayout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+			mDrawerLayout.setFocusableInTouchMode(false);
+			mDrawerLayout.closeDrawer(containerView);
+		}
+	}
     public interface FragmentDrawerListener {
         public void onDrawerItemSelected(View view, int position);
     }
