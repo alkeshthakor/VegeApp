@@ -1,5 +1,9 @@
 package com.cb.vmss;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,9 +17,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cb.vmss.adapter.AddressAdapter;
+import com.cb.vmss.model.Address;
 import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
 
 public class ChooseAddressActivity extends Activity implements OnClickListener{
@@ -26,6 +35,8 @@ public class ChooseAddressActivity extends Activity implements OnClickListener{
 	private ProgressDialog mProgressDialog;
 	ServerConnector connector;
 	private String mServiceUrl;
+	ListView addressListView;
+	public static List<Address> mAddresstList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,8 @@ public class ChooseAddressActivity extends Activity implements OnClickListener{
         
         addAddressBtn =(Button) findViewById(R.id.btnAddAddressChose);
 		addAddressBtn.setOnClickListener(this);
+		addressListView = (ListView) findViewById(R.id.addressListView);
+		
 	}
 
 	@Override
@@ -67,12 +80,18 @@ public class ChooseAddressActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Constant.CONTEXT=this;
 		fetchAddress();
+		
 	}
 	
 	private void fetchAddress(){
 		mServiceUrl=Constant.HOST+Constant.SERVICE_FETCH_ADDRESS;
-		new addAddressOnServerTask().execute(mServiceUrl,"usr_id=47");
+		String parameter = Pref.getValue(Constant.PREF_USER_ID, "0");
+		parameter = "47";
+		if(!parameter.equals("0")) {
+			new addAddressOnServerTask().execute(mServiceUrl,"usr_id=" + parameter);
+		}
 	}
 	
 	private class addAddressOnServerTask extends AsyncTask<String, Void, JSONObject> {
@@ -94,9 +113,25 @@ public class ChooseAddressActivity extends Activity implements OnClickListener{
 			mProgressDialog.dismiss();
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
-					//Toast.makeText(ChooseAddressActivity.this,"" + result.toString(),Toast.LENGTH_SHORT).show();
-				} else {
-					//Toast.makeText(ChooseAddressActivity.this,"Add address fail",Toast.LENGTH_SHORT).show();;
+					JSONArray addressJsonArray = result.getJSONArray("DATA");
+					mAddresstList = new ArrayList<Address>();
+					for (int i = 0; i < addressJsonArray.length(); i++) {
+						Address addressItem = new Address();
+						addressItem.setAddId(addressJsonArray.getJSONObject(i).getString("add_id"));
+						addressItem.setAddUserId(addressJsonArray.getJSONObject(i).getString("add_usr_id"));
+						addressItem.setAddFullName(addressJsonArray.getJSONObject(i).getString("add_fullname"));
+						addressItem.setAddPhone(addressJsonArray.getJSONObject(i).getString("add_phone"));
+						addressItem.setAddAddress1(addressJsonArray.getJSONObject(i).getString("add_address1"));
+						addressItem.setAddAddress2(addressJsonArray.getJSONObject(i).getString("add_address2"));
+						addressItem.setAddLandmark(addressJsonArray.getJSONObject(i).getString("add_landmark"));
+						addressItem.setAddCity(addressJsonArray.getJSONObject(i).getString("add_city"));
+						addressItem.setAddZipCode(addressJsonArray.getJSONObject(i).getString("add_zipcode"));
+						addressItem.setAddCreatedDate(addressJsonArray.getJSONObject(i).getString("add_createddate"));
+						addressItem.setAddUpdatedDate(addressJsonArray.getJSONObject(i).getString("add_updateddate"));
+						addressItem.setAddStatus(addressJsonArray.getJSONObject(i).getString("add_status"));
+						mAddresstList.add(addressItem);
+					}
+					addressListView.setAdapter(new AddressAdapter(ChooseAddressActivity.this, mAddresstList));
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
