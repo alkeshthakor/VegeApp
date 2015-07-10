@@ -3,10 +3,6 @@ package com.cb.vmss;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.ServerConnector;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
 
 public class AddAddressActivity extends Activity implements OnClickListener {
 
@@ -76,11 +77,6 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 
 		createButton = (Button) findViewById(R.id.btnCreateAdd);
 		createButton.setOnClickListener(this);
-		
-		
-
-		 
-
 	}
 
 	@Override
@@ -95,21 +91,20 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 			}else{
 				Toast.makeText(mContext,"Internet connection not available",Toast.LENGTH_SHORT).show();
 			}
-			
 			break;
-
 		}
-
 	}
 
 	private void createAddress(){
 		if(!isEmptyField()){
-			addressBody="usr_id=47&add_id=&add_fullname="+nameEditText.getText().toString()+"&add_phone=2147483647"+"&add_address1="+houseEditText.getText().toString()
-					+"&add_address2="+areaEditText.getText().toString()+"&add_landmark="+cityEditText.getText().toString()+"&add_zipcode="+zipEditText.getText().toString();
-			 mServiceUrl=Constant.HOST+Constant.SERVICE_ADD_ADDRESS;
-			 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
-			 
-		}else{
+			String userId = Pref.getValue(Constant.PREF_USER_ID, "0");
+			if(!userId.equals("0")) {
+				addressBody="usr_id=" + userId + "&add_id=&add_fullname="+nameEditText.getText().toString()+"&add_phone=2147483647"+"&add_address1="+houseEditText.getText().toString()
+						+"&add_address2="+areaEditText.getText().toString()+"&add_landmark="+cityEditText.getText().toString()+"&add_zipcode="+zipEditText.getText().toString();
+				 mServiceUrl=Constant.HOST+Constant.SERVICE_ADD_ADDRESS;
+				 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
+			}
+		} else {
 			Toast.makeText(mContext,"Field should not be blank",Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -118,10 +113,8 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			mProgressDialog.show();
-
 		}
 
 		@Override
@@ -142,10 +135,8 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 					Toast.makeText(mContext,"Add address fail",Toast.LENGTH_SHORT).show();;
 				}
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-						
 		}
 	}
 

@@ -88,7 +88,6 @@ public class ChooseAddressActivity extends Activity implements OnClickListener{
 	private void fetchAddress(){
 		mServiceUrl=Constant.HOST+Constant.SERVICE_FETCH_ADDRESS;
 		String parameter = Pref.getValue(Constant.PREF_USER_ID, "0");
-		parameter = "47";
 		if(!parameter.equals("0")) {
 			new addAddressOnServerTask().execute(mServiceUrl,"usr_id=" + parameter);
 		}
