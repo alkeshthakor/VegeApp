@@ -78,6 +78,7 @@ Quam libero nulla netus eu porta curae, ut nulla bibendum facilisis et urna sed,
     <!-- navigation drawer item labels -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_location</item>
+        <item>@string/nav_item_Login</item>
         <item>@string/nav_item_address</item>
         <item>@string/nav_item_order</item>
         <item>@string/nav_item_cart</item>
@@ -93,6 +94,7 @@ Quam libero nulla netus eu porta curae, ut nulla bibendum facilisis et urna sed,
     <!-- navigation drawer item icon -->
     <string-array name="nav_drawer_icon">
         <item>@drawable/icon_home</item>
+        <item>@drawable/icon_profile</item>
         <item>@drawable/icon_calendar</item>
         <item>@drawable/icon_overview</item>
         <item>@drawable/icon_groups</item>

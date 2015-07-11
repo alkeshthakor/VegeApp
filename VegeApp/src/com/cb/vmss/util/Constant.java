@@ -25,6 +25,8 @@ public class Constant {
 	
 	public static final String PREF_QTY_COUNT = "PREF_QTY_COUNT";
 	public static final String PREF_TOTAL_AMOUT = "PREF_TOTAL_AMOUNT";
+	
+	public static final int CODE_MAIN_LOGIN = 1001;
 
 	
 	/*

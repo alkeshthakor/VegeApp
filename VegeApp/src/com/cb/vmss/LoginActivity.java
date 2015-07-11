@@ -3,6 +3,10 @@ package com.cb.vmss;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.ServerConnector;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,11 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
-
 public class LoginActivity extends Activity implements OnClickListener {
 
 	private Toolbar toolbar;
@@ -35,6 +34,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private ServerConnector connector;
 	private Context mContext;
 	private String mServiceUrl;
+	private String mFromScreen;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
 
+		mFromScreen=getIntent().getStringExtra("fromscreen");
+		
 		progressIndicater=(ProgressBar)findViewById(R.id.progressIndicater);
 		phoneNumberEditText=(EditText)findViewById(R.id.phoneNumberEditText);
 
@@ -122,10 +124,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
 					Toast.makeText(mContext,"User created successfully",Toast.LENGTH_SHORT).show();
 					JSONObject returnObject=result.getJSONObject("DATA");
-					
 					Intent verifyPhoneIntent=new Intent(getApplicationContext(),VerifyPhoneActivity.class);
 					verifyPhoneIntent.putExtra(Constant.PREF_USER_ID, returnObject.getString("usr_id"));
 					verifyPhoneIntent.putExtra(Constant.PREF_PHONE_NUMBER, returnObject.getString("usr_phone"));
+					verifyPhoneIntent.putExtra("fromscreen", mFromScreen);
 					startActivity(verifyPhoneIntent);
 					finish();
 					
@@ -138,28 +140,4 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}					
 		}
 	}
-	
-/*	public void confirmCall() {
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-		builder.setTitle("Confirm Phone number");
-		builder.setMessage("");
-		
-		builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {				
-			}
-		});
-		builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-			}
-		});
-
-		AlertDialog alert = builder.create();
-		alert.show();
-	}
-*/	
 }

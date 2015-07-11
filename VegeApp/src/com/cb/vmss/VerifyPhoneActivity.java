@@ -42,7 +42,8 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 	private String mVerificationBody;
 	private String mPhoneNumber;
 	private String mUserId;
-
+	private String mFromScreen;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 			closeImageView=(ImageView)toolbar.findViewById(R.id.imgeCloseTopBar);
 			closeImageView.setOnClickListener(this);
 		}
-	
+		mFromScreen=getIntent().getStringExtra("fromscreen");
 		mContext = this;
 		Constant.CONTEXT=mContext;
 		cd = new ConnectionDetector(mContext);
@@ -73,10 +74,13 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 		
 		resendCodeButton.setOnClickListener(this);
 		nextButton.setOnClickListener(this);
-		phoneNumberTextView.setText("+91 "+Pref.getValue(Constant.PREF_PHONE_NUMBER,""));
+		
 
 		mPhoneNumber=getIntent().getStringExtra(Constant.PREF_PHONE_NUMBER);
 		mUserId=getIntent().getStringExtra(Constant.PREF_USER_ID);
+		
+		phoneNumberTextView.setText("+91 "+mPhoneNumber);
+		
 	}
 
 	@Override
@@ -136,10 +140,8 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 				    Toast.makeText(mContext,"Phone number verification success",Toast.LENGTH_SHORT).show();
 				    JSONArray dataArray=result.getJSONArray("DATA");    
 				    Pref.setValue(Constant.PREF_USER_ID,dataArray.getJSONObject(0).getString("usr_id"));
-					Pref.setValue(Constant.PREF_PHONE_NUMBER,dataArray.getJSONObject(0).getString("usr_phone"));
-				
-				 //Intent checkOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
-				 //startActivity(checkOutIntent);				 
+					Pref.setValue(Constant.PREF_PHONE_NUMBER,dataArray.getJSONObject(0).getString("usr_phone"));	
+					forwardToAnotherActivity();
 			}else{
 				Toast.makeText(mContext,"Phone number verification fail",Toast.LENGTH_SHORT).show();;
 			}
@@ -163,5 +165,15 @@ public class VerifyPhoneActivity extends Activity implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}				
+	}
+	
+	public void forwardToAnotherActivity(){
+		if(mFromScreen.equalsIgnoreCase(MainActivity.class.getCanonicalName())){
+			setResult(Constant.CODE_MAIN_LOGIN);
+			finish();
+		}else{
+			 Intent checkOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+			 startActivity(checkOutIntent);				 
+		}
 	}
 }

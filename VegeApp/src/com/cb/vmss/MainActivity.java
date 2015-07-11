@@ -1,5 +1,10 @@
 package com.cb.vmss;
 
+import com.cb.vmss.fragment.FragmentDrawer;
+import com.cb.vmss.fragment.HomeFragment;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,11 +19,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
-
-import com.cb.vmss.fragment.FragmentDrawer;
-import com.cb.vmss.fragment.HomeFragment;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener
 {
@@ -98,29 +98,36 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				break;
 			
 			case 1 :
-//				fragment = new CalenderFragment();
-//				title = getString(R.string.title_calender);
-				Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
-				startActivity(chooseAddressIntent);
-				break;
-			
-			case 2 :
-//				fragment = new OverviewFragment();
-//				title = getString(R.string.title_overview);
-//				loadFragment(fragment,title);
+
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
+					Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
+		        } else {
+		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
+		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
+		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
+		        }
+				break;
+			case 2 :
+				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
+					Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
+					startActivity(chooseAddressIntent);
+		        } else {
+		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
+		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
+		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
+		        }
+				break;
+			case 3 :
+				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
 					Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
 					startActivity(checkoutIntent);
 		        } else {
 		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-		        	startActivity(loginIntent);
+		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
+		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
 		        }
 				break;
-			
-			case 3 :
-				/*fragment = new GroupsFragment();
-				title = getString(R.string.title_groups);
-				loadFragment(fragment,title);*/
+			case 4 :	
 				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
 				startActivity(cartIntent);
 				break;
@@ -131,40 +138,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        } else {
 		        	Toast.makeText(MainActivity.this, "Already Logout", Toast.LENGTH_LONG);
 		        }
-				break;
-			
-			/*case 4 :
-				fragment = new ListsFragment();
-				title = getString(R.string.title_lists);
-				loadFragment(fragment,title);
-
-				break;
-			case 5 :
-				fragment = new ProfileFragment();
-				title = getString(R.string.title_profile);
-				loadFragment(fragment,title);
-
-				break;
-			case 6 :
-				fragment = new ScheduleDeliveryFragment();
-				title = getString(R.string.title_schedule_delivery);
-				loadFragment(fragment,title);
-
-				break;
-			case 7 :
-				fragment = new SettingsFragment();
-				title = getString(R.string.title_settings);
-				loadFragment(fragment,title);
-
-				break;
-			case 8 :
-				
-				 * fragment = new (); title = getString (R.string.title_settings);
-				 
-				// Operation for logout
-				break;
-			 */
-				
+				break;		
 				default :
 				break;
 		}
@@ -198,10 +172,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	private void showConfirmLogout() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				MainActivity.this);
- 
 			// set title
 			alertDialogBuilder.setTitle("Logout");
- 
 			// set dialog message
 			alertDialogBuilder
 				.setMessage("Are you sure?")
@@ -228,5 +200,17 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
  
 				// show it
 				alertDialog.show();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		// Check which request we're responding to
+	    if (requestCode == Constant.CODE_MAIN_LOGIN) {
+	        // Make sure the request was successful
+	        if (resultCode == RESULT_OK) {
+	        	displayView(0);    
+	        }
+	    }
 	}
 }
