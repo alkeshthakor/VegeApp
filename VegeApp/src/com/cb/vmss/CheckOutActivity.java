@@ -2,14 +2,17 @@ package com.cb.vmss;
 
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class CheckOutActivity extends Activity implements OnClickListener{
@@ -31,6 +34,11 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 	
 	private int totalAmount;
 	
+	private LinearLayout timerLinearLayout;
+	
+	private ProgressDialog mProgressDialog;
+	ServerConnector connector;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,6 +52,12 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 			closeImageView.setOnClickListener(this);
 		}
 		
+		mProgressDialog = new ProgressDialog(CheckOutActivity.this);
+		mProgressDialog.setMessage("Please wait...");
+		mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
+        
+		timerLinearLayout=(LinearLayout)findViewById(R.id.timeLinerLayout);
 		
 		subTotalTextView=(TextView)findViewById(R.id.subTotalTextView);
 		deliveryChargesTextView=(TextView)findViewById(R.id.deliveryChargeTextView);
@@ -65,6 +79,7 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 		btnDayAfter.setOnClickListener(this);
 		btnPlaceOrder.setOnClickListener(this);
 		
+		timerLinearLayout.setOnClickListener(this);
 		
 
 				
@@ -96,10 +111,11 @@ public class CheckOutActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btnBackCheckOut:
 			finish();
-			
 			break;
 		case R.id.btnPlaceOrderCheckOut:
-			break;			
+			break;	
+		case R.id.timeLinerLayout:
+			break;
 		}
 	}
 }
