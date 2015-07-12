@@ -24,11 +24,14 @@ public class Constant {
 	public static final String SERVICE_FETCH_ADDRESS = "user/getaddressbyusrid";
 	public static final String SERVICE_USER_CREATION = "user/adduser";
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
+	public static final String SERVICE_ADD_ORDER = "order/addorder";
+	
 	
 	public static final String PREF_QTY_COUNT = "PREF_QTY_COUNT";
 	public static final String PREF_TOTAL_AMOUT = "PREF_TOTAL_AMOUNT";
 	
 	public static final int CODE_MAIN_LOGIN = 1001;
+	public static final int CODE_BACK = 1002;
 
 	
 	/*	

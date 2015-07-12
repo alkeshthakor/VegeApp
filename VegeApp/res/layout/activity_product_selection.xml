@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+         
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" >
 
+              
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
@@ -27,12 +28,19 @@
                 android:layout_height="match_parent" />
         </FrameLayout>
 
-        <View
+       <!--  <View
             android:id="@+id/overlay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/flexible_space_image_height"
             android:background="?attr/colorPrimary" />
-
+ -->
+ 
+ <View
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/flexible_space_image_height"
+            android:background="@drawable/icon_top_bg_vegetables" />
+ 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,12 +71,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
             android:background="@android:color/transparent" />
+           <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_product" />
+        
+           
     </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/relLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true" >
 
         <View
@@ -117,7 +130,7 @@
         <View
             android:id="@+id/sprator3"
             android:layout_width="2dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_toRightOf="@+id/qtyCountRelLayout"
             android:background="#EEEEEE" />
@@ -145,7 +158,9 @@
         <View
             android:id="@+id/sprator4"
             android:layout_width="2dp"
-            android:layout_height="43dp"
+            android:layout_height="match_parent"
+             android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_below="@+id/sprator"
             android:layout_toLeftOf="@+id/icoCheckout"
             android:background="#EEEEEE" />
@@ -157,6 +172,9 @@
             android:layout_alignBottom="@+id/icoShopping"
             android:layout_alignParentRight="true"
             android:layout_margin="2dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:src="@drawable/icon_checkout2" />
 
     </RelativeLayout>

@@ -1,20 +1,5 @@
 package com.cb.vmss;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import com.cb.vmss.adapter.ProductAdapter.ITotalCount;
 import com.cb.vmss.fadingactionbar.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.cb.vmss.fadingactionbar.observablescrollview.ScrollUtils;
@@ -27,6 +12,26 @@ import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class ProductSelectionActivity extends BaseActivity implements ITotalCount,OnClickListener{
 
@@ -44,17 +49,38 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private SlidingTabLayout mSlidingTabLayout;
 	private int mFlexibleSpaceHeight;
 	private int mTabHeight;
-
+	private int mToolbarHeight;
+	
 	private int totalAmount;
 	private int totalQtyCount;
 	private Context mContext;
 
+	private Toolbar mToolbar;
+	private ImageView serachImageView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_selection);
 		mContext = this;
 		Constant.CONTEXT = mContext;
+		mToolbar = (Toolbar)findViewById(R.id.toolbar);
+		if (mToolbar != null) {
+					setSupportActionBar(mToolbar);
+					getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+				     getSupportActionBar().setHomeButtonEnabled(true);
+					getSupportActionBar().setDisplayShowTitleEnabled(false);
+					TextView mTitle = (TextView) mToolbar.findViewById(R.id.toolbar_title);
+					final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+					upArrow.setColorFilter(getResources().getColor(android.R.color.white),Mode.SRC_ATOP);
+					getSupportActionBar().setHomeAsUpIndicator(upArrow);
+					
+					serachImageView=(ImageView)mToolbar.findViewById(R.id.searchImageView);
+					
+					serachImageView.setOnClickListener(this);
+					
+					
+		}
 		///currentFragment = new ProductSelectionFragment(HomeFragment.mCategoryList.get(0).getCategoryId());
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));
 		mPager = (ViewPager) findViewById(R.id.pager);
@@ -66,9 +92,12 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 
 		mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
 		mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
-
-		TextView titleView = (TextView) findViewById(R.id.title);
-		titleView.setText("Sabji At Door");
+		mToolbarHeight = getResources().getDimensionPixelSize(R.dimen.toolbar_height);
+		
+		
+		
+		//TextView titleView = (TextView) findViewById(R.id.title);
+		//titleView.setText("Sabji At Door");
 
 		mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
 		mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
@@ -109,6 +138,20 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		}
 
 		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+	    case android.R.id.home:
+	        finish();
+	        break;
+
+	    default:
+	        break;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	
@@ -224,7 +267,11 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			// other fragments
 			// when their scrollY is changed.
 			// So we need to check the caller(S) is the current fragment.
-			int adjustedScrollY = Math.min(scrollY, mFlexibleSpaceHeight - mTabHeight);
+			int myScroll=(mFlexibleSpaceHeight - mTabHeight)-mToolbarHeight;
+			
+			//int adjustedScrollY = Math.min(scrollY, mFlexibleSpaceHeight - mTabHeight);
+			int adjustedScrollY = Math.min(scrollY, myScroll);
+			
 			translateTab(adjustedScrollY, false);
 			propagateScroll(adjustedScrollY);
 		}
@@ -233,6 +280,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private void translateTab(int scrollY, boolean animated) {
 		int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
 		int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
+		
 		View imageView = findViewById(R.id.image);
 		View overlayView = findViewById(R.id.overlay);
 		TextView titleView = (TextView) findViewById(R.id.title);
@@ -240,11 +288,12 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		// Translate overlay and image
 		float flexibleRange = flexibleSpaceImageHeight - getActionBarSize();
 		int minOverlayTransitionY = tabHeight - overlayView.getHeight();
+		
 		ViewHelper.setTranslationY(overlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
 		ViewHelper.setTranslationY(imageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
 
 		// Change alpha of overlay
-		ViewHelper.setAlpha(overlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
+		//ViewHelper.setAlpha(overlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
 
 		// Scale title text
 		float scale = 1
@@ -318,8 +367,23 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		switch(v.getId()){
 		case R.id.relLayout:
 			 Intent myCartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
-			 startActivity(myCartIntent);
+			 startActivityForResult(myCartIntent,Constant.CODE_MAIN_LOGIN);
 			break;
+		case R.id.searchImageView:
+			break;
+			
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		// Check which request we're responding to
+	    if (requestCode == Constant.CODE_MAIN_LOGIN) {
+	        // Make sure the request was successful
+	    	setResult(Constant.CODE_MAIN_LOGIN);
+        	finish();  
+        	
+	    }
 	}
 }

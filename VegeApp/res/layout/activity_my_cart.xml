@@ -7,16 +7,15 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/top_bar_address" />
+        layout="@layout/toolbar_with_back" />
 
     <LinearLayout
         android:id="@+id/topBarMyCart"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:background="@android:color/holo_green_light"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-         android:layout_marginTop="10dp"
         android:paddingLeft="12dp"
         android:paddingStart="12dp" >
     </LinearLayout>

@@ -8,6 +8,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.model.Product;
 
@@ -188,7 +191,11 @@ public class VegAppDatabaseHelper
         
     }
     
-
+    public long clearMayCart()
+    {
+        long rowid = mDb.delete(VegAppColumn.CART_MASTER_TABLE,null,null);
+        return rowid;        
+    }
     
     public int getCartProductQty(String productId)
     {
@@ -271,4 +278,34 @@ public class VegAppDatabaseHelper
         }
         return myCartList;
     } 
+    
+    
+    public JSONArray getOrderItem()
+    {
+        Cursor cartCursor = null;
+        JSONArray orderItemArray=new JSONArray();      
+        try
+        {
+        	String query = "SELECT "+VegAppColumn.CART_PRODUCT_ID+","+VegAppColumn.CART_PRODUCT_QTY+" from "+VegAppColumn.CART_MASTER_TABLE;	
+            cartCursor = mDb.rawQuery(query, null);
+            cartCursor.moveToFirst();
+            if (cartCursor != null && cartCursor.getCount() > 0)
+            {
+                while (!cartCursor.isAfterLast())
+                {
+                   JSONObject orderItem=new JSONObject();
+                   orderItem.put("prp_id",cartCursor.getString(0));
+                   orderItem.put("quantity",cartCursor.getString(1));
+                   orderItemArray.put(orderItem);
+                   cartCursor.moveToNext();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e("Error: ", "e.getMessage() :" + e.getMessage());
+        }
+        return orderItemArray;
+    } 
+    
 }

@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener
@@ -27,7 +28,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 	private Toolbar mToolbar;
 	private FragmentDrawer drawerFragment;
-
+	private TextView mTitleTextView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -39,13 +41,20 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		if (mToolbar != null)
 		{
 			setSupportActionBar(mToolbar);
+			mTitleTextView= (TextView) mToolbar
+					.findViewById(R.id.toolbar_title);
+			mTitleTextView.setText(getString(R.string.app_name));
+			
+		
 		}
 		mToolbar.setTitleTextColor(Color.BLACK);
 		
 		//setSupportActionBar (mToolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+		
 		drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 		drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
 		drawerFragment.setDrawerListener(this);
@@ -88,13 +97,13 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	private void displayView(int position)
 	{
 		Fragment fragment = null;
-		String title = getString(R.string.app_name);
+		//String title = getString(R.string.app_name);
 		switch (position)
 		{
 			case 0 :
 				fragment = new HomeFragment();
-				title = getString(R.string.title_home);
-				loadFragment(fragment,title);
+				//title = getString(R.string.title_home);
+				loadFragment(fragment);
 				break;
 			
 			case 1 :
@@ -132,7 +141,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				startActivity(cartIntent);
 				break;
 			
-			case 10 :
+			case 11 :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
 					showConfirmLogout();
 		        } else {
@@ -156,7 +165,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	}
 	
 	
-	private void loadFragment(Fragment fragment,String title){
+	private void loadFragment(Fragment fragment){
 		if (fragment != null)
 		{
 			FragmentManager fragmentManager = getSupportFragmentManager();
@@ -165,7 +174,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			fragmentTransaction.commit();
 
 			// set the toolbar title
-			getSupportActionBar().setTitle(title);
+			//getSupportActionBar().setTitle(title);
 		}
 	}
 	

@@ -7,26 +7,26 @@ import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.ServerConnector;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends Activity implements OnClickListener {
+public class LoginActivity extends ActionBarActivity {
 
 	private Toolbar toolbar;
-	private ImageView closeImageView;
 	private EditText phoneNumberEditText;
 	private ProgressBar progressIndicater;
 	
@@ -45,10 +45,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
 			mTitle.setText(getResources().getString(R.string.lbl_title_login));
-			closeImageView=(ImageView)toolbar.findViewById(R.id.imgeCloseTopBar);
-			closeImageView.setOnClickListener(this);
+			
+			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		    getSupportActionBar().setHomeButtonEnabled(true);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+			final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+			upArrow.setColorFilter(getResources().getColor(android.R.color.black),Mode.SRC_ATOP);
+			getSupportActionBar().setHomeAsUpIndicator(upArrow);
+			
 		}
-		
 		
 		mContext = this;
 		Constant.CONTEXT=mContext;
@@ -89,16 +95,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 		
 	}
 
+	
+	
 	@Override
-	public void onClick(View view) {
-		switch(view.getId()){
-		case R.id.imgeCloseTopBar:
-			finish();
-			
-			break;	
-			
-		}
-		
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+	    case android.R.id.home:
+	    	setResult(Constant.CODE_BACK);
+	        finish();
+	        break;
+	    default:
+	        break;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	
@@ -123,7 +133,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
 					Toast.makeText(mContext,"User created successfully",Toast.LENGTH_SHORT).show();
+					//JSONObject returnObject=result.getJSONObject("DATA");
+					
 					JSONObject returnObject=result.getJSONObject("DATA");
+					
 					Intent verifyPhoneIntent=new Intent(getApplicationContext(),VerifyPhoneActivity.class);
 					verifyPhoneIntent.putExtra(Constant.PREF_USER_ID, returnObject.getString("usr_id"));
 					verifyPhoneIntent.putExtra(Constant.PREF_PHONE_NUMBER, returnObject.getString("usr_phone"));

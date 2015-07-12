@@ -17,10 +17,10 @@
 package com.cb.vmss;
 
 import android.content.res.TypedArray;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
 
-public abstract class BaseActivity extends FragmentActivity  {
+public abstract class BaseActivity extends ActionBarActivity  {
     private static final int NUM_OF_ITEMS = 100;
     private static final int NUM_OF_ITEMS_FEW = 3;
 

@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -347,6 +346,78 @@ public class ServerConnector {
 	    
 	 }
 
+	
+	
+	public JSONObject submitOrder(String hostUrl,String parameter){
+		 JSONObject responseObj=null;
+		 
+		int statusCode=0;
+		String line;
+		String responsStr="";
+		URL url;
+	  
+	  	try {
+	        url = new URL(hostUrl);   
+	    } catch (MalformedURLException e) {
+	        throw new IllegalArgumentException("invalid url : " + hostUrl);
+	    }
+	    //String body = parameter.toString();
+	    HttpURLConnection conn = null;	    
+	    try {
+	    	
+	         conn = (HttpURLConnection) url.openConnection();
+	         conn.setDoOutput(true);
+	         conn.setDoInput(true);
+	         conn.setUseCaches(false);
+	         //conn.setRequestProperty("Content-length",String.valueOf (body.length()));
+	         conn.setRequestProperty("content-type","application/x-www-form-urlencoded; charset=utf-8"); 
+	         conn.setRequestMethod("POST");
+	      
+	         //send datat
+	         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+	         writer.write(parameter);
+	         writer.flush();
+			 writer.close();
+	         
+			 statusCode = conn.getResponseCode();
+	         
+	         if (statusCode != 200) {
+	              throw new IOException("Post failed with error code " + statusCode);
+	            }else{
+	            	 InputStream is = conn.getInputStream();
+	            	 
+	                 BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+	                 StringBuffer response = new StringBuffer(); 
+	                 while((line = rd.readLine()) != null) {
+	                   response.append(line);
+	                   response.append('\r');
+	                 }
+	                 rd.close();
+	                 
+	                 if(response.toString().contains("Warning: Invalid argument supplied for foreach()")){
+	                	 int startPosition=response.indexOf("{");
+	                	 responsStr=response.substring(startPosition);
+	                	 
+	                 }else{
+	                	 responsStr=response.toString();
+	                 }
+	                 responseObj=new JSONObject(responsStr.toString());
+	                 Log.d("Data......",response.toString());            
+	            }
+	         
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
+	    
+	    finally {
+	        if (conn != null) {
+	            conn.disconnect();
+	        }
+	    }
+	    
+	    return responseObj;
+	    
+	 }
 	
 	
 	
