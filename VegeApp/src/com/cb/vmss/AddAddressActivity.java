@@ -1,5 +1,7 @@
 package com.cb.vmss;
 
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cb.vmss.model.Address;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
@@ -43,7 +46,9 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
-
+	private Address item;
+	private boolean isEdit = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +61,16 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 			closeImageView = (ImageView) toolbar
 					.findViewById(R.id.imgeCloseTopBar);
 			closeImageView.setOnClickListener(this);
+		}
+
+		if(getIntent() != null) {
+			if(getIntent().hasExtra("edit")) {
+				isEdit = getIntent().getBooleanExtra("edit", false);
+			}
+			if(getIntent().getSerializableExtra("address") != null) {
+				Serializable b = getIntent().getSerializableExtra("address");
+				item = (Address) b;
+			}
 		}
 
 		mContext = this;
@@ -77,6 +92,16 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 
 		createButton = (Button) findViewById(R.id.btnCreateAdd);
 		createButton.setOnClickListener(this);
+		
+		if(isEdit) {
+			createButton.setText("Save");
+			nameEditText.setText(item.getAddFullName());
+			houseEditText.setText(item.getAddAddress1());
+			streetEditText.setText(item.getAddAddress2());
+			areaEditText.setText(item.getAddCity());
+			cityEditText.setText(item.getAddCity());
+			zipEditText.setText(item.getAddZipCode());
+		}
 	}
 
 	@Override
@@ -99,8 +124,26 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 		if(!isEmptyField()){
 			String userId = Pref.getValue(Constant.PREF_USER_ID, "0");
 			if(!userId.equals("0")) {
-				addressBody="usr_id=" + userId + "&add_id=&add_fullname="+nameEditText.getText().toString()+"&add_phone=2147483647"+"&add_address1="+houseEditText.getText().toString()
-						+"&add_address2="+areaEditText.getText().toString()+"&add_landmark="+cityEditText.getText().toString()+"&add_zipcode="+zipEditText.getText().toString();
+				if(isEdit) {
+					addressBody="usr_id=" + userId 
+						+ "&add_id=" + item.getAddId()
+						+ "&add_fullname="+nameEditText.getText().toString()
+						+ "&add_phone=2147483647"
+						+ "&add_address1="+houseEditText.getText().toString()
+						+ "&add_address2="+areaEditText.getText().toString()
+						+ "&add_landmark="+cityEditText.getText().toString()
+						+ "&add_zipcode="+zipEditText.getText().toString();
+				} else {
+					addressBody="usr_id=" + userId 
+							+ "&add_id="
+							+ "&add_fullname="+nameEditText.getText().toString()
+							+ "&add_phone=2147483647"
+							+ "&add_address1="+houseEditText.getText().toString()
+							+ "&add_address2="+areaEditText.getText().toString()
+							+ "&add_landmark="+cityEditText.getText().toString()
+							+ "&add_zipcode="+zipEditText.getText().toString();
+					
+				}
 				 mServiceUrl=Constant.HOST+Constant.SERVICE_ADD_ADDRESS;
 				 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
 			}
@@ -129,10 +172,16 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 			mProgressDialog.dismiss();
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-					Toast.makeText(mContext,"Address added successfully",Toast.LENGTH_SHORT).show();;
+					if(isEdit)
+						Toast.makeText(mContext,"Address updated successfully",Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(mContext,"Address added successfully",Toast.LENGTH_SHORT).show();
 					finish();
 				}else{
-					Toast.makeText(mContext,"Add address fail",Toast.LENGTH_SHORT).show();;
+					if(isEdit)
+						Toast.makeText(mContext,"Add address fail",Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(mContext,"Update address fail",Toast.LENGTH_SHORT).show();;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
