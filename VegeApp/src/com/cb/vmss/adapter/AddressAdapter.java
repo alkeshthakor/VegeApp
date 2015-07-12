@@ -1,17 +1,23 @@
 package com.cb.vmss.adapter;
 
+import java.io.ObjectOutputStream.PutField;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cb.vmss.AddAddressActivity;
 import com.cb.vmss.R;
-import com.cb.vmss.database.VegAppDatabaseHelper;
 import com.cb.vmss.model.Address;
 
 public class AddressAdapter extends BaseAdapter {
@@ -61,6 +67,8 @@ public class AddressAdapter extends BaseAdapter {
             holder.address1TextView = (TextView)convertView.findViewById(R.id.address1TextView);
             holder.address2TextView = (TextView)convertView.findViewById(R.id.address2TextView);
             holder.address3TextView = (TextView)convertView.findViewById(R.id.address3TextView);
+            holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
+            holder.iconDeleteAddress = (ImageView) convertView.findViewById(R.id.icoDeleteAddress);
             
             convertView.setTag(holder);
             
@@ -72,7 +80,16 @@ public class AddressAdapter extends BaseAdapter {
         holder.address1TextView.setText(rowItem.getAddAddress1() + ", "+ rowItem.getAddAddress2());
         holder.address2TextView.setText(rowItem.getAddLandmark()+ ", "+ rowItem.getAddCity());
         holder.address3TextView.setText(rowItem.getAddZipCode());
-        
+        holder.iconEditAddress.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent addressIntent=new Intent(context, AddAddressActivity.class);
+				addressIntent.putExtra("edit", true);
+				addressIntent.putExtra("address", (Serializable)rowItem);
+				context.startActivity(addressIntent);
+			}
+		});
         return convertView;
 	}
 
@@ -81,5 +98,7 @@ public class AddressAdapter extends BaseAdapter {
 		TextView address1TextView;
 		TextView address2TextView;
 		TextView address3TextView;
+		ImageView iconEditAddress;
+		ImageView iconDeleteAddress;
     }
 }
