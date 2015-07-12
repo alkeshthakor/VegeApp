@@ -179,9 +179,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 					Pref.setValue(Constant.PREF_QTY_COUNT,"0");
 					Pref.setValue(Constant.PREF_TOTAL_AMOUT,"0");
 					
-					setResult(Constant.CODE_MAIN_LOGIN);
+					orderSuccessInfom();
 					
-					finish();
 				}else{
 					Toast.makeText(mContext,"Order submiting fail.",Toast.LENGTH_SHORT).show();
 				}
@@ -223,6 +222,31 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				});
 				// create alert dialog
 				AlertDialog alertDialog = alertDialogBuilder.create();
+				// show it
+				alertDialog.show();
+	}
+	
+	
+	private void orderSuccessInfom(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				CheckOutActivity.this);
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Your order successfully placed!!")
+				.setCancelable(false)
+				.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+						//MainActivity.this.finish();
+						
+						setResult(Constant.CODE_MAIN_LOGIN);
+						finish();
+					}
+				  });
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
 				// show it
 				alertDialog.show();
 	}

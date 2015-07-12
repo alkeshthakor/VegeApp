@@ -5,12 +5,21 @@ import java.io.Serializable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
+import com.cb.vmss.model.Address;
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
+
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,13 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cb.vmss.model.Address;
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
-
-public class AddAddressActivity extends Activity implements OnClickListener {
+public class AddAddressActivity extends ActionBarActivity implements OnClickListener {
 
 	private Toolbar toolbar;
 	private ImageView closeImageView;
@@ -58,9 +61,15 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
 			mTitle.setText(getResources().getString(R.string.lbl_add_address));
-			closeImageView = (ImageView) toolbar
-					.findViewById(R.id.imgeCloseTopBar);
-			closeImageView.setOnClickListener(this);
+			
+			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		    getSupportActionBar().setHomeButtonEnabled(true);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+			final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+			upArrow.setColorFilter(getResources().getColor(android.R.color.black),Mode.SRC_ATOP);
+			getSupportActionBar().setHomeAsUpIndicator(upArrow);
+			
 		}
 
 		if(getIntent() != null) {
@@ -105,11 +114,22 @@ public class AddAddressActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+	    case android.R.id.home:
+	    	setResult(Constant.CODE_BACK);
+	        finish();
+	        break;
+	    default:
+	        break;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.imgeCloseTopBar:
-			finish();
-			break;
 		case R.id.btnCreateAdd:
 			if(cd.isConnectingToInternet()){
 				createAddress();	
