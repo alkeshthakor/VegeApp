@@ -141,6 +141,13 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				startActivity(cartIntent);
 				break;
 			
+			case 9 :	
+				 Intent intent = new Intent(Intent.ACTION_SEND);
+				 intent.setType("text/plain");
+				 intent.putExtra(Intent.EXTRA_TEXT, "My App\nhttps://play.google.com/store/apps/details?id=com.google.android.apps.messaging&hl=en");
+				 startActivity(Intent.createChooser(intent, "Share this app"));
+				 break;
+				
 			case 11 :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
 					showConfirmLogout();
