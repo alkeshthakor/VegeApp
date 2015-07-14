@@ -22,7 +22,6 @@
     <string name="nav_item_address">My Addresses</string>
     <string name="nav_item_order">My Order</string>
     <string name="nav_item_cart">My Cart</string>
-    <string name="nav_item_notification">Notification Center</string>
     <string name="nav_heading_others">Others</string>
     <string name="nav_item_help">Help</string>
     <string name="nav_item_callus">Call Us</string>
@@ -82,7 +81,6 @@ Quam libero nulla netus eu porta curae, ut nulla bibendum facilisis et urna sed,
         <item>@string/nav_item_address</item>
         <item>@string/nav_item_order</item>
         <item>@string/nav_item_cart</item>
-        <item>@string/nav_item_notification</item>
         <item>@string/nav_item_help</item>
         <item>@string/nav_item_callus</item>
         <item>@string/nav_item_rateus</item>
@@ -101,7 +99,6 @@ Quam libero nulla netus eu porta curae, ut nulla bibendum facilisis et urna sed,
         <item>@drawable/icon_lists</item>
         <item>@drawable/icon_profile</item>
         <item>@drawable/icon_schedule_delivery</item>
-        <item>@drawable/icon_settings</item>
         <item>@drawable/icon_settings</item>
         <item>@drawable/icon_settings</item>
         <item>@drawable/icon_logout</item>
