@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cb.vmss.ProductSelectionActivity;
@@ -124,7 +125,12 @@ public class HomeFragment extends Fragment {
 				         view = mActivity.getLayoutInflater().inflate(R.layout.layout_category_item, null);
 						 TextView mNameTextView=(TextView)view.findViewById(R.id.categoryNameTextView);
 						 mNameTextView.setText(catItem.getCategoryName());
-						 ImageView catImageView=(ImageView)view.findViewById(R.id.categoryImageView);
+						 RelativeLayout catImageView=(RelativeLayout)view.findViewById(R.id.categoryImageRel);
+						 if(i>0) {
+							 LinearLayout.LayoutParams relativeParams = (LinearLayout.LayoutParams)catImageView.getLayoutParams();
+							 relativeParams.setMargins(0, 20, 0, 0);  // left, top, right, bottom
+							 catImageView.setLayoutParams(relativeParams);
+						 }
 						 catImageView.setTag(i);
 						 catImageView.setId(i);
 						 
@@ -150,8 +156,8 @@ public class HomeFragment extends Fragment {
 	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
-		public DownloadImageTask(ImageView bmImage) {
+		RelativeLayout bmImage;
+		public DownloadImageTask(RelativeLayout bmImage) {
 			this.bmImage = bmImage;
 		}
 
