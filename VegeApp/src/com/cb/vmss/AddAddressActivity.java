@@ -165,7 +165,13 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 					
 				}
 				 mServiceUrl=Constant.HOST+Constant.SERVICE_ADD_ADDRESS;
-				 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
+				 
+				 if(cd.isConnectingToInternet()){
+					 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
+				    }else{
+				    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+				    }
+				 
 			}
 		} else {
 			Toast.makeText(mContext,"Field should not be blank",Toast.LENGTH_SHORT).show();

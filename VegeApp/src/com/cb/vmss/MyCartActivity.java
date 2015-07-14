@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyCartActivity extends ActionBarActivity implements OnClickListener,IUpdateMyCart{
 	private Toolbar toolbar;
@@ -113,9 +114,12 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		switch (view.getId()) {
 		case R.id.bottomBarMyCart:
 			if(!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
-				 Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
-				 startActivityForResult(checkoutIntent,Constant.CODE_MAIN_LOGIN);
-				 
+				  if(!Pref.getValue(Constant.PREF_ADD_ID, "0").equals("0")){
+					  Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+					 startActivityForResult(checkoutIntent,Constant.CODE_MAIN_LOGIN);	  
+				  }else{
+					  Toast.makeText(mContext,"Please choose shipping address",Toast.LENGTH_SHORT).show();
+				  }
 			} else {
 				Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
 				loginIntent.putExtra("fromscreen",MyCartActivity.class.getCanonicalName());

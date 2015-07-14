@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 
 public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment<ObservableListView>{
@@ -120,7 +121,14 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
 		mServiceUrl = Constant.HOST + Constant.SERVICE_PRODUCT_BY_CAT_ID;
-		new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
+		
+		
+		 if(cd.isConnectingToInternet()){
+			 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
+		    }else{
+		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		    }
+		 
 		return view;
 	}
 

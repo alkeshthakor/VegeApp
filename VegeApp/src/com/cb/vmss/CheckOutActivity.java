@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
@@ -12,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -54,6 +56,9 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	private VegAppDatabaseHelper mDatabaseHelper;
 	private Context mContext;
 	
+	private ConnectionDetector cd;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,7 +66,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		mContext=this;
 		Constant.CONTEXT=mContext;
-		
+		cd = new ConnectionDetector(mContext);
 		
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
@@ -145,7 +150,13 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		case R.id.btnDayAfterCheckOut:
 			break;
 		case R.id.btnPlaceOrderCheckOut:
-			ConfirmOrderPlaced();
+			 if(cd.isConnectingToInternet()){
+				 ConfirmOrderPlaced();
+			    }else{
+			    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+			    	Intent chooseAddressintent=new Intent(getApplicationContext(),ChooseAddressActivity.class);
+			    	startActivity(chooseAddressintent);
+			    }
 			break;	
 		case R.id.timeLinerLayout:
 			break;

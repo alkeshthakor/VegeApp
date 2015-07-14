@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cb.vmss.ProductSelectionActivity;
 import com.cb.vmss.R;
@@ -70,7 +71,14 @@ public class HomeFragment extends Fragment {
 		mProgressDialog.setIndeterminate(false);
 		mCategoryLinearLayout=(LinearLayout)view.findViewById(R.id.categoryLinearLayout);
 	    mCatServiceUrl=Constant.HOST+Constant.SERVICE_GET_ALL_CATEGORY;
-        new LoadCategoryTask().execute(mCatServiceUrl);
+	    
+	    if(cd.isConnectingToInternet()){
+	    	new LoadCategoryTask().execute(mCatServiceUrl);	
+	    }else{
+	    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+	    }
+	    
+        
 		return view;
 	}
 

@@ -88,7 +88,14 @@ public class LoginActivity extends ActionBarActivity {
 					//Toast.makeText(getApplicationContext(),"Valid Phone number",Toast.LENGTH_SHORT).show();
 					 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
 					// usr_phone= 9909983932
-					 new createNewUserTask().execute(mServiceUrl,phoneNumberEditText.getText().toString());
+					 
+					 if(cd.isConnectingToInternet()){
+						  new createNewUserTask().execute(mServiceUrl,phoneNumberEditText.getText().toString());
+					    }else{
+					    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+					    }
+					 
+					
 				}
 			}
 		});

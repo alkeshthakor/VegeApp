@@ -9,11 +9,13 @@ import org.json.JSONObject;
 
 import com.cb.vmss.adapter.AddressAdapter;
 import com.cb.vmss.model.Address;
+import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
@@ -29,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ChooseAddressActivity extends ActionBarActivity implements OnClickListener,OnItemClickListener
 {
@@ -41,12 +44,19 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	ListView addressListView;
 	public List<Address> mAddresstList;
 	
+	Context mContext;
+	ConnectionDetector cd;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chosee_address);
 		Constant.CONTEXT=this;
+		
+		mContext = this;
+		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
+		
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
@@ -107,7 +117,14 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	protected void onResume() {
 		super.onResume();
 		Constant.CONTEXT=this;
-		fetchAddress();
+		
+		if(cd.isConnectingToInternet()){
+			fetchAddress();
+		    }else{
+		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		    }
+		
+		
 		
 	}
 	

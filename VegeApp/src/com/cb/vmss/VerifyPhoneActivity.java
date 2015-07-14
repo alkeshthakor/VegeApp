@@ -4,7 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,14 +23,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
 
 public class VerifyPhoneActivity extends ActionBarActivity implements OnClickListener{
 
@@ -113,13 +111,27 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		case R.id.btnResendCodePhoneVerify:
 			 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
 			 mVerificationBody="usr_phone="+mPhoneNumber;
-			new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"CODE_RESEND");
+			
+			
+			 if(cd.isConnectingToInternet()){
+				 new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"CODE_RESEND");
+			    }else{
+			    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+			    }
+			 
 			break;
 		case R.id.btnNextPhoneVerify:
 			if(manualCodeEditText.getText().toString().length()>0){
 				 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_VERIFY;
 				 mVerificationBody="usr_id="+mUserId+"&sms_code="+manualCodeEditText.getText().toString();
-				 new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"PHONE_VERIFICATION");
+				
+				 if(cd.isConnectingToInternet()){
+					 new CodeVerificationTaskTask().execute(mServiceUrl,mVerificationBody,"PHONE_VERIFICATION");
+				    }else{
+				    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+				    }
+				 
+				 
 			}else{
 				Toast.makeText(getApplicationContext(),"Code should not be blank",Toast.LENGTH_SHORT).show();
 			}

@@ -65,6 +65,9 @@
     <string name="lbl_title_check_out">Check Out</string>
     <string name="lbl_checkout">CheckOut</string>
     
+    <string name="lbl_network_connection_fail">Network connection fail!!</string>
+    
+    
     <string name="lbl_title_add_address">Add Address</string>
     <string name="lbl_title_verifying_phone">Verifying Phone</string>
     <string name="lbl_title_login">Login or Signup</string>
