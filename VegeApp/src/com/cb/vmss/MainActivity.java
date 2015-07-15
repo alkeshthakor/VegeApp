@@ -128,7 +128,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				break;
 			case R.id.nav_order :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
-					Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+					Intent checkoutIntent=new Intent(getApplicationContext(),MyPreviousOrderActivity.class);
 					startActivity(checkoutIntent);
 		        } else {
 		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
