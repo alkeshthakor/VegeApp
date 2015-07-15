@@ -14,7 +14,7 @@
             android:background="#F5F5F6"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgPhone"
@@ -40,7 +40,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgLocation"
@@ -62,30 +62,24 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#F5F5F6" />
+            android:background="#F2F2F3" />
 
         <LinearLayout
             android:id="@+id/nav_heading_information"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_profile"
-                android:visibility="gone" />
-
-            <TextView
+           <TextView
                 android:id="@+id/txtInfomation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="My Information"
-                android:textColor="#F50000"
+                 android:fontFamily="sans-serif-light"
+                android:textColor="#A5A5A5"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -96,7 +90,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgLogin"
@@ -122,7 +116,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgAddress"
@@ -148,7 +142,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgOrder"
@@ -174,7 +168,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgCart"
@@ -185,7 +179,8 @@
 
             <TextView
                 android:id="@+id/txtCart"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="My Cart"
@@ -198,7 +193,7 @@
                 android:layout_height="20dp"
                 android:layout_alignLeft="@+id/icoShopping"
                 android:layout_below="@+id/sprator2"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/bg_round_unread_msg_count"
                 android:gravity="center"
                 android:padding="1dp"
@@ -220,30 +215,24 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#F5F5F6" />
+            android:background="#F2F2F3" />
 
         <LinearLayout
             android:id="@+id/nav_heading_other"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_profile"
-                android:visibility="gone" />
-
-            <TextView
+           <TextView
                 android:id="@+id/txtOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="Other"
-                android:textColor="#F50000"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#A5A5A5"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -254,7 +243,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgHelp"
@@ -280,7 +269,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgcallus"
@@ -306,7 +295,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgRateUs"
@@ -332,7 +321,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgShare"
@@ -358,7 +347,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgAbout"
@@ -384,7 +373,7 @@
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="15dp" >
 
             <ImageView
                 android:id="@+id/imgLogout"
