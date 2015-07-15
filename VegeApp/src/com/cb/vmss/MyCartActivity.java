@@ -22,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MyCartActivity extends ActionBarActivity implements OnClickListener,IUpdateMyCart{
 	private Toolbar toolbar;
@@ -68,19 +67,19 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		checkOutOutLinearLayout.setOnClickListener(this);
 		priceTextViewMyCart=(TextView)findViewById(R.id.priceTextViewMyCart);
 		
-		
-		
-		
-		mDatabaseHelper.open();
-		myCartList=mDatabaseHelper.getMyCartList();
-		myCartListView.setAdapter(new MyCartAdapter(mContext, myCartList));
-		mDatabaseHelper.close();
+			
 	}
 	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
+		mDatabaseHelper.open();
+		myCartList=mDatabaseHelper.getMyCartList();
+		myCartListView.setAdapter(new MyCartAdapter(mContext, myCartList));
+		mDatabaseHelper.close();
+		
 		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 
@@ -114,16 +113,14 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		switch (view.getId()) {
 		case R.id.bottomBarMyCart:
 			if(!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
-				  if(!Pref.getValue(Constant.PREF_ADD_ID, "0").equals("0")){
-					  Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
-					 startActivityForResult(checkoutIntent,Constant.CODE_MAIN_LOGIN);	  
-				  }else{
-					  Toast.makeText(mContext,"Please choose shipping address",Toast.LENGTH_SHORT).show();
-				  }
+				     Intent chooseAddressIntent=new Intent(getApplicationContext(),ChooseAddressActivity.class);
+				     chooseAddressIntent.putExtra("fromscreen",MyCartActivity.class.getCanonicalName());
+				     startActivityForResult(chooseAddressIntent,Constant.CODE_MAIN_LOGIN);
+					 
 			} else {
 				Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
 				loginIntent.putExtra("fromscreen",MyCartActivity.class.getCanonicalName());
-				startActivity(loginIntent);
+				startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
 			}
 			break;
 		}
@@ -166,7 +163,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		// Check which request we're responding to
-	    if (requestCode == Constant.CODE_MAIN_LOGIN) {
+	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
 	        // Make sure the request was successful
 	        	setResult(Constant.CODE_MAIN_LOGIN);
 	        	finish();    
