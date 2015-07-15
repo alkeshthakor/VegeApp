@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		drawerFragment.setDrawerListener(this);
 
 		// display the first navigation drawer view on app launch
-		displayView(0);
+		displayView(R.id.nav_location);
 	}
 
 	/*
@@ -88,9 +88,9 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		Constant.CONTEXT = this;
 	}
 	@Override
-	public void onDrawerItemSelected(View view, int position)
+	public void onDrawerItemSelected(View view)
 	{
-		displayView(position);
+		displayView(view.getId());
 	}
 
 	@SuppressLint("ShowToast")
@@ -100,13 +100,13 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		//String title = getString(R.string.app_name);
 		switch (position)
 		{
-			case 0 :
+			case R.id.nav_location :
 				fragment = new HomeFragment();
 				//title = getString(R.string.title_home);
 				loadFragment(fragment);
 				break;
 			
-			case 1 :
+			case R.id.nav_login :
 
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
 					Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
@@ -116,7 +116,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
 		        }
 				break;
-			case 2 :
+			case R.id.nav_address :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
 					Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
 					startActivity(chooseAddressIntent);
@@ -126,7 +126,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
 		        }
 				break;
-			case 3 :
+			case R.id.nav_order :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
 					Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
 					startActivity(checkoutIntent);
@@ -136,19 +136,19 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
 		        }
 				break;
-			case 4 :	
+			case R.id.nav_cart :	
 				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
 				startActivity(cartIntent);
 				break;
 			
-			case 9 :	
+			case R.id.nav_share :	
 				 Intent intent = new Intent(Intent.ACTION_SEND);
 				 intent.setType("text/plain");
 				 intent.putExtra(Intent.EXTRA_TEXT, "My App\nhttps://play.google.com/store/apps/details?id=com.google.android.apps.messaging&hl=en");
 				 startActivity(Intent.createChooser(intent, "Share this app"));
 				 break;
 				
-			case 11 :
+			case R.id.nav_logout :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
 					showConfirmLogout();
 		        } else {

@@ -1,16 +1,12 @@
 package com.cb.vmss.fragment;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
@@ -20,11 +16,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cb.vmss.R;
-import com.cb.vmss.adapter.NavigationDrawerAdapter;
-import com.cb.vmss.model.NavDrawerItem;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
 
@@ -33,15 +28,24 @@ public class FragmentDrawer extends Fragment {
 
     private static String TAG = FragmentDrawer.class.getSimpleName();
 
-    private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private NavigationDrawerAdapter adapter;
     private View containerView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
     private TextView orderItemCountTextView;
+    private LinearLayout loginObj;
+    private LinearLayout locationObj;
+    private LinearLayout addressObj;
+    private LinearLayout orderObj;
+    private LinearLayout cartObj;
+    private LinearLayout helpObj;
+    private LinearLayout calusObj;
+    private LinearLayout rateusObj;
+    private LinearLayout shareObj;
+    private LinearLayout aboutObj;
+    private LinearLayout logoutObj;
     private ImageView mPhoneIcon;
     
     public FragmentDrawer() {
@@ -50,19 +54,6 @@ public class FragmentDrawer extends Fragment {
 
     public void setDrawerListener(FragmentDrawerListener listener) {
         this.drawerListener = listener;
-    }
-
-    public static List<NavDrawerItem> getData() {
-        List<NavDrawerItem> data = new ArrayList<NavDrawerItem>();
-
-
-        // preparing navigation drawer items
-        for (int i = 0; i < titles.length; i++) {
-            NavDrawerItem navItem = new NavDrawerItem();
-            navItem.setTitle(titles[i]);
-            data.add(navItem);
-        }
-        return data;
     }
 
     @Override
@@ -77,32 +68,50 @@ public class FragmentDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflating view layout
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        View layout = inflater.inflate(R.layout.fragment_navigation_drawer2, container, false);
         
         mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
         
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
+
+        loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
+        locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
+        addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
+        orderObj = (LinearLayout) layout.findViewById(R.id.nav_order);
+        cartObj = (LinearLayout) layout.findViewById(R.id.nav_cart);
+        helpObj = (LinearLayout) layout.findViewById(R.id.nav_help);
+        calusObj = (LinearLayout) layout.findViewById(R.id.nav_callus);
+        rateusObj = (LinearLayout) layout.findViewById(R.id.nav_rateus);
+        shareObj = (LinearLayout) layout.findViewById(R.id.nav_share);
+        aboutObj = (LinearLayout) layout.findViewById(R.id.nav_about);
+        logoutObj = (LinearLayout) layout.findViewById(R.id.nav_logout);
         
-        adapter = new NavigationDrawerAdapter(getActivity(), getData());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                drawerListener.onDrawerItemSelected(view, position);
-                mDrawerLayout.closeDrawer(containerView);
-            }
 
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
+        loginObj.setOnClickListener(mClickListener);
+        locationObj.setOnClickListener(mClickListener);
+        addressObj.setOnClickListener(mClickListener);
+        orderObj.setOnClickListener(mClickListener);
+        cartObj.setOnClickListener(mClickListener);
+        helpObj.setOnClickListener(mClickListener);
+        calusObj.setOnClickListener(mClickListener);
+        rateusObj.setOnClickListener(mClickListener);
+        shareObj.setOnClickListener(mClickListener);
+        aboutObj.setOnClickListener(mClickListener);
+        logoutObj.setOnClickListener(mClickListener);
+        
         return layout;
     }
     
+    private OnClickListener mClickListener  = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+     		if (isDrawerOpen()) {
+    			closeDrawer();
+    		}
+    		drawerListener.onDrawerItemSelected(v);
+		}
+	};
     @Override
     public void onAttach(Activity activity) {
     	super.onAttach(activity);
@@ -125,9 +134,13 @@ public class FragmentDrawer extends Fragment {
                 if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
                 	mPhoneNumberTextView.setText(Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").toString());
                 	mPhoneIcon.setVisibility(View.VISIBLE);
-                }else{
+                	loginObj.setVisibility(View.GONE);
+                	logoutObj.setVisibility(View.VISIBLE);
+                } else {
                 	mPhoneNumberTextView.setText("Welcome");
                 	mPhoneIcon.setVisibility(View.GONE);
+                	loginObj.setVisibility(View.VISIBLE);
+                	logoutObj.setVisibility(View.GONE);
                 }
                 getActivity().invalidateOptionsMenu();
             }
@@ -228,7 +241,8 @@ public class FragmentDrawer extends Fragment {
 			mDrawerLayout.closeDrawer(containerView);
 		}
 	}
+	
     public interface FragmentDrawerListener {
-        public void onDrawerItemSelected(View view, int position);
+        public void onDrawerItemSelected(View view);
     }
 }
