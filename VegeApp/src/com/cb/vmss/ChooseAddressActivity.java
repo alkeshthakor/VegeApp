@@ -53,7 +53,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_chosee_address);
+		setContentView(R.layout.activity_choose_address);
 		Constant.CONTEXT=this;
 		
 		mContext = this;

@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Navarangpura, Ahmedabad"
+                android:text="@string/nav_item_location"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -77,7 +77,7 @@
                 android:id="@+id/txtInfomation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Information"
+                android:text="@string/nav_healding_myiformatio"
                  android:fontFamily="sans-serif-light"
                 android:textColor="#A5A5A5"
                 android:textSize="15dp" />
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Login"
+                android:text="@string/nav_item_Login"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="My Addresses"
+                android:text="@string/nav_item_address"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="My Order"
+                android:text="@string/nav_item_order"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -183,7 +183,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="My Cart"
+                android:text="@string/nav_item_cart"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
@@ -229,7 +229,7 @@
                 android:id="@+id/txtOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Other"
+                android:text="@string/nav_heading_others"
                 android:fontFamily="sans-serif-light"
                 android:textColor="#A5A5A5"
                 android:textSize="15dp" />
@@ -256,7 +256,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Help"
+                android:text="@string/nav_item_help"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -282,7 +282,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Call Us"
+                android:text="@string/nav_item_callus"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -308,7 +308,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Rate Us"
+                android:text="@string/nav_item_rateus"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -334,7 +334,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Share"
+                android:text="@string/nav_item_share"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -360,7 +360,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="About this app"
+                android:text="@string/nav_item_about"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -386,7 +386,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Logout"
+                android:text="@string/nav_item_logout"
                 android:textColor="#000000"
                 android:textSize="15dp" />
         </LinearLayout>
