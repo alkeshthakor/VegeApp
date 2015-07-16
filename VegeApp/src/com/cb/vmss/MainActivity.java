@@ -128,18 +128,14 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        }
 				break;
 			case R.id.nav_order :
-			/*	if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
-					Intent checkoutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
+					Intent checkoutIntent=new Intent(getApplicationContext(),MyPreviousOrderActivity.class);
 					startActivity(checkoutIntent);
 		        } else {
 		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
 		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
 		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
-		        }*/
-				
-				Toast.makeText(getApplicationContext(),"Under development",Toast.LENGTH_SHORT).show();
-				
-				
+		        }
 				break;
 			case R.id.nav_cart :	
 				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
