@@ -379,7 +379,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		// Check which request we're responding to
-	    if (requestCode == Constant.CODE_MAIN_LOGIN) {
+	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
 	        // Make sure the request was successful
 	    	setResult(Constant.CODE_MAIN_LOGIN);
         	finish();  

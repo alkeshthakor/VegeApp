@@ -43,7 +43,6 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private Button createButton;
 	private String mServiceUrl;
 	private String addressBody;
-	
 
 	private ProgressDialog mProgressDialog;
 	ConnectionDetector cd;
@@ -51,32 +50,32 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	Context mContext;
 	private Address item;
 	private boolean isEdit = false;
-	
+	private String[] addressLine;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_address);
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		if (toolbar != null) {
-			TextView mTitle = (TextView) toolbar
-					.findViewById(R.id.toolbar_title);
+			TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 			mTitle.setText(getResources().getString(R.string.lbl_add_address));
-			
+
 			setSupportActionBar(toolbar);
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		    getSupportActionBar().setHomeButtonEnabled(true);
+			getSupportActionBar().setHomeButtonEnabled(true);
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-			upArrow.setColorFilter(getResources().getColor(android.R.color.black),Mode.SRC_ATOP);
+			upArrow.setColorFilter(getResources().getColor(android.R.color.black), Mode.SRC_ATOP);
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
-			
+
 		}
 
-		if(getIntent() != null) {
-			if(getIntent().hasExtra("edit")) {
+		if (getIntent() != null) {
+			if (getIntent().hasExtra("edit")) {
 				isEdit = getIntent().getBooleanExtra("edit", false);
 			}
-			if(getIntent().getSerializableExtra("address") != null) {
+			if (getIntent().getSerializableExtra("address") != null) {
 				Serializable b = getIntent().getSerializableExtra("address");
 				item = (Address) b;
 			}
@@ -89,9 +88,8 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		mProgressDialog = new ProgressDialog(AddAddressActivity.this);
 		mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-        mProgressDialog.setCancelable(false);
-        
-		
+		mProgressDialog.setCancelable(false);
+
 		nameEditText = (EditText) findViewById(R.id.addNameEditText);
 		houseEditText = (EditText) findViewById(R.id.addHouseEditText);
 		streetEditText = (EditText) findViewById(R.id.addStreetEditText);
@@ -101,15 +99,32 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 
 		createButton = (Button) findViewById(R.id.btnCreateAdd);
 		createButton.setOnClickListener(this);
-		
-		if(isEdit) {
+
+		if (isEdit) {
 			createButton.setText("Save");
 			nameEditText.setText(item.getAddFullName());
-			houseEditText.setText(item.getAddAddress1());
-			streetEditText.setText(item.getAddAddress2());
-			areaEditText.setText(item.getAddCity());
+
+			areaEditText.setText(item.getAddLandmark());
 			cityEditText.setText(item.getAddCity());
 			zipEditText.setText(item.getAddZipCode());
+
+			houseEditText.setText(item.getAddAddress1());
+			streetEditText.setText(item.getAddAddress2());
+			
+			/*addressLine = item.getAddAddress1().split(",");
+			if (addressLine.length > 1)
+				houseEditText.setText(addressLine[0]);
+
+			if (addressLine.length == 2) {
+				streetEditText.setText(addressLine[1]);
+			} else if (addressLine.length > 2) {
+				String addStreet = "";
+				for (int i = 1; i < addressLine.length; i++) {
+					addStreet += addressLine[i];
+				}
+				streetEditText.setText(addStreet);
+			}
+*/
 		}
 	}
 
@@ -117,67 +132,65 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-	    case android.R.id.home:
-	    	setResult(Constant.CODE_BACK);
-	        finish();
-	        break;
-	    default:
-	        break;
-	    }
-	    return super.onOptionsItemSelected(item);
+		case android.R.id.home:
+			setResult(Constant.CODE_BACK);
+			finish();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnCreateAdd:
-			if(cd.isConnectingToInternet()){
-				createAddress();	
-			}else{
-				Toast.makeText(mContext,"Internet connection not available",Toast.LENGTH_SHORT).show();
+			if (cd.isConnectingToInternet()) {
+				createAddress();
+			} else {
+				Toast.makeText(mContext, "Internet connection not available", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		}
 	}
 
-	private void createAddress(){
-		if(!isEmptyField()){
+	private void createAddress() {
+		if (!isEmptyField()) {
 			String userId = Pref.getValue(Constant.PREF_USER_ID, "0");
-			if(!userId.equals("0")) {
-				if(isEdit) {
-					addressBody="usr_id=" + userId 
-						+ "&add_id=" + item.getAddId()
-						+ "&add_fullname="+nameEditText.getText().toString()
-						+ "&add_phone=2147483647"
-						+ "&add_address1="+houseEditText.getText().toString()
-						+ "&add_address2="+areaEditText.getText().toString()
-						+ "&add_landmark="+cityEditText.getText().toString()
-						+ "&add_zipcode="+zipEditText.getText().toString();
+			if (!userId.equals("0")) {
+				if (isEdit) {
+					addressBody = "usr_id=" + userId + "&add_id=" + item.getAddId() + "&add_fullname="
+							+ nameEditText.getText().toString() + "&add_phone="
+							+ Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
+							+ "&add_address1="+ houseEditText.getText().toString() 
+							+ "&add_address2=" + streetEditText.getText().toString() 
+							+ "&add_landmark=" + cityEditText.getText().toString() 
+							+ "&add_zipcode=" + zipEditText.getText().toString();
 				} else {
-					addressBody="usr_id=" + userId 
-							+ "&add_id="
-							+ "&add_fullname="+nameEditText.getText().toString()
-							+ "&add_phone=2147483647"
-							+ "&add_address1="+houseEditText.getText().toString()
-							+ "&add_address2="+areaEditText.getText().toString()
-							+ "&add_landmark="+cityEditText.getText().toString()
-							+ "&add_zipcode="+zipEditText.getText().toString();
-					
+					addressBody = "usr_id=" + userId + "&add_id=" + "&add_fullname=" + nameEditText.getText().toString()
+							+ "&add_phone=" + Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
+							+ "&add_address1="+ houseEditText.getText().toString() 
+							+ "&add_address2=" + streetEditText.getText().toString() 
+							+ "&add_landmark=" + cityEditText.getText().toString() 
+							+ "&add_zipcode=" + zipEditText.getText().toString();
+
 				}
-				 mServiceUrl=Constant.HOST+Constant.SERVICE_ADD_ADDRESS;
-				 
-				 if(cd.isConnectingToInternet()){
-					 new addAddressOnServerTask().execute(mServiceUrl,addressBody);
-				    }else{
-				    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
-				    }
-				 
+				mServiceUrl = Constant.HOST + Constant.SERVICE_ADD_ADDRESS;
+
+				if (cd.isConnectingToInternet()) {
+					new addAddressOnServerTask().execute(mServiceUrl, addressBody);
+				} else {
+					Toast.makeText(mContext, getString(R.string.lbl_network_connection_fail), Toast.LENGTH_SHORT)
+							.show();
+				}
+
 			}
 		} else {
-			Toast.makeText(mContext,"Field should not be blank",Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "Field should not be blank", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	private class addAddressOnServerTask extends AsyncTask<String, Void, JSONObject> {
 
 		@Override
@@ -188,8 +201,8 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 
 		@Override
 		protected JSONObject doInBackground(String... params) {
-			
-			return connector.getDataFromServer(params[0],params[1]);
+
+			return connector.getDataFromServer(params[0], params[1]);
 		}
 
 		@Override
@@ -197,17 +210,18 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 			super.onPostExecute(result);
 			mProgressDialog.dismiss();
 			try {
-				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-					if(isEdit)
-						Toast.makeText(mContext,"Address updated successfully",Toast.LENGTH_SHORT).show();
+				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
+					if (isEdit)
+						Toast.makeText(mContext, "Address updated successfully", Toast.LENGTH_SHORT).show();
 					else
-						Toast.makeText(mContext,"Address added successfully",Toast.LENGTH_SHORT).show();
+						Toast.makeText(mContext, "Address added successfully", Toast.LENGTH_SHORT).show();
 					finish();
-				}else{
-					if(isEdit)
-						Toast.makeText(mContext,"Add address fail",Toast.LENGTH_SHORT).show();
+				} else {
+					if (isEdit)
+						Toast.makeText(mContext, "Add address fail", Toast.LENGTH_SHORT).show();
 					else
-						Toast.makeText(mContext,"Update address fail",Toast.LENGTH_SHORT).show();;
+						Toast.makeText(mContext, "Update address fail", Toast.LENGTH_SHORT).show();
+					;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -215,10 +229,12 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		}
 	}
 
-	private boolean isEmptyField(){
-		if(nameEditText.getText().toString().length()>0 && houseEditText.getText().toString().length()>0 && streetEditText.getText().toString().length()>0 && areaEditText.getText().toString().length()>0 && cityEditText.getText().toString().length()>0 && zipEditText.getText().toString().length()>0){
+	private boolean isEmptyField() {
+		if (nameEditText.getText().toString().length() > 0 && houseEditText.getText().toString().length() > 0
+				&& streetEditText.getText().toString().length() > 0 && areaEditText.getText().toString().length() > 0
+				&& cityEditText.getText().toString().length() > 0 && zipEditText.getText().toString().length() > 0) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}

@@ -87,7 +87,7 @@
             android:id="@+id/nav_login"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -113,7 +113,7 @@
             android:id="@+id/nav_address"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -139,7 +139,7 @@
             android:id="@+id/nav_order"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -165,7 +165,7 @@
             android:id="@+id/nav_cart"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -205,7 +205,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/lbl_zero"
                     android:textColor="#FFF"
                     android:textSize="10sp"
                     android:textStyle="bold" />
@@ -240,7 +239,7 @@
             android:id="@+id/nav_help"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -266,7 +265,7 @@
             android:id="@+id/nav_callus"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -292,7 +291,7 @@
             android:id="@+id/nav_rateus"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -318,7 +317,7 @@
             android:id="@+id/nav_share"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -344,7 +343,7 @@
             android:id="@+id/nav_about"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
@@ -370,7 +369,7 @@
             android:id="@+id/nav_logout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FFF"
+            android:background="@drawable/list_item_selector"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp" >

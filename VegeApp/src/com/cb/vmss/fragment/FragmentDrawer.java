@@ -35,6 +35,8 @@ public class FragmentDrawer extends Fragment {
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
     private TextView orderItemCountTextView;
+    private TextView qtyCountTextView;
+   
     private LinearLayout loginObj;
     private LinearLayout locationObj;
     private LinearLayout addressObj;
@@ -73,7 +75,8 @@ public class FragmentDrawer extends Fragment {
         mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
         
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
-
+        qtyCountTextView=(TextView)layout.findViewById(R.id.txtQtyCount);
+        
         loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
         locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
         addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
@@ -121,7 +124,7 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onResume() {
     	super.onResume();
-    	
+    	qtyCountTextView.setText(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));	
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
