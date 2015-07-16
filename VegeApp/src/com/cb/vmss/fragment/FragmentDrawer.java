@@ -31,10 +31,8 @@ public class FragmentDrawer extends Fragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View containerView;
-    private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
-    private TextView orderItemCountTextView;
     private TextView qtyCountTextView;
    
     private LinearLayout loginObj;
@@ -62,15 +60,13 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // drawer labels
-        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflating view layout
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer2, container, false);
+        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         
         mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
         
