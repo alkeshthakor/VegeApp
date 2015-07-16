@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <include
         android:id="@+id/toolbar"
@@ -223,61 +223,19 @@
                 android:text="@string/lbl_term_service"
                 android:textColor="@android:color/black"
                 android:textSize="12sp" />
-
-           
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/btnPlaceOrderCheckOut"
         style="?android:attr/buttonBarButtonStyle"
-        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
         android:text="@string/lbl_place_order"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 
 </LinearLayout>
-
-
- <!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
-
-                <Button
-                    android:id="@+id/btnBackCheckOut"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="130dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/round_corner_button_background"
-                    android:text="@string/lbl_back"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btnPlaceOrderCheckOut"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="130dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/round_corner_button_background_with_color"
-                    android:text="@string/lbl_place_order"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            -->

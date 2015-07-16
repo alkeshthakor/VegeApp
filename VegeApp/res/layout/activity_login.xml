@@ -8,10 +8,12 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_with_back" />
-<View
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -51,24 +53,25 @@
                     android:id="@+id/phoneNumberEditText"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:hint="@string/lbl_phone_number"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="5dp"
-                     android:textSize="16sp"
-                    android:layout_weight="1"
                     android:layout_marginLeft="2dp"
                     android:layout_marginStart="2dp"
+                    android:layout_weight="1"
                     android:background="@android:color/darker_gray"
+                    android:hint="@string/lbl_phone_number"
                     android:inputType="number|phone"
-                    android:maxLength="10" />
+                    android:maxLength="10"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <ProgressBar
-                android:id="@+id/progressIndicater" 
-                android:layout_marginTop="20dp"
+                android:id="@+id/progressIndicater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
 
