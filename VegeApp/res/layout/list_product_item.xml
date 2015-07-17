@@ -77,14 +77,22 @@
             android:layout_weight="1"
             android:gravity="center" >
 
-            <ImageView
+            <RelativeLayout
                 android:id="@+id/iconMinus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:clickable="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
                 android:gravity="center"
-                android:src="@drawable/icon_minus" />
+                android:padding="1dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_minus" />
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -108,14 +116,22 @@
             android:layout_weight="1"
             android:gravity="center" >
 
-            <ImageView
+           <RelativeLayout
                 android:id="@+id/iconPlus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:clickable="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
                 android:gravity="center"
-                android:src="@drawable/icon_plus" />
+                android:padding="1dp"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_plus" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

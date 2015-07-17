@@ -191,8 +191,6 @@
                 android:id="@+id/qtyCountRelLayout"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_alignLeft="@+id/icoShopping"
-                android:layout_below="@+id/sprator2"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_round_unread_msg_count"
                 android:gravity="center"

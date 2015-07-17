@@ -4,11 +4,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cb.vmss.R;
-import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
-import com.cb.vmss.database.VegAppDatabaseHelper;
-import com.cb.vmss.model.Product;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,7 +19,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.cb.vmss.R;
+import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
+import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.model.Product;
 
 public class ProductAdapter extends BaseAdapter {
 
@@ -76,8 +77,8 @@ public class ProductAdapter extends BaseAdapter {
             holder.txtViewProductWeight = (TextView)convertView.findViewById(R.id.productWeightTextView);
             holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productPriceTextView);
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
-            holder.icoPlus= (ImageView)convertView.findViewById(R.id.iconPlus);
-            holder.icoMinus= (ImageView)convertView.findViewById(R.id.iconMinus);
+            holder.icoPlus= (RelativeLayout)convertView.findViewById(R.id.iconPlus);
+            holder.icoMinus= (RelativeLayout)convertView.findViewById(R.id.iconMinus);
             holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
             convertView.setTag(holder);
             
@@ -169,8 +170,8 @@ public class ProductAdapter extends BaseAdapter {
 		TextView txtViewProductWeight;
 		TextView txtViewProductPrice;
 		TextView txtViewQty;
-		ImageView icoPlus;
-		ImageView icoMinus;
+		RelativeLayout icoPlus;
+		RelativeLayout icoMinus;
 		ImageView productImageObj;
     }
 	
