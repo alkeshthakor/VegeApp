@@ -2,14 +2,18 @@ package com.cb.vmss;
 
 import com.cb.vmss.fragment.FragmentDrawer;
 import com.cb.vmss.fragment.HomeFragment;
+import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +33,10 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	private Toolbar mToolbar;
 	private FragmentDrawer drawerFragment;
 	private TextView mTitleTextView;
+	
+	ConnectionDetector cd;
+	ServerConnector connector;
+	Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -156,6 +164,17 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		        	Toast.makeText(MainActivity.this, "Already Logout", Toast.LENGTH_LONG);
 		        }
 				break;		
+			case R.id.nav_callus:
+				confirmCall();
+				break;
+			case R.id.nav_rateus:
+				rateUs();
+				break;
+			case R.id.nav_help:
+				break;
+			case R.id.nav_about:
+				break;
+				
 				default :
 				break;
 		}
@@ -202,6 +221,10 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 						//MainActivity.this.finish();
 						Pref.setValue(Constant.PREF_PHONE_NUMBER, "0");
 						
+						Pref.setValue(Constant.PREF_ADD_ID,"0");
+						Pref.setValue(Constant.PREF_ADDRESS,"");
+						
+						
 					}
 				  })
 				.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -223,11 +246,58 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		// Check which request we're responding to
-	    if (requestCode == Constant.CODE_MAIN_LOGIN) {
-	        // Make sure the request was successful
-	        if (resultCode == RESULT_OK) {
-	        	displayView(0);    
-	        }
+	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
+	        displayView(0);   
+	    }else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
+	    	   //setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
+     	   //finish(); 
+     	displayView(R.id.nav_order);
+     	
+	    }else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
+	    	displayView(0);  
 	    }
 	}
+	
+	
+	public void rateUs(){
+		try {
+			Uri marketUri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+			Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+			startActivity(marketIntent);
+		} catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(getApplicationContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+	
+	
+	public void confirmCall() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		builder.setTitle("Contact Subji At Door");
+		builder.setMessage("Do you want to call the Subji At Door help line?");
+		
+		builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				Intent intent = new Intent(Intent.ACTION_CALL);
+				intent.setData(Uri.parse("tel:9925833511"));
+				startActivity(intent);
+				
+			}
+		});
+		builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
 }

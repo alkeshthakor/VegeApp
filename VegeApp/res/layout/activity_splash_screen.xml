@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    
+  <ImageView android:layout_width="230dp"
+      android:layout_height="130dp"
+      android:contentDescription="@string/app_name"
+      android:background="@drawable/icon_ok_splash"/>  
+
+</LinearLayout>

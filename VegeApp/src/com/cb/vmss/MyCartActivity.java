@@ -167,6 +167,12 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 	        // Make sure the request was successful
 	        	setResult(Constant.CODE_MAIN_LOGIN);
 	        	finish();    
+	    }else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
+	    	   setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
+        	   finish(); 
+	    }else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
+	    	   setResult(Constant.CODE_BACK_WITH_COUTINUE_SHOPPING);
+        	   finish(); 
 	    }
 	}
 }

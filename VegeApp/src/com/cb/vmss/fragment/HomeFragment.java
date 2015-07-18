@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment {
 						 RelativeLayout catImageView=(RelativeLayout)view.findViewById(R.id.categoryImageRel);
 						 if(i>0) {
 							 LinearLayout.LayoutParams relativeParams = (LinearLayout.LayoutParams)catImageView.getLayoutParams();
-							 relativeParams.setMargins(0, 20, 0, 0);  // left, top, right, bottom
+							 relativeParams.setMargins(0, 30, 0, 0);  // left, top, right, bottom
 							 catImageView.setLayoutParams(relativeParams);
 						 }
 						 catImageView.setTag(i);
@@ -151,7 +151,8 @@ public class HomeFragment extends Fragment {
 								productIntent.putExtra("cat_list",categoryStringList);	
 								productIntent.putExtra("tabposition",v.getId()+"");
 								productIntent.putExtra("cat_name",mCategoryList.get(v.getId()).getCategoryName());
-								startActivity(productIntent);
+								startActivityForResult(productIntent,Constant.CODE_MAIN_LOGIN);
+								//startActivity(productIntent);
 							}
 						 });
 						 mCategoryLinearLayout.addView(view);

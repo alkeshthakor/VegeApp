@@ -33,6 +33,10 @@ public class Constant {
 	
 	public static final int CODE_MAIN_LOGIN = 1001;
 	public static final int CODE_BACK = 1002;
+	
+	public static final int CODE_BACK_WITH_CHECK_ORDER = 1003;
+	public static final int CODE_BACK_WITH_COUTINUE_SHOPPING = 1004;
+	
 
 	
 	/*	

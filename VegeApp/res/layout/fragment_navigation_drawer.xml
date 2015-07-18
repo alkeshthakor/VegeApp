@@ -10,383 +10,295 @@
         <LinearLayout
             android:id="@+id/nav_header_User"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#F5F5F6"
+            android:layout_height="@dimen/height_56"
+            android:background="@color/colorPressed"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingEnd="0dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="0dp"
+            android:paddingStart="15dp" >
 
             <ImageView
                 android:id="@+id/imgPhone"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Welcome"
+                android:layout_marginStart="10dp"
+                android:text="@string/lbl_welome"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="@dimen/font_size_medium" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_location"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#FFF"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgLocation"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_location"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                android:singleLine="true"
+                android:textSize="@dimen/font_size_small" />
         </LinearLayout>
 
         <View
+            android:id="@+id/locationDevider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#F2F2F3" />
+            android:background="@color/divider_color" />
 
         <LinearLayout
             android:id="@+id/nav_heading_information"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="#FFF"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingBottom="@dimen/size_12"
+            android:paddingEnd="0dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="0dp"
+            android:paddingStart="15dp"
+            android:paddingTop="@dimen/size_12" >
 
-           <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtInfomation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_healding_myiformatio"
-                 android:fontFamily="sans-serif-light"
-                android:textColor="#A5A5A5"
-                android:textSize="15dp" />
+                android:textColor="@color/GBL2"
+                android:textSize="@dimen/font_size_micro" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_login"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgLogin"
+                style="@style/styleDrowarImageView"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_Login"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_Login" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_address"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgAddress"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_address"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_address" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_order"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgOrder"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_order"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_order" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_cart"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgCart"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtCart"
+                style="@style/styleDrowarTextView"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_cart"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                android:text="@string/nav_item_cart" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/qtyCountRelLayout"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_round_unread_msg_count"
                 android:gravity="center"
-                android:padding="1dp"
+                android:padding="2dp"
                 android:visibility="visible" >
 
                 <TextView
                     android:id="@+id/txtQtyCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:textColor="#FFF"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#F2F2F3" />
+            android:background="@color/divider_color" />
 
         <LinearLayout
             android:id="@+id/nav_heading_other"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#FFF"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/size_12"
+            android:paddingTop="@dimen/size_12" >
 
-           <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_heading_others"
-                android:fontFamily="sans-serif-light"
-                android:textColor="#A5A5A5"
-                android:textSize="15dp" />
+                android:textColor="@color/GBL2"
+                android:textSize="@dimen/font_size_micro" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_help"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgHelp"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtHelp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_help"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_help" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_callus"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgcallus"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtCallUs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_callus"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_callus" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_rateus"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgRateUs"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtRateUs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_rateus"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_rateus" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_share"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgShare"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_share"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_share" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_about"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgAbout"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtAbout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_about"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_about" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_logout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/list_item_selector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            style="@style/styleDrowarItem" >
 
             <ImageView
                 android:id="@+id/imgLogout"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_profile"
                 android:visibility="visible" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/nav_item_logout"
-                android:textColor="#000000"
-                android:textSize="15dp" />
+                style="@style/styleDrowarTextView"
+                android:text="@string/nav_item_logout" />
         </LinearLayout>
     </LinearLayout>
 

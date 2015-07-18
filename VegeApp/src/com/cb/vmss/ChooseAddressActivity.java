@@ -196,9 +196,8 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 			
 			String addressId=mAddress.getAddId();
 			
-			String defaultAddresss=mAddress.getAddFullName()+"\n"+
-			mAddress.getAddAddress1()+",\n"+ mAddress.getAddAddress2()+",\n"+
-			mAddress.getAddLandmark()+", "+mAddress.getAddCity()+",\n"+mAddress.getAddZipCode();
+			String defaultAddresss= mAddress.getAddAddress2()+", "+mAddress.getAddLandmark();
+			
 			
 			Pref.setValue(Constant.PREF_ADD_ID,addressId);
 			Pref.setValue(Constant.PREF_ADDRESS, defaultAddresss);
@@ -217,6 +216,12 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	        // Make sure the request was successful
 	        	setResult(Constant.CODE_MAIN_LOGIN);
 	        	finish();    
+	    }else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
+	    	   setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
+        	   finish(); 
+	    }else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
+	    	   setResult(Constant.CODE_BACK_WITH_COUTINUE_SHOPPING);
+        	   finish(); 
 	    }
 	}
 	
