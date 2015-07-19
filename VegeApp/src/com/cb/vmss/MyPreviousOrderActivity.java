@@ -141,16 +141,17 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 			mProgressDialog.dismiss();
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
-					JSONObject previousOrderJSONObject = result.getJSONObject("DATA");
+					JSONArray dataJSONArray = result.getJSONArray("DATA");
 					mPreviousOrderList = new ArrayList<PreviousOrder>();
-					
-					for (int i = 0; i < 2; i++) {
+					for (int i=0; i< dataJSONArray.length(); i++) {
+						JSONObject orderJSONObject = dataJSONArray.getJSONObject(i);
 						PreviousOrder previousOrderItem = new PreviousOrder();
-						previousOrderItem.setOrderId("12312312");
-						previousOrderItem.setOrderDate("16 Jul 2015");
-						previousOrderItem.setTotalItem("10");
-						previousOrderItem.setOrderTotalPrice("20000");
-						mPreviousOrderList.add(previousOrderItem);					
+						previousOrderItem.setOrderId(orderJSONObject.getString("od_id")== null?"23":orderJSONObject.getString("od_id"));
+						previousOrderItem.setOrderDate(orderJSONObject.getString("date") + " " + orderJSONObject.getString("time"));
+						previousOrderItem.setTotalItem(""+orderJSONObject.getJSONArray("item").length());
+						previousOrderItem.setOrderTotalPrice(orderJSONObject.getString("od_finalprice")== null?"2300":orderJSONObject.getString("od_finalprice"));
+						previousOrderItem.setJsonObject(orderJSONObject.toString());
+						mPreviousOrderList.add(previousOrderItem);
 					}
 					previousOrderListView.setAdapter(new PreviousOrderAdapter(MyPreviousOrderActivity.this, mPreviousOrderList));
 

@@ -9,58 +9,103 @@
     android:padding="5dp"
     tools:context=".ChooseAddressActivity" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:paddingLeft="15dp" >
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txtOrdTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Palak"
-                android:textColor="@android:color/black"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="sdnkfhjkh"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/address1TextView"
+            <RelativeLayout
+                android:id="@+id/viewDeatilsRelLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="A/102, Pearl Park"
-                android:textSize="15sp" />
+                android:background="@drawable/bg_round_unread_msg_count"
+                android:gravity="center"
+                android:padding="5dp"
+                android:visibility="visible" >
 
-            <TextView
-                android:id="@+id/address2TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Chharwada Road"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/address3TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Vapi - 396191"
-                android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="View Details"
+                    android:textColor="#FFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/icoEditAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/go" />
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="15dp" >
+
+                <TextView
+                    android:id="@+id/txtOrdNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Palak"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/totItemsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Chharwada Road"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/totPriceTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Vapi - 396191"
+                    android:textSize="15sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/totPriceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Vapi - 396191"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="bottom|right"
+                    android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/icoEditAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/go"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

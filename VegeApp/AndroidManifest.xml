@@ -73,6 +73,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".MyOrderDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".ProductSelectionActivity2"
             android:screenOrientation="portrait" >
         </activity>

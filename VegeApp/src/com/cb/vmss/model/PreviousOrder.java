@@ -2,6 +2,8 @@ package com.cb.vmss.model;
 
 import java.io.Serializable;
 
+import org.json.JSONObject;
+
 public class PreviousOrder implements Serializable{
 	/**
 	 * 
@@ -12,8 +14,16 @@ public class PreviousOrder implements Serializable{
 	private String orderTotalPrice;
 	private String orderDate;
 	private String totalItem;
+	private String jsonObject;
+	
 	public String getOrderId() {
 		return orderId;
+	}
+	public String getJsonObject() {
+		return jsonObject;
+	}
+	public void setJsonObject(String jsonObject) {
+		this.jsonObject = jsonObject;
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;

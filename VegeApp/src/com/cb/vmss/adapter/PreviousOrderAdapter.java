@@ -1,16 +1,22 @@
 package com.cb.vmss.adapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cb.vmss.AddAddressActivity;
+import com.cb.vmss.MyOrderDetailsActivity;
 import com.cb.vmss.R;
 import com.cb.vmss.model.PreviousOrder;
 
@@ -57,30 +63,40 @@ public class PreviousOrderAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_previous_order_item, null);
             holder = new ViewHolder();
-            holder.txtName = (TextView)convertView.findViewById(R.id.txtName);
-            holder.address1TextView = (TextView)convertView.findViewById(R.id.address1TextView);
-            holder.address2TextView = (TextView)convertView.findViewById(R.id.address2TextView);
-            holder.address3TextView = (TextView)convertView.findViewById(R.id.address3TextView);
+            holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdTime);
+            holder.txtOrdNo = (TextView)convertView.findViewById(R.id.txtOrdNo);
+            holder.txtTotItems = (TextView)convertView.findViewById(R.id.totItemsTextView);
+            holder.txtTotPrice = (TextView)convertView.findViewById(R.id.totPriceTextView);
             holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
-            
+            holder.viewDeatilsRelLayoutObj = (RelativeLayout) convertView.findViewById(R.id.viewDeatilsRelLayout);
             convertView.setTag(holder);
             
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         
-        holder.txtName.setText("Order No : " + rowItem.getOrderId());
-        holder.address1TextView.setText("Order Date : " + rowItem.getOrderDate());
-        holder.address2TextView.setText("Order Items : " + rowItem.getTotalItem());
-        holder.address3TextView.setText("Total Prize : " + rowItem.getOrderTotalPrice());
+        holder.txtOrdDate.setText(rowItem.getOrderDate());
+        holder.txtOrdNo.setText("Order Id : " + rowItem.getOrderId());
+        holder.txtTotItems.setText("Order Items : " + rowItem.getTotalItem());
+        holder.txtTotPrice.setText(rowItem.getOrderTotalPrice());
+        holder.viewDeatilsRelLayoutObj.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent myOrderDetailsIntent=new Intent(context, MyOrderDetailsActivity.class);
+				myOrderDetailsIntent.putExtra("order", (Serializable)rowItem);
+				context.startActivity(myOrderDetailsIntent);
+			}
+		});
         return convertView;
 	}
 
 	static class ViewHolder {
-		TextView txtName;
-		TextView address1TextView;
-		TextView address2TextView;
-		TextView address3TextView;
+		TextView txtOrdDate;
+		TextView txtOrdNo;
+		TextView txtTotItems;
+		TextView txtTotPrice;
 		ImageView iconEditAddress;
+		RelativeLayout viewDeatilsRelLayoutObj;
     }
 }
