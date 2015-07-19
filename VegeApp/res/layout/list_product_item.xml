@@ -17,32 +17,36 @@
         android:src="@drawable/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
+        android:layout_weight="0.7"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="5dp" >
 
-        <TextView
+        <com.cb.vmss.cusomview.TextViewCustom
             android:id="@+id/productItemNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_size_small" />
 
-        <TextView
+        <com.cb.vmss.cusomview.TextViewCustom
             android:id="@+id/productWeightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="250 grms"
-            android:textSize="12sp" />
+            android:textSize="@dimen/font_size_micro" />
+
+       
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
@@ -52,86 +56,83 @@
                 android:layout_marginTop="1dp"
                 android:src="@drawable/icon_indian_rupee_16" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/productPriceTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:text="50"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:textSize="@dimen/font_size_small" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:weightSum="3" >
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center" >
-
-            <RelativeLayout
-                android:id="@+id/iconMinus"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/btn_selector"
-                android:gravity="center"
-                android:padding="1dp"
-                android:visibility="visible" >
-
-                <ImageView
-                    android:layout_width="25dp"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/icon_minus" />
-            </RelativeLayout>
-        </LinearLayout>
+                    android:layout_weight="1"
+                    android:gravity="center" >
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
+                    <LinearLayout
+                        android:id="@+id/iconMinus"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/btn_selector"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:visibility="visible" >
 
-            <TextView
-                android:id="@+id/txtQty"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="20sp" />
-        </LinearLayout>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/icon_minus" />
+                    </LinearLayout>
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center" >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
 
-           <RelativeLayout
-                android:id="@+id/iconPlus"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/btn_selector"
-                android:gravity="center"
-                android:padding="1dp"
-                android:visibility="visible" >
+                    <com.cb.vmss.cusomview.TextViewCustom
+                        android:id="@+id/txtQty"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="@dimen/font_size_medium" />
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="25dp"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/icon_plus" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <LinearLayout
+                        android:id="@+id/iconPlus"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/btn_selector"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:visibility="visible" >
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/icon_plus" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

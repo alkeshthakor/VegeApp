@@ -12,16 +12,21 @@ import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.DatePickerFragment;
 import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
+import com.cb.vmss.util.TimePickerFragment;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,10 +35,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class CheckOutActivity extends ActionBarActivity implements OnClickListener {
 
 	private Toolbar toolbar;
@@ -47,8 +55,10 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	private Button btnTomorrow;
 	private Button btnDayAfter;
 	private Button btnPlaceOrder;
-	private Button btnPromoCode;
+	//private Button btnPromoCode;
 
+	private EditText mPromoEditText;
+	
 	private int totalAmount;
 
 	private LinearLayout timerLinearLayout;
@@ -64,11 +74,21 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 	private ConnectionDetector cd;
 
-	DatePickerFragment mDatePicker;
+	//DatePickerFragment mDatePicker;
+	TimePickerFragment mTimePicker;
+	
 
 	private String parameterDate;
 	private String mDialogTitle;
 	private int mYear, mMonth, mDay;
+	
+	private int mHours, mMinute;
+	private int timeMode;
+	private String TimeValue;
+	private String AM_PM ;
+	private String dayShift;
+	
+	
 	Calendar calender;
 
 	@Override
@@ -107,13 +127,16 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		totalTextView = (TextView) findViewById(R.id.totalTextView);
 		timeTextView = (TextView) findViewById(R.id.timeTextViewCheckOut);
 
-		btnPromoCode = (Button) findViewById(R.id.btnPromoCodeCheckOut);
+		//btnPromoCode = (Button) findViewById(R.id.btnPromoCodeCheckOut);
 		btnToday = (Button) findViewById(R.id.btnTodayCheckOut);
 		btnTomorrow = (Button) findViewById(R.id.btnTommorowCheckOut);
 		btnDayAfter = (Button) findViewById(R.id.btnDayAfterCheckOut);
 		btnPlaceOrder = (Button) findViewById(R.id.btnPlaceOrderCheckOut);
 
-		btnPromoCode.setOnClickListener(this);
+		mPromoEditText=(EditText)findViewById(R.id.promoCodeEditTextCheckOut);
+		
+		
+		//btnPromoCode.setOnClickListener(this);
 		btnToday.setOnClickListener(this);
 		btnTomorrow.setOnClickListener(this);
 		btnDayAfter.setOnClickListener(this);
@@ -123,14 +146,15 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 		calender = Calendar.getInstance();
 		calender.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
-		mDatePicker = new DatePickerFragment(getApplicationContext());
+		
+		mTimePicker=new TimePickerFragment(getApplicationContext());
+		
+		//mDatePicker = new DatePickerFragment(getApplicationContext());
 		
 		
 		mDialogTitle=getString(R.string.lbl_today);
 		setDateOnStartup();
 		
-		
-
 	}
 
 	@Override
@@ -160,16 +184,22 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.btnPromoCodeCheckOut:
-			break;
+		/*case R.id.btnPromoCodeCheckOut:
+			break;*/
 		case R.id.btnTodayCheckOut:
+			setTodayDrawable();
 			selectDate(getString(R.string.lbl_today));
+			dayShift="TODAY";
 			break;
 		case R.id.btnTommorowCheckOut:
+			setTomorrowDrawable();
 			selectDate(getString(R.string.lbl_tomorrow));
+			dayShift="TOMORROW";
 			break;
 		case R.id.btnDayAfterCheckOut:
+			setDayAfterDrawable();
 			selectDate(getString(R.string.lbl_dayafter));
+			dayShift="DAYAFTER";
 			break;
 		case R.id.btnPlaceOrderCheckOut:
 			if (cd.isConnectingToInternet()) {
@@ -212,6 +242,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 					Pref.setValue(Constant.PREF_TOTAL_AMOUT, "0");
 
 					Intent orderSuccessIntent=new Intent(getApplicationContext(), OrderSuccessActivity.class);
+					orderSuccessIntent.putExtra("time",timeTextView.getText().toString());
+					orderSuccessIntent.putExtra("shift",dayShift);
 					startActivityForResult(orderSuccessIntent,Constant.CODE_MAIN_LOGIN);
 					
 				} else {
@@ -236,7 +268,9 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 						String orderData = mDatabaseHelper.getOrderItem().toString();
 
 						mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
-								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=\"" + orderData + "\"";
+								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=\"" + orderData + "\""
+								+"&od_deliverytype="+dayShift+"&od_delivertytime="+TimeValue+"&od_promocode="+mPromoEditText.getText().toString();
+						
 						mDatabaseHelper.close();
 						new OrderPlacedTask().execute(mServiceUrl, mOrderData);
 
@@ -281,88 +315,60 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		 */
 		// Calendar calender = Calendar.getInstance();
 		Bundle args = new Bundle();
-		args.putInt("year", mYear);
-		args.putInt("month", mMonth);
-		args.putInt("day", mDay);
+		args.putInt("hours", mHours);
+		args.putInt("minute", mMinute);
 		args.putString("title", mTitle);
 		mDialogTitle=mTitle;
+		mTimePicker.setArguments(args);
 		
-		mDatePicker.setArguments(args);
+		//mDatePicker.setArguments(args);
 		/**
 		 * Set Call back to capture selected date
 		 */
-		mDatePicker.setCallBack(mDateListener);
-	    mDatePicker.show(getSupportFragmentManager(), "Date Picker");
+		mTimePicker.setCallBack(mTimeSetListener);
+		mTimePicker.show(getSupportFragmentManager(), "Time Picker");
 	    
 	}
 
-	OnDateSetListener mDateListener = new OnDateSetListener() {
+	OnTimeSetListener mTimeSetListener=new OnTimeSetListener() {
+		
 		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-			mYear = year;
-			mMonth = monthOfYear;
-			mDay = dayOfMonth;
-
-			monthOfYear = monthOfYear + 1;
-			String dateValue = "";
-
-			dateValue = "";
-
-			if (dayOfMonth < 10) {
-				dateValue = "0" + dayOfMonth;
-			} else {
-				dateValue = "" + dayOfMonth;
-			}
-
-			if (monthOfYear < 10) {
-				dateValue = dateValue + "-0" + monthOfYear;
-			} else {
-				dateValue = dateValue + "-" + monthOfYear;
-			}
-			dateValue = dateValue + "-" + year;
-
-			parameterDate = dateValue;
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			// TODO Auto-generated method stub
+			mHours=hourOfDay;
+			mMinute=minute;
 			
-			timeTextView.setText(parameterDate);
+			TimeValue=mHours+":"+mMinute;
 			
-
+			if(hourOfDay < 12){
+				timeTextView.setText(TimeValue+" AM");
+				AM_PM = "AM";
+			}else{
+				timeTextView.setText(TimeValue+" PM");
+				AM_PM = "PM";
+			}
+						  
 		}
 	};
-
 	
+
 	public void setDateOnStartup() {
 
-		mYear = calender.get(Calendar.YEAR);
-		mMonth = calender.get(Calendar.MONTH);
-		mDay = calender.get(Calendar.DAY_OF_MONTH);
-
-		mMonth = mMonth + 1;
-
-		String dateValue = "";
-
+		mHours=calender.get(Calendar.HOUR);
+		mMinute=calender.get(Calendar.MINUTE);
 		
-
-		if (mDay < 10) {
-			dateValue = "0" + mDay;
-		} else {
-			dateValue = "" + mDay;
+		timeMode=calender.get(Calendar.AM);
+		
+		TimeValue=mHours+":"+mMinute;
+		
+		if(timeMode==0){			
+			timeTextView.setText(TimeValue+" AM");
+			
+		}else{
+			timeTextView.setText(TimeValue+" PM");
 		}
-
-		if (mMonth < 10) {
-			dateValue = dateValue + "-0" + mMonth;
-		} else {
-			dateValue = dateValue + "-" + mMonth;
-		}
-
-		dateValue = dateValue + "-" + mYear;
-		parameterDate = dateValue;
 		
-		
-		
-		mMonth--;
-		
-		timeTextView.setText(parameterDate);
+		dayShift="TODAY";
 		
 	}
 	
@@ -385,5 +391,41 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	    
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void setTodayDrawable(){
+		btnToday.setBackground(getResources().getDrawable(R.drawable.button_background_with_fill_color));
+		btnTomorrow.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		btnDayAfter.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		
+		btnToday.setTextColor(Color.WHITE);
+		btnTomorrow.setTextColor(Color.BLACK);
+		btnDayAfter.setTextColor(Color.BLACK);
+
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setTomorrowDrawable(){
+		btnToday.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		btnTomorrow.setBackground(getResources().getDrawable(R.drawable.button_background_with_fill_color));
+		btnDayAfter.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		
+		btnToday.setTextColor(Color.BLACK);
+		btnTomorrow.setTextColor(Color.WHITE);
+		btnDayAfter.setTextColor(Color.BLACK);
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setDayAfterDrawable(){
+		btnToday.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		btnTomorrow.setBackground(getResources().getDrawable(R.drawable.button_background_with_border_color));
+		btnDayAfter.setBackground(getResources().getDrawable(R.drawable.button_background_with_fill_color));
+		
+		btnToday.setTextColor(Color.BLACK);
+		btnTomorrow.setTextColor(Color.BLACK);
+		btnDayAfter.setTextColor(Color.WHITE);
+		
+	}
 	
 }

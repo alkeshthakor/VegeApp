@@ -33,7 +33,6 @@ public class DatePickerFragment extends DialogFragment{
 	  day = args.getInt("day");
 	  dialogType = args.getInt("type");
 	  title=args.getString("title");
-	  
 	 }
 
 	 @Override

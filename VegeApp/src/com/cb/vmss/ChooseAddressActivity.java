@@ -129,9 +129,6 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 		    }else{
 		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 		    }
-		
-		
-		
 	}
 	
 	private void fetchAddress(){

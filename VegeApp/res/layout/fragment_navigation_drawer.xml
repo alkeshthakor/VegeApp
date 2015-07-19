@@ -174,7 +174,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="#FFF"
-                    android:textSize="@dimen/font_size_small" />
+                    android:textSize="@dimen/font_size_micro" />
             </LinearLayout>
         </LinearLayout>
 

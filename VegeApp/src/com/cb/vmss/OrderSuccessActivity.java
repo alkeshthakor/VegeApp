@@ -57,6 +57,10 @@ public class OrderSuccessActivity extends ActionBarActivity implements OnClickLi
 		checkOrderStatusButton.setOnClickListener(this);
 		coutinueShoppingButton.setOnClickListener(this);
 		
+		if(getIntent()!=null){
+			shiftTextView.setText(getIntent().getStringExtra("shift"));
+			timeTextView.setText(getIntent().getStringExtra("time"));
+		}
 		
 	}
 	

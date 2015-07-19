@@ -61,6 +61,8 @@
     
     <string name="lbl_order_success">Order Successfully Placed</string>
     <string name="lbl_schedule_date">Scheduled Delivery Date and Time </string>
+    <string name="lbl_delivery_date_time">Delivery Date and Time </string>
+    
     <string name="lbl_check_order">Check Order Status</string>
     <string name="lbl_continue_shopping">Countinue Shopping</string>
     <string name="lbl_thanks">Thank you</string>

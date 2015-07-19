@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
 	Context mContext;
 	private String mCatServiceUrl;
 	private LinearLayout mCategoryLinearLayout;
+	private LinearLayout.LayoutParams categoryViewParams;
+	
 	private String categoryStringList[];
 	public static List<Category> mCategoryList;
 	
@@ -70,7 +72,11 @@ public class HomeFragment extends Fragment {
 		mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
 		mCategoryLinearLayout=(LinearLayout)view.findViewById(R.id.categoryLinearLayout);
-	    mCatServiceUrl=Constant.HOST+Constant.SERVICE_GET_ALL_CATEGORY;
+	   
+		
+		
+        		
+		mCatServiceUrl=Constant.HOST+Constant.SERVICE_GET_ALL_CATEGORY;
 	    
 	    if(cd.isConnectingToInternet()){
 	    	new LoadCategoryTask().execute(mCatServiceUrl);	
@@ -131,12 +137,17 @@ public class HomeFragment extends Fragment {
 					    categoryStringList[i]=catItem.getCategoryName().toUpperCase();
 					     View view = new View(mContext);
 				         view = mActivity.getLayoutInflater().inflate(R.layout.layout_category_item, null);
-						 TextView mNameTextView=(TextView)view.findViewById(R.id.categoryNameTextView);
+				         
+//				         categoryViewParams = (LinearLayout.LayoutParams)view.getLayoutParams();
+//				 		 categoryViewParams.setMargins(0, 30, 0, 0);  // left, top, right, bottom
+				 		
+				 		
+				         TextView mNameTextView=(TextView)view.findViewById(R.id.categoryNameTextView);
 						 mNameTextView.setText(catItem.getCategoryName());
 						 RelativeLayout catImageView=(RelativeLayout)view.findViewById(R.id.categoryImageRel);
 						 if(i>0) {
 							 LinearLayout.LayoutParams relativeParams = (LinearLayout.LayoutParams)catImageView.getLayoutParams();
-							 relativeParams.setMargins(0, 30, 0, 0);  // left, top, right, bottom
+							 relativeParams.setMargins(0, 50, 0, 0);  // left, top, right, bottom
 							 catImageView.setLayoutParams(relativeParams);
 						 }
 						 catImageView.setTag(i);
@@ -155,7 +166,10 @@ public class HomeFragment extends Fragment {
 								//startActivity(productIntent);
 							}
 						 });
+						 
+						 //view.setLayoutParams(categoryViewParams);
 						 mCategoryLinearLayout.addView(view);
+						 
 				    }
 				 }
 			} catch (JSONException e) {

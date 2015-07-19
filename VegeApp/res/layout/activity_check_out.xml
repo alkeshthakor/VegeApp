@@ -13,116 +13,127 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+                android:layout_weight="1"
+                android:text="@string/lbl_sub_total"
+                android:textSize="@dimen/font_size_small" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lbl_sub_total"
-                    android:textSize="12sp" />
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="3dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_indian_rupee_16" />
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="3dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_indian_rupee_16" />
-
-                <TextView
-                    android:id="@+id/subTotalTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:singleLine="true"
-                    android:text="@string/lbl_zero"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/subTotalTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+                android:gravity="end"
+                android:singleLine="true"
+                android:text="@string/lbl_zero"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lbl_delivery_charges"
-                    android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-                <TextView
-                    android:id="@+id/deliveryChargeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:singleLine="true"
-                    android:text="@string/lbl_free"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/holo_green_light"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+                android:layout_weight="1"
+                android:text="@string/lbl_delivery_charges"
+                android:textSize="@dimen/font_size_small" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lbl_total_amount"
-                    android:textSize="12sp" />
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/deliveryChargeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:singleLine="true"
+                android:text="@string/lbl_free"
+                android:textAllCaps="true"
+                android:textColor="@color/app_green"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="3dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_indian_rupee_16" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-                <TextView
-                    android:id="@+id/totalTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:singleLine="true"
-                    android:text="@string/lbl_zero"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lbl_total_amount"
+                android:textSize="@dimen/font_size_small" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/darker_gray" />
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="3dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_indian_rupee_16" />
 
-            <Button
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/totalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:singleLine="true"
+                android:text="@string/lbl_zero"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/promoCodeEditTextCheckOut"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background_with_border_color"
+            android:hint="@string/lbl_apply_promo_code"
+            android:inputType="text"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:textAllCaps="false"
+            android:textSize="14sp" />
+
+        <!--
+                 <Button
                 android:id="@+id/btnPromoCodeCheckOut"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
@@ -133,109 +144,126 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="12sp" />
+        -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/darker_gray" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/lbl_delivery_date_time"
+            android:textSize="@dimen/font_size_small" />
 
-                <Button
-                    android:id="@+id/btnTodayCheckOut"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/booth_right_button_background"
-                    android:text="@string/lbl_today"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-                <Button
-                    android:id="@+id/btnTommorowCheckOut"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/green_border_button_background"
-                    android:text="@string/lbl_tomorrow"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+            <com.cb.vmss.cusomview.ButtonCustom
+                android:id="@+id/btnTodayCheckOut"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_with_fill_color"
+                android:text="@string/lbl_today"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
 
-                <Button
-                    android:id="@+id/btnDayAfterCheckOut"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/booth_left_button_background"
-                    android:text="@string/lbl_dayafter"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <com.cb.vmss.cusomview.ButtonCustom
+                android:id="@+id/btnTommorowCheckOut"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_with_border_color"
+                android:text="@string/lbl_tomorrow"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
 
-            <LinearLayout
-                android:id="@+id/timeLinerLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+            <com.cb.vmss.cusomview.ButtonCustom
+                android:id="@+id/btnDayAfterCheckOut"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background_with_border_color"
+                android:text="@string/lbl_dayafter"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_watch" />
+        <LinearLayout
+            android:id="@+id/timeLinerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-                <TextView
-                    android:id="@+id/timeTextViewCheckOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
-                    android:gravity="end"
-                    android:singleLine="true"
-                    android:text="@string/lbl_time"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_watch" />
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/timeTextViewCheckOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
-                android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="@string/lbl_term_service"
+                android:gravity="end"
+                android:singleLine="true"
+                android:text="@string/lbl_time"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
-    </ScrollView>
 
-    <Button
-        android:id="@+id/btnPlaceOrderCheckOut"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/lbl_place_order"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="12sp" />
+         <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white" />
+         
+      
+            <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="@string/lbl_term_service"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <com.cb.vmss.cusomview.ButtonCustom
+            android:id="@+id/btnPlaceOrderCheckOut"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/app_green"
+            android:text="@string/lbl_place_order"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+       
+       
+    </LinearLayout>
 
 </LinearLayout>
