@@ -38,6 +38,9 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	ServerConnector connector;
 	Context mContext;
 	
+	public static String name;
+    public static String email;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
