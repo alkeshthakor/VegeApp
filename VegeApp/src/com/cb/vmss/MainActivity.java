@@ -171,8 +171,13 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				rateUs();
 				break;
 			case R.id.nav_help:
+				Intent helpIntent=new Intent(getApplicationContext(),HelpActivity.class);
+				startActivity(helpIntent);
 				break;
 			case R.id.nav_about:
+				Intent aboutIntent=new Intent(getApplicationContext(),AboutUsActivity.class);
+				startActivity(aboutIntent);
+				
 				break;
 				
 				default :
@@ -212,7 +217,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			alertDialogBuilder.setTitle("Logout");
 			// set dialog message
 			alertDialogBuilder
-				.setMessage("Are you sure?")
+				.setMessage("Are you sure you want to logout?")
 				.setCancelable(false)
 				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int id) {

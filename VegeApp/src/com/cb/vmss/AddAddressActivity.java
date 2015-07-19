@@ -24,14 +24,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddAddressActivity extends ActionBarActivity implements OnClickListener {
 
 	private Toolbar toolbar;
-	private ImageView closeImageView;
+	//private ImageView closeImageView;
 
 	private EditText nameEditText;
 	private EditText houseEditText;

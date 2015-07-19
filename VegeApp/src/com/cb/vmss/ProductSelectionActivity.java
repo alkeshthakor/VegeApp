@@ -133,6 +133,10 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			relLayout.setVisibility(View.VISIBLE);
 			txtQtyCountObj.setText("" + totalQtyCount);
 			productPriceTextViewObj.setText("" + totalAmount);
+		}else{
+			relLayout.setVisibility(View.INVISIBLE);
+			txtQtyCountObj.setText("" + totalQtyCount);
+			productPriceTextViewObj.setText("" + totalAmount);
 		}
 
 	}
