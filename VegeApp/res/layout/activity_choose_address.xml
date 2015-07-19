@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
-    
+
     <ListView
         android:id="@+id/addressListView"
         android:layout_width="match_parent"
@@ -28,15 +28,15 @@
     <Button
         android:id="@+id/btnAddAddressChose"
         style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/round_corner_button_background"
+        android:background="@drawable/round_corner_button_background_with_color"
         android:text="@string/lbl_add_another_address"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
         android:textSize="12sp" />
 
 </LinearLayout>

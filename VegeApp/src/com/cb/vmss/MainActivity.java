@@ -119,6 +119,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			case R.id.nav_address :
 				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
 					Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
+					chooseAddressIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
 					startActivity(chooseAddressIntent);
 		        } else {
 		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);

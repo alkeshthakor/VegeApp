@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff99ca3b</color>
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryDark">#689F38</color>
+    <color name="colorPrimaryLight">#DCEDC8</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+    <color name="accent">#4CAF50</color>
+    <color name="icons">#212121</color>
+    <color name="divider">#B6B6B6</color>
+     
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#ffc8fa40</color>
+    <color name="nav_divider">#fff3f3f3</color>
+    <color name="count_item">#D53F40</color>
+    
+    <color name="accentLight">#F4FF81</color>
+    <color name="colorGreenDark">#689F38</color>
+    
+    <color name="colorPressed">#F5F5F6</color>
+    
+    
+      
+    
+    
+    <!-- 
+    
+     <color name="colorPrimary">#ff99ca3b</color>
     <color name="colorPrimaryDark">#ff6b9433</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
@@ -9,11 +35,14 @@
     <color name="nav_divider">#fff3f3f3</color>
     <color name="count_item">#D53F40</color>
     
-    <color name="accent">#eeff41</color>
     <color name="accentLight">#F4FF81</color>
-    
     <color name="colorGreenDark">#689F38</color>
-      
+   
+    <color name="accent">#eeff41</color> 
+    -->
     
+    
+ 
+  
     
 </resources>

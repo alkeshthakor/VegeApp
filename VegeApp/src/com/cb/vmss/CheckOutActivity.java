@@ -154,8 +154,6 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				 ConfirmOrderPlaced();
 			    }else{
 			    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
-			    	Intent chooseAddressintent=new Intent(getApplicationContext(),ChooseAddressActivity.class);
-			    	startActivity(chooseAddressintent);
 			    }
 			break;	
 		case R.id.timeLinerLayout:

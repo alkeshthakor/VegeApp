@@ -31,10 +31,10 @@ public class FragmentDrawer extends Fragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View containerView;
-    private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
-    private TextView orderItemCountTextView;
+    private TextView qtyCountTextView;
+   
     private LinearLayout loginObj;
     private LinearLayout locationObj;
     private LinearLayout addressObj;
@@ -60,20 +60,19 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // drawer labels
-        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflating view layout
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer2, container, false);
+        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         
         mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
         
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
-
+        qtyCountTextView=(TextView)layout.findViewById(R.id.txtQtyCount);
+        
         loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
         locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
         addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
@@ -121,7 +120,7 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onResume() {
     	super.onResume();
-    	
+    	qtyCountTextView.setText(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));	
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {

@@ -39,18 +39,21 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	private Toolbar toolbar;
 	private Button addAddressBtn;
 	private ProgressDialog mProgressDialog;
-	ServerConnector connector;
 	private String mServiceUrl;
-	ListView addressListView;
+	private String mFromScreenName;
+	
 	public List<Address> mAddresstList;
+	
+	ListView addressListView;
 	
 	Context mContext;
 	ConnectionDetector cd;
+	ServerConnector connector;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_chosee_address);
+		setContentView(R.layout.activity_choose_address);
 		Constant.CONTEXT=this;
 		
 		mContext = this;
@@ -72,6 +75,9 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
 			
 		}
+		
+		mFromScreenName=getIntent().getStringExtra("fromscreen");
+		
 		
 		mProgressDialog = new ProgressDialog(ChooseAddressActivity.this);
 		mProgressDialog.setMessage("Please wait...");
@@ -184,18 +190,34 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		
-		    
-		Address mAddress=mAddresstList.get(position);
-		
-		String addressId=mAddress.getAddId();
-		
-		String defaultAddresss=mAddress.getAddFullName()+"\n"+
-		mAddress.getAddAddress1()+",\n"+ mAddress.getAddAddress2()+",\n"+
-		mAddress.getAddLandmark()+", "+mAddress.getAddCity()+",\n"+mAddress.getAddZipCode();
-				
-		Pref.setValue(Constant.PREF_ADD_ID,addressId);
-		Pref.setValue(Constant.PREF_ADDRESS, defaultAddresss);
-		
+		if(!mFromScreenName.equalsIgnoreCase(MainActivity.class.getCanonicalName().toString())){
+			
+			Address mAddress=mAddresstList.get(position);
+			
+			String addressId=mAddress.getAddId();
+			
+			String defaultAddresss=mAddress.getAddFullName()+"\n"+
+			mAddress.getAddAddress1()+",\n"+ mAddress.getAddAddress2()+",\n"+
+			mAddress.getAddLandmark()+", "+mAddress.getAddCity()+",\n"+mAddress.getAddZipCode();
+			
+			Pref.setValue(Constant.PREF_ADD_ID,addressId);
+			Pref.setValue(Constant.PREF_ADDRESS, defaultAddresss);
+			
+			Intent mCheckOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
+			startActivityForResult(mCheckOutIntent,Constant.CODE_MAIN_LOGIN);
+		}
 		
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		// Check which request we're responding to
+	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
+	        // Make sure the request was successful
+	        	setResult(Constant.CODE_MAIN_LOGIN);
+	        	finish();    
+	    }
+	}
+	
 }
