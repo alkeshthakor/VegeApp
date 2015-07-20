@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cb.vmss.adapter.ProductDetailsItemsAdapter;
@@ -23,6 +22,7 @@ import com.cb.vmss.model.PreviousOrder;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.ServerConnector;
+import com.cb.vmss.widget.ExpandedListView;
 
 public class MyOrderDetailsActivity extends ActionBarActivity
 {
@@ -33,7 +33,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity
 	TextView txtTotItems;
 	TextView txtTotPrice;
 	
-	ListView orderItemListViewObj;
+	public ExpandedListView orderItemListViewObj;
 	TextView txtSubTotal;
 	TextView txtDeliveryCharge;
 	TextView txtTotalAmt;
@@ -84,7 +84,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity
         txtTotItems = (TextView)findViewById(R.id.totItemsTextView);
         txtTotPrice = (TextView)findViewById(R.id.totPriceTextView);
         
-        orderItemListViewObj = (ListView) findViewById(R.id.orderItemListView);
+        orderItemListViewObj = (ExpandedListView) findViewById(R.id.orderItemListView);
         txtSubTotal = (TextView)findViewById(R.id.txtSubTotal);
         txtDeliveryCharge = (TextView)findViewById(R.id.txtDeliveryCharge);
         txtTotalAmt = (TextView)findViewById(R.id.txtTotalAmt);

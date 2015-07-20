@@ -219,12 +219,12 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical" >
 
-                    <ListView
+                    <com.cb.vmss.widget.ExpandedListView
                         android:id="@+id/orderItemListView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:dividerHeight="0.2dp"
-                        android:scrollbars="vertical"/>
+                        android:scrollbars="none" />
 
                     <View
                         android:layout_width="match_parent"
