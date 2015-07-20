@@ -5,20 +5,20 @@ import android.content.Intent;
 
 public final class CommonUtilities {
 	 // give your server registration url here
-    static final String SERVER_URL = "http://10.0.2.2/gcm_server_php/register.php"; 
+    static final String SERVER_URL = "http://45.55.152.215/dev/gcm_server_php/register.php"; 
  
     // Google project id
-    static final String SENDER_ID = "903913289319"; 
+    public  static final String SENDER_ID = "399583839789"; 
  
     /**
      * Tag used on log messages.
      */
-    static final String TAG = "AndroidHive GCM";
+    public static final String TAG = "SubjiAtDoorGCM";
  
-    static final String DISPLAY_MESSAGE_ACTION =
+    public static final String DISPLAY_MESSAGE_ACTION =
             "com.androidhive.pushnotifications.DISPLAY_MESSAGE";
  
-    static final String EXTRA_MESSAGE = "message";
+    public static final String EXTRA_MESSAGE = "message";
  
     /**
      * Notifies UI to display a message.

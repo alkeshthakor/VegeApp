@@ -10,12 +10,15 @@ public class Constant {
 	public static final String PREF_FILE = "PREF_VMSS";
 
 	public static final String HOST="http://45.55.152.215/dev/sabjiatdoor/services/";
-	
+	//http://45.55.152.215/dev/sabjiatdoor/services/share
 	public static final String PREF_USER_ID = "PREF_USER_ID";
 	public static final String PREF_PHONE_NUMBER= "PREF_PHONE_NUMBER";
 	public static final String PREF_ADD_ID = "PREF_ADD_ID";
 	public static final String PREF_ADDRESS = "PREF_ADDRESS";
-
+	
+	public static final String PREF_IS_GCM_REGISTER = "PREF_IS_GCM_REGISTER";
+	public static final String PREF_GCM_REGISTRATION_ID = "PREF_GCM_REGISTRATION_ID";
+	public static final String PREF_SHARE_URL = "PREF_SHARE_URL";
 	
 	public static final String SERVICE_GET_ALL_CATEGORY = "category/getallcategory";
 	public static final String SERVICE_GET_ALL_PRODUCT = "PREF_VMSS";
@@ -26,6 +29,7 @@ public class Constant {
 	public static final String SERVICE_USER_CREATION = "user/adduser";
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
 	public static final String SERVICE_ADD_ORDER = "order/addorder";
+	public static final String SERVICE_SHARE = "share";
 	
 	
 	public static final String PREF_QTY_COUNT = "PREF_QTY_COUNT";
