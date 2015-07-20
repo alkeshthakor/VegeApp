@@ -1,6 +1,13 @@
 package com.cb.vmss.gcm.notification;
 
+import static com.cb.vmss.gcm.notification.CommonUtilities.SERVER_URL;
+import static com.cb.vmss.gcm.notification.CommonUtilities.TAG;
+import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -17,10 +24,6 @@ import com.google.android.gcm.GCMRegistrar;
 import android.content.Context;
 import android.util.Log;
 
-import static com.cb.vmss.gcm.notification.CommonUtilities.SERVER_URL;
-import static com.cb.vmss.gcm.notification.CommonUtilities.TAG;
-import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
-
 public final class ServerUtilities {
 	
 	private static final int MAX_ATTEMPTS = 5;
@@ -35,11 +38,13 @@ public final class ServerUtilities {
     public static void register(final Context context, String name, String email, final String regId) {
         Log.i(TAG, "registering device (regId = " + regId + ")");
         String serverUrl = SERVER_URL;
-        Map<String, String> params = new HashMap<String, String>();
+       /* Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
         params.put("name", name);
-        params.put("email", email);
+        params.put("email", email);*/
          
+        String gcmParam="gcm_regid="+regId;
+        
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
         // Once GCM returns a registration id, we need to register on our server
         // As the server might be down, we will retry it a couple
@@ -49,7 +54,7 @@ public final class ServerUtilities {
             try {
                 displayMessage(context, context.getString(
                         R.string.server_registering, i, MAX_ATTEMPTS));
-                post(serverUrl, params);
+                post(serverUrl, gcmParam);
                 GCMRegistrar.setRegisteredOnServer(context, true);
                 String message = context.getString(R.string.server_registered);
                 CommonUtilities.displayMessage(context, message);
@@ -83,13 +88,16 @@ public final class ServerUtilities {
     /**
      * Unregister this account/device pair within the server.
      */
-    static void unregister(final Context context, final String regId) {
+    public static void unregister(final Context context, final String regId) {
         Log.i(TAG, "unregistering device (regId = " + regId + ")");
         String serverUrl = SERVER_URL + "/unregister";
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("regId", regId);
+//        Map<String, String> params = new HashMap<String, String>();
+//        params.put("regId", regId);
+        
+        String gcmParam="gcm_regid="+regId;
+        
         try {
-            post(serverUrl, params);
+            post(serverUrl, gcmParam);
             GCMRegistrar.setRegisteredOnServer(context, false);
             String message = context.getString(R.string.server_unregistered);
             CommonUtilities.displayMessage(context, message);
@@ -113,7 +121,7 @@ public final class ServerUtilities {
      *
      * @throws IOException propagated from POST.
      */
-    private static void post(String endpoint, Map<String, String> params)
+    private static void post(String endpoint,String param)
             throws IOException {    
          
         URL url;
@@ -122,7 +130,7 @@ public final class ServerUtilities {
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("invalid url: " + endpoint);
         }
-        StringBuilder bodyBuilder = new StringBuilder();
+        /*StringBuilder bodyBuilder = new StringBuilder();
         Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
         // constructs the POST body using the parameters
         while (iterator.hasNext()) {
@@ -132,8 +140,8 @@ public final class ServerUtilities {
             if (iterator.hasNext()) {
                 bodyBuilder.append('&');
             }
-        }
-        String body = bodyBuilder.toString();
+        }*/
+        String body = param.toString();
         Log.v(TAG, "Posting '" + body + "' to " + url);
         byte[] bytes = body.getBytes();
         HttpURLConnection conn = null;
@@ -155,6 +163,18 @@ public final class ServerUtilities {
             if (status != 200) {
               throw new IOException("Post failed with error code " + status);
             }
+            
+            InputStream is=conn.getInputStream();
+			BufferedReader rd=new BufferedReader(new InputStreamReader(is));
+			
+            StringBuffer response = new StringBuffer(); 
+			String line;
+			while((line=rd.readLine())!=null){
+				 response.append(line);
+			}
+			rd.close();
+			Log.d("Return Message: ", response.toString());
+						
         } finally {
             if (conn != null) {
                 conn.disconnect();

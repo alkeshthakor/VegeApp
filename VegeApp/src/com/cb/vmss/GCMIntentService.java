@@ -1,5 +1,11 @@
-package com.cb.vmss.gcm.notification;
+package com.cb.vmss;
 
+import static com.cb.vmss.gcm.notification.CommonUtilities.SENDER_ID;
+import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
+
+import com.cb.vmss.MainActivity;
+import com.cb.vmss.R;
+import com.cb.vmss.gcm.notification.ServerUtilities;
 import com.google.android.gcm.GCMBaseIntentService;
 
 import android.app.Notification;
@@ -8,14 +14,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-import com.google.android.gcm.GCMBaseIntentService;
-
-import static com.cb.vmss.gcm.notification.CommonUtilities.SENDER_ID;
-import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
-
-import com.cb.vmss.MainActivity;
-import com.cb.vmss.R;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
@@ -52,11 +50,17 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onMessage(Context context, Intent intent) {
         Log.i(TAG, "Received message");
-        String message = intent.getExtras().getString("price");
-         
+        
+        //Bundle[{promocode=WELCOME , message=Test Alkesh , from=399583839789, collapse_key=do_not_collapse}]
+        		
+        String title = intent.getExtras().getString("title");
+        String message = intent.getExtras().getString("message");
+        String promocode = intent.getExtras().getString("promocode");
+        String from = intent.getExtras().getString("from");
+        
         displayMessage(context, message);
         // notifies user
-        generateNotification(context, message);
+        generateNotification(context,title,message,promocode,from);
     }
  
     /**
@@ -68,7 +72,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         String message = getString(R.string.gcm_deleted, total);
         displayMessage(context, message);
         // notifies user
-        generateNotification(context, message);
+        //generateNotification(context, message);
     }
  
     /**
@@ -92,14 +96,14 @@ public class GCMIntentService extends GCMBaseIntentService {
     /**
      * Issues a notification to inform the user that server has sent a message.
      */
-    private static void generateNotification(Context context, String message) {
+    private static void generateNotification(Context context,String title,String message,String promocode,String from) {
         int icon = R.drawable.ic_launcher;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
          
-        String title = context.getString(R.string.app_name);
+        String titleNotification = context.getString(R.string.lbl_title_notification);
          
         Intent notificationIntent = new Intent(context, MainActivity.class);
         // set intent so it does not start a new activity
@@ -107,7 +111,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent =
                 PendingIntent.getActivity(context, 0, notificationIntent, 0);
-        notification.setLatestEventInfo(context, title, message, intent);
+        notification.setLatestEventInfo(context, titleNotification, message, intent);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
          
         // Play default notification sound

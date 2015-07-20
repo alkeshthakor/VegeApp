@@ -107,7 +107,17 @@ public class VegAppDatabaseHelper
                     + VegAppColumn.CART_PRODUCT_CAT_ID + " TEXT, "
                     + VegAppColumn.CART_PRODUCT_CAT_NAME + " TEXT" + ")";
             
+            String CREATE_NOTIFICATION_MASTER_TABLE = "CREATE TABLE " + VegAppColumn.NOTIFICATION_MASTER_TABLE + "(" 
+                    + VegAppColumn.NOTI_ID + " INTEGER PRIMARY KEY," 
+            		+ VegAppColumn.NOTI_TITLE + " TEXT," 
+            		+ VegAppColumn.NOTI_MESSAGE + " TEXT," 
+            		+ VegAppColumn.NOTI_PROMOCODE + " TEXT,"
+                    + VegAppColumn.NOTI_FROM + " TEXT "  + ")";
+            
+            
             db.execSQL(CREATE_CART_MASTER_TABLE);
+            db.execSQL(CREATE_NOTIFICATION_MASTER_TABLE);
+            
         }
 
         @Override
