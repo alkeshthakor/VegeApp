@@ -3,14 +3,20 @@ package com.cb.vmss;
 import static com.cb.vmss.gcm.notification.CommonUtilities.SENDER_ID;
 import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
 
+import java.util.Calendar;
+
 import com.cb.vmss.MainActivity;
 import com.cb.vmss.R;
+import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
+import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.database.VegAppDatabaseHelper.DatabaseHelper;
 import com.cb.vmss.gcm.notification.ServerUtilities;
 import com.google.android.gcm.GCMBaseIntentService;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -18,7 +24,7 @@ import android.util.Log;
 public class GCMIntentService extends GCMBaseIntentService {
 
 	private static final String TAG = "GCMIntentService";
-	 
+	
     public GCMIntentService() {
         super(SENDER_ID);
     }
@@ -97,21 +103,35 @@ public class GCMIntentService extends GCMBaseIntentService {
      * Issues a notification to inform the user that server has sent a message.
      */
     private static void generateNotification(Context context,String title,String message,String promocode,String from) {
-        int icon = R.drawable.ic_launcher;
+      
+    	VegAppDatabaseHelper mDatabaseHelper= new VegAppDatabaseHelper(context);
+    	mDatabaseHelper.open();
+    	ContentValues values=new ContentValues();
+    	values.put(VegAppColumn.NOTI_TITLE, title);
+    	values.put(VegAppColumn.NOTI_MESSAGE, message);
+    	values.put(VegAppColumn.NOTI_PROMOCODE, promocode);
+    	values.put(VegAppColumn.NOTI_FROM, from);
+    	String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+    	values.put(VegAppColumn.NOTI_DATE, mydate);
+    	mDatabaseHelper.insertNotification(values);
+    	mDatabaseHelper.close();
+    	
+    	
+    	int icon = R.drawable.ic_launcher;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
          
-        String titleNotification = context.getString(R.string.lbl_title_notification);
+        //String titleNotification = context.getString(R.string.lbl_title_notification);
          
-        Intent notificationIntent = new Intent(context, MainActivity.class);
+        Intent notificationIntent = new Intent(context, NotifictaionListActivity.class);
         // set intent so it does not start a new activity
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent =
                 PendingIntent.getActivity(context, 0, notificationIntent, 0);
-        notification.setLatestEventInfo(context, titleNotification, message, intent);
+        notification.setLatestEventInfo(context, title, message, intent);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
          
         // Play default notification sound

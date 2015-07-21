@@ -116,7 +116,12 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.cb.vmss.GCMIntentService" />
+        <service android:name=".GCMIntentService" />
+
+        <activity
+            android:name=".NotifictaionListActivity"
+            android:label="@string/title_activity_notifictaion_list" >
+        </activity>
     </application>
 
 </manifest>
