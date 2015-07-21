@@ -33,7 +33,7 @@ public class NotifictaionListActivity extends ActionBarActivity {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-			mTitle.setText(getResources().getString(R.string.lbl_about_us_title));
+			mTitle.setText(getResources().getString(R.string.title_notification));
 
 			setSupportActionBar(toolbar);
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,10 +55,11 @@ public class NotifictaionListActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		mDatabaseHelper.open();
 		notificationList=mDatabaseHelper.getNotificationList();
+		mDatabaseHelper.close();
+		
 		if(notificationList!=null){
 			mNotificationAdapter=new NotificationAdapter(mContext, notificationList);
 			mNotificationListView.setAdapter(mNotificationAdapter);

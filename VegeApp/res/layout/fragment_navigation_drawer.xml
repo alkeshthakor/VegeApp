@@ -178,6 +178,27 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/nav_notification_center"
+            style="@style/styleDrowarItem" >
+
+            <ImageView
+                android:id="@+id/imgNotification"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_profile"
+                android:visibility="visible" />
+
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/txtNotification"
+                style="@style/styleDrowarTextView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/nav_item_notification" />
+
+           
+        </LinearLayout>
+        
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

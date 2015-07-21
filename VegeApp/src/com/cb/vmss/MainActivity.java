@@ -216,7 +216,11 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
 				startActivity(cartIntent);
 				break;
-			
+			case R.id.nav_notification_center :	
+				Intent notificationIntent=new Intent(getApplicationContext(),NotifictaionListActivity.class);
+				startActivity(notificationIntent);
+				break;
+				
 			case R.id.nav_share :	
 				 Intent intent = new Intent(Intent.ACTION_SEND);
 				 intent.setType("text/plain");

@@ -353,7 +353,7 @@ public class VegAppDatabaseHelper
         
         try
         {
-            String str = "SELECT * from "+VegAppColumn.NOTIFICATION_MASTER_TABLE+" ORDER BY noti_date DESC";
+            String str = "SELECT * from "+VegAppColumn.NOTIFICATION_MASTER_TABLE+" ORDER BY noti_id DESC";
             notiCursor = mDb.rawQuery(str, null);
             notiCursor.moveToFirst();
             if (notiCursor != null && notiCursor.getCount() > 0)
@@ -368,7 +368,9 @@ public class VegAppDatabaseHelper
                 	mNotification.setFrom(notiCursor.getString(4));
                 	mNotification.setDate(notiCursor.getString(5));
                 	
-                    notiCursor.moveToNext();
+                	appNotificationList.add(mNotification);
+                	
+                    notiCursor.moveToNext();	
                 }
             }
         }

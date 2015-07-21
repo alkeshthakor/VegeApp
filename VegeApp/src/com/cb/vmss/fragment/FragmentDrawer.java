@@ -42,6 +42,7 @@ public class FragmentDrawer extends Fragment {
     private LinearLayout addressObj;
     private LinearLayout orderObj;
     private LinearLayout cartObj;
+    private LinearLayout notificationObj;
     private LinearLayout helpObj;
     private LinearLayout calusObj;
     private LinearLayout rateusObj;
@@ -84,6 +85,7 @@ public class FragmentDrawer extends Fragment {
         addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
         orderObj = (LinearLayout) layout.findViewById(R.id.nav_order);
         cartObj = (LinearLayout) layout.findViewById(R.id.nav_cart);
+        notificationObj= (LinearLayout) layout.findViewById(R.id.nav_notification_center);
         helpObj = (LinearLayout) layout.findViewById(R.id.nav_help);
         calusObj = (LinearLayout) layout.findViewById(R.id.nav_callus);
         rateusObj = (LinearLayout) layout.findViewById(R.id.nav_rateus);
@@ -105,6 +107,7 @@ public class FragmentDrawer extends Fragment {
         shareObj.setOnClickListener(mClickListener);
         aboutObj.setOnClickListener(mClickListener);
         logoutObj.setOnClickListener(mClickListener);
+        notificationObj.setOnClickListener(mClickListener);
         
         return layout;
     }

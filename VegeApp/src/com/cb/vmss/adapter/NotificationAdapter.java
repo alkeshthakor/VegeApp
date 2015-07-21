@@ -56,7 +56,7 @@ public class NotificationAdapter extends BaseAdapter {
         final VNotification rowItem = (VNotification) getItem(position);
          
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_address_item, null);
+            convertView = inflater.inflate(R.layout.list_notification_item, null);
             holder = new ViewHolder();
               holder.titleTextView = (TextView)convertView.findViewById(R.id.tvNotificationTitle);
               holder.messageTextView = (TextView)convertView.findViewById(R.id.tvNotificationMessage);
@@ -76,7 +76,7 @@ public class NotificationAdapter extends BaseAdapter {
         holder.titleTextView.setText(rowItem.getTitle());
         holder.messageTextView.setText(rowItem.getMessage());
         
-        if(rowItem.getPromocode()!=null&&"".equalsIgnoreCase(rowItem.getPromocode()))
+        if(rowItem.getPromocode()!=null&&!"".equalsIgnoreCase(rowItem.getPromocode()))
         {
         	holder.promocodeTextView.setText(rowItem.getPromocode());
         }else{
@@ -94,7 +94,6 @@ public class NotificationAdapter extends BaseAdapter {
 				mAppDatabaseHelper.open();
 				mAppDatabaseHelper.deleteNotification(rowItem.getNoti_Id().toString());
 				mAppDatabaseHelper.close();
-				notifyDataSetChanged();
 			}
 		});
         
