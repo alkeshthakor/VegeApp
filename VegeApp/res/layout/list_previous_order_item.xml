@@ -20,14 +20,14 @@
             android:orientation="horizontal"
             android:paddingLeft="15dp" >
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/txtOrdTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="sdnkfhjkh"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <RelativeLayout
                 android:id="@+id/viewDeatilsRelLayout"
@@ -38,7 +38,7 @@
                 android:padding="5dp"
                 android:visibility="visible" >
 
-                <TextView
+                 <com.cb.vmss.cusomview.TextViewCustom
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -62,23 +62,23 @@
                 android:orientation="vertical"
                 android:paddingLeft="15dp" >
 
-                <TextView
+                <com.cb.vmss.cusomview.TextViewCustom
                     android:id="@+id/txtOrdNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Palak"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
-                <TextView
+                <com.cb.vmss.cusomview.TextViewCustom
                     android:id="@+id/totItemsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="Chharwada Road"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
-                <TextView
+                <com.cb.vmss.cusomview.TextViewCustom
                     android:id="@+id/totPriceTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     android:visibility="gone"/>
             </LinearLayout>
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                     android:id="@+id/totPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:text="Vapi - 396191"
                     android:textColor="@android:color/black"
                     android:layout_gravity="bottom|right"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             <ImageView
                 android:id="@+id/icoEditAddress"
                 android:layout_width="wrap_content"

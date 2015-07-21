@@ -62,7 +62,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
 					.findViewById(R.id.toolbar_title);
-			mTitle.setText(getResources().getString(R.string.lbl_title_previous_order));
+			mTitle.setText(getResources().getString(R.string.lbl_title_my_order));
 			
 			setSupportActionBar(toolbar);
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -59,7 +59,7 @@
     <string name="lbl_title_verifying_phone">Verifying Phone</string>
     <string name="lbl_title_login">Login or Signup</string>
     <string name="lbl_title_choose_address">Choose Address</string>
-    <string name="lbl_title_previous_order">Previous Order</string>
+    <string name="lbl_title_my_order">My Order</string>
     <string name="lbl_title_order_details">Order Details</string>
     <string name="lbl_order_success">Order Successfully Placed</string>
     <string name="lbl_schedule_date">Scheduled Delivery Date and Time </string>
