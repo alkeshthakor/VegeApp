@@ -8,6 +8,7 @@
         android:id="@+id/categoryLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
         android:orientation="vertical" >
     </LinearLayout>
 

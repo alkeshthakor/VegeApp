@@ -24,7 +24,7 @@
             android:layout_marginTop="60dp"
             android:orientation="vertical" >
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -34,7 +34,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_weight="1"
                 android:text="@string/lbl_sms_waiting"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneNumberTextView"
@@ -80,7 +80,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
-            <TextView
+            <com.cb.vmss.cusomview.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
                 android:text="@string/lbl_manual_code_enter"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/manualCodeVerifyEdittext"
@@ -118,31 +118,31 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp" >
 
-                <Button
+               <com.cb.vmss.cusomview.ButtonCustom
                     android:id="@+id/btnResendCodePhoneVerify"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="150dp"
                     android:layout_height="55dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/round_corner_button_background"
+                    android:background="@drawable/button_background_with_border_color"
                     android:text="@string/lbl_resend_verification"
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
-                <Button
+               <com.cb.vmss.cusomview.ButtonCustom
                     android:id="@+id/btnNextPhoneVerify"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="55dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/round_corner_button_background_with_color"
+                    android:background="@drawable/button_background_with_fill_color"
                     android:text="@string/lbl_next"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

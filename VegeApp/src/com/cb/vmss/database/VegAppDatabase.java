@@ -22,6 +22,17 @@ public class VegAppDatabase
         public static final String CART_PRODUCT_QTY = "cproduct_qty";
         public static final String CART_PRODUCT_SUB_TOTAL = "cproduct_sub_total";
         
+        
+        
+        public static final String NOTIFICATION_MASTER_TABLE = "notification_master";
+        public static final String NOTI_ID = "noti_id";
+        public static final String NOTI_TITLE = "noti_title";
+        public static final String NOTI_MESSAGE = "noti_message";
+        public static final String NOTI_PROMOCODE = "noti_promocode";
+        public static final String NOTI_FROM = "noti_from";
+        public static final String NOTI_DATE = "noti_date";
+        
+        
     }
 }
 

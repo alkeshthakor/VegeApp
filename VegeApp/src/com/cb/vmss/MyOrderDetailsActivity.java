@@ -118,7 +118,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity
         
         orderItemListViewObj.setAdapter(new ProductDetailsItemsAdapter(MyOrderDetailsActivity.this, mOrderItemsRowItem));
         txtSubTotal.setText(""+itemTotalPrice);
-        int totalPrize = itemTotalPrice + 49;
+        int totalPrize = itemTotalPrice;
         txtTotalAmt.setText(""+totalPrize);
         
 	}

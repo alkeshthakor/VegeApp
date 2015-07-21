@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -77,8 +78,8 @@ public class MyCartAdapter extends BaseAdapter {
             holder.txtViewProductWeight = (TextView)convertView.findViewById(R.id.productWeightTextView);
             holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productPriceTextView);
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
-            holder.icoPlus= (RelativeLayout)convertView.findViewById(R.id.iconPlus);
-            holder.icoMinus= (RelativeLayout)convertView.findViewById(R.id.iconMinus);
+            holder.icoPlus= (LinearLayout)convertView.findViewById(R.id.iconPlus);
+            holder.icoMinus= (LinearLayout)convertView.findViewById(R.id.iconMinus);
             holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
             convertView.setTag(holder);
             
@@ -170,8 +171,8 @@ public class MyCartAdapter extends BaseAdapter {
 		TextView txtViewProductWeight;
 		TextView txtViewProductPrice;
 		TextView txtViewQty;
-		RelativeLayout icoPlus;
-		RelativeLayout icoMinus;
+		LinearLayout icoPlus;
+		LinearLayout icoMinus;
 		ImageView productImageObj;
     }
 	

@@ -24,14 +24,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddAddressActivity extends ActionBarActivity implements OnClickListener {
 
 	private Toolbar toolbar;
-	private ImageView closeImageView;
+	//private ImageView closeImageView;
 
 	private EditText nameEditText;
 	private EditText houseEditText;
@@ -165,14 +164,14 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 							+ Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
 							+ "&add_address1="+ houseEditText.getText().toString() 
 							+ "&add_address2=" + streetEditText.getText().toString() 
-							+ "&add_landmark=" + cityEditText.getText().toString() 
+							+ "&add_landmark=" + areaEditText.getText().toString() 
 							+ "&add_zipcode=" + zipEditText.getText().toString();
 				} else {
 					addressBody = "usr_id=" + userId + "&add_id=" + "&add_fullname=" + nameEditText.getText().toString()
 							+ "&add_phone=" + Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
 							+ "&add_address1="+ houseEditText.getText().toString() 
 							+ "&add_address2=" + streetEditText.getText().toString() 
-							+ "&add_landmark=" + cityEditText.getText().toString() 
+							+ "&add_landmark=" + areaEditText.getText().toString() 
 							+ "&add_zipcode=" + zipEditText.getText().toString();
 
 				}
@@ -216,12 +215,18 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 					else
 						Toast.makeText(mContext, "Address added successfully", Toast.LENGTH_SHORT).show();
 					finish();
+					
+					
+					String defaultAddresss= streetEditText.getText().toString()+", "+areaEditText.getText().toString();
+					Pref.setValue(Constant.PREF_ADDRESS, defaultAddresss);
+					
+					
 				} else {
 					if (isEdit)
 						Toast.makeText(mContext, "Add address fail", Toast.LENGTH_SHORT).show();
 					else
 						Toast.makeText(mContext, "Update address fail", Toast.LENGTH_SHORT).show();
-					;
+					
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

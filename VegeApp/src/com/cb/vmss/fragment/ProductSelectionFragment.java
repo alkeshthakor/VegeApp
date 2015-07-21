@@ -123,15 +123,22 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		mServiceUrl = Constant.HOST + Constant.SERVICE_PRODUCT_BY_CAT_ID;
 		
 		
+		
+		 
+		return view;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		 if(cd.isConnectingToInternet()){
 			 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
 		    }else{
 		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 		    }
-		 
-		return view;
 	}
-
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

@@ -71,7 +71,6 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 			final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 			upArrow.setColorFilter(getResources().getColor(android.R.color.black),Mode.SRC_ATOP);
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
-			
 		}
 		
 		mProgressDialog = new ProgressDialog(MyPreviousOrderActivity.this);
@@ -80,10 +79,13 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
         mProgressDialog.setCancelable(false);
         
 		previousOrderListView = (ListView) findViewById(R.id.previousOrderListView);
-		
 		previousOrderListView.setOnItemClickListener(this);
 		
-	
+		if(cd.isConnectingToInternet()){
+			fetchPreviousOrder();
+		} else {
+		    Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		}
 		
 	}
 
@@ -104,13 +106,6 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Constant.CONTEXT=this;
-		
-		if(cd.isConnectingToInternet()){
-			fetchPreviousOrder();
-		} else {
-		    Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	private void fetchPreviousOrder(){

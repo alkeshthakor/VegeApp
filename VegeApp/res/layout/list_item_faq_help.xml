@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:paddingLeft="16dp"
+    android:paddingStart="16dp"
+    android:paddingRight="50dp"
+    android:paddingEnd="50dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:orientation="vertical" >
+     <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/faqTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_medium" />
+
+</LinearLayout>

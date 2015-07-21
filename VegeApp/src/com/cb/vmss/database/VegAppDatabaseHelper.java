@@ -13,7 +13,9 @@ import org.json.JSONObject;
 
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.model.Product;
+import com.cb.vmss.model.VNotification;
 
+import android.app.Notification;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -107,7 +109,18 @@ public class VegAppDatabaseHelper
                     + VegAppColumn.CART_PRODUCT_CAT_ID + " TEXT, "
                     + VegAppColumn.CART_PRODUCT_CAT_NAME + " TEXT" + ")";
             
+            String CREATE_NOTIFICATION_MASTER_TABLE = "CREATE TABLE " + VegAppColumn.NOTIFICATION_MASTER_TABLE + "(" 
+                    + VegAppColumn.NOTI_ID + " INTEGER PRIMARY KEY," 
+            		+ VegAppColumn.NOTI_TITLE + " TEXT," 
+            		+ VegAppColumn.NOTI_MESSAGE + " TEXT," 
+            		+ VegAppColumn.NOTI_PROMOCODE + " TEXT,"
+                    + VegAppColumn.NOTI_FROM + " TEXT ,"
+                    + VegAppColumn.NOTI_DATE + " TEXT " + ")";
+            
+            
             db.execSQL(CREATE_CART_MASTER_TABLE);
+            db.execSQL(CREATE_NOTIFICATION_MASTER_TABLE);
+            
         }
 
         @Override
@@ -306,6 +319,66 @@ public class VegAppDatabaseHelper
             Log.e("Error: ", "e.getMessage() :" + e.getMessage());
         }
         return orderItemArray;
+    } 
+    
+    
+    
+    public void insertNotification(ContentValues insertValues)
+    {
+        long rowid = 0;
+        try
+        {    
+           rowid = mDb.insert(VegAppColumn.NOTIFICATION_MASTER_TABLE, null, insertValues);
+            Log.d(TAG, "Inseert in database: " + insertValues + "Row id:" + rowid);
+        }
+        catch (Exception e)
+        {
+            Log.e("Error: ", "e.getMessage() :" + e.getMessage());
+        }
+    }
+    
+    public long deleteNotification(String notificationId)
+    {
+        String args[] = { notificationId.toString() };
+        
+        long rowid = mDb.delete(VegAppColumn.NOTIFICATION_MASTER_TABLE, VegAppColumn.NOTI_ID + "=?", args);
+        return rowid;     
+
+    }
+    
+    public List<VNotification> getNotificationList()
+    {
+        Cursor notiCursor = null;
+        List<VNotification> appNotificationList = new ArrayList<VNotification>();
+        
+        try
+        {
+            String str = "SELECT * from "+VegAppColumn.NOTIFICATION_MASTER_TABLE+" ORDER BY noti_id DESC";
+            notiCursor = mDb.rawQuery(str, null);
+            notiCursor.moveToFirst();
+            if (notiCursor != null && notiCursor.getCount() > 0)
+            {
+                while (!notiCursor.isAfterLast())
+                {
+                	VNotification mNotification=new VNotification();
+                	mNotification.setNoti_Id(notiCursor.getString(0));
+                	mNotification.setTitle(notiCursor.getString(1));
+                	mNotification.setMessage(notiCursor.getString(2));
+                	mNotification.setPromocode(notiCursor.getString(3));
+                	mNotification.setFrom(notiCursor.getString(4));
+                	mNotification.setDate(notiCursor.getString(5));
+                	
+                	appNotificationList.add(mNotification);
+                	
+                    notiCursor.moveToNext();	
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e("Error: ", "e.getMessage() :" + e.getMessage());
+        }
+        return appNotificationList;
     } 
     
 }

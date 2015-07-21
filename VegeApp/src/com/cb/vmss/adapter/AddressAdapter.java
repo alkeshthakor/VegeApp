@@ -1,13 +1,15 @@
 package com.cb.vmss.adapter;
 
-import java.io.ObjectOutputStream.PutField;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cb.vmss.AddAddressActivity;
+import com.cb.vmss.R;
+import com.cb.vmss.model.Address;
+
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,10 +17,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.cb.vmss.AddAddressActivity;
-import com.cb.vmss.R;
-import com.cb.vmss.model.Address;
 
 public class AddressAdapter extends BaseAdapter {
 
@@ -68,7 +66,7 @@ public class AddressAdapter extends BaseAdapter {
             holder.address2TextView = (TextView)convertView.findViewById(R.id.address2TextView);
             holder.address3TextView = (TextView)convertView.findViewById(R.id.address3TextView);
             holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
-            holder.iconDeleteAddress = (ImageView) convertView.findViewById(R.id.icoDeleteAddress);
+           // holder.iconDeleteAddress = (ImageView) convertView.findViewById(R.id.icoDeleteAddress);
             
             convertView.setTag(holder);
             

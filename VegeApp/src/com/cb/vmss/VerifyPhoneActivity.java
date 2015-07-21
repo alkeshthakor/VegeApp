@@ -210,4 +210,23 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 			 startActivity(chooseAddressIntent);
 		}
 	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		// Check which request we're responding to
+	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
+	        // Make sure the request was successful
+	        	setResult(Constant.CODE_MAIN_LOGIN);
+	        	finish();    
+	    }else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
+	    	   setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
+        	   finish(); 
+	    }else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
+	    	   setResult(Constant.CODE_BACK_WITH_COUTINUE_SHOPPING);
+        	   finish(); 
+	    }
+	    
+	}
 }

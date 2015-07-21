@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_with_back" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@android:color/darker_gray" />
+
+   <ExpandableListView
+        android:id="@+id/faq_list"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+    </ExpandableListView>
+
+</LinearLayout>

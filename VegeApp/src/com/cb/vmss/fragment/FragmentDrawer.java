@@ -1,6 +1,10 @@
 package com.cb.vmss.fragment;
 
 
+import com.cb.vmss.R;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,10 +23,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cb.vmss.R;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-
 
 public class FragmentDrawer extends Fragment {
 
@@ -34,12 +34,15 @@ public class FragmentDrawer extends Fragment {
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
     private TextView qtyCountTextView;
+    private TextView locationTextView;
+    
    
     private LinearLayout loginObj;
     private LinearLayout locationObj;
     private LinearLayout addressObj;
     private LinearLayout orderObj;
     private LinearLayout cartObj;
+    private LinearLayout notificationObj;
     private LinearLayout helpObj;
     private LinearLayout calusObj;
     private LinearLayout rateusObj;
@@ -47,6 +50,8 @@ public class FragmentDrawer extends Fragment {
     private LinearLayout aboutObj;
     private LinearLayout logoutObj;
     private ImageView mPhoneIcon;
+    
+    private View locationDivider;
     
     public FragmentDrawer() {
 
@@ -72,12 +77,15 @@ public class FragmentDrawer extends Fragment {
         
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
         qtyCountTextView=(TextView)layout.findViewById(R.id.txtQtyCount);
+        locationTextView=(TextView)layout.findViewById(R.id.txtLocation);
+        
         
         loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
         locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
         addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
         orderObj = (LinearLayout) layout.findViewById(R.id.nav_order);
         cartObj = (LinearLayout) layout.findViewById(R.id.nav_cart);
+        notificationObj= (LinearLayout) layout.findViewById(R.id.nav_notification_center);
         helpObj = (LinearLayout) layout.findViewById(R.id.nav_help);
         calusObj = (LinearLayout) layout.findViewById(R.id.nav_callus);
         rateusObj = (LinearLayout) layout.findViewById(R.id.nav_rateus);
@@ -85,7 +93,9 @@ public class FragmentDrawer extends Fragment {
         aboutObj = (LinearLayout) layout.findViewById(R.id.nav_about);
         logoutObj = (LinearLayout) layout.findViewById(R.id.nav_logout);
         
-
+        locationDivider=(View)layout.findViewById(R.id.locationDevider);
+        
+        
         loginObj.setOnClickListener(mClickListener);
         locationObj.setOnClickListener(mClickListener);
         addressObj.setOnClickListener(mClickListener);
@@ -97,6 +107,7 @@ public class FragmentDrawer extends Fragment {
         shareObj.setOnClickListener(mClickListener);
         aboutObj.setOnClickListener(mClickListener);
         logoutObj.setOnClickListener(mClickListener);
+        notificationObj.setOnClickListener(mClickListener);
         
         return layout;
     }
@@ -121,6 +132,16 @@ public class FragmentDrawer extends Fragment {
     public void onResume() {
     	super.onResume();
     	qtyCountTextView.setText(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));	
+    	
+    	if(!Pref.getValue(Constant.PREF_ADDRESS,"").equalsIgnoreCase("")){
+    		locationObj.setVisibility(View.VISIBLE);
+    		locationDivider.setVisibility(View.VISIBLE);
+    		locationTextView.setText(Pref.getValue(Constant.PREF_ADDRESS,""));
+    	}else{
+    		locationObj.setVisibility(View.GONE);
+    		locationDivider.setVisibility(View.GONE);
+    		locationTextView.setText(Pref.getValue(Constant.PREF_ADDRESS,""));
+    	}
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
