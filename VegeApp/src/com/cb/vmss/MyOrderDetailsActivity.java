@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.cb.vmss.adapter.ProductDetailsItemsAdapter;
@@ -49,7 +50,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_order_details);
+		setContentView(R.layout.activity_previous_order_details);
 		Constant.CONTEXT=this;
 		
 		mContext = this;
@@ -80,6 +81,9 @@ public class MyOrderDetailsActivity extends ActionBarActivity
 		}
 		
 		txtOrdDate = (TextView)findViewById(R.id.txtOrdTime);
+		txtOrdDate.setFocusable(true);
+		txtOrdDate.setFocusableInTouchMode(true);	
+		txtOrdDate.requestFocus();
         txtOrdNo = (TextView)findViewById(R.id.txtOrdNo);
         txtTotItems = (TextView)findViewById(R.id.totItemsTextView);
         txtTotPrice = (TextView)findViewById(R.id.totPriceTextView);

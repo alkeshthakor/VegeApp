@@ -45,6 +45,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:focusable="true"
                         android:text="sdnkfhjkh"
                         android:textSize="15sp" />
 
@@ -122,7 +123,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp" >
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp" >
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/txtHeading"
@@ -130,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:paddingLeft="5dp"
                         android:text="Delivery Address"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
@@ -195,7 +204,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp" >
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp" >
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/txtHeading2"
@@ -203,6 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:paddingLeft="5dp"
                         android:text="Ordered Items"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
@@ -234,6 +251,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="10dp" >
 
@@ -245,8 +263,8 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:src="@drawable/icon_indian_rupee_16" />
 
                         <TextView
@@ -254,6 +272,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="112"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -265,6 +284,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="10dp" >
 
@@ -276,8 +296,8 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:src="@drawable/icon_indian_rupee_16" />
 
                         <TextView
@@ -285,6 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="49"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -296,6 +317,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="10dp" >
 
@@ -307,8 +329,8 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:src="@drawable/icon_indian_rupee_16" />
 
                         <TextView
@@ -330,91 +352,93 @@
         android:layout_height="50dp"
         android:layout_weight="0"
         android:background="@android:color/white"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <View
             android:id="@+id/sprator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black" />
+
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:weightSum="1" >
-        <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="vertical" >
+            android:layout_weight="0"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:weightSum="1" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_close" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Cancel Order" />
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:orientation="vertical" >
 
-        <View
-            android:id="@+id/sprator3"
-            android:layout_width="0.2dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_close" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="vertical" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Cancel Order" />
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_close" />
+            <View
+                android:id="@+id/sprator3"
+                android:layout_width="0.2dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/black" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Email Details" />
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:orientation="vertical" >
 
-        <View
-            android:id="@+id/sprator2"
-            android:layout_width="0.2dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_close" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="vertical" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Email Details" />
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_close" />
+            <View
+                android:id="@+id/sprator2"
+                android:layout_width="0.2dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/black" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Call Us" />
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_close" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Call Us" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
