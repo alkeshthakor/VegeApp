@@ -532,8 +532,10 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 					}
 
 				} else {
-					mPromoEditText.setError("Invalid promo code");
-					//Toast.makeText(mContext, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
+					//mPromoEditText.setError("Invalid promo code");
+					mPromoEditText.setText("");
+					btnPromoCodeSecond.setText(getString(R.string.lbl_promo_cancel));
+					Toast.makeText(mContext, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
 					promocodeLinearLayout.setVisibility(View.GONE);
 				}
 			} catch (JSONException e) {

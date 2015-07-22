@@ -9,7 +9,6 @@
 /VegeApp/bin/*.xml
 /VegeApp/bin/*.dex
 /VegeApp/bin/*.txt
-/VegeApp/bin/*.ap_
 /VegeApp/gen
 /VegeApp/.settings
 /NineoldAndroids/bin
