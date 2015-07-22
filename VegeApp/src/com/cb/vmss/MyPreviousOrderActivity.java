@@ -142,24 +142,22 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 						JSONObject orderJSONObject = dataJSONArray.getJSONObject(i);
 						PreviousOrder previousOrderItem = new PreviousOrder();
 						previousOrderItem.setOrderId(orderJSONObject.getString("od_id"));
-						previousOrderItem.setOrderStatus(orderJSONObject.getString("od_process"));
-						
-						previousOrderItem.setOrderDate(orderJSONObject.getString("od_deliverytype") + " " + orderJSONObject.getString("od_delivertytime"));
-						previousOrderItem.setTotalItem(""+orderJSONObject.getJSONArray("item").length());
 						previousOrderItem.setOrderTotalPrice(orderJSONObject.getString("od_finalprice"));
-						previousOrderItem.setJsonObject(orderJSONObject.toString());
-						String address=orderJSONObject.getString("user_name")+"\n"+orderJSONObject.getString("address1") 
-						+"\n"+orderJSONObject.getString("address2")+"\n"+orderJSONObject.getString("landmark") +"\n"+orderJSONObject.getString("city")
-						 +"\n"+orderJSONObject.getString("zipcode");
-						
-					previousOrderItem.setUserName(orderJSONObject.getString("user_name"));
-					previousOrderItem.setAddressLine1(orderJSONObject.getString("address1"));
-					previousOrderItem.setAddressLine2(orderJSONObject.getString("address2"));
-					previousOrderItem.setAddressLandmark(orderJSONObject.getString("landmark"));
-					previousOrderItem.setAddressCity(orderJSONObject.getString("city"));
-					previousOrderItem.setAddressZipCode(orderJSONObject.getString("zipcode"));
-					
+						//orderJSONObject.getString("od_deliverytype");
+						previousOrderItem.setOrderTime(orderJSONObject.getString("od_delivertytime"));
+						previousOrderItem.setOrderDate(orderJSONObject.getString("od_createddate"));
+						previousOrderItem.setOrderStatus(orderJSONObject.getString("od_process"));
+						//orderJSONObject.getString("address_id");
+						previousOrderItem.setUserName(orderJSONObject.getString("user_name"));
+						//orderJSONObject.getString("phone_number");
+						previousOrderItem.setAddressLine1(orderJSONObject.getString("address1"));
+						previousOrderItem.setAddressLine2(orderJSONObject.getString("address2"));
+						previousOrderItem.setAddressLandmark(orderJSONObject.getString("landmark"));
+						previousOrderItem.setAddressCity(orderJSONObject.getString("city"));
+						previousOrderItem.setAddressZipCode(orderJSONObject.getString("zipcode"));
 
+						previousOrderItem.setTotalItem(""+orderJSONObject.getJSONArray("item").length());
+						previousOrderItem.setJsonObject(orderJSONObject.toString());
 						
 						mPreviousOrderList.add(previousOrderItem);
 					}

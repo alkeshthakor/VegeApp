@@ -63,9 +63,10 @@ public class PreviousOrderAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_previous_order_item, null);
             holder = new ViewHolder();
-            holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdTime);
+            holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdDate);
+            holder.txtOrdTime = (TextView)convertView.findViewById(R.id.txtOrdTime);
             holder.txtOrdNo = (TextView)convertView.findViewById(R.id.txtOrdNo);
-            holder.txtTotItems = (TextView)convertView.findViewById(R.id.totItemsTextView);
+            holder.txtStatus = (TextView)convertView.findViewById(R.id.statusTextView);
             holder.txtTotPrice = (TextView)convertView.findViewById(R.id.totPriceTextView);
             holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
             holder.viewDeatilsRelLayoutObj = (RelativeLayout) convertView.findViewById(R.id.viewDeatilsRelLayout);
@@ -76,8 +77,9 @@ public class PreviousOrderAdapter extends BaseAdapter {
         }
         
         holder.txtOrdDate.setText(rowItem.getOrderDate());
-        holder.txtOrdNo.setText("Order Id : " + rowItem.getOrderId());
-        holder.txtTotItems.setText("Order Items : " + rowItem.getTotalItem());
+        holder.txtOrdTime.setText(rowItem.getOrderTime());
+        holder.txtOrdNo.setText("Order No. : " + rowItem.getOrderId());
+        holder.txtStatus.setText("Status : " + rowItem.getOrderStatus());
         holder.txtTotPrice.setText(rowItem.getOrderTotalPrice());
         holder.viewDeatilsRelLayoutObj.setOnClickListener(new OnClickListener() {
 			
@@ -93,8 +95,9 @@ public class PreviousOrderAdapter extends BaseAdapter {
 
 	static class ViewHolder {
 		TextView txtOrdDate;
+		TextView txtOrdTime;
 		TextView txtOrdNo;
-		TextView txtTotItems;
+		TextView txtStatus;
 		TextView txtTotPrice;
 		ImageView iconEditAddress;
 		RelativeLayout viewDeatilsRelLayoutObj;

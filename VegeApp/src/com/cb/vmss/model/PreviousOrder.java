@@ -13,11 +13,10 @@ public class PreviousOrder implements Serializable{
 	private String orderId;
 	private String orderTotalPrice;
 	private String orderDate;
+	private String orderTime;
 	private String orderStatus;
-
 	private String totalItem;
 	private String jsonObject;
-	
 	private String userName;
 	private String addressLine1;
 	private String addressLine2;
@@ -49,6 +48,12 @@ public class PreviousOrder implements Serializable{
 	}
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
+	}
+	public String getOrderTime() {
+		return orderTime;
+	}
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
 	}
 	public String getTotalItem() {
 		return totalItem;
@@ -103,8 +108,5 @@ public class PreviousOrder implements Serializable{
 	}
 	public void setAddressId(String addressId) {
 		this.addressId = addressId;
-	}
-	
-	
-	
+	}	
 }

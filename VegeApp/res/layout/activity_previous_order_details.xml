@@ -36,42 +36,6 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <com.cb.vmss.cusomview.TextViewCustom
-                        android:id="@+id/txtOrdTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:focusable="true"
-                        android:text="sdnkfhjkh"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/viewDeatilsRelLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_round_unread_msg_count"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:visibility="invisible" >
-
-                        <com.cb.vmss.cusomview.TextViewCustom
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:text="View Details"
-                            android:textColor="#FFF"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
                     <LinearLayout
@@ -85,27 +49,120 @@
                             android:id="@+id/txtOrdNo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Palak"
+                            android:text="Order No. : "
                             android:textColor="@android:color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
-                            android:id="@+id/totItemsTextView"
+                            android:id="@+id/statusTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="Chharwada Road"
+                            android:text="Status : "
                             android:textSize="14sp" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/totPriceTextView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Vapi - 396191"
+                            android:textSize="15sp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
-                    <com.cb.vmss.cusomview.TextViewCustom
-                        android:id="@+id/totPriceTextView"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginTop="3dp"
-                        android:textColor="@android:color/black"
+                        android:layout_gravity="top|right"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_indian_rupee_16" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/totPriceTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Price"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/icon_watch" />
+
+                    <com.cb.vmss.cusomview.TextViewCustom
+                        android:id="@+id/txtOrdDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Date"
                         android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0.2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@android:color/black" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/icon_watch" />
+
+                    <com.cb.vmss.cusomview.TextViewCustom
+                        android:id="@+id/txtOrdTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Time"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right" >
+
+                        <RelativeLayout
+                            android:id="@+id/viewDeatilsRelLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_btn"
+                            android:padding="8dp"
+                            android:visibility="gone" >
+
+                            <com.cb.vmss.cusomview.TextViewCustom
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:text="View Details"
+                                android:textColor="#FFF"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -160,7 +217,6 @@
                         android:id="@+id/txtNameAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Palak"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
@@ -169,7 +225,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="A/102, Pearl Park"
                         android:textSize="14sp" />
 
                     <com.cb.vmss.cusomview.TextViewCustom
@@ -177,7 +232,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Chharwada Road"
                         android:textSize="14sp" />
 
                     <com.cb.vmss.cusomview.TextViewCustom
@@ -185,7 +239,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Vapi - 396191"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -259,7 +312,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Sub Total : "
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:layout_width="12dp"
@@ -270,9 +323,8 @@
                             android:id="@+id/txtSubTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="112"
                             android:textColor="@android:color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <View
@@ -292,7 +344,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Delivery Charges : "
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:layout_width="12dp"
@@ -303,9 +355,8 @@
                             android:id="@+id/txtDeliveryCharge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
                             android:textColor="@android:color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <View
@@ -325,7 +376,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Total Amount : "
-                            android:textSize="14sp" />
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
 
                         <ImageView
                             android:layout_width="12dp"
@@ -336,9 +388,8 @@
                             android:id="@+id/txtTotalAmt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="161"
                             android:textColor="@android:color/black"
-                            android:textSize="14sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
