@@ -268,7 +268,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 						String orderData = mDatabaseHelper.getOrderItem().toString();
 
 						mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
-								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=\"" + orderData + "\""
+								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=" + orderData 
 								+"&od_deliverytype="+dayShift+"&od_delivertytime="+TimeValue+"&od_promocode="+mPromoEditText.getText().toString();
 						
 						mDatabaseHelper.close();

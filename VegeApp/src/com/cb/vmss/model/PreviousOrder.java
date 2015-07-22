@@ -13,8 +13,18 @@ public class PreviousOrder implements Serializable{
 	private String orderId;
 	private String orderTotalPrice;
 	private String orderDate;
+	private String orderStatus;
+
 	private String totalItem;
 	private String jsonObject;
+	
+	private String userName;
+	private String addressLine1;
+	private String addressLine2;
+	private String addressLandmark;
+	private String addressCity;
+	private String addressZipCode;
+	private String addressId;
 	
 	public String getOrderId() {
 		return orderId;
@@ -46,5 +56,55 @@ public class PreviousOrder implements Serializable{
 	public void setTotalItem(String totalItem) {
 		this.totalItem = totalItem;
 	}
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+	public String getAddressLandmark() {
+		return addressLandmark;
+	}
+	public void setAddressLandmark(String addressLandmark) {
+		this.addressLandmark = addressLandmark;
+	}
+	public String getAddressCity() {
+		return addressCity;
+	}
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
+	}
+	public String getAddressZipCode() {
+		return addressZipCode;
+	}
+	public void setAddressZipCode(String addressZipCode) {
+		this.addressZipCode = addressZipCode;
+	}
+	public String getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+	
+	
 	
 }
