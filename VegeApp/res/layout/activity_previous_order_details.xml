@@ -104,7 +104,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
                         android:layout_marginTop="3dp"
-                        android:text="Vapi - 396191"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -158,7 +157,7 @@
                     android:padding="10dp" >
 
                     <com.cb.vmss.cusomview.TextViewCustom
-                        android:id="@+id/txtName"
+                        android:id="@+id/txtNameAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Palak"
@@ -348,6 +347,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/llCancelOrder"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@android:color/holo_red_light"
