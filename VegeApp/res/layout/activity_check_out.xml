@@ -37,7 +37,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="6dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_indian_rupee_16" />
 
@@ -80,6 +80,42 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llPromocodeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
+
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lbl_promo_code_discount"
+                android:textSize="@dimen/font_size_small" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_indian_rupee_16" />
+
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/promocodeDiscountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:singleLine="true"
+                android:text="@string/lbl_zero"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -97,7 +133,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="6dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_indian_rupee_16" />
 
@@ -118,33 +154,66 @@
             android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
-        <EditText
-            android:id="@+id/promoCodeEditTextCheckOut"
-            android:layout_width="190dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center|bottom"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_background_with_border_color"
-            android:hint="@string/lbl_apply_promo_code"
-            android:inputType="text"
-            android:paddingLeft="6dp"
-            android:paddingStart="6dp"
-            android:textAllCaps="false"
-            android:textSize="14sp" />
-
-        <!--
-                 <Button
-                android:id="@+id/btnPromoCodeCheckOut"
-                android:layout_width="170dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center|bottom"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/icon_button_white_bg"
-                android:text="@string/lbl_apply_promo_code"
+        <ViewFlipper
+            android:id="@+id/flipperPromoCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" >
+            <com.cb.vmss.cusomview.ButtonCustom
+                android:id="@+id/btnApplyPromocodeFirst"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_background_with_border_color"
+                android:gravity="center"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingStart="8dp"
+                android:text="@string/lbl_apply_promo_code_button"
                 android:textAllCaps="false"
-                android:textColor="@android:color/holo_green_light"
-                android:textSize="12sp" />
-        -->
+                android:textColor="@color/app_green"
+                android:textSize="16sp" />
+            
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/promoCodeEditTextCheckOut"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_background_with_border_color"
+                    android:hint="@string/lbl_apply_promo_code_hint"
+                    android:inputType="text"
+                    android:paddingEnd="4dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingStart="4dp"
+                    android:textAllCaps="false"
+                    android:textSize="14sp" />
+
+                <com.cb.vmss.cusomview.ButtonCustom
+                    android:id="@+id/btnApplyPromocodeSecond"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_background_with_fill_color"
+                    android:text="@string/lbl_promo_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            
+            
+        </ViewFlipper>
 
         <View
             android:layout_width="match_parent"
@@ -164,9 +233,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="30dp"
-            android:gravity="center"
             android:paddingRight="30dp" >
 
             <com.cb.vmss.cusomview.ButtonCustom
@@ -232,23 +301,22 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-         <View
+        <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@android:color/white" />
-         
-      
-            <com.cb.vmss.cusomview.TextViewCustom
+
+        <com.cb.vmss.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:layout_gravity="center"
             android:text="@string/lbl_term_service"
             android:textColor="@android:color/black"
             android:textSize="12sp" />
@@ -264,8 +332,6 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
-       
-       
     </LinearLayout>
 
 </LinearLayout>

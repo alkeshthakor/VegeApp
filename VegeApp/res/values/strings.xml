@@ -41,9 +41,16 @@
     <string name="lbl_add_logout">Logout</string>
     <string name="lbl_sub_total">Sub Total</string>
     <string name="lbl_delivery_charges">Delivery Charges</string>
+    <string name="lbl_promo_code_discount">Promo Code Discount</string>
     <string name="lbl_free">Free</string>
     <string name="lbl_total_amount">Total Amount</string>
-    <string name="lbl_apply_promo_code">Apply Promo Code</string>
+    <string name="lbl_apply_promo_code_hint">Enter Promo Code</string>
+    <string name="lbl_apply_promo_code_button">Apply Promo Code</string>
+    <string name="lbl_invalid_promo_code">Invalid promo code</string>
+    
+    <string name="lbl_promo_apply">Apply</string>
+    <string name="lbl_promo_cancel">Cancel</string>
+    
     <string name="lbl_today">Today</string>
     <string name="lbl_tomorrow">Tomorrow</string>
     <string name="lbl_dayafter">Day After</string>

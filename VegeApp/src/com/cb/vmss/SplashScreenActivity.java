@@ -53,12 +53,16 @@ public class SplashScreenActivity extends Activity {
 					"Internet Connection Error",
 					"Please connect to working Internet connection", false);
 			// stop executing code by return
-			return;
+			finish();
+			//return;
 		}
 
 		if (Pref.getValue(Constant.PREF_SHARE_URL, "").equalsIgnoreCase("")) {
 			mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
+			
+			//if (!cd.isConnectingToInternet()) 
 			new GetShareUrlTask().execute(mServiceUrl);
+			
 		}else{
 			sleepThread();
 		}

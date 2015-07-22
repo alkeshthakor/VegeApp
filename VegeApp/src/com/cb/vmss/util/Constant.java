@@ -30,6 +30,8 @@ public class Constant {
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
 	public static final String SERVICE_ADD_ORDER = "order/addorder";
 	public static final String SERVICE_CANCEL_ORDER = "order/cancelorder";
+	public static final String SERVICE_PROMO_CODE = "order/promocode";
+	
 	
 	public static final String SERVICE_SHARE = "share";
 	
