@@ -35,8 +35,9 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 	
 	private Toolbar toolbar;
 	TextView txtOrdDate;
+	TextView txtOrdTime;
 	TextView txtOrdNo;
-	TextView txtTotItems;
+	TextView txtStatus;
 	TextView txtTotPrice;
 	
 	TextView txtUserName;
@@ -44,7 +45,6 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 	TextView txtAddressLandmark;
 	TextView txtAddresscity;
 	TextView txtZipCode;
-	
 	
 	public ExpandedListView orderItemListViewObj;
 	TextView txtSubTotal;
@@ -64,7 +64,6 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 	private String mServiceUrl;
 	private String orderId;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,8 +81,6 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 		mProgressDialog.setIndeterminate(false);
         mProgressDialog.setCancelable(false);
         
-		
-		
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar
@@ -97,7 +94,6 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 			final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 			upArrow.setColorFilter(getResources().getColor(android.R.color.black),Mode.SRC_ATOP);
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
-			
 		}
 		
 		if (getIntent() != null) {
@@ -107,12 +103,16 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 			}
 		}
 		
-		txtOrdDate = (TextView)findViewById(R.id.txtOrdTime);
-		txtOrdDate.setFocusable(true);
+		txtOrdDate = (TextView)findViewById(R.id.txtOrdDate);
+        txtOrdTime = (TextView)findViewById(R.id.txtOrdTime);
+        txtOrdNo = (TextView)findViewById(R.id.txtOrdNo);
+        txtStatus = (TextView)findViewById(R.id.statusTextView);
+        txtTotPrice = (TextView)findViewById(R.id.totPriceTextView);
+        
+        txtOrdDate.setFocusable(true);
 		txtOrdDate.setFocusableInTouchMode(true);	
 		txtOrdDate.requestFocus();
         txtOrdNo = (TextView)findViewById(R.id.txtOrdNo);
-        txtTotItems = (TextView)findViewById(R.id.totItemsTextView);
         txtTotPrice = (TextView)findViewById(R.id.totPriceTextView);
         
         orderItemListViewObj = (ExpandedListView) findViewById(R.id.orderItemListView);
@@ -120,29 +120,29 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         txtDeliveryCharge = (TextView)findViewById(R.id.txtDeliveryCharge);
         txtTotalAmt = (TextView)findViewById(R.id.txtTotalAmt);
         
-        
         txtUserName = (TextView)findViewById(R.id.txtNameAddress);
     	txtAddress1and2  = (TextView)findViewById(R.id.address1TextView);
     	txtAddressLandmark = (TextView)findViewById(R.id.address2TextView);
         txtAddresscity = (TextView)findViewById(R.id.address3TextView);
     	
-    	
-    	
-        llCancelOrder=(LinearLayout) findViewById(R.id.llCancelOrder);
+    	llCancelOrder=(LinearLayout) findViewById(R.id.llCancelOrder);
         llCancelOrder.setOnClickListener(this);
         
+        if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        	llCancelOrder.setVisibility(View.GONE);
+        }
         orderId=item.getOrderId();
         
         txtOrdDate.setText(item.getOrderDate());
-        txtOrdNo.setText("Order Id : " + item.getOrderId());
-        txtTotItems.setText("Order Items : " + item.getTotalItem());
+        txtOrdTime.setText(item.getOrderTime());
+        txtOrdNo.setText("Order No. : " + item.getOrderId());
+        txtStatus.setText("Status : " + item.getOrderStatus());
         txtTotPrice.setText(item.getOrderTotalPrice());
         
         txtUserName.setText(item.getUserName());
         txtAddress1and2.setText(item.getAddressLine1()+", "+item.getAddressLine2());
         txtAddressLandmark.setText(item.getAddressLandmark());
         txtAddresscity.setText(item.getAddressCity()+"-"+item.getAddressZipCode());
-        
         
         int itemTotalPrice = 0;
         try {
