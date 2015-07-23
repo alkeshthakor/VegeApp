@@ -52,7 +52,7 @@
                 android:layout_marginTop="24dp"
                 android:gravity="fill_horizontal"
                 android:text="@string/lbl_about_us"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 

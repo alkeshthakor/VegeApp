@@ -2,6 +2,7 @@ package com.cb.vmss.fragment;
 
 
 import com.cb.vmss.R;
+import com.cb.vmss.database.VegAppDatabaseHelper;
 import com.cb.vmss.util.Constant;
 import com.cb.vmss.util.Pref;
 
@@ -34,6 +35,7 @@ public class FragmentDrawer extends Fragment {
     private FragmentDrawerListener drawerListener;
     private TextView mPhoneNumberTextView;
     private TextView qtyCountTextView;
+    private TextView notificationCountTextView;
     private TextView locationTextView;
     
    
@@ -49,10 +51,18 @@ public class FragmentDrawer extends Fragment {
     private LinearLayout shareObj;
     private LinearLayout aboutObj;
     private LinearLayout logoutObj;
+    
+    private LinearLayout llNotificationCount;
+    private LinearLayout llCartItemCount;
+    
     private ImageView mPhoneIcon;
     
     private View locationDivider;
     
+    private Activity mActivity;
+    
+	private VegAppDatabaseHelper mDatabaseHelper;
+
     public FragmentDrawer() {
 
     }
@@ -73,12 +83,14 @@ public class FragmentDrawer extends Fragment {
         // Inflating view layout
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         
+		mDatabaseHelper=new VegAppDatabaseHelper(mActivity);
+
         mPhoneIcon=(ImageView)layout.findViewById(R.id.imgPhone);
         
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
         qtyCountTextView=(TextView)layout.findViewById(R.id.txtQtyCount);
         locationTextView=(TextView)layout.findViewById(R.id.txtLocation);
-        
+        notificationCountTextView=(TextView)layout.findViewById(R.id.tvNotficationCount);
         
         loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
         locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
@@ -92,6 +104,11 @@ public class FragmentDrawer extends Fragment {
         shareObj = (LinearLayout) layout.findViewById(R.id.nav_share);
         aboutObj = (LinearLayout) layout.findViewById(R.id.nav_about);
         logoutObj = (LinearLayout) layout.findViewById(R.id.nav_logout);
+        
+        llNotificationCount= (LinearLayout) layout.findViewById(R.id.llNotificationCount);
+        llCartItemCount = (LinearLayout) layout.findViewById(R.id.qtyCountRelLayout);
+        
+        
         
         locationDivider=(View)layout.findViewById(R.id.locationDevider);
         
@@ -126,12 +143,33 @@ public class FragmentDrawer extends Fragment {
     public void onAttach(Activity activity) {
     	super.onAttach(activity);
     	Constant.CONTEXT = activity;
+    	mActivity=activity;
     }
 
     @Override
     public void onResume() {
     	super.onResume();
-    	qtyCountTextView.setText(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));	
+    	
+    	mDatabaseHelper.open();
+    	int notificationCount=mDatabaseHelper.getNotificationList().size();
+    	mDatabaseHelper.close();
+    	
+    	if(notificationCount>0){
+    		llNotificationCount.setVisibility(View.VISIBLE);
+    		notificationCountTextView.setText(""+notificationCount);
+    		
+    	}else{
+    		llNotificationCount.setVisibility(View.GONE);
+    		notificationCountTextView.setText("0");
+    	}
+    	
+    	if(Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"))>0){
+    		llCartItemCount.setVisibility(View.VISIBLE);
+    		qtyCountTextView.setText(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));	
+    	}else{
+    		llCartItemCount.setVisibility(View.GONE);
+    		qtyCountTextView.setText("0");
+    	}
     	
     	if(!Pref.getValue(Constant.PREF_ADDRESS,"").equalsIgnoreCase("")){
     		locationObj.setVisibility(View.VISIBLE);

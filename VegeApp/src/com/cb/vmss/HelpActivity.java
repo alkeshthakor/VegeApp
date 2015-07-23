@@ -6,12 +6,13 @@ import java.util.List;
 import com.cb.vmss.adapter.FAQExpandableAdapter;
 import com.cb.vmss.model.FAQBean;
 import com.cb.vmss.util.Constant;
-
+import android.annotation.SuppressLint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -21,14 +22,42 @@ public class HelpActivity extends ActionBarActivity {
 	private Toolbar toolbar;
 	private ExpandableListView mFaqListView;
 	private List<FAQBean> mFAGList;
+	int mPaddingRigh=50;
 	
+	
+	@SuppressLint("NewApi")
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
-		mFaqListView.setIndicatorBounds(mFaqListView.getRight()- 50, mFaqListView.getWidth());
+		//int width=mFaqListView.getWidth();
+		//mPaddingRigh=(width*10)/100;
+		////mFaqListView.setIndicatorBounds(mFaqListView.getRight()- 50, mFaqListView.getWidth());
+		//mFaqListView.setIndicatorBounds(mFaqListView.getRight()- mPaddingRigh, mFaqListView.getWidth());
+		
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+	    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+	    int width = metrics.widthPixels; 
+	    //mFaqListView.setIndicatorBounds(width - GetPixelFromDips(60), width - GetPixelFromDips(10));
+        
+	    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+	    	mFaqListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
+	        //searchExpListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
+	    } else {
+	    	mFaqListView.setIndicatorBoundsRelative(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
+	        //searchExpListView.setIndicatorBoundsRelative(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
+	    }
+
+	    
 	}
 	
+	public int GetPixelFromDips(float pixels) {
+	    // Get the screen's density scale 
+	    final float scale = getResources().getDisplayMetrics().density;
+	    // Convert the dps to pixels, based on density scale
+	    return (int) (pixels * scale + 0.5f);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
