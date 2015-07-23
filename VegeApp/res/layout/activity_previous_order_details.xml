@@ -100,11 +100,11 @@
                     android:orientation="horizontal" >
 
                     <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:layout_gravity="center"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/icon_watch" />
+                        android:src="@drawable/icon_calendar_grey" />
 
                     <com.cb.vmss.cusomview.TextViewCustom
                         android:id="@+id/txtOrdDate"

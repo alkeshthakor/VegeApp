@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="match_parent" >
 
     <LinearLayout
@@ -24,7 +25,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_person_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -46,7 +47,7 @@
                 android:id="@+id/imgLocation"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_location_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -96,7 +97,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_person_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -113,7 +114,7 @@
                 android:id="@+id/imgAddress"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_my_address"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -130,7 +131,7 @@
                 android:id="@+id/imgOrder"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_history_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -147,7 +148,7 @@
                 android:id="@+id/imgCart"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_shopping_cart_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -186,7 +187,7 @@
                 android:id="@+id/imgNotification"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_notifications_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -228,7 +229,7 @@
                 android:id="@+id/imgHelp"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_help_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -245,7 +246,7 @@
                 android:id="@+id/imgcallus"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_call_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -262,7 +263,7 @@
                 android:id="@+id/imgRateUs"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_star_border_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -279,7 +280,7 @@
                 android:id="@+id/imgShare"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_share_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -296,7 +297,7 @@
                 android:id="@+id/imgAbout"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_about_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -313,7 +314,7 @@
                 android:id="@+id/imgLogout"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_profile"
+                android:src="@drawable/icon_person_black"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
