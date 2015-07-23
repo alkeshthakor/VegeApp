@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cb.vmss.AddAddressActivity;
+import com.cb.vmss.MainActivity;
 import com.cb.vmss.R;
 import com.cb.vmss.model.Address;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +71,7 @@ public class AddressAdapter extends BaseAdapter {
             holder.address2TextView = (TextView)convertView.findViewById(R.id.address2TextView);
             holder.address3TextView = (TextView)convertView.findViewById(R.id.address3TextView);
             holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
-           // holder.iconDeleteAddress = (ImageView) convertView.findViewById(R.id.icoDeleteAddress);
+            holder.iconDeleteAddress = (ImageView) convertView.findViewById(R.id.icoDeleteAddress);
             
             convertView.setTag(holder);
             
@@ -78,6 +83,7 @@ public class AddressAdapter extends BaseAdapter {
         holder.address1TextView.setText(rowItem.getAddAddress1() + ", "+ rowItem.getAddAddress2());
         holder.address2TextView.setText(rowItem.getAddLandmark()+ ", "+ rowItem.getAddCity());
         holder.address3TextView.setText(rowItem.getAddZipCode());
+        
         holder.iconEditAddress.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -88,6 +94,42 @@ public class AddressAdapter extends BaseAdapter {
 				context.startActivity(addressIntent);
 			}
 		});
+        
+        holder.iconDeleteAddress.setOnClickListener(new OnClickListener() {
+	
+        	@Override
+        	public void onClick(View v) {
+
+        		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+        				context);
+        			// set title
+        			alertDialogBuilder.setTitle("Alert");
+        			// set dialog message
+        			alertDialogBuilder
+        				.setMessage("Are you sure you want to delete?")
+        				.setCancelable(false)
+        				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+        					public void onClick(DialogInterface dialog,int id) {
+        						
+        					}
+        				  })
+        				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+        					public void onClick(DialogInterface dialog,int id) {
+        						// if this button is clicked, just close
+        						// the dialog box and do nothing
+        						dialog.cancel();
+        					}
+        				});
+         
+        				// create alert dialog
+        				AlertDialog alertDialog = alertDialogBuilder.create();
+         
+        				// show it
+        				alertDialog.show();
+        	
+        	}
+        });
+        
         return convertView;
 	}
 

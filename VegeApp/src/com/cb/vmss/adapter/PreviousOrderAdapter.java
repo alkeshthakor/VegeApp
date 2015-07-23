@@ -78,7 +78,7 @@ public class PreviousOrderAdapter extends BaseAdapter {
         
         holder.txtOrdDate.setText(rowItem.getOrderDate());
         holder.txtOrdTime.setText(rowItem.getOrderTime());
-        holder.txtOrdNo.setText("Order No. : " + rowItem.getOrderId());
+        holder.txtOrdNo.setText("Order ID : " + rowItem.getOrderId());
         holder.txtStatus.setText("Status : " + rowItem.getOrderStatus());
         holder.txtTotPrice.setText(rowItem.getOrderTotalPrice());
         holder.viewDeatilsRelLayoutObj.setOnClickListener(new OnClickListener() {

@@ -12,11 +12,14 @@ import com.cb.vmss.model.OrderItems;
 import com.cb.vmss.model.PreviousOrder;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
 import com.cb.vmss.widget.ExpandedListView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -135,7 +138,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         
         txtOrdDate.setText(item.getOrderDate());
         txtOrdTime.setText(item.getOrderTime());
-        txtOrdNo.setText("Order No. : " + item.getOrderId());
+        txtOrdNo.setText("Order ID : " + item.getOrderId());
         txtStatus.setText("Status : " + item.getOrderStatus());
         txtTotPrice.setText(item.getOrderTotalPrice());
         
@@ -195,13 +198,43 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 		switch(v.getId()){
 		case R.id.llCancelOrder:
 			 if(cd.isConnectingToInternet()){
-				 mServiceUrl=Constant.HOST+Constant.SERVICE_CANCEL_ORDER;
-				 new CancelOrderTask().execute(mServiceUrl,"order_id="+orderId);
+				 showConfirmCancel();
 			    }else{
 			    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 			    }
 			break;
 		}
+	}
+	
+	private void showConfirmCancel() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				MyOrderDetailsActivity.this);
+			// set title
+			alertDialogBuilder.setTitle("Cancel Alert");
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Are you sure you want to cancel?")
+				.setCancelable(false)
+				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+
+						mServiceUrl=Constant.HOST+Constant.SERVICE_CANCEL_ORDER;
+						 new CancelOrderTask().execute(mServiceUrl,"order_id="+orderId);
+					}
+				  })
+				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
 	}
 	
     private class CancelOrderTask extends AsyncTask<String, Void, JSONObject> {
