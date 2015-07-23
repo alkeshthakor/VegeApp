@@ -16,6 +16,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/font_size_medium" />
+                android:textSize="@dimen/font_size_large" />
 
 </LinearLayout>

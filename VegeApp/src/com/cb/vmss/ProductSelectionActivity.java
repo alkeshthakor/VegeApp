@@ -75,9 +75,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			upArrow.setColorFilter(getResources().getColor(android.R.color.white), Mode.SRC_ATOP);
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-			serachImageView = (ImageView) mToolbar.findViewById(R.id.searchImageView);
-
-			serachImageView.setOnClickListener(this);
+			//serachImageView = (ImageView) mToolbar.findViewById(R.id.searchImageView);
+			//serachImageView.setOnClickListener(this);
 
 		}
 		/// currentFragment = new
@@ -370,9 +369,9 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			Intent myCartIntent = new Intent(getApplicationContext(), MyCartActivity.class);
 			startActivityForResult(myCartIntent, Constant.CODE_MAIN_LOGIN);
 			break;
-		case R.id.searchImageView:
+/*		case R.id.searchImageView:
 			break;
-
+*/
 		}
 	}
 
