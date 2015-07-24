@@ -7,15 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cb.vmss.adapter.ProductDetailsItemsAdapter;
-import com.cb.vmss.model.OrderItems;
-import com.cb.vmss.model.PreviousOrder;
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
-import com.cb.vmss.widget.ExpandedListView;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -32,6 +23,14 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cb.vmss.adapter.ProductDetailsItemsAdapter;
+import com.cb.vmss.model.OrderItems;
+import com.cb.vmss.model.PreviousOrder;
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.ServerConnector;
+import com.cb.vmss.widget.ExpandedListView;
 
 public class MyOrderDetailsActivity extends ActionBarActivity implements OnClickListener
 {
@@ -52,7 +51,11 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 	public ExpandedListView orderItemListViewObj;
 	TextView txtSubTotal;
 	TextView txtDeliveryCharge;
+	TextView txtPromoDiscount;
 	TextView txtTotalAmt;
+	
+	View dividerPromoDiscount;
+	LinearLayout llPromoDiscount;
 	
 	private ArrayList<OrderItems> mOrderItemsRowItem = new ArrayList<OrderItems>();
     
@@ -121,6 +124,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         orderItemListViewObj = (ExpandedListView) findViewById(R.id.orderItemListView);
         txtSubTotal = (TextView)findViewById(R.id.txtSubTotal);
         txtDeliveryCharge = (TextView)findViewById(R.id.txtDeliveryCharge);
+        txtPromoDiscount = (TextView)findViewById(R.id.txtPromoDiscount);
         txtTotalAmt = (TextView)findViewById(R.id.txtTotalAmt);
         
         txtUserName = (TextView)findViewById(R.id.txtNameAddress);
@@ -131,6 +135,9 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
     	llCancelOrder=(LinearLayout) findViewById(R.id.llCancelOrder);
         llCancelOrder.setOnClickListener(this);
         
+        dividerPromoDiscount = (View) findViewById(R.id.dividerPromoDiscount);
+        llPromoDiscount = (LinearLayout) findViewById(R.id.llPromoDiscount);    	
+    	
         if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
         	llCancelOrder.setVisibility(View.GONE);
         }
@@ -161,6 +168,21 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 				itemTotalPrice = itemTotalPrice + Integer.parseInt(orderItemJSONArray.getJSONObject(i).getString("item_totalprice"));
 				mOrderItemsRowItem.add(orderItem);
 			}
+			
+			if(orderJSONObject.getString("od_promocode").length() > 0) {
+				if(orderJSONObject.getString("od_coupon_price").contains("%")) {
+					int subTotal = Integer.parseInt(orderJSONObject.getString("od_subprice"));
+					int couponPrice = Integer.parseInt(orderJSONObject.getString("od_coupon_price").replace("%", ""));
+					int promoDiscount = couponPrice * subTotal / 100;
+					txtPromoDiscount.setText(String.valueOf(promoDiscount));
+				} else {
+					int promoDiscount = Integer.parseInt(orderJSONObject.getString("od_coupon_price").replace("Rs.", ""));
+					txtPromoDiscount.setText(String.valueOf(promoDiscount));
+				}
+			} else {
+				dividerPromoDiscount.setVisibility(View.GONE);
+				llPromoDiscount.setVisibility(View.GONE);
+			}
         } catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -168,7 +190,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         orderItemListViewObj.setAdapter(new ProductDetailsItemsAdapter(MyOrderDetailsActivity.this, mOrderItemsRowItem));
         txtSubTotal.setText(""+itemTotalPrice);
         int totalPrize = itemTotalPrice;
-        txtTotalAmt.setText(""+totalPrize);
+        txtTotalAmt.setText(item.getOrderTotalPrice());
         
 	}
 

@@ -117,10 +117,10 @@
                     <View
                         android:layout_width="0.5dp"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
                         android:background="@android:color/black" />
 
                     <ImageView
@@ -347,16 +347,58 @@
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
+                            android:layout_width="12.5dp"
+                            android:layout_height="12.5dp"
                             android:src="@drawable/icon_indian_rupee_16" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtDeliveryCharge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
                             android:text="0"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/dividerPromoDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <LinearLayout
+                        android:id="@+id/llPromoDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp" >
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Promo Discount : "
+                            android:textSize="16sp" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="- "
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:layout_width="12.5dp"
+                            android:layout_height="12.5dp"
+                            android:src="@drawable/icon_indian_rupee_16" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/txtPromoDiscount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@android:color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -381,8 +423,8 @@
                             android:textSize="18sp" />
 
                         <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:src="@drawable/icon_indian_rupee_16" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
