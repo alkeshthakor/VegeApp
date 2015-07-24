@@ -197,6 +197,10 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			}
 		});
 
+		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		subTotalTextView.setText(totalAmount + "");
+		totalTextView.setText(totalAmount + "");
+		
 	}
 
 	@Override
@@ -217,9 +221,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
-		subTotalTextView.setText(totalAmount + "");
-		totalTextView.setText(totalAmount + "");
+		
 
 	}
 
@@ -260,7 +262,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		case R.id.btnApplyPromocodeSecond:
 			if (hasText) {
 				String promoCodeServiceUrl = Constant.HOST + Constant.SERVICE_PROMO_CODE;
-				String promoCode = "od_chkpromocode=" + mPromoEditText.getText();
+				String promoCode ="od_chkuser_id="+Pref.getValue(Constant.PREF_USER_ID, "")+ "&od_chkpromocode=" + mPromoEditText.getText();
 				new CheckPromoCodeTask().execute(promoCodeServiceUrl, promoCode);
 
 			} else {
@@ -330,7 +332,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 						mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
 								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=" + orderData
 								+ "&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
-								+ validCouponCode;
+								+ validCouponCode+"&gcm_regid="+Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID,"");
 
 						mDatabaseHelper.close();
 						new OrderPlacedTask().execute(mServiceUrl, mOrderData);
@@ -348,18 +350,17 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		alertDialog.show();
 	}
 
-	private void orderSuccessInfom() {
+	private void onPromoCodeFail() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
 		// set dialog message
-		alertDialogBuilder.setMessage("Your order successfully placed!!").setCancelable(false).setPositiveButton("OK",
+		alertDialogBuilder.setMessage("Invalid Promo Code").setCancelable(false).setPositiveButton("OK",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						// if this button is clicked, close
-						// current activity
-						// MainActivity.this.finish();
+						mPromoEditText.setText("");
+						btnPromoCodeSecond.setText(getString(R.string.lbl_promo_cancel));
+						//Toast.makeText(mContext, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
+						promocodeLinearLayout.setVisibility(View.GONE);
 
-						setResult(Constant.CODE_MAIN_LOGIN);
-						finish();
 					}
 				});
 		// create alert dialog
@@ -369,6 +370,59 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		alertDialog.show();
 	}
 
+	private void onPromoCodeSuccess(final JSONObject result) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
+		// set dialog message
+		alertDialogBuilder.setMessage("Congratulation!!!").setCancelable(false).setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						proccesPromoCode(result);
+					}
+				});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+	}
+	
+	private void proccesPromoCode(JSONObject result){
+		
+		
+		JSONObject promoCodeObject;
+		try {
+			promoCodeObject = result.getJSONObject("DATA");
+			
+			String couponType = promoCodeObject.getString("Coupon_type");
+			validCouponCode = promoCodeObject.getString("Coupon_code");
+
+			if (couponType.equals("amount")) {
+				int discountAmount = promoCodeObject.getInt("Coupon_price");
+				//Coupon_price  org.json.JSONException: No value for Coupon_price
+				int couponMinPrice = promoCodeObject.getInt("coupon_min_price");
+				if (totalAmount >= couponMinPrice) {
+					promocodeLinearLayout.setVisibility(View.VISIBLE);
+					totalValueAfterDiscount = totalAmount - discountAmount;
+					promocodeTextView.setText(discountAmount + "");
+					totalTextView.setText("" + totalValueAfterDiscount);
+				}
+
+			} else if (couponType.equals("discount")) {
+				int couponDiscount = promoCodeObject.getInt("Coupon_discount");
+				int discountValue = (totalAmount * couponDiscount) / 100;
+				totalValueAfterDiscount = totalAmount - discountValue;
+				promocodeTextView.setText(discountValue + "");
+				totalTextView.setText("" + totalValueAfterDiscount);
+				promocodeLinearLayout.setVisibility(View.VISIBLE);
+			}
+
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	
 	private void selectDate(String mTitle) {
 
 		/**
@@ -507,37 +561,11 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			mProgressDialog.dismiss();
 			try {
 				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
-
-					JSONObject promoCodeObject = result.getJSONObject("DATA");
-					String couponType = promoCodeObject.getString("Coupon_type");
-					validCouponCode = promoCodeObject.getString("Coupon_code");
-
-					if (couponType.equals("amount")) {
-						int discountAmount = result.getInt("Coupon_price");
-						int couponMinPrice = result.getInt("coupon_min_price");
-						if (totalAmount >= couponMinPrice) {
-							promocodeLinearLayout.setVisibility(View.VISIBLE);
-							totalValueAfterDiscount = totalAmount - discountAmount;
-							promocodeTextView.setText(discountAmount + "");
-							totalTextView.setText("" + totalValueAfterDiscount);
-						}
-
-					} else if (couponType.equals("discount")) {
-						int couponDiscount = result.getInt("Coupon_discount");
-						int discountValue = (totalAmount * couponDiscount) / 100;
-						totalValueAfterDiscount = totalAmount - discountValue;
-						promocodeTextView.setText(discountValue + "");
-						totalTextView.setText("" + totalValueAfterDiscount);
-						promocodeLinearLayout.setVisibility(View.VISIBLE);
-					}
-
+					onPromoCodeSuccess(result);
 				} else {
+					onPromoCodeFail();
 					//mPromoEditText.setError("Invalid promo code");
-					mPromoEditText.setText("");
-					btnPromoCodeSecond.setText(getString(R.string.lbl_promo_cancel));
-					Toast.makeText(mContext, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
-					promocodeLinearLayout.setVisibility(View.GONE);
-				}
+									}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
