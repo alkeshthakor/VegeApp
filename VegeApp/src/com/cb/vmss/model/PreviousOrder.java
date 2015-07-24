@@ -15,6 +15,9 @@ public class PreviousOrder implements Serializable{
 	private String orderDate;
 	private String orderTime;
 	private String orderStatus;
+	private String orderPromoCode;
+	private String orderCouponPrice;
+	private String orderSubPrice;
 	private String totalItem;
 	private String jsonObject;
 	private String userName;
@@ -66,6 +69,24 @@ public class PreviousOrder implements Serializable{
 	}
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+	public String getOrderPromoCode() {
+		return orderPromoCode;
+	}
+	public void setOrderPromoCode(String orderPromoCode) {
+		this.orderPromoCode = orderPromoCode;
+	}
+	public String getOrderCouponPrice() {
+		return orderCouponPrice;
+	}
+	public void setOrderCouponPrice(String orderCouponPrice) {
+		this.orderCouponPrice = orderCouponPrice;
+	}
+	public String getOrderSubPrice() {
+		return orderSubPrice;
+	}
+	public void setOrderSubPrice(String orderSubPrice) {
+		this.orderSubPrice = orderSubPrice;
 	}
 	public String getUserName() {
 		return userName;
