@@ -25,12 +25,18 @@ public class Constant {
 	public static final String SERVICE_PRODUCT_BY_CAT_ID = "product/getproductbycatid";
 	public static final String SERVICE_ADD_ADDRESS = "user/addaddress";
 	public static final String SERVICE_FETCH_ADDRESS = "user/getaddressbyusrid";
+	public static final String SERVICE_DELETE_ADDRESS = "user/deleteaddress";
+	
 	public static final String SERVICE_FETCH_PREVIOUS_ORDER = "order/orderhistory";
 	public static final String SERVICE_USER_CREATION = "user/adduser";
 	public static final String SERVICE_USER_VERIFY = "user/verifyuser";
 	public static final String SERVICE_ADD_ORDER = "order/addorder";
 	public static final String SERVICE_CANCEL_ORDER = "order/cancelorder";
 	public static final String SERVICE_PROMO_CODE = "order/promocode";
+	
+	
+	//http://45.55.152.215/dev/sabjiatdoor/services/user/deleteaddress
+		
 	
 	
 	public static final String SERVICE_SHARE = "share";

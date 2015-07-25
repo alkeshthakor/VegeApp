@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -141,6 +142,8 @@ public class LoginActivity extends ActionBarActivity {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
 					Toast.makeText(mContext,"User created successfully",Toast.LENGTH_SHORT).show();
 					//JSONObject returnObject=result.getJSONObject("DATA");
+					
+					Log.d("Login  Response: ",result.toString());
 					
 					JSONObject returnObject=result.getJSONObject("DATA");
 					

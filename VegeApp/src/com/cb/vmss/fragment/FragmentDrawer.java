@@ -151,7 +151,7 @@ public class FragmentDrawer extends Fragment {
     	super.onResume();
     	
     	mDatabaseHelper.open();
-    	int notificationCount=mDatabaseHelper.getNotificationList().size();
+    	int notificationCount=mDatabaseHelper.getNotificationCount();
     	mDatabaseHelper.close();
     	
     	if(notificationCount>0){
@@ -180,6 +180,19 @@ public class FragmentDrawer extends Fragment {
     		locationDivider.setVisibility(View.GONE);
     		locationTextView.setText(Pref.getValue(Constant.PREF_ADDRESS,""));
     	}
+    	
+    	 if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
+         	mPhoneNumberTextView.setText(Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").toString());
+         	mPhoneIcon.setVisibility(View.VISIBLE);
+         	loginObj.setVisibility(View.GONE);
+         	logoutObj.setVisibility(View.VISIBLE);
+         } else {
+         	mPhoneNumberTextView.setText("Welcome");
+         	mPhoneIcon.setVisibility(View.GONE);
+         	loginObj.setVisibility(View.VISIBLE);
+         	logoutObj.setVisibility(View.GONE);
+         }
+    	 
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {

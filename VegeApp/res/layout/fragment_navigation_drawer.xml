@@ -25,7 +25,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_person_black"
+                android:src="@drawable/icon_phone"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom

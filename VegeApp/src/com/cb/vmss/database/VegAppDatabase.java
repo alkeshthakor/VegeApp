@@ -31,6 +31,7 @@ public class VegAppDatabase
         public static final String NOTI_PROMOCODE = "noti_promocode";
         public static final String NOTI_FROM = "noti_from";
         public static final String NOTI_DATE = "noti_date";
+        public static final String NOTI_IS_READ = "noti_is_read";
         
         
     }

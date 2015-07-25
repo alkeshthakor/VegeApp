@@ -5,11 +5,8 @@ import static com.cb.vmss.gcm.notification.CommonUtilities.displayMessage;
 
 import java.util.Calendar;
 
-import com.cb.vmss.MainActivity;
-import com.cb.vmss.R;
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.database.VegAppDatabaseHelper;
-import com.cb.vmss.database.VegAppDatabaseHelper.DatabaseHelper;
 import com.cb.vmss.gcm.notification.ServerUtilities;
 import com.google.android.gcm.GCMBaseIntentService;
 
@@ -66,7 +63,9 @@ public class GCMIntentService extends GCMBaseIntentService {
         
         displayMessage(context, message);
         // notifies user
-        generateNotification(context,title,message,promocode,from);
+        if(title!=null&&message!=null&&from!=null){
+        	generateNotification(context,title,message,promocode,from);	
+        }   
     }
  
     /**
@@ -111,13 +110,15 @@ public class GCMIntentService extends GCMBaseIntentService {
     	values.put(VegAppColumn.NOTI_MESSAGE, message);
     	values.put(VegAppColumn.NOTI_PROMOCODE, promocode);
     	values.put(VegAppColumn.NOTI_FROM, from);
+    	values.put(VegAppColumn.NOTI_IS_READ,"false");
+    	
     	String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
     	values.put(VegAppColumn.NOTI_DATE, mydate);
     	mDatabaseHelper.insertNotification(values);
     	mDatabaseHelper.close();
     	
     	
-    	int icon = R.drawable.ic_launcher;
+    	int icon = R.drawable.icon_app_luancher;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
