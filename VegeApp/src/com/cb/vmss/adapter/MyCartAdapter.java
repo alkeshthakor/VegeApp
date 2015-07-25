@@ -4,6 +4,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cb.vmss.R;
+import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
+import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.model.Product;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -20,13 +25,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.cb.vmss.R;
-import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
-import com.cb.vmss.database.VegAppDatabaseHelper;
-import com.cb.vmss.model.Product;
 
 public class MyCartAdapter extends BaseAdapter {
 
@@ -76,16 +75,26 @@ public class MyCartAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.txtViewProductName = (TextView)convertView.findViewById(R.id.productItemNameTV);
             holder.txtViewProductWeight = (TextView)convertView.findViewById(R.id.productWeightTextView);
-            holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productPriceTextView);
+            holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productDisplayPriceTextView);
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
+            holder.txtMainPrice= (TextView)convertView.findViewById(R.id.productMainPriceTextView);
+            
             holder.icoPlus= (LinearLayout)convertView.findViewById(R.id.iconPlus);
             holder.icoMinus= (LinearLayout)convertView.findViewById(R.id.iconMinus);
             holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
+            holder.ruppesIconIV= (ImageView)convertView.findViewById(R.id.iv_icon_ruppes_productItem);
+            
+            
+            
             convertView.setTag(holder);
             
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        
+        holder.txtMainPrice.setVisibility(View.GONE);
+        holder.ruppesIconIV.setVisibility(View.GONE);
+        
         
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
@@ -171,9 +180,12 @@ public class MyCartAdapter extends BaseAdapter {
 		TextView txtViewProductWeight;
 		TextView txtViewProductPrice;
 		TextView txtViewQty;
+		TextView txtMainPrice;
 		LinearLayout icoPlus;
 		LinearLayout icoMinus;
 		ImageView productImageObj;
+		ImageView ruppesIconIV;
+		
     }
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
