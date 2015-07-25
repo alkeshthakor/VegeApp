@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -20,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cb.vmss.R;
@@ -76,7 +76,8 @@ public class ProductAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.txtViewProductName = (TextView)convertView.findViewById(R.id.productItemNameTV);
             holder.txtViewProductWeight = (TextView)convertView.findViewById(R.id.productWeightTextView);
-            holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productPriceTextView);
+            holder.productDisplayPriceTextView = (TextView)convertView.findViewById(R.id.productDisplayPriceTextView);
+            holder.productMainPriceTextView = (TextView)convertView.findViewById(R.id.productMainPriceTextView);
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
             holder.icoPlus= (LinearLayout)convertView.findViewById(R.id.iconPlus);
             holder.icoMinus= (LinearLayout)convertView.findViewById(R.id.iconMinus);
@@ -155,7 +156,10 @@ public class ProductAdapter extends BaseAdapter {
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
-        holder.txtViewProductPrice.setText(rowItem.getProductMainPrice());
+        holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
+        holder.productDisplayPriceTextView.setText(rowItem.getProductDisplayPrice());
+        holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
+        holder.productMainPriceTextView.setPaintFlags(holder.productMainPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
         if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
@@ -169,7 +173,8 @@ public class ProductAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView txtViewProductName;
 		TextView txtViewProductWeight;
-		TextView txtViewProductPrice;
+		TextView productDisplayPriceTextView;
+		TextView productMainPriceTextView;
 		TextView txtViewQty;
 		LinearLayout icoPlus;
 		LinearLayout icoMinus;
