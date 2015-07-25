@@ -453,8 +453,20 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			mHours = hourOfDay;
 			mMinute = minute;
 
-			TimeValue = mHours + ":" + mMinute;
+			//TimeValue = mHours + ":" + mMinute;
 
+			if(mHours<10){
+				TimeValue = "0"+mHours;	
+			}else{
+				TimeValue = ""+mHours;
+			}
+			
+			if(mMinute<10){
+				TimeValue = TimeValue+":0"+mMinute;	
+			}else{
+				TimeValue = TimeValue+":"+mMinute;
+			}
+			
 			if (hourOfDay < 12) {
 				timeTextView.setText(TimeValue + " AM");
 				AM_PM = "AM";
@@ -473,8 +485,21 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 		timeMode = calender.get(Calendar.AM);
 
-		TimeValue = mHours + ":" + mMinute;
+		//TimeValue = mHours + ":" + mMinute;
 
+		if(mHours<10){
+			TimeValue = "0"+mHours;	
+		}else{
+			TimeValue = ""+mHours;
+		}
+		
+		if(mMinute<10){
+			TimeValue = TimeValue+":0"+mMinute;	
+		}else{
+			TimeValue = TimeValue+":"+mMinute;
+		}
+		
+		
 		if (timeMode == 0) {
 			timeTextView.setText(TimeValue + " AM");
 

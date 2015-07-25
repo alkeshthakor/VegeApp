@@ -264,8 +264,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 						// MainActivity.this.finish();
 						Pref.setValue(Constant.PREF_PHONE_NUMBER, "0");
 
-						Pref.setValue(Constant.PREF_ADD_ID, "0");
-						Pref.setValue(Constant.PREF_ADDRESS, "");
+						Pref.setValue(Constant.PREF_ADD_ID,"0");
+						Pref.setValue(Constant.PREF_ADDRESS,"");
 
 					}
 				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
