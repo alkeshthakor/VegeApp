@@ -15,7 +15,6 @@ import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.model.Product;
 import com.cb.vmss.model.VNotification;
 
-import android.app.Notification;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -115,7 +114,8 @@ public class VegAppDatabaseHelper
             		+ VegAppColumn.NOTI_MESSAGE + " TEXT," 
             		+ VegAppColumn.NOTI_PROMOCODE + " TEXT,"
                     + VegAppColumn.NOTI_FROM + " TEXT ,"
-                    + VegAppColumn.NOTI_DATE + " TEXT " + ")";
+                    + VegAppColumn.NOTI_DATE + " TEXT ,"
+                    + VegAppColumn.NOTI_IS_READ + " TEXT " + ")";
             
             
             db.execSQL(CREATE_CART_MASTER_TABLE);
@@ -380,5 +380,32 @@ public class VegAppDatabaseHelper
         }
         return appNotificationList;
     } 
+    
+    
+    public int getNotificationCount()
+    {
+        Cursor notiCursor = null;
+        int count=0;
+        
+        try
+        {
+            String str = "SELECT * from "+VegAppColumn.NOTIFICATION_MASTER_TABLE+" where "+VegAppColumn.NOTI_IS_READ+"='false'";
+            notiCursor = mDb.rawQuery(str, null);
+            if(notiCursor!=null)
+            	count=notiCursor.getCount();
+        }
+        catch (Exception e)
+        {
+            Log.e("Error: ", "e.getMessage() :" + e.getMessage());
+        }
+        return count;
+    } 
+    
+    public int updateNotificationAsRead(String notificationId,ContentValues updateValues)
+    {
+        String args[] = { notificationId.toString() };
+        int rowid=mDb.update(VegAppColumn.NOTIFICATION_MASTER_TABLE, updateValues, VegAppColumn.NOTI_ID+ "=?", args);
+        return rowid;
+    }
     
 }

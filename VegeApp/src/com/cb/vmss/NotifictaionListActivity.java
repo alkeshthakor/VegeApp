@@ -3,10 +3,12 @@ package com.cb.vmss;
 import java.util.List;
 
 import com.cb.vmss.adapter.NotificationAdapter;
+import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.database.VegAppDatabaseHelper;
 import com.cb.vmss.model.VNotification;
 import com.cb.vmss.util.Constant;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
@@ -14,6 +16,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,7 +56,21 @@ public class NotifictaionListActivity extends ActionBarActivity {
 		
 		mNotificationListView=(ListView)findViewById(R.id.notificationListView);
 		
+		
+		mNotificationListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				mDatabaseHelper.open();
+				ContentValues values=new ContentValues();
+				values.put(VegAppColumn.NOTI_IS_READ,"true");
+				mDatabaseHelper.updateNotificationAsRead(notificationList.get(position).getNoti_Id(),values);
+				mDatabaseHelper.close();
+			}
+		});
+		
 	}
+	
 	
 	@Override
 	protected void onResume() {

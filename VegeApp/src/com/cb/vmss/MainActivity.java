@@ -37,119 +37,90 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener
-{
+public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
 	private static String TAG = MainActivity.class.getSimpleName();
 
 	private Toolbar mToolbar;
 	private FragmentDrawer drawerFragment;
 	private TextView mTitleTextView;
-	
-	/*ConnectionDetector cd;
-	ServerConnector connector;
-	Context mContext;
-	
-	public static String name;
-    public static String email;*/
-    
- // Alert dialog manager
- 	AlertDialogManager alert = new AlertDialogManager();
- 	// Asyntask
- 	AsyncTask<Void, Void, Void> mRegisterTask;
 
- 	private ConnectionDetector cd;
- 	private ServerConnector connector;
- 	private Context mContext;
- 	private String mServiceUrl;
- 	public static String name;
- 	public static String email;
- 	private String registrationId;
- 	
- 	
-    
+	/*
+	 * ConnectionDetector cd; ServerConnector connector; Context mContext;
+	 * 
+	 * public static String name; public static String email;
+	 */
+
+	// Alert dialog manager
+	AlertDialogManager alert = new AlertDialogManager();
+	// Asyntask
+	AsyncTask<Void, Void, Void> mRegisterTask;
+
+	private ConnectionDetector cd;
+	private ServerConnector connector;
+	private Context mContext;
+	private String mServiceUrl;
+	public static String name;
+	public static String email;
+	private String registrationId;
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Constant.CONTEXT = this;
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-		//Pref.setValue(Constant.PREF_USER_ID, "86");
-		//Pref.setValue(Constant.PREF_PHONE_NUMBER, "9067230751");
-		
-		if (mToolbar != null)
-		{
+		// Pref.setValue(Constant.PREF_USER_ID, "108");
+		// Pref.setValue(Constant.PREF_PHONE_NUMBER, "9879890783");
+
+		if (mToolbar != null) {
 			setSupportActionBar(mToolbar);
-			mTitleTextView= (TextView) mToolbar
-					.findViewById(R.id.toolbar_title);
+			mTitleTextView = (TextView) mToolbar.findViewById(R.id.toolbar_title);
 			mTitleTextView.setText(getString(R.string.app_name));
-			
-		
+
 		}
 		mToolbar.setTitleTextColor(Color.BLACK);
-		
-		//setSupportActionBar (mToolbar);
+
+		// setSupportActionBar (mToolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-		
+
 		mContext = this;
 		Constant.CONTEXT = mContext;
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
 
 		cd = new ConnectionDetector(getApplicationContext());
-		name="Alkesh Thakor";
-		email="";
-		
-		
-		
+		name = "Alkesh Thakor";
+		email = "";
+
 		drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-		drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+		drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout),
+				mToolbar);
 		drawerFragment.setDrawerListener(this);
 
 		// display the first navigation drawer view on app launch
 		displayView(R.id.nav_location);
-	
+
 	}
-
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the menu; this adds items to the action bar
-	 * if it is present. getMenuInflater ().inflate (R.menu.menu_main, menu); return true; }
-	 */
-
-	/*
-	 * @Override public boolean onOptionsItemSelected(MenuItem item) { // Handle action bar item clicks here. The action
-	 * bar will // automatically handle clicks on the Home/Up button, so long // as you specify a parent activity in
-	 * AndroidManifest.xml. int id = item.getItemId ();
-	 * 
-	 * //noinspection SimplifiableIfStatement if (id == R.id.action_settings) { return true; }
-	 * 
-	 * if (id == R.id.action_search) { Toast.makeText (getApplicationContext (), "Search action is selected!",
-	 * Toast.LENGTH_SHORT).show (); return true; }
-	 * 
-	 * return super.onOptionsItemSelected (item); }
-	 */
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//Constant.CONTEXT = this;
-		
-		if (Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "")
-				.equalsIgnoreCase("")) {
+		// Constant.CONTEXT = this;
+
+		if (Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "").equalsIgnoreCase("")) {
 			// Make sure the device has the proper dependencies.
 			GCMRegistrar.checkDevice(MainActivity.this);
 			// Make sure the manifest was properly set - comment out this line
 			// while developing the app, then uncomment it when it's ready.
 			GCMRegistrar.checkManifest(MainActivity.this);
 
-			registerReceiver(mHandleMessageReceiver, new IntentFilter(
-					DISPLAY_MESSAGE_ACTION));
+			registerReceiver(mHandleMessageReceiver, new IntentFilter(DISPLAY_MESSAGE_ACTION));
 
 			// Get GCM registration id
 			registrationId = GCMRegistrar.getRegistrationId(MainActivity.this);
@@ -157,217 +128,206 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			// Check if regid already presents
 			if (registrationId.equals("")) {
 				// Registration is not present, register now with GCM
-				GCMRegistrar.register(MainActivity.this,SENDER_ID);
+				GCMRegistrar.register(MainActivity.this, SENDER_ID);
 				registerOnOurServer();
-			}else {
+			} else {
 				registerOnOurServer();
 			}
 		}
-		
+
 	}
+
 	@Override
-	public void onDrawerItemSelected(View view)
-	{
+	public void onDrawerItemSelected(View view) {
 		displayView(view.getId());
 	}
 
 	@SuppressLint("ShowToast")
-	private void displayView(int position)
-	{
+	private void displayView(int position) {
 		Fragment fragment = null;
-		//String title = getString(R.string.app_name);
-		switch (position)
-		{
-			case R.id.nav_location :
-				fragment = new HomeFragment();
-				//title = getString(R.string.title_home);
-				loadFragment(fragment);
-				break;
-			
-			case R.id.nav_login :
+		// String title = getString(R.string.app_name);
+		switch (position) {
+		case R.id.nav_location:
+			fragment = new HomeFragment();
+			// title = getString(R.string.title_home);
+			loadFragment(fragment);
+			break;
 
-				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
-					Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
-		        } else {
-		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
-		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
-		        }
-				break;
-			case R.id.nav_address :
-				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
-					Intent chooseAddressIntent=new Intent(getApplicationContext(), ChooseAddressActivity.class);
-					chooseAddressIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
-					startActivity(chooseAddressIntent);
-		        } else {
-		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
-		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
-		        }
-				break;
-			case R.id.nav_order :
-				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){					
-					Intent checkoutIntent=new Intent(getApplicationContext(),MyPreviousOrderActivity.class);
-					startActivity(checkoutIntent);
-		        } else {
-		        	Intent loginIntent=new Intent(getApplicationContext(),LoginActivity.class);
-		        	loginIntent.putExtra("fromscreen",MainActivity.class.getCanonicalName());
-		        	startActivityForResult(loginIntent,Constant.CODE_MAIN_LOGIN);
-		        }
-				break;
-			case R.id.nav_cart :	
-				Intent cartIntent=new Intent(getApplicationContext(),MyCartActivity.class);
-				startActivity(cartIntent);
-				break;
-			case R.id.nav_notification_center :	
-				Intent notificationIntent=new Intent(getApplicationContext(),NotifictaionListActivity.class);
-				startActivity(notificationIntent);
-				break;
-				
-			case R.id.nav_share :	
-				 Intent intent = new Intent(Intent.ACTION_SEND);
-				 intent.setType("text/plain");
-				 intent.putExtra(Intent.EXTRA_TEXT, "My App\nhttps://play.google.com/store/apps/details?id=com.google.android.apps.messaging&hl=en");
-				 startActivity(Intent.createChooser(intent, "Share this app"));
-				 break;
-				
-			case R.id.nav_logout :
-				if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
-					showConfirmLogout();
-		        } else {
-		        	Toast.makeText(MainActivity.this, "Already Logout", Toast.LENGTH_LONG);
-		        }
-				break;		
-			case R.id.nav_callus:
-				confirmCall();
-				break;
-			case R.id.nav_rateus:
-				rateUs();
-				break;
-			case R.id.nav_help:
-				Intent helpIntent=new Intent(getApplicationContext(),HelpActivity.class);
-				startActivity(helpIntent);
-				break;
-			case R.id.nav_about:
-				Intent aboutIntent=new Intent(getApplicationContext(),AboutUsActivity.class);
-				startActivity(aboutIntent);
-				
-				break;
-				
-				default :
-				break;
+		case R.id.nav_login:
+
+			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
+			} else {
+				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
+				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
+			}
+			break;
+		case R.id.nav_address:
+			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				Intent chooseAddressIntent = new Intent(getApplicationContext(), ChooseAddressActivity.class);
+				chooseAddressIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
+				startActivity(chooseAddressIntent);
+			} else {
+				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
+				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
+			}
+			break;
+		case R.id.nav_order:
+			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				Intent checkoutIntent = new Intent(getApplicationContext(), MyPreviousOrderActivity.class);
+				startActivity(checkoutIntent);
+			} else {
+				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
+				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
+			}
+			break;
+		case R.id.nav_cart:
+			Intent cartIntent = new Intent(getApplicationContext(), MyCartActivity.class);
+			startActivity(cartIntent);
+			break;
+		case R.id.nav_notification_center:
+			Intent notificationIntent = new Intent(getApplicationContext(), NotifictaionListActivity.class);
+			startActivity(notificationIntent);
+			break;
+
+		case R.id.nav_share:
+			String shareMessage = Pref.getValue(Constant.PREF_SHARE_URL, "");
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("text/plain");
+			intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+			startActivity(Intent.createChooser(intent, "Share this app"));
+			break;
+
+		case R.id.nav_logout:
+			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				showConfirmLogout();
+			} else {
+				Toast.makeText(MainActivity.this, "Already Logout", Toast.LENGTH_LONG);
+			}
+			break;
+		case R.id.nav_callus:
+			confirmCall();
+			break;
+		case R.id.nav_rateus:
+			rateUs();
+			break;
+		case R.id.nav_help:
+			Intent helpIntent = new Intent(getApplicationContext(), HelpActivity.class);
+			startActivity(helpIntent);
+			break;
+		case R.id.nav_about:
+			Intent aboutIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
+			startActivity(aboutIntent);
+
+			break;
+
+		default:
+			break;
 		}
 
-	/*	if (fragment != null)
-		{
+		/*
+		 * if (fragment != null) { FragmentManager fragmentManager =
+		 * getSupportFragmentManager(); FragmentTransaction fragmentTransaction
+		 * = fragmentManager.beginTransaction();
+		 * fragmentTransaction.replace(R.id.container_body, fragment);
+		 * fragmentTransaction.commit();
+		 * 
+		 * // set the toolbar title getSupportActionBar().setTitle(title); }
+		 */
+	}
+
+	private void loadFragment(Fragment fragment) {
+		if (fragment != null) {
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.container_body, fragment);
 			fragmentTransaction.commit();
 
 			// set the toolbar title
-			getSupportActionBar().setTitle(title);
-		}*/
-	}
-	
-	
-	private void loadFragment(Fragment fragment){
-		if (fragment != null)
-		{
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-			fragmentTransaction.replace(R.id.container_body, fragment);
-			fragmentTransaction.commit();
-
-			// set the toolbar title
-			//getSupportActionBar().setTitle(title);
+			// getSupportActionBar().setTitle(title);
 		}
 	}
-	
+
 	private void showConfirmLogout() {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				MainActivity.this);
-			// set title
-			alertDialogBuilder.setTitle("Logout");
-			// set dialog message
-			alertDialogBuilder
-				.setMessage("Are you sure you want to logout?")
-				.setCancelable(false)
-				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int id) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+		// set title
+		alertDialogBuilder.setTitle("Logout");
+		// set dialog message
+		alertDialogBuilder.setMessage("Are you sure you want to logout?").setCancelable(false)
+				.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
 						// if this button is clicked, close
 						// current activity
-						//MainActivity.this.finish();
+						// MainActivity.this.finish();
 						Pref.setValue(Constant.PREF_PHONE_NUMBER, "0");
-						
-						Pref.setValue(Constant.PREF_ADD_ID,"0");
-						Pref.setValue(Constant.PREF_ADDRESS,"");
-						
-						
+
+						Pref.setValue(Constant.PREF_ADD_ID, "0");
+						Pref.setValue(Constant.PREF_ADDRESS, "");
+
 					}
-				  })
-				.setNegativeButton("No",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int id) {
+				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
 						// if this button is clicked, just close
 						// the dialog box and do nothing
 						dialog.cancel();
 					}
 				});
- 
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
-				alertDialog.show();
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		// Check which request we're responding to
-	    if (resultCode == Constant.CODE_MAIN_LOGIN) {
-	        displayView(0);   
-	    }else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
-	    	   //setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
-     	   //finish(); 
-     	displayView(R.id.nav_order);
-     	
-	    }else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
-	    	displayView(0);  
-	    }
+		if (resultCode == Constant.CODE_MAIN_LOGIN) {
+			displayView(0);
+		} else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
+			// setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
+			// finish();
+			displayView(R.id.nav_order);
+
+		} else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
+			displayView(0);
+		}
 	}
-	
-	
-	public void rateUs(){
+
+	public void rateUs() {
 		try {
 			Uri marketUri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
 			Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
 			startActivity(marketIntent);
 		} catch (Exception e) {
 			// TODO: handle exception
-			Toast.makeText(getApplicationContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
-		
+
 	}
-	
-	
+
 	public void confirmCall() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setTitle("Contact Subji At Door");
 		builder.setMessage("Do you want to call the Subji At Door help line?");
-		
-		builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 				Intent intent = new Intent(Intent.ACTION_CALL);
 				intent.setData(Uri.parse("tel:9925833511"));
 				startActivity(intent);
-				
+
 			}
 		});
-		builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+		builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -378,10 +338,10 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-	
+
 	/**
 	 * Receiving push messages
-	 * */
+	 */
 	private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -392,7 +352,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			/**
 			 * Take appropriate action on this message depending upon your app
 			 * requirement For now i am just displaying it on the screen
-			 * */
+			 */
 
 			// Showing received message
 			// Toast.makeText(getApplicationContext(), "New Message: " +
@@ -403,8 +363,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			WakeLocker.release();
 		}
 	};
-	
-	
+
 	@Override
 	protected void onDestroy() {
 		if (mRegisterTask != null) {
@@ -419,8 +378,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		}
 		super.onDestroy();
 	}
-	
-	public void registerOnOurServer(){
+
+	public void registerOnOurServer() {
 		// Try to register again, but not in the UI thread.
 		// It's also necessary to cancel the thread onDestroy(),
 		// hence the use of AsyncTask instead of a raw thread.
@@ -431,28 +390,26 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			protected Void doInBackground(Void... params) {
 				// Register on our server
 				// On server creates a new user
-				if(registrationId==null||"".equals(registrationId)){
+				if (registrationId == null || "".equals(registrationId)) {
 					registrationId = GCMRegistrar.getRegistrationId(MainActivity.this);
 				}
-				
-				if(registrationId!=null&&!"".equals(registrationId)){
-					ServerUtilities.register(context, name, email,
-							registrationId);
+
+				if (registrationId != null && !"".equals(registrationId)) {
+					ServerUtilities.register(context, name, email, registrationId);
 				}
 				return null;
 			}
+
 			@Override
 			protected void onPostExecute(Void result) {
-				
-				if(registrationId!=null&&!"".equals(registrationId)){
-					Pref.setValue(Constant.PREF_GCM_REGISTRATION_ID,
-							registrationId);
+
+				if (registrationId != null && !"".equals(registrationId)) {
+					Pref.setValue(Constant.PREF_GCM_REGISTRATION_ID, registrationId);
 				}
 				mRegisterTask = null;
 			}
 		};
 		mRegisterTask.execute(null, null, null);
 	}
-	
-	
+
 }

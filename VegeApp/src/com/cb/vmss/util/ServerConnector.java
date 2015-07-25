@@ -345,9 +345,6 @@ public class ServerConnector {
 	    return responseObj;
 	    
 	 }
-
-	
-	
 	public JSONObject submitOrder(String hostUrl,String parameter){
 		 JSONObject responseObj=null;
 		 
