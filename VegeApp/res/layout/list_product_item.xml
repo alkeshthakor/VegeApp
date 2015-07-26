@@ -55,6 +55,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
+                    android:id="@+id/iv_icon_ruppes_productItem"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginTop="1dp"
@@ -68,7 +69,6 @@
                     android:textSize="@dimen/font_size_small" />
 
                 <ImageView
-                    android:id="@+id/iv_icon_ruppes_productItem"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginLeft="10dp"
