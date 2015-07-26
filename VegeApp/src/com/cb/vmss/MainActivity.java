@@ -219,7 +219,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			startActivity(helpIntent);
 			break;
 		case R.id.nav_about:
-			Intent aboutIntent = new Intent(getApplicationContext(), AboutUsActivity.class);
+			Intent aboutIntent=new Intent(getApplicationContext(),AboutUsActivity2.class);
 			startActivity(aboutIntent);
 
 			break;

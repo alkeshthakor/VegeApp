@@ -75,16 +75,14 @@ public class MyCartAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.txtViewProductName = (TextView)convertView.findViewById(R.id.productItemNameTV);
             holder.txtViewProductWeight = (TextView)convertView.findViewById(R.id.productWeightTextView);
-            holder.txtViewProductPrice = (TextView)convertView.findViewById(R.id.productDisplayPriceTextView);
+            holder.productDisplayPriceTextView = (TextView)convertView.findViewById(R.id.productDisplayPriceTextView);
             holder.txtViewQty= (TextView)convertView.findViewById(R.id.txtQty);
-            holder.txtMainPrice= (TextView)convertView.findViewById(R.id.productMainPriceTextView);
+            holder.productMainPriceTextView= (TextView)convertView.findViewById(R.id.productMainPriceTextView);
             
             holder.icoPlus= (LinearLayout)convertView.findViewById(R.id.iconPlus);
             holder.icoMinus= (LinearLayout)convertView.findViewById(R.id.iconMinus);
             holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
             holder.ruppesIconIV= (ImageView)convertView.findViewById(R.id.iv_icon_ruppes_productItem);
-            
-            
             
             convertView.setTag(holder);
             
@@ -92,9 +90,8 @@ public class MyCartAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         
-        holder.txtMainPrice.setVisibility(View.GONE);
+        holder.productDisplayPriceTextView.setVisibility(View.GONE);
         holder.ruppesIconIV.setVisibility(View.GONE);
-        
         
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
@@ -164,7 +161,7 @@ public class MyCartAdapter extends BaseAdapter {
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
-        holder.txtViewProductPrice.setText(rowItem.getProductMainPrice());
+        holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
         if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
@@ -178,9 +175,9 @@ public class MyCartAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView txtViewProductName;
 		TextView txtViewProductWeight;
-		TextView txtViewProductPrice;
+		TextView productDisplayPriceTextView;
+		TextView productMainPriceTextView;
 		TextView txtViewQty;
-		TextView txtMainPrice;
 		LinearLayout icoPlus;
 		LinearLayout icoMinus;
 		ImageView productImageObj;

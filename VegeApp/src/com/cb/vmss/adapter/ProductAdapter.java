@@ -159,7 +159,7 @@ public class ProductAdapter extends BaseAdapter {
         holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productDisplayPriceTextView.setText(rowItem.getProductDisplayPrice());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
-        holder.productMainPriceTextView.setPaintFlags(holder.productMainPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.productDisplayPriceTextView.setPaintFlags(holder.productDisplayPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
         if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());

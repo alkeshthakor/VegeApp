@@ -105,7 +105,19 @@
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us" >
         </activity>
-
+        <activity
+            android:name=".AboutUsActivity2"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        <activity
+            android:name=".TermsConditionsActivity"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
