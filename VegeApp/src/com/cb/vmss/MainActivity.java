@@ -82,12 +82,18 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		}
 		mToolbar.setTitleTextColor(Color.BLACK);
 
+		/*getSupportActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);*/
+		
 		// setSupportActionBar (mToolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 
+		//getResources().getDrawable(R.drawable.ic_navigation_drawer)
+		
 		mContext = this;
 		Constant.CONTEXT = mContext;
 		cd = new ConnectionDetector(mContext);
@@ -219,21 +225,18 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			startActivity(helpIntent);
 			break;
 		case R.id.nav_about:
-			Intent aboutIntent=new Intent(getApplicationContext(),AboutUsActivity2.class);
+			Intent aboutIntent = new Intent(getApplicationContext(), AboutUsActivity2.class);
 			startActivity(aboutIntent);
 			break;
 		case R.id.nav_refer_a_friend:
-			Intent referFriendIntent = new Intent(getApplicationContext(), ReferFriendActivity.class);
-			startActivity(referFriendIntent);
-			
-			/*if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
 				Intent referFriendIntent = new Intent(getApplicationContext(), ReferFriendActivity.class);
 				startActivity(referFriendIntent);
 			} else {
 				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-				loginIntent.putExtra("fromscreen", MainActivity2.class.getCanonicalName());
+				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
 				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
-			}*/
+			}
 			break;
 		default:
 			break;
@@ -274,8 +277,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 						// MainActivity.this.finish();
 						Pref.setValue(Constant.PREF_PHONE_NUMBER, "0");
 
-						Pref.setValue(Constant.PREF_ADD_ID,"0");
-						Pref.setValue(Constant.PREF_ADDRESS,"");
+						Pref.setValue(Constant.PREF_ADD_ID, "0");
+						Pref.setValue(Constant.PREF_ADDRESS, "");
 
 					}
 				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
