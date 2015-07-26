@@ -310,6 +310,23 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_refer_a_friend"
+            style="@style/styleDrowarItem" >
+
+            <ImageView
+                android:id="@+id/imgReferAFriend"
+                style="@style/styleDrowarImageView"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_share_black"
+                android:visibility="visible" />
+
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:id="@+id/txtReferAFriend"
+                style="@style/styleDrowarTextView"
+                android:text="@string/lbl_refer_a_friend" />
+        </LinearLayout>
+        
+        <LinearLayout
             android:id="@+id/nav_about"
             style="@style/styleDrowarItem" >
 

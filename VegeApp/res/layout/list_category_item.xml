@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingLeft="12dp"
+    android:paddingStart="12dp"
+    android:paddingRight="0dp"
+    android:paddingEnd="0dp"
+    tools:context=".ChooseAddressActivity" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:id="@+id/tvCategoryNameItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_large" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:id="@+id/tvCategoryDiscriptionItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/GBL2"
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iconlistAddress"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_list_arrow" />
+
+</LinearLayout>

@@ -11,6 +11,8 @@ public class Category implements Serializable{
 	private String categoryId;
 	private String categoryName;
 	private String categoryImage;
+	private String categroyDiscription;
+	
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -28,6 +30,12 @@ public class Category implements Serializable{
 	}
 	public void setCategoryImage(String categoryImage) {
 		this.categoryImage = categoryImage;
+	}
+	public String getCategroyDiscription() {
+		return categroyDiscription;
+	}
+	public void setCategroyDiscription(String categroyDiscription) {
+		this.categroyDiscription = categroyDiscription;
 	}
 	
 	

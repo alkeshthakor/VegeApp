@@ -33,10 +33,12 @@ public class Constant {
 	public static final String SERVICE_ADD_ORDER = "order/addorder";
 	public static final String SERVICE_CANCEL_ORDER = "order/cancelorder";
 	public static final String SERVICE_PROMO_CODE = "order/promocode";
+	public static final String SERVICE_REFER_FRIEND = "refertofriend/addrefertofriend";
+	
 	
 	
 	//http://45.55.152.215/dev/sabjiatdoor/services/user/deleteaddress
-		
+	//http://45.55.152.215/dev/sabjiatdoor/services/refertofriend/addrefertofriend	
 	
 	
 	public static final String SERVICE_SHARE = "share";

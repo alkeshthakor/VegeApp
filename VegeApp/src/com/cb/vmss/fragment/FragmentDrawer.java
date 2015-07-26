@@ -51,6 +51,8 @@ public class FragmentDrawer extends Fragment {
     private LinearLayout shareObj;
     private LinearLayout aboutObj;
     private LinearLayout logoutObj;
+    private LinearLayout referFriendObj;
+    
     
     private LinearLayout llNotificationCount;
     private LinearLayout llCartItemCount;
@@ -104,6 +106,8 @@ public class FragmentDrawer extends Fragment {
         shareObj = (LinearLayout) layout.findViewById(R.id.nav_share);
         aboutObj = (LinearLayout) layout.findViewById(R.id.nav_about);
         logoutObj = (LinearLayout) layout.findViewById(R.id.nav_logout);
+        referFriendObj= (LinearLayout) layout.findViewById(R.id.nav_refer_a_friend);
+        
         
         llNotificationCount= (LinearLayout) layout.findViewById(R.id.llNotificationCount);
         llCartItemCount = (LinearLayout) layout.findViewById(R.id.qtyCountRelLayout);
@@ -125,6 +129,7 @@ public class FragmentDrawer extends Fragment {
         aboutObj.setOnClickListener(mClickListener);
         logoutObj.setOnClickListener(mClickListener);
         notificationObj.setOnClickListener(mClickListener);
+        referFriendObj.setOnClickListener(mClickListener);
         
         return layout;
     }

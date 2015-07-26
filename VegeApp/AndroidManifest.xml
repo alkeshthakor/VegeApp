@@ -40,7 +40,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -49,10 +49,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+       <!--  <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity> -->
         <activity
             android:name=".ProductSelectionActivity"
             android:screenOrientation="portrait" >
@@ -125,6 +125,10 @@
         <activity
             android:name=".NotifictaionListActivity"
             android:label="@string/title_activity_notifictaion_list" >
+        </activity>
+        <activity
+            android:name=".ReferFriendActivity"
+            android:label="@string/title_activity_refer_friend" >
         </activity>
     </application>
 
