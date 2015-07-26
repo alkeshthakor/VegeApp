@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon_app_luancher" />
 
     <LinearLayout
         android:layout_width="wrap_content"

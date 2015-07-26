@@ -76,7 +76,7 @@ public class FAQExpandableAdapter extends BaseExpandableListAdapter {
 		}
 		TextView item = (TextView) convertView.findViewById(R.id.faqTitleTextView);
 		//item.setTypeface(null, Typeface.BOLD);
-		item.setText(mFaqBean.getQuestion().toString());
+		item.setText(mFaqBean.getHeading().toString());
 
 		return convertView;
 	}
@@ -91,7 +91,7 @@ public class FAQExpandableAdapter extends BaseExpandableListAdapter {
 			convertView = infalInflater.inflate(R.layout.list_faq_childe_item, null);
 		}
 		TextView item = (TextView) convertView.findViewById(R.id.faqsubcontentTextView);
-		item.setText(mFaqBean.getAnswer().toString());
+		item.setText(mFaqBean.getContent().toString());
 
 		return convertView;
 	}
