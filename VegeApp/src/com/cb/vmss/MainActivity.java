@@ -221,13 +221,23 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		case R.id.nav_about:
 			Intent aboutIntent=new Intent(getApplicationContext(),AboutUsActivity2.class);
 			startActivity(aboutIntent);
-
 			break;
-
+		case R.id.nav_refer_a_friend:
+			Intent referFriendIntent = new Intent(getApplicationContext(), ReferFriendActivity.class);
+			startActivity(referFriendIntent);
+			
+			/*if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
+				Intent referFriendIntent = new Intent(getApplicationContext(), ReferFriendActivity.class);
+				startActivity(referFriendIntent);
+			} else {
+				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+				loginIntent.putExtra("fromscreen", MainActivity2.class.getCanonicalName());
+				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
+			}*/
+			break;
 		default:
 			break;
 		}
-
 		/*
 		 * if (fragment != null) { FragmentManager fragmentManager =
 		 * getSupportFragmentManager(); FragmentTransaction fragmentTransaction

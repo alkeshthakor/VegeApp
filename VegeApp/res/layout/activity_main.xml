@@ -10,21 +10,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/container_toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_top_bg_vegetables" 
+                android:layout_marginTop="24dp"/>
 
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
-              <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@android:color/darker_gray" />
-              
-        </LinearLayout>
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/container_body"

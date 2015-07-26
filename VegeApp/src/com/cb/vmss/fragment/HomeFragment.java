@@ -1,6 +1,5 @@
 package com.cb.vmss.fragment;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import org.json.JSONObject;
 
 import com.cb.vmss.ProductSelectionActivity;
 import com.cb.vmss.R;
+import com.cb.vmss.adapter.CategoryAdapter;
 import com.cb.vmss.model.Category;
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
@@ -20,21 +20,16 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -48,6 +43,9 @@ public class HomeFragment extends Fragment {
 	private String mCatServiceUrl;
 	private LinearLayout mCategoryLinearLayout;
 	private LinearLayout.LayoutParams categoryViewParams;
+	private ListView mCategoryListView;
+	private CategoryAdapter mCategoryAdapter;
+	
 	
 	private String categoryStringList[];
 	public static List<Category> mCategoryList;
@@ -70,9 +68,9 @@ public class HomeFragment extends Fragment {
 		mProgressDialog = new ProgressDialog(mActivity);
 		mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-		mCategoryLinearLayout=(LinearLayout)view.findViewById(R.id.categoryLinearLayout);
+		//mCategoryLinearLayout=(LinearLayout)view.findViewById(R.id.categoryLinearLayout);
 	   
-		
+		mCategoryListView=(ListView)view.findViewById(R.id.categoryListView);
 		
         		
 		mCatServiceUrl=Constant.HOST+Constant.SERVICE_GET_ALL_CATEGORY;
@@ -83,7 +81,21 @@ public class HomeFragment extends Fragment {
 	    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 	    }
 	    
-        
+	    mCategoryListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
+				productIntent.putExtra("cat_list",categoryStringList);	
+				productIntent.putExtra("tabposition",position+"");
+				productIntent.putExtra("cat_name",mCategoryList.get(position).getCategoryName());
+				startActivityForResult(productIntent,Constant.CODE_MAIN_LOGIN);
+				//startActivity(productIntent);
+			}
+		});
+	    
+	    
 		return view;
 	}
 
@@ -120,7 +132,7 @@ public class HomeFragment extends Fragment {
 
 	private void parseResponse(JSONObject responseData) {
 		if(responseData!=null&&responseData.length()>0){
-			mCategoryLinearLayout.removeAllViews();
+			//mCategoryLinearLayout.removeAllViews();
 			 try {
 				 JSONArray categoryArray=responseData.getJSONArray("DATA");
 				 if(categoryArray.length()>0){
@@ -132,52 +144,24 @@ public class HomeFragment extends Fragment {
 						catItem.setCategoryId(categoryArray.getJSONObject(i).getString("cat_id"));
 						catItem.setCategoryName(categoryArray.getJSONObject(i).getString("cat_name"));
 						catItem.setCategoryImage(categoryArray.getJSONObject(i).getString("cat_image"));
+						catItem.setCategroyDiscription(categoryArray.getJSONObject(i).getString("cat_desc"));
+						
 					    mCategoryList.add(catItem);
 					    categoryStringList[i]=catItem.getCategoryName().toUpperCase();
-					     View view = new View(mContext);
-				         view = mActivity.getLayoutInflater().inflate(R.layout.layout_category_item, null);
-				         
-//				         categoryViewParams = (LinearLayout.LayoutParams)view.getLayoutParams();
-//				 		 categoryViewParams.setMargins(0, 30, 0, 0);  // left, top, right, bottom
-				 		
-				 		
-				         TextView mNameTextView=(TextView)view.findViewById(R.id.categoryNameTextView);
-						 mNameTextView.setText(catItem.getCategoryName());
-						 RelativeLayout catImageView=(RelativeLayout)view.findViewById(R.id.categoryImageRel);
-						 if(i>0) {
-							 LinearLayout.LayoutParams relativeParams = (LinearLayout.LayoutParams)catImageView.getLayoutParams();
-							 relativeParams.setMargins(0, 50, 0, 0);  // left, top, right, bottom
-							 catImageView.setLayoutParams(relativeParams);
-						 }
-						 catImageView.setTag(i);
-						 catImageView.setId(i);
-						 
-						 new DownloadImageTask(catImageView).execute(catItem.getCategoryImage());
-						 catImageView.setOnClickListener(new OnClickListener() {
-							
-							@Override
-							public void onClick(View v) {
-								Intent productIntent=new Intent(mContext,ProductSelectionActivity.class);
-								productIntent.putExtra("cat_list",categoryStringList);	
-								productIntent.putExtra("tabposition",v.getId()+"");
-								productIntent.putExtra("cat_name",mCategoryList.get(v.getId()).getCategoryName());
-								startActivityForResult(productIntent,Constant.CODE_MAIN_LOGIN);
-								//startActivity(productIntent);
-							}
-						 });
-						 
-						 //view.setLayoutParams(categoryViewParams);
-						 mCategoryLinearLayout.addView(view);
-						 
 				    }
 				 }
+				 
+				 mCategoryAdapter=new CategoryAdapter(mContext, mCategoryList);
+				 mCategoryListView.setAdapter(mCategoryAdapter);
+				 
+				 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}	
 		}
 	}
 	
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+/*	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		RelativeLayout bmImage;
 		public DownloadImageTask(RelativeLayout bmImage) {
 			this.bmImage = bmImage;
@@ -203,4 +187,4 @@ public class HomeFragment extends Fragment {
 			bmImage.setBackground(imageDrawable);
 		}
 	}
-}
+*/}

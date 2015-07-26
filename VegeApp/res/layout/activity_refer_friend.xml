@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_with_back" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp" >
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_refer_a_friend"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="24dp"
+            android:textSize="@dimen/font_size_xlarge" />
+
+        <EditText
+            android:id="@+id/etFriendNameRefer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="200"
+            android:singleLine="true"
+            android:layout_marginTop="20dp"
+            android:hint="@string/lbl_friend_name"
+            android:paddingEnd="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:paddingStart="10dp" />
+
+        <EditText
+            android:id="@+id/etFriendMobileRefer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:inputType="phone"
+            android:hint="@string/lbl_friend_mobil"
+            android:paddingEnd="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:paddingStart="10dp" />
+        <View android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <com.cb.vmss.cusomview.ButtonCustom
+                android:id="@+id/btnReferFriend"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:background="@drawable/button_background_with_fill_color"
+                android:text="@string/lbl_refer"
+                android:textAllCaps="true"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        
+    </LinearLayout>
+
+</LinearLayout>

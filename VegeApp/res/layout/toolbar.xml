@@ -4,7 +4,9 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:minHeight="?attr/actionBarSize"
+    android:gravity="center"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
@@ -15,6 +17,6 @@
         android:text="@string/app_name"
         android:textAllCaps="false"
         android:textColor="@color/app_green"
-        android:textSize="@dimen/font_size_xlarge" />
+        android:textSize="@dimen/font_size_large" />
 
 </android.support.v7.widget.Toolbar>

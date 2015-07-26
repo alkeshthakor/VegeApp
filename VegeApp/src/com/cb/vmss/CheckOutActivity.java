@@ -76,7 +76,6 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 	private VegAppDatabaseHelper mDatabaseHelper;
 	private Context mContext;
-
 	private ConnectionDetector cd;
 
 	// DatePickerFragment mDatePicker;
