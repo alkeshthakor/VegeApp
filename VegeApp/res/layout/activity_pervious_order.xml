@@ -14,13 +14,45 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
+    <LinearLayout
+        android:id="@+id/llEmptyOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/empty_cart" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            android:text="No Order History"
+            android:textSize="@dimen/font_size_xxxlarge" />
+        
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Look like you don't have any past order "
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+    
     <ListView
         android:id="@+id/previousOrderListView"
         android:layout_width="match_parent"
         android:listSelector="@android:color/transparent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:dividerHeight="2dp" >
+        android:dividerHeight="2dp"
+        android:visibility="gone" >
     </ListView>
 
 </LinearLayout>

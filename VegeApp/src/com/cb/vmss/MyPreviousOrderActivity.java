@@ -31,6 +31,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 	ServerConnector connector;
 	private String mServiceUrl;
 	ListView previousOrderListView;
+	private LinearLayout llEmptyOrder;
 	public List<PreviousOrder> mPreviousOrderList;
 	
 	Context mContext;
@@ -78,6 +80,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 		mProgressDialog.setIndeterminate(false);
         mProgressDialog.setCancelable(false);
         
+        llEmptyOrder = (LinearLayout) findViewById(R.id.llEmptyOrder);
 		previousOrderListView = (ListView) findViewById(R.id.previousOrderListView);
 		previousOrderListView.setOnItemClickListener(this);
 		
@@ -165,8 +168,14 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 						
 						mPreviousOrderList.add(previousOrderItem);
 					}
-					previousOrderListView.setAdapter(new PreviousOrderAdapter(MyPreviousOrderActivity.this, mPreviousOrderList));
-
+					if(mPreviousOrderList.size() > 0) {
+						llEmptyOrder.setVisibility(View.GONE);
+						previousOrderListView.setVisibility(View.VISIBLE);
+						previousOrderListView.setAdapter(new PreviousOrderAdapter(MyPreviousOrderActivity.this, mPreviousOrderList));
+					} else {
+						llEmptyOrder.setVisibility(View.VISIBLE);
+						previousOrderListView.setVisibility(View.GONE);
+					}
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

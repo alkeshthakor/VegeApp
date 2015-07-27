@@ -9,6 +9,42 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_with_back" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/llEmptyCart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/empty_cart" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:text="Add Some Items!"
+            android:textSize="@dimen/font_size_xxxlarge" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Currently you have no item in your cart"
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/topBarMyCart"
         android:layout_width="match_parent"
@@ -17,15 +53,17 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="12dp"
-        android:paddingStart="12dp" >
+        android:paddingStart="12dp"
+        android:visibility="gone" >
     </LinearLayout>
 
     <ListView
         android:id="@+id/myCartListView"
         android:layout_width="match_parent"
-        android:listSelector="@android:color/transparent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:listSelector="@android:color/transparent"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/bottomBarMyCart"
@@ -35,9 +73,10 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="12dp"
-        android:paddingStart="12dp" >
+        android:paddingStart="12dp"
+        android:visibility="visible" >
 
-       <com.cb.vmss.cusomview.TextViewCustom
+        <com.cb.vmss.cusomview.TextViewCustom
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,14 +84,14 @@
             android:textColor="#FFF"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="1dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/icon_indian_rupee_16" />
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Rs"
+            android:textColor="#FFF"
+            android:textSize="@dimen/font_size_small" />
 
-       <com.cb.vmss.cusomview.TextViewCustom
+        <com.cb.vmss.cusomview.TextViewCustom
             android:id="@+id/priceTextViewMyCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

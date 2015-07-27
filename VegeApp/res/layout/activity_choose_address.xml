@@ -14,16 +14,49 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
+    <LinearLayout
+        android:id="@+id/llEmptyAddress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/empty_address" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="No Stored Address Yet!"
+            android:textSize="@dimen/font_size_xxxlarge" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Tell your home or office address just once\nand we will save it for future checkout"
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/addressListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:listSelector="@null"
         android:layout_weight="1"
         android:dividerHeight="2dp"
+        android:listSelector="@null"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingRight="10dp"
+        android:visibility="gone" >
     </ListView>
 
     <Button

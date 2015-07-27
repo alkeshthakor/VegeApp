@@ -164,9 +164,13 @@ public class ProductAdapter extends BaseAdapter {
         if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
             holder.productImageObj.setImageDrawable(imageDrawable);
-        } else 
-        	new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
-        
+        } else {
+        	if(rowItem.getProductImage().length()>0) {
+        		new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        	} else {
+        		holder.productImageObj.setImageResource(R.drawable.no_image);
+        	}
+        }
         return convertView;
 	}
 

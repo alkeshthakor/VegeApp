@@ -2,13 +2,6 @@ package com.cb.vmss;
 
 import java.util.List;
 
-import com.cb.vmss.adapter.MyCartAdapter;
-import com.cb.vmss.adapter.MyCartAdapter.IUpdateMyCart;
-import com.cb.vmss.database.VegAppDatabaseHelper;
-import com.cb.vmss.model.Product;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff.Mode;
@@ -19,16 +12,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.cb.vmss.adapter.MyCartAdapter;
+import com.cb.vmss.adapter.MyCartAdapter.IUpdateMyCart;
+import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.model.Product;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 
 public class MyCartActivity extends ActionBarActivity implements OnClickListener,IUpdateMyCart{
 	private Toolbar toolbar;
 	//private ImageView closeImageView;
 	private TextView mTitle;
 	private TextView priceTextViewMyCart;
-	
+	private LinearLayout llEmptyCart;
 	private ListView myCartListView;
 	private LinearLayout checkOutOutLinearLayout;
 	
@@ -62,6 +63,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		Constant.CONTEXT = mContext;
 		mDatabaseHelper=new VegAppDatabaseHelper(mContext);
 		
+		llEmptyCart = (LinearLayout) findViewById(R.id.llEmptyCart);
 		myCartListView=(ListView)findViewById(R.id.myCartListView);
 		checkOutOutLinearLayout=(LinearLayout)findViewById(R.id.bottomBarMyCart);
 		checkOutOutLinearLayout.setOnClickListener(this);
@@ -86,9 +88,13 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		mTitle.setText("My Cart ("+totalQtyCount+")");
 		
 		if (totalQtyCount > 0) {
+			llEmptyCart.setVisibility(View.GONE);
+			myCartListView.setVisibility(View.VISIBLE);
 			checkOutOutLinearLayout.setVisibility(View.VISIBLE);
 			priceTextViewMyCart.setText("" + totalAmount);
 		}else{
+			llEmptyCart.setVisibility(View.VISIBLE);
+			myCartListView.setVisibility(View.GONE);
 			checkOutOutLinearLayout.setVisibility(View.GONE);
 		}
 		

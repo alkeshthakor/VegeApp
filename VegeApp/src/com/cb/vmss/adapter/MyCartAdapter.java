@@ -161,6 +161,7 @@ public class MyCartAdapter extends BaseAdapter {
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());
+        holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
         if(rowItem.getProductBitmap() != null) {
