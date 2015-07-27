@@ -83,7 +83,7 @@ public class OrderSuccessActivity extends ActionBarActivity implements OnClickLi
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.btnCountinueShoppin:
-			setResult(Constant.CODE_BACK_WITH_COUTINUE_SHOPPING);
+			setResult(Constant.CODE_MAIN_LOGIN);
 			finish();
 			break;
 		case R.id.btnCheckOrderStatus:

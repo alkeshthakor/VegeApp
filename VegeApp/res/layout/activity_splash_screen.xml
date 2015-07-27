@@ -2,20 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+    android:background="@drawable/background_splash_screen"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     tools:context="${relativePackage}.${activityClass}" >
 
     <ProgressBar
+        android:id="@+id/progressBarSplash"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+        android:visibility="invisible"/>
 
-    <ImageView
+    <!-- <ImageView
         android:layout_width="230dp"
         android:layout_height="130dp"
         android:background="@drawable/icon_ok_splash"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name" /> -->
 
 </LinearLayout>

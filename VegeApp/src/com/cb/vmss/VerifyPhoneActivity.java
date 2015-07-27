@@ -206,7 +206,7 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		}else{
 			 Intent chooseAddressIntent=new Intent(getApplicationContext(),ChooseAddressActivity.class);
 		     chooseAddressIntent.putExtra("fromscreen",VerifyPhoneActivity.class.getCanonicalName());
-			 startActivity(chooseAddressIntent);
+			 startActivityForResult(chooseAddressIntent,Constant.CODE_MAIN_LOGIN);
 		}
 		finish();
 	}

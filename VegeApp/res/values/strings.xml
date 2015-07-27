@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name" translatable="false">Sabzi@door</string>
+    
+    <string name="app_name_title" translatable="false">Sabzi@Door</string>
+    
     <string name="action_settings" translatable="false">Settings</string>
     <string name="action_search" translatable="false">Search</string>
     <string name="drawer_open">Open</string>
@@ -10,7 +13,7 @@
     <string name="nav_healding_myiformatio">My Information</string>
     <string name="nav_item_Login">Login</string>
     <string name="nav_item_address">My Addresses</string>
-    <string name="nav_item_order">My Order</string>
+    <string name="nav_item_order">My Orders</string>
     <string name="nav_item_cart">My Cart</string>
     <string name="nav_item_notification">Notification center</string>
     <string name="nav_heading_others">Others</string>

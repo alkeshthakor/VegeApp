@@ -39,7 +39,7 @@
                 android:textSize="@dimen/font_size_medium" />
         </LinearLayout>
 
-        <LinearLayout
+       <!--  <LinearLayout
             android:id="@+id/nav_location"
             style="@style/styleDrowarItem" >
 
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider_color" />
-
+ -->
         <LinearLayout
             android:id="@+id/nav_heading_information"
             android:layout_width="match_parent"
@@ -317,7 +317,7 @@
                 android:id="@+id/imgReferAFriend"
                 style="@style/styleDrowarImageView"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_share_black"
+                android:src="@drawable/icon_referrals"
                 android:visibility="visible" />
 
             <com.cb.vmss.cusomview.TextViewCustom
