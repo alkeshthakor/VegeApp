@@ -321,10 +321,9 @@ Personal Information\n
     <string name="options_exit">Exit</string>
     <string name="title_activity_notifictaion_list">NotifictaionListActivity</string>
 
-    <!--
     <string name="Rs">\u20B9</string> 
-    <string name="rs">\u20A8</string>
-    -->
+    <!-- <string name="rs">\u20A8</string> -->
+   
     <string name="title_activity_refer_friend">ReferFriendActivity</string>
 
 </resources>

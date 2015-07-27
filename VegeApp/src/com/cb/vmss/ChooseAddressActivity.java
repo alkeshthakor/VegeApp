@@ -29,6 +29,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	private ProgressDialog mProgressDialog;
 	private String mServiceUrl;
 	private String mFromScreenName;
-	
+	private LinearLayout llEmptyAddress;
 	public List<Address> mAddresstList;
 	
 	ListView addressListView;
@@ -78,7 +79,6 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 		
 		mFromScreenName=getIntent().getStringExtra("fromscreen");
 		
-		
 		mProgressDialog = new ProgressDialog(ChooseAddressActivity.this);
 		mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
@@ -87,11 +87,8 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
         addAddressBtn =(Button) findViewById(R.id.btnAddAddressChose);
 		addAddressBtn.setOnClickListener(this);
 		addressListView = (ListView) findViewById(R.id.addressListView);
-		
+		llEmptyAddress = (LinearLayout) findViewById(R.id.llEmptyAddress);
 		addressListView.setOnItemClickListener(this);
-		
-	
-		
 	}
 
 	@Override
@@ -176,7 +173,14 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 						addressItem.setAddStatus(addressJsonArray.getJSONObject(i).getString("add_status"));
 						mAddresstList.add(addressItem);
 					}
-					addressListView.setAdapter(new AddressAdapter(ChooseAddressActivity.this, mAddresstList));
+					if(mAddresstList.size() > 0) {
+						llEmptyAddress.setVisibility(View.GONE);
+						addressListView.setVisibility(View.VISIBLE);
+						addressListView.setAdapter(new AddressAdapter(ChooseAddressActivity.this, mAddresstList));
+					} else {
+						llEmptyAddress.setVisibility(View.VISIBLE);
+						addressListView.setVisibility(View.GONE);
+					}
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -192,9 +196,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 			Address mAddress=mAddresstList.get(position);
 			
 			String addressId=mAddress.getAddId();
-			
 			String defaultAddresss= mAddress.getAddAddress2()+", "+mAddress.getAddLandmark();
-			
 			
 			Pref.setValue(Constant.PREF_ADD_ID,addressId);
 			Pref.setValue(Constant.PREF_ADDRESS, defaultAddresss);
@@ -202,7 +204,6 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 			Intent mCheckOutIntent=new Intent(getApplicationContext(),CheckOutActivity.class);
 			startActivityForResult(mCheckOutIntent,Constant.CODE_MAIN_LOGIN);
 		}
-		
 	}
 	
 	@Override
@@ -218,5 +219,4 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
         	   finish(); 
 	    }
 	}
-	
 }

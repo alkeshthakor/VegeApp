@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:src="@drawable/icon_app_luancher" />
+        android:src="@drawable/no_image" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
         android:layout_weight="0.7"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="5dp" >
+        android:paddingLeft="10dp" >
 
         <com.cb.vmss.cusomview.TextViewCustom
             android:id="@+id/productItemNameTV"
@@ -45,7 +45,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="5dp" >
+            android:paddingRight="5dp" >
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -65,13 +65,13 @@
                     android:id="@+id/productDisplayPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_small" />
 
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="1dp"
                     android:src="@drawable/icon_indian_rupee_16" />
 
