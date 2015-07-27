@@ -76,8 +76,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 		if (mToolbar != null) {
 			setSupportActionBar(mToolbar);
-			mTitleTextView = (TextView) mToolbar.findViewById(R.id.toolbar_title);
-			mTitleTextView.setText(getString(R.string.app_name));
+			//mTitleTextView = (TextView) mToolbar.findViewById(R.id.toolbar_title);
+			//mTitleTextView.setText(getString(R.string.app_name));
 
 		}
 		mToolbar.setTitleTextColor(Color.BLACK);

@@ -20,8 +20,7 @@
                 android:layout_height="@dimen/flexible_space_image_height"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_top_bg_vegetables" 
-                android:layout_marginTop="24dp"/>
+                android:src="@drawable/icon_home_page_background"/>
 
             <include
                 android:id="@+id/toolbar"

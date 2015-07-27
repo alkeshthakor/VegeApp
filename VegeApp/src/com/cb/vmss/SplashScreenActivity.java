@@ -14,7 +14,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 
 public class SplashScreenActivity extends Activity {
 
@@ -29,6 +31,8 @@ public class SplashScreenActivity extends Activity {
 	private String mServiceUrl;
 	public static String name;
 	public static String email;
+	private ProgressBar progressBarSplash;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,9 @@ public class SplashScreenActivity extends Activity {
 		name="Alkesh Thakor";
 		email="";
 		
-		// Check if Internet present
+		progressBarSplash=(ProgressBar)findViewById(R.id.progressBarSplash);
+		
+		/*// Check if Internet present
 		if (!cd.isConnectingToInternet()) {
 			// Internet Connection is not present
 			alert.showAlertDialog(SplashScreenActivity.this,
@@ -55,22 +61,21 @@ public class SplashScreenActivity extends Activity {
 			// stop executing code by return
 			finish();
 			//return;
-		}
+		}*/
 
 		if (Pref.getValue(Constant.PREF_SHARE_URL, "").equalsIgnoreCase("")) {
 			mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
-			
-			//if (!cd.isConnectingToInternet()) 
-			new GetShareUrlTask().execute(mServiceUrl);
-			
+			if (!cd.isConnectingToInternet()) {
+				new GetShareUrlTask().execute(mServiceUrl);	
+			}else{
+				sleepThread();
+			}
 		}else{
 			sleepThread();
 		}
 
 		
 	}
-
-	
 
 	@Override
 	protected void onDestroy() {
@@ -83,6 +88,7 @@ public class SplashScreenActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			progressBarSplash.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -94,6 +100,7 @@ public class SplashScreenActivity extends Activity {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
+			progressBarSplash.setVisibility(View.INVISIBLE);
 			try {
 				if (result != null
 						&& result.getString("STATUS").equalsIgnoreCase(
@@ -107,9 +114,7 @@ public class SplashScreenActivity extends Activity {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			
 			sleepThread();
-			
 		}
 	}
 
