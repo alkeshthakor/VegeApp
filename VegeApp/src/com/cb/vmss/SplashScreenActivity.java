@@ -64,8 +64,8 @@ public class SplashScreenActivity extends Activity {
 		}*/
 
 		if (Pref.getValue(Constant.PREF_SHARE_URL, "").equalsIgnoreCase("")) {
-			mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
-			if (!cd.isConnectingToInternet()) {
+			if (cd.isConnectingToInternet()) {
+				mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
 				new GetShareUrlTask().execute(mServiceUrl);	
 			}else{
 				sleepThread();
