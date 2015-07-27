@@ -10,8 +10,17 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
+        
     </style>
 
+    <!--         <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item> -->
+    
+    <style name="MyDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+        <item name="spinBars">true</item>
+    </style>
+    
     <style name="styleDrowarItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

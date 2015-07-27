@@ -87,11 +87,16 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		getSupportActionBar().setHomeButtonEnabled(true);*/
 		
 		// setSupportActionBar (mToolbar);
+		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+		/*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-
+*/
 		//getResources().getDrawable(R.drawable.ic_navigation_drawer)
 		
 		mContext = this;
@@ -109,7 +114,12 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		drawerFragment.setDrawerListener(this);
 
 		// display the first navigation drawer view on app launch
-		displayView(R.id.nav_location);
+		//displayView(R.id.nav_location);
+		
+		Fragment fragment = new HomeFragment();
+		// title = getString(R.string.title_home);
+		loadFragment(fragment);
+		
 
 	}
 
@@ -150,30 +160,24 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 	@SuppressLint("ShowToast")
 	private void displayView(int position) {
-		Fragment fragment = null;
 		// String title = getString(R.string.app_name);
 		switch (position) {
-		case R.id.nav_location:
-			fragment = new HomeFragment();
-			// title = getString(R.string.title_home);
-			loadFragment(fragment);
-			break;
-
-		case R.id.nav_login:
-
+		case R.id.nav_address:
 			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
-				Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
+				Intent chooseAddressIntent = new Intent(getApplicationContext(), ChooseAddressActivity.class);
+				chooseAddressIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
+				startActivity(chooseAddressIntent);
 			} else {
 				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
 				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
 				startActivityForResult(loginIntent, Constant.CODE_MAIN_LOGIN);
 			}
 			break;
-		case R.id.nav_address:
+			
+		case R.id.nav_login:
+
 			if (!Pref.getValue(Constant.PREF_PHONE_NUMBER, "0").equals("0")) {
-				Intent chooseAddressIntent = new Intent(getApplicationContext(), ChooseAddressActivity.class);
-				chooseAddressIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
-				startActivity(chooseAddressIntent);
+				Toast.makeText(MainActivity.this, "Already Login", Toast.LENGTH_LONG);
 			} else {
 				Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
 				loginIntent.putExtra("fromscreen", MainActivity.class.getCanonicalName());
@@ -239,6 +243,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			}
 			break;
 		default:
+			
+			
 			break;
 		}
 		/*
@@ -335,7 +341,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 			public void onClick(DialogInterface dialog, int which) {
 
 				Intent intent = new Intent(Intent.ACTION_CALL);
-				intent.setData(Uri.parse("tel:9925833511"));
+				intent.setData(Uri.parse("tel:7228033322"));
 				startActivity(intent);
 
 			}

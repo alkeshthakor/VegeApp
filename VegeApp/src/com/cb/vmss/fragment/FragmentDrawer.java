@@ -40,7 +40,7 @@ public class FragmentDrawer extends Fragment {
     
    
     private LinearLayout loginObj;
-    private LinearLayout locationObj;
+   // private LinearLayout locationObj;
     private LinearLayout addressObj;
     private LinearLayout orderObj;
     private LinearLayout cartObj;
@@ -59,7 +59,7 @@ public class FragmentDrawer extends Fragment {
     
     private ImageView mPhoneIcon;
     
-    private View locationDivider;
+    //private View locationDivider;
     
     private Activity mActivity;
     
@@ -91,11 +91,11 @@ public class FragmentDrawer extends Fragment {
         
         mPhoneNumberTextView=(TextView)layout.findViewById(R.id.userName);
         qtyCountTextView=(TextView)layout.findViewById(R.id.txtQtyCount);
-        locationTextView=(TextView)layout.findViewById(R.id.txtLocation);
+       // locationTextView=(TextView)layout.findViewById(R.id.txtLocation);
         notificationCountTextView=(TextView)layout.findViewById(R.id.tvNotficationCount);
         
         loginObj = (LinearLayout) layout.findViewById(R.id.nav_login);
-        locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
+       // locationObj = (LinearLayout) layout.findViewById(R.id.nav_location);
         addressObj = (LinearLayout) layout.findViewById(R.id.nav_address);
         orderObj = (LinearLayout) layout.findViewById(R.id.nav_order);
         cartObj = (LinearLayout) layout.findViewById(R.id.nav_cart);
@@ -114,11 +114,11 @@ public class FragmentDrawer extends Fragment {
         
         
         
-        locationDivider=(View)layout.findViewById(R.id.locationDevider);
+      //  locationDivider=(View)layout.findViewById(R.id.locationDevider);
         
         
         loginObj.setOnClickListener(mClickListener);
-        locationObj.setOnClickListener(mClickListener);
+       // locationObj.setOnClickListener(mClickListener);
         addressObj.setOnClickListener(mClickListener);
         orderObj.setOnClickListener(mClickListener);
         cartObj.setOnClickListener(mClickListener);
@@ -176,7 +176,7 @@ public class FragmentDrawer extends Fragment {
     		qtyCountTextView.setText("0");
     	}
     	
-    	if(!Pref.getValue(Constant.PREF_ADDRESS,"").equalsIgnoreCase("")){
+    	/*if(!Pref.getValue(Constant.PREF_ADDRESS,"").equalsIgnoreCase("")){
     		locationObj.setVisibility(View.VISIBLE);
     		locationDivider.setVisibility(View.VISIBLE);
     		locationTextView.setText(Pref.getValue(Constant.PREF_ADDRESS,""));
@@ -184,7 +184,7 @@ public class FragmentDrawer extends Fragment {
     		locationObj.setVisibility(View.GONE);
     		locationDivider.setVisibility(View.GONE);
     		locationTextView.setText(Pref.getValue(Constant.PREF_ADDRESS,""));
-    	}
+    	}*/
     	
     	 if(!Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").equals("0")){
          	mPhoneNumberTextView.setText(Pref.getValue(Constant.PREF_PHONE_NUMBER,"0").toString());
@@ -234,7 +234,7 @@ public class FragmentDrawer extends Fragment {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        //mDrawerToggle.setDrawerIndicatorEnabled(false);
         mDrawerToggle.setToolbarNavigationClickListener(new OnClickListener() {
 			
 			@Override

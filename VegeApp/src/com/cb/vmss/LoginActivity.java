@@ -152,7 +152,8 @@ public class LoginActivity extends ActionBarActivity {
 					verifyPhoneIntent.putExtra(Constant.PREF_PHONE_NUMBER, returnObject.getString("usr_phone"));
 					verifyPhoneIntent.putExtra("fromscreen", mFromScreen);
 					
-					startActivity(verifyPhoneIntent);
+					startActivityForResult(verifyPhoneIntent,Constant.CODE_MAIN_LOGIN);
+					
 					finish();
 					
 				}else{
