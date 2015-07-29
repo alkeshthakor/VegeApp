@@ -34,12 +34,19 @@
                 android:text="@string/lbl_sub_total"
                 android:textSize="@dimen/font_size_small" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginTop="6dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_indian_rupee_16" />
+                android:src="@drawable/icon_indian_rupee_16" /> -->
+                
+			<com.cb.vmss.cusomview.TextViewCustom
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/Rs"
+                android:textColor="@android:color/black"
+            	android:textSize="@dimen/font_size_small" />
 
             <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/subTotalTextView"
@@ -96,12 +103,19 @@
                 android:text="@string/lbl_promo_code_discount"
                 android:textSize="@dimen/font_size_small" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginTop="6dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_indian_rupee_16" />
+                android:src="@drawable/icon_indian_rupee_16" /> -->
+                
+            <com.cb.vmss.cusomview.TextViewCustom
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/Rs"
+	            android:textColor="#FFF"
+	            android:textSize="@dimen/font_size_small" />    
 
             <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/promocodeDiscountTextView"
@@ -130,13 +144,20 @@
                 android:text="@string/lbl_total_amount"
                 android:textSize="@dimen/font_size_small" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginTop="6dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_indian_rupee_16" />
+                android:src="@drawable/icon_indian_rupee_16" /> -->
 
+			<com.cb.vmss.cusomview.TextViewCustom
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/Rs"
+                android:textColor="@android:color/black"
+	            android:textSize="@dimen/font_size_small" />
+			
             <com.cb.vmss.cusomview.TextViewCustom
                 android:id="@+id/totalTextView"
                 android:layout_width="wrap_content"

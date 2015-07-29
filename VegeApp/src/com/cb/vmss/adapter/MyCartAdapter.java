@@ -82,7 +82,7 @@ public class MyCartAdapter extends BaseAdapter {
             holder.icoPlus= (LinearLayout)convertView.findViewById(R.id.iconPlus);
             holder.icoMinus= (LinearLayout)convertView.findViewById(R.id.iconMinus);
             holder.productImageObj= (ImageView)convertView.findViewById(R.id.productImage);
-            holder.ruppesIconIV= (ImageView)convertView.findViewById(R.id.iv_icon_ruppes_productItem);
+            holder.ruppesIconIV= (TextView)convertView.findViewById(R.id.iv_icon_ruppes_productItem);
             
             convertView.setTag(holder);
             
@@ -182,7 +182,7 @@ public class MyCartAdapter extends BaseAdapter {
 		LinearLayout icoPlus;
 		LinearLayout icoMinus;
 		ImageView productImageObj;
-		ImageView ruppesIconIV;
+		TextView ruppesIconIV;
 		
     }
 	
