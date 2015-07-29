@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="invisible" >
 
         <ImageView
             android:layout_width="match_parent"
@@ -71,6 +71,6 @@
         android:text="@string/lbl_add_another_address"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:textSize="@dimen/font_size_small" />
 
 </LinearLayout>

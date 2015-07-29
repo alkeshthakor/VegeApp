@@ -77,19 +77,27 @@
                         android:layout_gravity="top|right"
                         android:orientation="horizontal" >
 
-                        <ImageView
+                        <!-- <ImageView
                             android:layout_width="12dp"
                             android:layout_height="12dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_indian_rupee_16" />
+                            android:src="@drawable/icon_indian_rupee_16" /> -->
 
+						<com.cb.vmss.cusomview.TextViewCustom
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/Rs"
+				            android:layout_gravity="center"
+			                android:textColor="@android:color/black"
+				            android:textSize="@dimen/font_size_medium" />
+					
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/totPriceTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Price"
                             android:textColor="@android:color/black"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/font_size_medium"  />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -314,17 +322,24 @@
                             android:text="Sub Total : "
                             android:textSize="16sp" />
 
-                        <ImageView
+                        <!-- <ImageView
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:src="@drawable/icon_indian_rupee_16" />
+                            android:src="@drawable/icon_indian_rupee_16" /> -->
+                            
+						<com.cb.vmss.cusomview.TextViewCustom
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/Rs"
+			                android:textColor="@android:color/black"
+				            android:textSize="@dimen/font_size_medium" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtSubTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/font_size_medium" />
                     </LinearLayout>
 
                     <View
@@ -346,11 +361,17 @@
                             android:text="Delivery Charges : "
                             android:textSize="16sp" />
 
-                        <ImageView
+                        <!-- <ImageView
                             android:layout_width="12.5dp"
                             android:layout_height="12.5dp"
-                            android:src="@drawable/icon_indian_rupee_16" />
-
+                            android:src="@drawable/icon_indian_rupee_16" /> -->
+                            
+						<com.cb.vmss.cusomview.TextViewCustom
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/Rs"
+			                android:textColor="@android:color/black"
+				            android:textSize="@dimen/font_size_medium" />
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtDeliveryCharge"
                             android:layout_width="wrap_content"
@@ -388,10 +409,17 @@
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
-                        <ImageView
+                        <!-- <ImageView
                             android:layout_width="12.5dp"
                             android:layout_height="12.5dp"
-                            android:src="@drawable/icon_indian_rupee_16" />
+                            android:src="@drawable/icon_indian_rupee_16" /> -->
+                       
+                       <com.cb.vmss.cusomview.TextViewCustom
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/Rs"
+			                android:textColor="@android:color/black"
+				            android:textSize="@dimen/font_size_medium" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtPromoDiscount"
@@ -422,17 +450,25 @@
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
-                        <ImageView
+                        <!-- <ImageView
                             android:layout_width="13dp"
                             android:layout_height="13dp"
-                            android:src="@drawable/icon_indian_rupee_16" />
+                            android:src="@drawable/icon_indian_rupee_16" /> -->
 
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:text="@string/Rs"
+			                android:textColor="@android:color/black"
+				            android:textSize="@dimen/font_size_large" />
+                        
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtTotalAmt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-                            android:textSize="18sp"
+				            android:textSize="@dimen/font_size_large"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

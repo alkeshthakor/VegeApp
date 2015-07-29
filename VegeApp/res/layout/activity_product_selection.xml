@@ -126,7 +126,7 @@
             android:layout_toRightOf="@+id/qtyCountRelLayout"
             android:background="#EEEEEE" />
 
-        <ImageView
+        <!-- <ImageView
             android:id="@+id/indian_rupee"
             android:layout_width="12dp"
             android:layout_height="12dp"
@@ -134,8 +134,18 @@
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/sprator3"
             android:src="@drawable/icon_indian_rupee_16"
-            android:tint="@android:color/black" />
+            android:tint="@android:color/black" /> -->
 
+		<com.cb.vmss.cusomview.TextViewCustom
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/Rs"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/sprator3"
+		    android:textColor="@android:color/black"
+			android:textSize="@dimen/font_size_small" />
+		
         <com.cb.vmss.cusomview.TextViewCustom
             android:id="@+id/productPriceTextView"
             android:layout_width="wrap_content"

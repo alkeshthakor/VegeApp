@@ -39,7 +39,7 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private EditText cityEditText;
 	private EditText zipEditText;
 
-	private Button createButton;
+	private TextView createButton;
 	private String mServiceUrl;
 	private String addressBody;
 
@@ -58,6 +58,9 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		if (toolbar != null) {
 			TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+			createButton = (TextView) findViewById(R.id.btnCreateAdd);
+			createButton.setOnClickListener(this);
+			
 			mTitle.setText(getResources().getString(R.string.lbl_add_address));
 
 			setSupportActionBar(toolbar);
@@ -96,8 +99,7 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		cityEditText = (EditText) findViewById(R.id.addCityEditText);
 		zipEditText = (EditText) findViewById(R.id.addZipEditText);
 
-		createButton = (Button) findViewById(R.id.btnCreateAdd);
-		createButton.setOnClickListener(this);
+		
 
 		if (isEdit) {
 			createButton.setText("Save");

@@ -15,6 +15,7 @@
     <string name="nav_item_address">My Addresses</string>
     <string name="nav_item_order">My Orders</string>
     <string name="nav_item_cart">My Cart</string>
+    <string name="btn_add">ADD</string>
     <string name="nav_item_notification">Notification center</string>
     <string name="nav_heading_others">Others</string>
     <string name="nav_item_help">Help</string>
