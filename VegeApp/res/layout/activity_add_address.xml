@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_with_back" />
+        layout="@layout/toolbar_with_btn" />
 
     <View
         android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <Button
+            <!-- <Button
                 android:id="@+id/btnCreateAdd"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -128,7 +128,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/round_corner_button_background_with_color"
                 android:text="@string/lbl_add_create"
-                android:textColor="#FFF" />
+                android:textColor="#FFF" /> -->
         </LinearLayout>
     </ScrollView>
 

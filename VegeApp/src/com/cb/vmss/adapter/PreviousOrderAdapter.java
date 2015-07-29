@@ -65,6 +65,9 @@ public class PreviousOrderAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdDate);
             holder.txtOrdTime = (TextView)convertView.findViewById(R.id.txtOrdTime);
+
+            holder.txtDeliveryOrdDate = (TextView)convertView.findViewById(R.id.txtDeliveryOrdDate);
+            holder.txtDeliveryOrdTime = (TextView)convertView.findViewById(R.id.txtDeliveryOrdTime);
             holder.txtOrdNo = (TextView)convertView.findViewById(R.id.txtOrdNo);
             holder.txtStatus = (TextView)convertView.findViewById(R.id.statusTextView);
             holder.txtTotPrice = (TextView)convertView.findViewById(R.id.totPriceTextView);
@@ -75,9 +78,11 @@ public class PreviousOrderAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
+
         holder.txtOrdDate.setText(rowItem.getOrderDate());
         holder.txtOrdTime.setText(rowItem.getOrderTime());
+        holder.txtDeliveryOrdDate.setText(rowItem.getOrderDelivertyDate());
+        holder.txtDeliveryOrdTime.setText(rowItem.getOrderDelivertTime());
         holder.txtOrdNo.setText("Order ID : " + rowItem.getOrderId());
         holder.txtStatus.setText("Status : " + rowItem.getOrderStatus());
         holder.txtTotPrice.setText(rowItem.getOrderTotalPrice());
@@ -96,6 +101,8 @@ public class PreviousOrderAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView txtOrdDate;
 		TextView txtOrdTime;
+		TextView txtDeliveryOrdDate;
+		TextView txtDeliveryOrdTime;
 		TextView txtOrdNo;
 		TextView txtStatus;
 		TextView txtTotPrice;
