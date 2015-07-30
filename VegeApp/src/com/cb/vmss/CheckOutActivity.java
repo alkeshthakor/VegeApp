@@ -199,7 +199,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		subTotalTextView.setText(totalAmount + "");
 		totalTextView.setText(totalAmount + "");
-		
+
 	}
 
 	@Override
@@ -220,7 +220,6 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
 
 	}
 
@@ -261,7 +260,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		case R.id.btnApplyPromocodeSecond:
 			if (hasText) {
 				String promoCodeServiceUrl = Constant.HOST + Constant.SERVICE_PROMO_CODE;
-				String promoCode ="od_chkuser_id="+Pref.getValue(Constant.PREF_USER_ID, "")+ "&od_chkpromocode=" + mPromoEditText.getText();
+				String promoCode = "od_chkuser_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&od_chkpromocode="
+						+ mPromoEditText.getText();
 				new CheckPromoCodeTask().execute(promoCodeServiceUrl, promoCode);
 
 			} else {
@@ -331,7 +331,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 						mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
 								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=" + orderData
 								+ "&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
-								+ validCouponCode+"&gcm_regid="+Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID,"");
+								+ validCouponCode + "&gcm_regid="
+								+ Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "");
 
 						mDatabaseHelper.close();
 						new OrderPlacedTask().execute(mServiceUrl, mOrderData);
@@ -349,65 +350,105 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		alertDialog.show();
 	}
 
-	private void onPromoCodeFail() {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
-		// set dialog message
-		alertDialogBuilder.setMessage("Invalid Promo Code").setCancelable(false).setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						mPromoEditText.setText("");
-						btnPromoCodeSecond.setText(getString(R.string.lbl_promo_cancel));
-						//Toast.makeText(mContext, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
-						promocodeLinearLayout.setVisibility(View.GONE);
+	private void onPromoCodeFail(final JSONObject result) {
+		try {
+			String message = result.getString("MESSAGES").toString();
 
-					}
-				});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
+			alertDialogBuilder.setTitle("Error! Wrong Code");
 
-		// show it
-		alertDialog.show();
+			// set dialog message
+			alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							mPromoEditText.setText("");
+							btnPromoCodeSecond.setText(getString(R.string.lbl_promo_cancel));
+							promocodeLinearLayout.setVisibility(View.GONE);
+
+						}
+					});
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+
+			// show it
+			alertDialog.show();
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	private void onPromoCodeSuccess(final JSONObject result) {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
-		// set dialog message
-		alertDialogBuilder.setMessage("Congratulation!!!").setCancelable(false).setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						proccesPromoCode(result);
-					}
-				});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
 
-		// show it
-		alertDialog.show();
+		try {
+			// String message =
+			// result.getJSONArray("MESSAGES").get(0).toString();
+			String message = result.getString("MESSAGES").toString();
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
+			alertDialogBuilder.setTitle("Congratulation!");
+			// set dialog message
+			alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							proccesPromoCode(result);
+						}
+					});
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+
+			// show it
+			alertDialog.show();
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
-	
-	private void proccesPromoCode(JSONObject result){
-		
-		
+
+	private void proccesPromoCode(JSONObject result) {
+
 		JSONObject promoCodeObject;
 		try {
 			promoCodeObject = result.getJSONObject("DATA");
-			
+
 			String couponType = promoCodeObject.getString("Coupon_type");
 			validCouponCode = promoCodeObject.getString("Coupon_code");
 
 			if (couponType.equals("amount")) {
+				
 				int discountAmount = promoCodeObject.getInt("Coupon_price");
-				//Coupon_price  org.json.JSONException: No value for Coupon_price
+
 				int couponMinPrice = promoCodeObject.getInt("coupon_min_price");
 				if (totalAmount >= couponMinPrice) {
 					promocodeLinearLayout.setVisibility(View.VISIBLE);
 					totalValueAfterDiscount = totalAmount - discountAmount;
 					promocodeTextView.setText(discountAmount + "");
 					totalTextView.setText("" + totalValueAfterDiscount);
+				} else {
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckOutActivity.this);
+					alertDialogBuilder.setTitle("Error!");
+					// set dialog message
+					String message = String.format(getString(R.string.lbl_promocode_minimum_validation),
+							couponMinPrice + "");
+					alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+
+								}
+							});
+					// create alert dialog
+					AlertDialog alertDialog = alertDialogBuilder.create();
+
+					// show it
+					alertDialog.show();
 				}
 
 			} else if (couponType.equals("discount")) {
 				int couponDiscount = promoCodeObject.getInt("Coupon_discount");
+				
 				int discountValue = (totalAmount * couponDiscount) / 100;
 				totalValueAfterDiscount = totalAmount - discountValue;
 				promocodeTextView.setText(discountValue + "");
@@ -415,13 +456,12 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				promocodeLinearLayout.setVisibility(View.VISIBLE);
 			}
 
-			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
-	
+	}
+
 	private void selectDate(String mTitle) {
 
 		/**
@@ -452,20 +492,20 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			mHours = hourOfDay;
 			mMinute = minute;
 
-			//TimeValue = mHours + ":" + mMinute;
+			// TimeValue = mHours + ":" + mMinute;
 
-			if(mHours<10){
-				TimeValue = "0"+mHours;	
-			}else{
-				TimeValue = ""+mHours;
+			if (mHours < 10) {
+				TimeValue = "0" + mHours;
+			} else {
+				TimeValue = "" + mHours;
 			}
-			
-			if(mMinute<10){
-				TimeValue = TimeValue+":0"+mMinute;	
-			}else{
-				TimeValue = TimeValue+":"+mMinute;
+
+			if (mMinute < 10) {
+				TimeValue = TimeValue + ":0" + mMinute;
+			} else {
+				TimeValue = TimeValue + ":" + mMinute;
 			}
-			
+
 			if (hourOfDay < 12) {
 				timeTextView.setText(TimeValue + " AM");
 				AM_PM = "AM";
@@ -484,21 +524,20 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 		timeMode = calender.get(Calendar.AM);
 
-		//TimeValue = mHours + ":" + mMinute;
+		// TimeValue = mHours + ":" + mMinute;
 
-		if(mHours<10){
-			TimeValue = "0"+mHours;	
-		}else{
-			TimeValue = ""+mHours;
+		if (mHours < 10) {
+			TimeValue = "0" + mHours;
+		} else {
+			TimeValue = "" + mHours;
 		}
-		
-		if(mMinute<10){
-			TimeValue = TimeValue+":0"+mMinute;	
-		}else{
-			TimeValue = TimeValue+":"+mMinute;
+
+		if (mMinute < 10) {
+			TimeValue = TimeValue + ":0" + mMinute;
+		} else {
+			TimeValue = TimeValue + ":" + mMinute;
 		}
-		
-		
+
 		if (timeMode == 0) {
 			timeTextView.setText(TimeValue + " AM");
 
@@ -521,7 +560,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		} else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
 			setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
 			finish();
-		} 
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -583,9 +622,9 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
 					onPromoCodeSuccess(result);
 				} else {
-					onPromoCodeFail();
-					//mPromoEditText.setError("Invalid promo code");
-									}
+					onPromoCodeFail(result);
+					// mPromoEditText.setError("Invalid promo code");
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
