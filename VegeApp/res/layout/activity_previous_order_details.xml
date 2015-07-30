@@ -54,14 +54,6 @@
                             android:textSize="16sp" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
-                            android:id="@+id/statusTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:text="Status : "
-                            android:textSize="14sp" />
-
-                        <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/totPriceTextView1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -77,27 +69,143 @@
                         android:layout_gravity="top|right"
                         android:orientation="horizontal" >
 
-                        <!-- <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_indian_rupee_16" /> -->
+                            android:text="@string/Rs"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_size_medium" />
 
-						<com.cb.vmss.cusomview.TextViewCustom
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:text="@string/Rs"
-				            android:layout_gravity="center"
-			                android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_medium" />
-					
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/totPriceTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Price"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/font_size_medium"  />
+                            android:textSize="@dimen/font_size_medium" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <com.cb.vmss.cusomview.TextViewCustom
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Created on"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_calendar_grey" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/txtOrdDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Date"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@android:color/black" />
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_watch" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/txtOrdTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Time"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llOrderDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <com.cb.vmss.cusomview.TextViewCustom
+                        android:id="@+id/txtOrderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Delivery on"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_calendar_grey" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/txtDeliveryOrdDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Date"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0.2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@android:color/black" />
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_watch" />
+
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:id="@+id/txtDeliveryOrdTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Time"
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -107,70 +215,13 @@
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal" >
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/icon_calendar_grey" />
-
                     <com.cb.vmss.cusomview.TextViewCustom
-                        android:id="@+id/txtOrdDate"
+                        android:id="@+id/statusTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="Date"
+                        android:text="Status : "
                         android:textSize="14sp" />
-
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="3dp"
-                        android:background="@android:color/black" />
-
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/icon_watch" />
-
-                    <com.cb.vmss.cusomview.TextViewCustom
-                        android:id="@+id/txtOrdTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Time"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right" >
-
-                        <RelativeLayout
-                            android:id="@+id/viewDeatilsRelLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_btn"
-                            android:padding="8dp"
-                            android:visibility="gone" >
-
-                            <com.cb.vmss.cusomview.TextViewCustom
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_centerVertical="true"
-                                android:text="View Details"
-                                android:textColor="#FFF"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -322,17 +373,12 @@
                             android:text="Sub Total : "
                             android:textSize="16sp" />
 
-                        <!-- <ImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:src="@drawable/icon_indian_rupee_16" /> -->
-                            
-						<com.cb.vmss.cusomview.TextViewCustom
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:text="@string/Rs"
-			                android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_medium" />
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Rs"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_size_medium" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtSubTotal"
@@ -361,17 +407,13 @@
                             android:text="Delivery Charges : "
                             android:textSize="16sp" />
 
-                        <!-- <ImageView
-                            android:layout_width="12.5dp"
-                            android:layout_height="12.5dp"
-                            android:src="@drawable/icon_indian_rupee_16" /> -->
-                            
-						<com.cb.vmss.cusomview.TextViewCustom
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:text="@string/Rs"
-			                android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_medium" />
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Rs"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_size_medium" />
+
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtDeliveryCharge"
                             android:layout_width="wrap_content"
@@ -409,17 +451,12 @@
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
-                        <!-- <ImageView
-                            android:layout_width="12.5dp"
-                            android:layout_height="12.5dp"
-                            android:src="@drawable/icon_indian_rupee_16" /> -->
-                       
-                       <com.cb.vmss.cusomview.TextViewCustom
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:text="@string/Rs"
-			                android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_medium" />
+                        <com.cb.vmss.cusomview.TextViewCustom
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Rs"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_size_medium" />
 
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtPromoDiscount"
@@ -450,25 +487,19 @@
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
-                        <!-- <ImageView
-                            android:layout_width="13dp"
-                            android:layout_height="13dp"
-                            android:src="@drawable/icon_indian_rupee_16" /> -->
-
-
                         <com.cb.vmss.cusomview.TextViewCustom
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:text="@string/Rs"
-			                android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_large" />
-                        
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Rs"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_size_large" />
+
                         <com.cb.vmss.cusomview.TextViewCustom
                             android:id="@+id/txtTotalAmt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-				            android:textSize="@dimen/font_size_large"
+                            android:textSize="@dimen/font_size_large"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

@@ -149,10 +149,10 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 						previousOrderItem.setOrderId(orderJSONObject.getString("od_id"));
 						previousOrderItem.setOrderTotalPrice(orderJSONObject.getString("od_finalprice"));
 						//orderJSONObject.getString("od_deliverytype");
-						previousOrderItem.setOrderDelivertyDate(orderJSONObject.getString("od_delivertydate"));
-						previousOrderItem.setOrderDelivertTime(orderJSONObject.getString("od_deliverttime"));
-						previousOrderItem.setOrderTime(orderJSONObject.getString("od_delivertytime"));
-						previousOrderItem.setOrderDate(orderJSONObject.getString("od_createddate"));
+						previousOrderItem.setOrderDeliveryDate(orderJSONObject.getString("od_deliverydate"));
+						previousOrderItem.setOrderDeliveryTime(orderJSONObject.getString("od_deliverytime"));
+						previousOrderItem.setOrderCreatedDate(orderJSONObject.getString("od_createddate"));
+						previousOrderItem.setOrderCreatedTime(orderJSONObject.getString("od_createdtime"));
 						previousOrderItem.setOrderStatus(orderJSONObject.getString("od_process"));
 						previousOrderItem.setOrderPromoCode(orderJSONObject.getString("od_promocode"));
 						previousOrderItem.setOrderCouponPrice(orderJSONObject.getString("od_coupon_price"));

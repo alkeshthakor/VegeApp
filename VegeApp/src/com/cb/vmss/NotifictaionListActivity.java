@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class NotifictaionListActivity extends ActionBarActivity {
 	private List<VNotification> notificationList;
 	private NotificationAdapter mNotificationAdapter;
 	private ListView mNotificationListView;
+	private LinearLayout llEmptyNotifications;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class NotifictaionListActivity extends ActionBarActivity {
 		Constant.CONTEXT = mContext;
 		mDatabaseHelper=new VegAppDatabaseHelper(mContext);
 		
+		llEmptyNotifications = (LinearLayout) findViewById(R.id.llEmptyNotifications);
 		mNotificationListView=(ListView)findViewById(R.id.notificationListView);
 		
 		
@@ -79,10 +82,14 @@ public class NotifictaionListActivity extends ActionBarActivity {
 		notificationList=mDatabaseHelper.getNotificationList();
 		mDatabaseHelper.close();
 		
-		if(notificationList!=null){
+		if(notificationList!=null && !notificationList.isEmpty()){
+			llEmptyNotifications.setVisibility(View.GONE);
+			mNotificationListView.setVisibility(View.VISIBLE);
 			mNotificationAdapter=new NotificationAdapter(mContext, notificationList);
 			mNotificationListView.setAdapter(mNotificationAdapter);
-			
+		} else {
+			llEmptyNotifications.setVisibility(View.VISIBLE);
+			mNotificationListView.setVisibility(View.GONE);
 		}
 		
 	}

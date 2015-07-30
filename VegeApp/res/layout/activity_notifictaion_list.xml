@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-                        android:background="@color/GBL5"
-    
+    android:background="@color/GBL5"
     android:orientation="vertical" >
 
     <include
@@ -15,15 +14,40 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
-    <ListView 
+    <LinearLayout
+        android:id="@+id/llEmptyNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="invisible" >
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/title_no_notifications"
+            android:textSize="@dimen/font_size_xxxlarge" />
+
+        <com.cb.vmss.cusomview.TextViewCustom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/description_no_notifications"
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+
+    <ListView
         android:id="@+id/notificationListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
-        
-        android:layout_marginTop="10dp">
-        
+        android:visibility="gone" >
     </ListView>
-   
+
 </LinearLayout>

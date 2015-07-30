@@ -12,8 +12,8 @@ public class PreviousOrder implements Serializable{
 	
 	private String orderId;
 	private String orderTotalPrice;
-	private String orderDelivertyDate;
-	private String orderDelivertTime;
+	private String orderDeliveryDate;
+	private String orderDeliveryTime;
 	private String orderDate;
 	private String orderTime;
 	private String orderStatus;
@@ -48,28 +48,28 @@ public class PreviousOrder implements Serializable{
 	public void setOrderTotalPrice(String orderTotalPrice) {
 		this.orderTotalPrice = orderTotalPrice;
 	}
-	public String getOrderDelivertyDate() {
-		return orderDelivertyDate;
+	public String getOrderDeliveryDate() {
+		return orderDeliveryDate;
 	}
-	public void setOrderDelivertyDate(String orderDelivertyDate) {
-		this.orderDelivertyDate = orderDelivertyDate;
+	public void setOrderDeliveryDate(String orderDelivertyDate) {
+		this.orderDeliveryDate = orderDelivertyDate;
 	}
-	public String getOrderDelivertTime() {
-		return orderDelivertTime;
+	public String getOrderDeliveryTime() {
+		return orderDeliveryTime;
 	}
-	public void setOrderDelivertTime(String orderDelivertTime) {
-		this.orderDelivertTime = orderDelivertTime;
+	public void setOrderDeliveryTime(String orderDelivertTime) {
+		this.orderDeliveryTime = orderDelivertTime;
 	}
 	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(String orderDate) {
+	public void setOrderCreatedDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(String orderTime) {
+	public void setOrderCreatedTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 	public String getTotalItem() {
