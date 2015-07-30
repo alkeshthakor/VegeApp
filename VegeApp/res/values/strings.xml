@@ -30,7 +30,6 @@
     <string name="lbl_friend_mobil">Enter mobile no.</string>
     <string name="lbl_refer">Refer</string>
     
-    
     <string name="lbl_add_address">Add Address</string>
     <string name="lbl_aboutus">About this app</string>
     <string name="lbl_add_name">Full Name</string>
@@ -327,4 +326,7 @@ Personal Information\n
    
     <string name="title_activity_refer_friend">ReferFriendActivity</string>
 
+    <string name="title_no_notifications">No Notifications!</string>
+    <string name="description_no_notifications">Currently you do not have any notification</string>
+    
 </resources>

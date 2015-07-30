@@ -63,18 +63,12 @@ public class SplashScreenActivity extends Activity {
 			//return;
 		}*/
 
-		if (Pref.getValue(Constant.PREF_SHARE_URL, "").equalsIgnoreCase("")) {
 			if (cd.isConnectingToInternet()) {
 				mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
-				new GetShareUrlTask().execute(mServiceUrl);	
-			}else{
-				sleepThread();
-			}
+				new GetShareUrlTask().execute(mServiceUrl);
 		}else{
 			sleepThread();
-		}
-
-		
+		}	
 	}
 
 	@Override
@@ -106,9 +100,13 @@ public class SplashScreenActivity extends Activity {
 						&& result.getString("STATUS").equalsIgnoreCase(
 								"SUCCESS")) {
 					JSONObject obj=result.getJSONObject("DATA");
-					Pref.setValue(Constant.PREF_SHARE_URL, obj.getString("SHARE_URL"));
+					if(obj.getString("SHARE_URL") != null && !obj.getString("SHARE_URL").equalsIgnoreCase("null")) {
+						Pref.setValue(Constant.PREF_SHARE_URL, obj.getString("SHARE_URL"));					
+					} else {
+						Pref.setValue(Constant.PREF_SHARE_URL, "https://play.google.com/store/apps/details?id=com.cb.vmss&hl=en");
+					}
 				} else {
-					Pref.setValue(Constant.PREF_SHARE_URL,"");
+					Pref.setValue(Constant.PREF_SHARE_URL, "https://play.google.com/store/apps/details?id=com.cb.vmss&hl=en");
 				}
 				
 			} catch (JSONException e) {

@@ -204,10 +204,10 @@ public class HelpActivity extends ActionBarActivity {
 		mFAGList.add(faq19);
 		
 		
-		FAQBean faq20=new FAQBean();
+		/*FAQBean faq20=new FAQBean();
 		faq20.setQuestion("How can I download Sabzi@door Mobile App?");
 		faq20.setAnswer("You can download our online mobile app from Google Play Store or App Store. Here is the link - bit.ly/grfrs");
-		mFAGList.add(faq20);
+		mFAGList.add(faq20);*/
 		
 		return mFAGList;
 	}
