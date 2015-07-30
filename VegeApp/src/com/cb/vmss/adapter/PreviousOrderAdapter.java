@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -63,9 +64,9 @@ public class PreviousOrderAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_previous_order_item, null);
             holder = new ViewHolder();
-            holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdDate);
-            holder.txtOrdTime = (TextView)convertView.findViewById(R.id.txtOrdTime);
-
+            /*holder.txtOrdDate = (TextView)convertView.findViewById(R.id.txtOrdDate);
+            holder.txtOrdTime = (TextView)convertView.findViewById(R.id.txtOrdTime);*/
+            holder.txtOrderIndicator = (TextView) convertView.findViewById(R.id.txtOrderIndicator);
             holder.txtDeliveryOrdDate = (TextView)convertView.findViewById(R.id.txtDeliveryOrdDate);
             holder.txtDeliveryOrdTime = (TextView)convertView.findViewById(R.id.txtDeliveryOrdTime);
             holder.txtOrdNo = (TextView)convertView.findViewById(R.id.txtOrdNo);
@@ -73,16 +74,24 @@ public class PreviousOrderAdapter extends BaseAdapter {
             holder.txtTotPrice = (TextView)convertView.findViewById(R.id.totPriceTextView);
             holder.iconEditAddress = (ImageView) convertView.findViewById(R.id.icoEditAddress);
             holder.viewDeatilsRelLayoutObj = (RelativeLayout) convertView.findViewById(R.id.viewDeatilsRelLayout);
+            holder.llOrderDeliveryObj = (LinearLayout) convertView.findViewById(R.id.llOrderDelivery);
             convertView.setTag(holder);
             
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtOrdDate.setText(rowItem.getOrderDate());
-        holder.txtOrdTime.setText(rowItem.getOrderTime());
-        holder.txtDeliveryOrdDate.setText(rowItem.getOrderDelivertyDate());
-        holder.txtDeliveryOrdTime.setText(rowItem.getOrderDelivertTime());
+        /*holder.txtOrdDate.setText(rowItem.getOrderDate());
+        holder.txtOrdTime.setText(rowItem.getOrderTime());*/
+        if(rowItem.getOrderStatus().equalsIgnoreCase("Open")) {
+        	holder.txtOrderIndicator.setText("Delivery on");
+        } else if(rowItem.getOrderStatus().equalsIgnoreCase("Delivered")) {
+        	holder.txtOrderIndicator.setText("Delivered on");
+        } else if(rowItem.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        	holder.llOrderDeliveryObj.setVisibility(View.GONE);
+        }
+        holder.txtDeliveryOrdDate.setText(rowItem.getOrderDeliveryDate());
+        holder.txtDeliveryOrdTime.setText(rowItem.getOrderDeliveryTime());
         holder.txtOrdNo.setText("Order ID : " + rowItem.getOrderId());
         holder.txtStatus.setText("Status : " + rowItem.getOrderStatus());
         holder.txtTotPrice.setText(rowItem.getOrderTotalPrice());
@@ -99,8 +108,9 @@ public class PreviousOrderAdapter extends BaseAdapter {
 	}
 
 	static class ViewHolder {
-		TextView txtOrdDate;
-		TextView txtOrdTime;
+		/*TextView txtOrdDate;
+		TextView txtOrdTime;*/
+		TextView txtOrderIndicator;
 		TextView txtDeliveryOrdDate;
 		TextView txtDeliveryOrdTime;
 		TextView txtOrdNo;
@@ -108,5 +118,7 @@ public class PreviousOrderAdapter extends BaseAdapter {
 		TextView txtTotPrice;
 		ImageView iconEditAddress;
 		RelativeLayout viewDeatilsRelLayoutObj;
+		LinearLayout llOrderDeliveryObj;
+
     }
 }

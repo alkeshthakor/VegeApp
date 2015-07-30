@@ -54,6 +54,11 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 	TextView txtPromoDiscount;
 	TextView txtTotalAmt;
 	
+	TextView txtOrderIndicator;
+	TextView txtDeliveryOrdDate;
+	TextView txtDeliveryOrdTime;
+	LinearLayout llOrderDeliveryObj;
+	
 	View dividerPromoDiscount;
 	LinearLayout llPromoDiscount;
 	
@@ -138,6 +143,11 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         dividerPromoDiscount = (View) findViewById(R.id.dividerPromoDiscount);
         llPromoDiscount = (LinearLayout) findViewById(R.id.llPromoDiscount);    	
     	
+		txtOrderIndicator  = (TextView)findViewById(R.id.txtOrderIndicator);
+		txtDeliveryOrdDate  = (TextView)findViewById(R.id.txtDeliveryOrdDate);
+		txtDeliveryOrdTime = (TextView)findViewById(R.id.txtDeliveryOrdTime);
+		llOrderDeliveryObj = (LinearLayout)findViewById(R.id.llOrderDelivery);
+		
         if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
         	llCancelOrder.setVisibility(View.GONE);
         }
@@ -153,6 +163,16 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         txtAddress1and2.setText(item.getAddressLine1()+", "+item.getAddressLine2());
         txtAddressLandmark.setText(item.getAddressLandmark());
         txtAddresscity.setText(item.getAddressCity()+"-"+item.getAddressZipCode());
+        
+        if(item.getOrderStatus().equalsIgnoreCase("Open")) {
+        	txtOrderIndicator.setText("Delivery on");
+        } else if(item.getOrderStatus().equalsIgnoreCase("Delivered")) {
+        	txtOrderIndicator.setText("Delivered on");
+        } else if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        	llOrderDeliveryObj.setVisibility(View.GONE);
+        }
+		txtDeliveryOrdDate.setText(item.getOrderDeliveryDate());
+		txtDeliveryOrdTime.setText(item.getOrderDeliveryTime());
         
         int itemTotalPrice = 0;
         try {
