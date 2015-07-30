@@ -84,14 +84,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Dilivery : "
+                android:text="Delivery : "
                 android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/icon_calendar_grey" />
 
             <com.cb.vmss.cusomview.TextViewCustom
@@ -105,14 +105,15 @@
             <View
                 android:layout_width="0.2dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_margin="2dp"
                 android:background="@android:color/black" />
 
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
                 android:src="@drawable/icon_watch" />
 
             <com.cb.vmss.cusomview.TextViewCustom
