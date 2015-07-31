@@ -38,7 +38,7 @@
     <string name="lbl_add_area">Area/Landmark</string>
     <string name="lbl_add_city">City/State</string>
     <string name="lbl_add_zip_code">Zip Code</string>
-    <string name="lbl_please_enter_phone">Please eneter your phone number</string>
+    <string name="lbl_please_enter_phone">Please enter your phone number in order to continue shopping</string>
     <string name="lbl_phone_number">Phone Number</string>
     <string name="lbl_phone_prefix">+91</string>
     <string name="lbl_sms_waiting">Waiting to detect a SMS code sent to </string>
@@ -46,6 +46,15 @@
     <string name="lbl_manual_code_enter">You can enter the code manually</string>
     <string name="lbl_enter_code">Enter Code</string>
     <string name="lbl_resend_verification">Resend code</string>
+    <string name="lbl_resend_success">Verification code sent successfully</string>
+    <string name="lbl_resend_fail">Verification code request fail!!!</string>
+    <string name="lbl_user_verfication_success">User verifed successfully</string>
+    <string name="lbl_user_verfication_fail">User verification fail!!!</string>
+    
+    
+    <string name="lbl_promocode_minimum_validation">Promocode is valid only on minimum purchase of \u20B9%1$s</string>
+    
+    
     <string name="lbl_next">Next</string>
     <string name="lbl_add_create">Add Address</string>
     <string name="lbl_add_logout">Logout</string>
@@ -78,11 +87,12 @@
     <string name="lbl_title_order_details">Order Details</string>
     <string name="lbl_order_success">Order Successfully Placed</string>
     <string name="lbl_schedule_date">Scheduled Delivery Date and Time </string>
-    <string name="lbl_delivery_date_time">Delivery Date and Time </string>
+    <string name="lbl_delivery_date_time">Preferred Delivery Date and Time</string>
     <string name="lbl_check_order">Check Order Status</string>
     <string name="lbl_continue_shopping">Countinue Shopping</string>
     <string name="lbl_thanks">Thank you</string>
     <string name="lbl_welome">Welcome</string>
+    <string name="lbl_welome_message">Welcome to Sabzi@Door</string>
     <string name="lbl_help">Help</string>
     <string name="lbl_code">Code:</string>
     <string name="lbl_tap_to_copy">Tap to copy</string>

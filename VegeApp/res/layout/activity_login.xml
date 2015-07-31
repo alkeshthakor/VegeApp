@@ -27,9 +27,9 @@
             android:paddingRight="30dp" >
 
             <com.cb.vmss.cusomview.TextViewCustom
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/lbl_please_enter_phone"
                 android:textSize="14sp" />
 

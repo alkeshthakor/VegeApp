@@ -137,6 +137,7 @@
             android:tint="@android:color/black" /> -->
 
 		<com.cb.vmss.cusomview.TextViewCustom
+		    android:id="@+id/indian_rupee"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="@string/Rs"

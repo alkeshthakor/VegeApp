@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -140,10 +141,15 @@ public class LoginActivity extends ActionBarActivity {
 			progressIndicater.setVisibility(View.INVISIBLE);;
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
-					Toast.makeText(mContext,"User created successfully",Toast.LENGTH_SHORT).show();
-					//JSONObject returnObject=result.getJSONObject("DATA");
+										
+					String message=result.getJSONArray("MESSAGES").get(0).toString();
+										
+					Toast toast = Toast.makeText(mContext,message, Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
 					
 					Log.d("Login  Response: ",result.toString());
+					
 					
 					JSONObject returnObject=result.getJSONObject("DATA");
 					

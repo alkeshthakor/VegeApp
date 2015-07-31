@@ -36,7 +36,7 @@ public class FragmentDrawer extends Fragment {
     private TextView mPhoneNumberTextView;
     private TextView qtyCountTextView;
     private TextView notificationCountTextView;
-    private TextView locationTextView;
+   // private TextView locationTextView;
     
    
     private LinearLayout loginObj;
@@ -192,10 +192,11 @@ public class FragmentDrawer extends Fragment {
          	loginObj.setVisibility(View.GONE);
          	logoutObj.setVisibility(View.VISIBLE);
          } else {
-         	mPhoneNumberTextView.setText("Welcome");
+         	mPhoneNumberTextView.setText(getString(R.string.lbl_welome_message));
          	mPhoneIcon.setVisibility(View.GONE);
          	loginObj.setVisibility(View.VISIBLE);
          	logoutObj.setVisibility(View.GONE);
+         	
          }
     	 
     }
@@ -213,7 +214,7 @@ public class FragmentDrawer extends Fragment {
                 	loginObj.setVisibility(View.GONE);
                 	logoutObj.setVisibility(View.VISIBLE);
                 } else {
-                	mPhoneNumberTextView.setText("Welcome");
+                	mPhoneNumberTextView.setText(getString(R.string.lbl_welome_message));
                 	mPhoneIcon.setVisibility(View.GONE);
                 	loginObj.setVisibility(View.VISIBLE);
                 	logoutObj.setVisibility(View.GONE);
