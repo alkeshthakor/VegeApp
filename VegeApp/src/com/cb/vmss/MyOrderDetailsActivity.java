@@ -155,6 +155,8 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         
         txtOrdDate.setText(item.getOrderDate());
         txtOrdTime.setText(item.getOrderTime());
+        
+        
         txtOrdNo.setText("Order ID : " + item.getOrderId());
         txtStatus.setText("Status : " + item.getOrderStatus());
         txtTotPrice.setText(item.getOrderTotalPrice());
@@ -164,11 +166,12 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         txtAddressLandmark.setText(item.getAddressLandmark());
         txtAddresscity.setText(item.getAddressCity()+"-"+item.getAddressZipCode());
         
-        if(item.getOrderStatus().equalsIgnoreCase("Open")) {
+        //if(item.getOrderStatus().equalsIgnoreCase("Open")) {
+        if(item.getOrderStatus().equalsIgnoreCase("OPEN")||item.getOrderStatus().equalsIgnoreCase("DISPATCH")) {
         	txtOrderIndicator.setText("Delivery on");
-        } else if(item.getOrderStatus().equalsIgnoreCase("Delivered")) {
+        } else if(item.getOrderStatus().equalsIgnoreCase("CLOSED")) {
         	txtOrderIndicator.setText("Delivered on");
-        } else if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        } else if(item.getOrderStatus().equalsIgnoreCase("CANCEl")) {
         	llOrderDeliveryObj.setVisibility(View.GONE);
         }
 		txtDeliveryOrdDate.setText(item.getOrderDeliveryDate());

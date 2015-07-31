@@ -4,6 +4,9 @@ import static com.cb.vmss.gcm.notification.CommonUtilities.DISPLAY_MESSAGE_ACTIO
 import static com.cb.vmss.gcm.notification.CommonUtilities.EXTRA_MESSAGE;
 import static com.cb.vmss.gcm.notification.CommonUtilities.SENDER_ID;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.cb.vmss.fragment.FragmentDrawer;
 import com.cb.vmss.fragment.HomeFragment;
 import com.cb.vmss.gcm.notification.AlertDialogManager;
@@ -34,7 +37,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -43,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 	private Toolbar mToolbar;
 	private FragmentDrawer drawerFragment;
-	private TextView mTitleTextView;
+	//private TextView mTitleTextView;
 
 	/*
 	 * ConnectionDetector cd; ServerConnector connector; Context mContext;
@@ -68,7 +70,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Constant.CONTEXT = this;
+
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 		//Pref.setValue(Constant.PREF_USER_ID, "108");
@@ -76,32 +78,15 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 		if (mToolbar != null) {
 			setSupportActionBar(mToolbar);
-			//mTitleTextView = (TextView) mToolbar.findViewById(R.id.toolbar_title);
-			//mTitleTextView.setText(getString(R.string.app_name));
-
 		}
 		mToolbar.setTitleTextColor(Color.BLACK);
-
-		/*getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);*/
-		
-		// setSupportActionBar (mToolbar);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-		/*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-*/
-		//getResources().getDrawable(R.drawable.ic_navigation_drawer)
-		
 		mContext = this;
 		Constant.CONTEXT = mContext;
-		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
 
 		cd = new ConnectionDetector(getApplicationContext());
@@ -120,7 +105,11 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		// title = getString(R.string.title_home);
 		loadFragment(fragment);
 		
-
+		if (cd.isConnectingToInternet()) {
+			mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
+			new GetShareUrlTask().execute(mServiceUrl);
+	    }
+		
 	}
 
 	@Override
@@ -333,8 +322,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 	public void confirmCall() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-		builder.setTitle("Contact Subji At Door");
-		builder.setMessage("Do you want to call the Subji At Door help line?");
+		builder.setTitle("Contact Sabzi@Door");
+		builder.setMessage("Do you want to call the Sabzi@Door help line?");
 
 		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			@Override
@@ -431,4 +420,38 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		mRegisterTask.execute(null, null, null);
 	}
 
+	
+	private class GetShareUrlTask extends AsyncTask<String, Void, JSONObject> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		@Override
+		protected JSONObject doInBackground(String... params) {
+
+			return connector.getServerResponse(params[0]);
+		}
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			try {
+				if (result != null
+						&& result.getString("STATUS").equalsIgnoreCase(
+								"SUCCESS")) {
+					JSONObject obj=result.getJSONObject("DATA");
+					if(obj.getString("SHARE_URL") != null && !obj.getString("SHARE_URL").equalsIgnoreCase("null")) {
+						Pref.setValue(Constant.PREF_SHARE_URL, obj.getString("SHARE_URL"));					
+					} else {
+						Pref.setValue(Constant.PREF_SHARE_URL, "https://play.google.com/store/apps/details?id=com.cb.vmss&hl=en");
+					}
+				} else {
+					Pref.setValue(Constant.PREF_SHARE_URL, "https://play.google.com/store/apps/details?id=com.cb.vmss&hl=en");
+				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

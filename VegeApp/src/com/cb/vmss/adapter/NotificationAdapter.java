@@ -102,6 +102,18 @@ public class NotificationAdapter extends BaseAdapter {
 			}
 		});
         
+        holder.promocodeTextView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				myClip = ClipData.newPlainText("text", holder.promocodeTextView.getText().toString());
+				myClipboard.setPrimaryClip(myClip);
+				Toast.makeText(context,"Promo code copied",Toast.LENGTH_SHORT).show();
+				
+			}
+		});
+        
         holder.tapToCopyTextView.setOnClickListener(new OnClickListener() {
 			
 			@Override

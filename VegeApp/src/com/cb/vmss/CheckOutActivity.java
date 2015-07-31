@@ -173,19 +173,16 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
 				if (mPromoEditText.getText().length() > 2) {
 					hasText = true;
 					btnPromoCodeSecond.setText(getString(R.string.lbl_promo_apply));
@@ -230,19 +227,19 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		 * case R.id.btnPromoCodeCheckOut: break;
 		 */
 		case R.id.btnTodayCheckOut:
+			dayShift = "TODAY";
 			setTodayDrawable();
 			selectDate(getString(R.string.lbl_today));
-			dayShift = "TODAY";
 			break;
 		case R.id.btnTommorowCheckOut:
+			dayShift = "TOMORROW";
 			setTomorrowDrawable();
 			selectDate(getString(R.string.lbl_tomorrow));
-			dayShift = "TOMORROW";
 			break;
 		case R.id.btnDayAfterCheckOut:
+			dayShift = "DAYAFTER";
 			setDayAfterDrawable();
 			selectDate(getString(R.string.lbl_dayafter));
-			dayShift = "DAYAFTER";
 			break;
 		case R.id.btnPlaceOrderCheckOut:
 			if (cd.isConnectingToInternet()) {
@@ -418,7 +415,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			validCouponCode = promoCodeObject.getString("Coupon_code");
 
 			if (couponType.equals("amount")) {
-				
+
 				int discountAmount = promoCodeObject.getInt("Coupon_price");
 
 				int couponMinPrice = promoCodeObject.getInt("coupon_min_price");
@@ -448,7 +445,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 			} else if (couponType.equals("discount")) {
 				int couponDiscount = promoCodeObject.getInt("Coupon_discount");
-				
+
 				int discountValue = (totalAmount * couponDiscount) / 100;
 				totalValueAfterDiscount = totalAmount - discountValue;
 				promocodeTextView.setText(discountValue + "");
@@ -489,29 +486,42 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// TODO Auto-generated method stub
+
 			mHours = hourOfDay;
 			mMinute = minute;
 
-			// TimeValue = mHours + ":" + mMinute;
-
-			if (mHours < 10) {
-				TimeValue = "0" + mHours;
-			} else {
-				TimeValue = "" + mHours;
+			if (dayShift.equalsIgnoreCase("TODAY")) {
+				Calendar cal = Calendar.getInstance();
+				int hours = cal.get(Calendar.HOUR_OF_DAY);
+				if ((mHours - hours) < 1) {
+					mHours++;
+				}
 			}
 
-			if (mMinute < 10) {
-				TimeValue = TimeValue + ":0" + mMinute;
-			} else {
-				TimeValue = TimeValue + ":" + mMinute;
-			}
+			if (isValidTime(mHours,mMinute)) {
 
-			if (hourOfDay < 12) {
-				timeTextView.setText(TimeValue + " AM");
-				AM_PM = "AM";
+				if (mHours < 10) {
+					TimeValue = "0" + mHours;
+				} else {
+					TimeValue = "" + mHours;
+				}
+
+				if (mMinute < 10) {
+					TimeValue = TimeValue + ":0" + mMinute;
+				} else {
+					TimeValue = TimeValue + ":" + mMinute;
+				}
+
+				if (hourOfDay < 12) {
+					timeTextView.setText(TimeValue + " AM");
+					AM_PM = "AM";
+				} else {
+					timeTextView.setText(TimeValue + " PM");
+					AM_PM = "PM";
+				}
+
 			} else {
-				timeTextView.setText(TimeValue + " PM");
-				AM_PM = "PM";
+				timeOutError();
 			}
 
 		}
@@ -521,10 +531,30 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 		mHours = calender.get(Calendar.HOUR);
 		mMinute = calender.get(Calendar.MINUTE);
+		timeMode = calender.get(Calendar.AM_PM);
 
-		timeMode = calender.get(Calendar.AM);
+		dayShift = "TODAY";
 
-		// TimeValue = mHours + ":" + mMinute;
+		setTodayDrawable();
+
+		if (timeMode == Calendar.AM) {
+			if (mHours <= 9) {
+				// calender.add(Calendar.HOUR,1);
+				// mHours = calender.get(Calendar.HOUR);
+				mHours = 11;
+				mMinute = 00;
+			}
+		} else {
+			if (mHours >= 6) {
+				dayShift = "TOMORROW";
+				btnToday.setEnabled(false);
+				btnToday.setClickable(false);
+				setTomorrowDrawable();
+				mHours = 11;
+				mMinute = 00;
+				timeMode = 0;
+			}
+		}
 
 		if (mHours < 10) {
 			TimeValue = "0" + mHours;
@@ -538,14 +568,12 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			TimeValue = TimeValue + ":" + mMinute;
 		}
 
-		if (timeMode == 0) {
+		if (timeMode == Calendar.AM) {
 			timeTextView.setText(TimeValue + " AM");
 
 		} else {
 			timeTextView.setText(TimeValue + " PM");
 		}
-
-		dayShift = "TODAY";
 
 	}
 
@@ -629,6 +657,37 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private boolean isValidTime(int hourOfDay,int minute) {
+
+		if (hourOfDay < 9 || hourOfDay > 18) {
+			
+			return false;
+		} else {
+			
+			if(hourOfDay==18&&minute>0){
+				return false;
+			}else{
+				return true;	
+			}
+		}
+	}
+
+	public void timeOutError() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(CheckOutActivity.this);
+		builder.setTitle("Error!!!");
+		builder.setMessage("Please choose delivery time between 9 am to 6 pm ");
+
+		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 }

@@ -84,12 +84,6 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 		previousOrderListView = (ListView) findViewById(R.id.previousOrderListView);
 		previousOrderListView.setOnItemClickListener(this);
 		
-		if(cd.isConnectingToInternet()){
-			fetchPreviousOrder();
-		} else {
-		    Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
-		}
-		
 	}
 
 	@Override
@@ -109,6 +103,12 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(cd.isConnectingToInternet()){
+			fetchPreviousOrder();
+		} else {
+		    Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 	
 	private void fetchPreviousOrder(){

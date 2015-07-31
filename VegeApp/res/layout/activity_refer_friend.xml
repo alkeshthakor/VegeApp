@@ -64,7 +64,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
-                android:background="@drawable/button_background_with_fill_color"
+                android:background="@drawable/round_corner_button_background_with_color"
                 android:text="@string/lbl_refer"
                 android:textAllCaps="true"
                 android:layout_marginTop="24dp"

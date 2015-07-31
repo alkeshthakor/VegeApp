@@ -2,6 +2,13 @@ package com.cb.vmss;
 
 import java.util.List;
 
+import com.cb.vmss.adapter.MyCartAdapter;
+import com.cb.vmss.adapter.MyCartAdapter.IUpdateMyCart;
+import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.model.Product;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff.Mode;
@@ -12,17 +19,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.cb.vmss.adapter.MyCartAdapter;
-import com.cb.vmss.adapter.MyCartAdapter.IUpdateMyCart;
-import com.cb.vmss.database.VegAppDatabaseHelper;
-import com.cb.vmss.model.Product;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
 
 public class MyCartActivity extends ActionBarActivity implements OnClickListener,IUpdateMyCart{
 	private Toolbar toolbar;

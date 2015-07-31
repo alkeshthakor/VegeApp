@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,20 +33,19 @@ public class ReferFriendActivity extends ActionBarActivity {
 	ServerConnector connector;
 
 	private String mServiceUrl;
-	
+
 	private Context mContext;
 	private ConnectionDetector cd;
 
-	
 	private EditText friendNameEditText;
 	private EditText friendMobileEditText;
 	private Button referButton;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_refer_friend);
-		
+
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		mContext = this;
 		Constant.CONTEXT = mContext;
@@ -69,34 +69,37 @@ public class ReferFriendActivity extends ActionBarActivity {
 		mProgressDialog.setIndeterminate(false);
 		mProgressDialog.setCancelable(false);
 		connector = new ServerConnector();
-		
-		friendNameEditText=(EditText)findViewById(R.id.etFriendNameRefer);
-		friendMobileEditText=(EditText)findViewById(R.id.etFriendMobileRefer);
-		referButton=(Button)findViewById(R.id.btnReferFriend);
-		
+
+		friendNameEditText = (EditText) findViewById(R.id.etFriendNameRefer);
+		friendMobileEditText = (EditText) findViewById(R.id.etFriendMobileRefer);
+		referButton = (Button) findViewById(R.id.btnReferFriend);
+
 		referButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(friendNameEditText.getText().toString().length()<=0){
-					Toast.makeText(mContext,"Friend name should not be blank",Toast.LENGTH_SHORT).show();
+				if (friendNameEditText.getText().toString().length() <= 0) {
+					Toast.makeText(mContext, "Friend name should not be blank", Toast.LENGTH_SHORT).show();
 					return;
-				}else if(friendMobileEditText.getText().toString().length()<=0){
-					Toast.makeText(mContext,"Mobile should not be blank",Toast.LENGTH_SHORT).show();
+				} else if (friendMobileEditText.getText().toString().length() <= 0) {
+					Toast.makeText(mContext, "Mobile should not be blank", Toast.LENGTH_SHORT).show();
 					return;
-				}else{
+				} else {
 					if (cd.isConnectingToInternet()) {
-						 mServiceUrl=Constant.HOST+Constant.SERVICE_REFER_FRIEND;
-						 String parameter="rf_usr_id="+Pref.getValue(Constant.PREF_USER_ID,"")+"&rf_name="+friendNameEditText.getText().toString()+"&rf_phonenumber="+friendMobileEditText.getText().toString();
-						 new ReferFriendTask().execute(mServiceUrl,parameter);
+						mServiceUrl = Constant.HOST + Constant.SERVICE_REFER_FRIEND;
+						String parameter = "rf_usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&rf_name="
+								+ friendNameEditText.getText().toString() + "&rf_phonenumber="
+								+ friendMobileEditText.getText().toString();
+						new ReferFriendTask().execute(mServiceUrl, parameter);
 					} else {
-						Toast.makeText(mContext, getString(R.string.lbl_network_connection_fail), Toast.LENGTH_SHORT).show();
+						Toast.makeText(mContext, getString(R.string.lbl_network_connection_fail), Toast.LENGTH_SHORT)
+								.show();
 					}
 				}
 			}
 		});
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -110,8 +113,7 @@ public class ReferFriendActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
 	private class ReferFriendTask extends AsyncTask<String, Void, JSONObject> {
 
 		@Override
@@ -131,15 +133,28 @@ public class ReferFriendActivity extends ActionBarActivity {
 			super.onPostExecute(result);
 			mProgressDialog.dismiss();
 			try {
-				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
-					Toast.makeText(mContext,"Refered to friend successfully",Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(mContext,"Refer to friend fail",Toast.LENGTH_SHORT).show();
+				if (result != null) {
+					
+					if(result.getJSONArray("MESSAGES").length()>0){
+						String message = result.getJSONArray("MESSAGES").get(0).toString();
+						Toast toast = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+					}
+					/*
+					 * if
+					 * (result.getString("STATUS").equalsIgnoreCase("SUCCESS"))
+					 * { Toast.makeText(mContext,
+					 * "Refered to friend successfully"
+					 * ,Toast.LENGTH_SHORT).show(); } else {
+					 * Toast.makeText(mContext,"Refer to friend fail"
+					 * ,Toast.LENGTH_SHORT).show(); }
+					 */
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 }

@@ -41,7 +41,7 @@ public class TimePickerFragment extends DialogFragment {
 	 public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// getDialog().setTitle(title);
 		 
-		mTimePickerDialog=new TimePickerDialog(getActivity(), onTimeSet, hours, minute,true);
+		mTimePickerDialog=new TimePickerDialog(getActivity(), onTimeSet, hours, minute,false);
 				
 		mTimePickerDialog.setTitle(title);
 		

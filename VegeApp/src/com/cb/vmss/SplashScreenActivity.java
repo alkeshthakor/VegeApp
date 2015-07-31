@@ -51,6 +51,8 @@ public class SplashScreenActivity extends Activity {
 		email="";
 		
 		progressBarSplash=(ProgressBar)findViewById(R.id.progressBarSplash);
+		//progressBarSplash.setVisibility(View.VISIBLE);
+		
 		
 		/*// Check if Internet present
 		if (!cd.isConnectingToInternet()) {
@@ -63,12 +65,14 @@ public class SplashScreenActivity extends Activity {
 			//return;
 		}*/
 
-			if (cd.isConnectingToInternet()) {
+	    /*if (cd.isConnectingToInternet()) {
 				mServiceUrl = Constant.HOST + Constant.SERVICE_SHARE;
 				new GetShareUrlTask().execute(mServiceUrl);
-		}else{
-			sleepThread();
-		}	
+		}else{	
+		}*/	
+	    
+	    sleepThread();
+	    
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class SplashScreenActivity extends Activity {
 		super.onDestroy();
 	}
 
-	private class GetShareUrlTask extends AsyncTask<String, Void, JSONObject> {
+	/*private class GetShareUrlTask extends AsyncTask<String, Void, JSONObject> {
 
 		@Override
 		protected void onPreExecute() {
@@ -112,20 +116,27 @@ public class SplashScreenActivity extends Activity {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			sleepThread();
+			
+			Intent i = new Intent(getBaseContext(), MainActivity.class);
+			startActivity(i);
+			// Remove activity
+			finish();
+			
+			//sleepThread();
 		}
 	}
-
+*/
 	
 	public void sleepThread(){
 		/****** Create Thread that will sleep for 5 seconds *************/
 		Thread background = new Thread() {
 			public void run() {
-
 				try {
 					// Thread will sleep for 5 seconds
+					
+					
 					sleep(2 * 1000);
-
+					//progressBarSplash.setVisibility(View.INVISIBLE);
 					// After 5 seconds redirect to another intent
 					Intent i = new Intent(getBaseContext(), MainActivity.class);
 					startActivity(i);

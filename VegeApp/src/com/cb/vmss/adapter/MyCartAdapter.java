@@ -14,6 +14,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -90,8 +91,8 @@ public class MyCartAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         
-        holder.productDisplayPriceTextView.setVisibility(View.GONE);
-        holder.ruppesIconIV.setVisibility(View.GONE);
+        //holder.productDisplayPriceTextView.setVisibility(View.GONE);
+       // holder.ruppesIconIV.setVisibility(View.GONE);
         
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
@@ -160,6 +161,11 @@ public class MyCartAdapter extends BaseAdapter {
 				iUpdateMyCart.updateMyCart(1,Integer.parseInt(rowItem.getProductMainPrice()));
 			}
 		});
+        
+        
+        holder.productDisplayPriceTextView.setText(rowItem.getProductDisplayPrice());;
+        holder.productDisplayPriceTextView.setPaintFlags(holder.productDisplayPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         holder.txtViewProductName.setText(rowItem.getProductName());
         holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());

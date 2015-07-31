@@ -83,11 +83,11 @@ public class PreviousOrderAdapter extends BaseAdapter {
 
         /*holder.txtOrdDate.setText(rowItem.getOrderDate());
         holder.txtOrdTime.setText(rowItem.getOrderTime());*/
-        if(rowItem.getOrderStatus().equalsIgnoreCase("Open")) {
+        if(rowItem.getOrderStatus().equalsIgnoreCase("OPEN")||rowItem.getOrderStatus().equalsIgnoreCase("DISPATCH")) {
         	holder.txtOrderIndicator.setText("Delivery on");
-        } else if(rowItem.getOrderStatus().equalsIgnoreCase("Delivered")) {
+        } else if(rowItem.getOrderStatus().equalsIgnoreCase("CLOSED")) {
         	holder.txtOrderIndicator.setText("Delivered on");
-        } else if(rowItem.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        } else if(rowItem.getOrderStatus().equalsIgnoreCase("CANCEl")) {
         	holder.llOrderDeliveryObj.setVisibility(View.GONE);
         }
         holder.txtDeliveryOrdDate.setText(rowItem.getOrderDeliveryDate());
