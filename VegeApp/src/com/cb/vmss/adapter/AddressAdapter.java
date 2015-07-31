@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -123,7 +125,7 @@ public class AddressAdapter extends BaseAdapter {
 
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				// set title
-				alertDialogBuilder.setTitle("Alert");
+				alertDialogBuilder.setTitle("Confirm Delete Address!!!");
 				// set dialog message
 				alertDialogBuilder.setMessage("Are you sure you want to delete?").setCancelable(false)
 						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -190,19 +192,36 @@ public class AddressAdapter extends BaseAdapter {
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
 			mProgressDialog.dismiss();
+             Log.d("Address deleted",result.toString());
+             try {
+				String message=result.getString("MESSAGES");
+				try {
+					if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
+						Toast toast = Toast.makeText(context,message, Toast.LENGTH_SHORT);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+						
+						mAddressRowItem.remove(addressPosition);
+						notifyDataSetChanged();
+					}else{
+						//Toast.makeText(context,"Deleting address fail!",Toast.LENGTH_SHORT).show();
+						Toast toast = Toast.makeText(context,message, Toast.LENGTH_SHORT);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
 
-			try {
-				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
-					mAddressRowItem.remove(addressPosition);
-					notifyDataSetChanged();
-				}else{
-					Toast.makeText(context,"Deleting address fail!",Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					//Toast.makeText(context,"Deleting address fail!",Toast.LENGTH_SHORT).show();
+					Toast toast = Toast.makeText(context,message, Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+					e.printStackTrace();
 				}
-			} catch (JSONException e) {
+				
+			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
-				Toast.makeText(context,"Deleting address fail!",Toast.LENGTH_SHORT).show();
-				e.printStackTrace();
-
+				e1.printStackTrace();
 			}
 		}
 	}

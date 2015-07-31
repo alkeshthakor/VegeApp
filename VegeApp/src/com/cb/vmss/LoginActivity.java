@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import com.cb.vmss.util.ConnectionDetector;
 import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
 import com.cb.vmss.util.ServerConnector;
 
 import android.content.Context;
@@ -88,11 +89,12 @@ public class LoginActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				if(phoneNumberEditText.getText().length()==10){
 					//Toast.makeText(getApplicationContext(),"Valid Phone number",Toast.LENGTH_SHORT).show();
-					 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
-					// usr_phone= 9909983932
+					// usr_phone= 9909983932 gcm_regid
 					 
 					 if(cd.isConnectingToInternet()){
-						  new createNewUserTask().execute(mServiceUrl,phoneNumberEditText.getText().toString());
+						 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
+						 String parameter="usr_phone="+phoneNumberEditText.getText().toString()+"&gcm_regid="+Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID,"");
+						  new createNewUserTask().execute(mServiceUrl,parameter);
 					    }else{
 					    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 					    }
@@ -132,7 +134,7 @@ public class LoginActivity extends ActionBarActivity {
 
 		@Override
 		protected JSONObject doInBackground(String... params) {
-			return connector.getDataFromServer(params[0],"usr_phone="+params[1]);
+			return connector.getDataFromServer(params[0],params[1]);
 		}
 
 		@Override
