@@ -171,7 +171,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         	txtOrderIndicator.setText("Delivery on");
         } else if(item.getOrderStatus().equalsIgnoreCase("CLOSED")) {
         	txtOrderIndicator.setText("Delivered on");
-        } else if(item.getOrderStatus().equalsIgnoreCase("CANCEl")) {
+        } else if(item.getOrderStatus().equalsIgnoreCase("CANCEL")) {
         	llOrderDeliveryObj.setVisibility(View.GONE);
         }
 		txtDeliveryOrdDate.setText(item.getOrderDeliveryDate());
