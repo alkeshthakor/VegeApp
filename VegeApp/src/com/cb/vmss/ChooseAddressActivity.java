@@ -167,6 +167,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 						addressItem.setAddAddress2(addressJsonArray.getJSONObject(i).getString("add_address2"));
 						addressItem.setAddLandmark(addressJsonArray.getJSONObject(i).getString("add_landmark"));
 						addressItem.setAddCity(addressJsonArray.getJSONObject(i).getString("add_city"));
+						addressItem.setAddZipCodeName(addressJsonArray.getJSONObject(i).getString("zip_code"));
 						addressItem.setAddZipCode(addressJsonArray.getJSONObject(i).getString("add_zipcode"));
 						addressItem.setAddCreatedDate(addressJsonArray.getJSONObject(i).getString("add_createddate"));
 						addressItem.setAddUpdatedDate(addressJsonArray.getJSONObject(i).getString("add_updateddate"));

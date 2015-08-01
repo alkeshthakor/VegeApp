@@ -9,7 +9,12 @@ public class Constant {
 	// APPLICATION PREFERENCE FILE NAME
 	public static final String PREF_FILE = "PREF_VMSS";
 
-	public static final String HOST="http://45.55.152.215/dev/sabjiatdoor/services/";
+	//public static final String HOST="http://45.55.152.215/dev/sabjiatdoor/services/";
+	
+	public static final String HOST="https://www.sabziatdoor.com/services/";
+	
+	
+		
 	//http://45.55.152.215/dev/sabjiatdoor/services/share
 	public static final String PREF_USER_ID = "PREF_USER_ID";
 	public static final String PREF_PHONE_NUMBER= "PREF_PHONE_NUMBER";

@@ -107,11 +107,15 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnResendCodePhoneVerify:
-			mServiceUrl = Constant.HOST + Constant.SERVICE_USER_CREATION;
-			mVerificationBody = "usr_phone=" + mPhoneNumber;
+			//mServiceUrl = Constant.HOST + Constant.SERVICE_USER_CREATION;
+			//mVerificationBody = "usr_phone=" + mPhoneNumber;
 
 			if (cd.isConnectingToInternet()) {
-				new CodeVerificationTaskTask().execute(mServiceUrl, mVerificationBody, "CODE_RESEND");
+				
+				 mServiceUrl=Constant.HOST+Constant.SERVICE_USER_CREATION;
+				 String parameter="usr_phone=" + mPhoneNumber+"&gcm_regid="+Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID,"");
+				 
+				new CodeVerificationTaskTask().execute(mServiceUrl, parameter, "CODE_RESEND");
 			} else {
 				Toast.makeText(mContext, getString(R.string.lbl_network_connection_fail), Toast.LENGTH_SHORT).show();
 			}
