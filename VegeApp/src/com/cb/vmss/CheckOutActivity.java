@@ -1,5 +1,7 @@
 package com.cb.vmss;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -324,15 +326,25 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 						mServiceUrl = Constant.HOST + Constant.SERVICE_ADD_ORDER;
 						mDatabaseHelper.open();
 						String orderData = mDatabaseHelper.getOrderItem().toString();
+						try {
+							String orderDataEncoded = URLEncoder.encode(orderData, "utf-8");
+							
+							mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
+									+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=\"" + orderDataEncoded
+									+ "\"&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
+									+ validCouponCode + "&gcm_regid="
+									+ Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "");
 
-						mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
-								+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=" + orderData
-								+ "&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
-								+ validCouponCode + "&gcm_regid="
-								+ Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "");
-
-						mDatabaseHelper.close();
-						new OrderPlacedTask().execute(mServiceUrl, mOrderData);
+							mDatabaseHelper.close();
+							new OrderPlacedTask().execute(mServiceUrl, mOrderData);
+							
+							
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
 
 					}
 				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
