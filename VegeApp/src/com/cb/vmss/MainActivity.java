@@ -73,8 +73,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-		//Pref.setValue(Constant.PREF_USER_ID, "108");
-		//Pref.setValue(Constant.PREF_PHONE_NUMBER, "9879890783");
+		Pref.setValue(Constant.PREF_USER_ID, "108");
+		Pref.setValue(Constant.PREF_PHONE_NUMBER, "9879890783");
 
 		if (mToolbar != null) {
 			setSupportActionBar(mToolbar);
