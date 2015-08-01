@@ -7,6 +7,7 @@ import java.util.List;
 import com.cb.vmss.R;
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.imageutils.ImageLoader;
 import com.cb.vmss.model.Product;
 
 import android.annotation.SuppressLint;
@@ -34,7 +35,7 @@ public class MyCartAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	private ArrayList<Product> mProductRowItem = new ArrayList<Product>();
 	private VegAppDatabaseHelper mDatabaseHelper;
-	
+	private ImageLoader imgLoader;
 	
 	public interface IUpdateMyCart {
 		public void updateMyCart(int updateValue,int prize);
@@ -48,6 +49,8 @@ public class MyCartAdapter extends BaseAdapter {
 		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		iUpdateMyCart = (IUpdateMyCart) context;
 		mDatabaseHelper=new VegAppDatabaseHelper(context);
+		imgLoader = new ImageLoader(this.context);
+		
 	}
 	
 	@Override
@@ -90,10 +93,7 @@ public class MyCartAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
-        //holder.productDisplayPriceTextView.setVisibility(View.GONE);
-       // holder.ruppesIconIV.setVisibility(View.GONE);
-        
+          
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -170,11 +170,25 @@ public class MyCartAdapter extends BaseAdapter {
         holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
         holder.txtViewQty.setText(rowItem.getProductQty()+"");
-        if(rowItem.getProductBitmap() != null) {
+       
+        /*if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
             holder.productImageObj.setImageDrawable(imageDrawable);
         } else 
-        	new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        	new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());*/
+        
+        
+        if(rowItem.getProductBitmap() != null) {
+        	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
+            holder.productImageObj.setImageDrawable(imageDrawable);
+        } else {
+        	if(rowItem.getProductImage().length()>0) {
+        		imgLoader.DisplayImage(rowItem.getProductImage(), holder.productImageObj);
+        		new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        	} else {
+        		holder.productImageObj.setImageResource(R.drawable.no_image);
+        	}
+        }
         
         return convertView;
 	}
