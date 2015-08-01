@@ -105,7 +105,7 @@ public class AddressAdapter extends BaseAdapter {
 		holder.txtName.setText(rowItem.getAddFullName());
 		holder.address1TextView.setText(rowItem.getAddAddress1() + ", " + rowItem.getAddAddress2());
 		holder.address2TextView.setText(rowItem.getAddLandmark() + ", " + rowItem.getAddCity());
-		holder.address3TextView.setText(rowItem.getAddZipCode());
+		holder.address3TextView.setText(rowItem.getAddZipCodeName());
 
 		holder.iconEditAddress.setOnClickListener(new OnClickListener() {
 

@@ -339,4 +339,10 @@ Personal Information\n
     <string name="title_no_notifications">No Notifications!</string>
     <string name="description_no_notifications">Currently you do not have any notification</string>
     
+    <string-array name="testaaa">
+        <item >Item1</item>
+        <item >Item1</item>
+        <item >Item1</item>
+        <item >Item1</item>
+    </string-array>
 </resources>

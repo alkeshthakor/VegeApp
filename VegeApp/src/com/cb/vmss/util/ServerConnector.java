@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -31,9 +33,10 @@ public class ServerConnector {
 	public JSONObject getServerResponse(String hostUrl){
 		try {
 			URL url=new URL(hostUrl);
-			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
-			//conn.setDoOutput(true);
+			//HttpURLConnection conn=(HttpURLConnection)url.openConnection();
 			
+			HttpsURLConnection conn=(HttpsURLConnection)url.openConnection();
+		
 			InputStream is=conn.getInputStream();
 			BufferedReader rd=new BufferedReader(new InputStreamReader(is));
 			
@@ -64,7 +67,8 @@ public class ServerConnector {
 		//String host_url=HOST_URL+operationName;
 		try {
 			URL url=new URL(hostUrl);
-			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+			//HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+			HttpsURLConnection conn=(HttpsURLConnection)url.openConnection();
 			conn.setDoOutput(true);
 			
 			InputStream is=conn.getInputStream();
@@ -126,6 +130,7 @@ public class ServerConnector {
 	}
 	
 	
+	
 	public JSONObject getProductList(String hostUrl){
 		String response=null;
 		HttpClient httpClient=null;
@@ -178,11 +183,13 @@ public class ServerConnector {
 	        throw new IllegalArgumentException("invalid url : " + hostUrl);
 	    }
 	    String body = params.toString();
-	    //String loginstr=Constant.AUTH_USERID+":"+Constant.AUTH_PASSWORD; 
-	    //String encodedCredentials="Basic "+ Base64.encodeBytes(loginstr.getBytes());
-	    //System.out.println("[ Authorization ]" + encodedCredentials);
-	    HttpURLConnection conn = null;	    
+	   
+	    HttpURLConnection conn = null;	  
+	    //HttpsURLConnection conn = null;	
+	    
 	    try {
+	    	
+	    	 //conn=(HttpsURLConnection)url.openConnection();
 	    	
 	         conn = (HttpURLConnection) url.openConnection();
 	         conn.setDoOutput(true);
@@ -201,21 +208,8 @@ public class ServerConnector {
 			 writer.close();
 	         
 			 statusCode = conn.getResponseCode();
-	         
-//	         if (statusCode != 200) {
-//	              throw new IOException("Post failed with error code " + statusCode);
-//	            }else{
-//	            	 InputStream is = conn.getInputStream();
-//	            	 
-//	                 BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-//	                 StringBuffer response = new StringBuffer(); 
-//	                 while((line = rd.readLine()) != null) {
-//	                   response.append(line);
-//	                   response.append('\r');
-//	                 }
-//	                 rd.close();
-//	                 Log.d("Data......",response.toString());            
-//	            }
+	 
+			 
 	    }catch(Exception e){
 	    	e.printStackTrace();
 	    }
@@ -242,9 +236,13 @@ public class ServerConnector {
 	        throw new IllegalArgumentException("invalid url : " + hostUrl);
 	    }
 	    
-	    HttpURLConnection conn = null;	    
+	    HttpURLConnection conn = null;	
+	    //HttpsURLConnection conn = null;	
+
 	    try {
 	    	
+	    	 //conn=(HttpsURLConnection)url.openConnection();
+
 	         conn = (HttpURLConnection) url.openConnection();
 	         conn.setDoOutput(true);
 	         conn.setDoInput(true);
@@ -296,11 +294,14 @@ public class ServerConnector {
 	    } catch (MalformedURLException e) {
 	        throw new IllegalArgumentException("invalid url : " + hostUrl);
 	    }
-	    //String body = parameter.toString();
-	    HttpURLConnection conn = null;	    
+	   // HttpURLConnection conn = null;	
+	   HttpsURLConnection conn = null;	
+
 	    try {
 	    	
-	         conn = (HttpURLConnection) url.openConnection();
+	    	 conn=(HttpsURLConnection)url.openConnection();
+
+	         //conn = (HttpURLConnection) url.openConnection();
 	         conn.setDoOutput(true);
 	         conn.setDoInput(true);
 	         conn.setUseCaches(false);
@@ -359,10 +360,14 @@ public class ServerConnector {
 	        throw new IllegalArgumentException("invalid url : " + hostUrl);
 	    }
 	    //String body = parameter.toString();
-	    HttpURLConnection conn = null;	    
+	   // HttpURLConnection conn = null;	  
+	    HttpsURLConnection conn = null;	
+
 	    try {
 	    	
-	         conn = (HttpURLConnection) url.openConnection();
+	    	 conn=(HttpsURLConnection)url.openConnection();
+
+	        // conn = (HttpURLConnection) url.openConnection();
 	         conn.setDoOutput(true);
 	         conn.setDoInput(true);
 	         conn.setUseCaches(false);
@@ -415,7 +420,4 @@ public class ServerConnector {
 	    return responseObj;
 	    
 	 }
-	
-	
-	
 }

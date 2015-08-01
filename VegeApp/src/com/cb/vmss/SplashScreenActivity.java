@@ -1,22 +1,14 @@
 package com.cb.vmss;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.cb.vmss.gcm.notification.AlertDialogManager;
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
-import android.widget.ProgressBar;
+
+import com.cb.vmss.gcm.notification.AlertDialogManager;
+import com.cb.vmss.util.Constant;
 
 public class SplashScreenActivity extends Activity {
 
@@ -25,13 +17,9 @@ public class SplashScreenActivity extends Activity {
 	// Asyntask
 	AsyncTask<Void, Void, Void> mRegisterTask;
 
-	private ConnectionDetector cd;
-	private ServerConnector connector;
 	private Context mContext;
-	private String mServiceUrl;
 	public static String name;
 	public static String email;
-	private ProgressBar progressBarSplash;
 	
 
 	@Override
@@ -43,14 +31,10 @@ public class SplashScreenActivity extends Activity {
 
 		mContext = this;
 		Constant.CONTEXT = mContext;
-		cd = new ConnectionDetector(mContext);
-		connector = new ServerConnector();
-
-		cd = new ConnectionDetector(getApplicationContext());
+	
 		name="Alkesh Thakor";
 		email="";
 		
-		progressBarSplash=(ProgressBar)findViewById(R.id.progressBarSplash);
 		//progressBarSplash.setVisibility(View.VISIBLE);
 		
 		

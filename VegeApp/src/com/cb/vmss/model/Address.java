@@ -20,6 +20,8 @@ public class Address implements Serializable{
 	private String addCreatedDate;
 	private String addUpdatedDate;
 	private String addStatus;
+	private String addZipCodeName;
+	
 	public String getAddId() {
 		return addId;
 	}
@@ -92,4 +94,12 @@ public class Address implements Serializable{
 	public void setAddStatus(String addStatus) {
 		this.addStatus = addStatus;
 	}
+	public String getAddZipCodeName() {
+		return addZipCodeName;
+	}
+	public void setAddZipCodeName(String addZipCodeName) {
+		this.addZipCodeName = addZipCodeName;
+	}
+	
+	
 }
