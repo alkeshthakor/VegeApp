@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.cb.vmss.R;
 import com.cb.vmss.database.VegAppDatabase.VegAppColumn;
 import com.cb.vmss.database.VegAppDatabaseHelper;
+import com.cb.vmss.imageutils.ImageLoader;
 import com.cb.vmss.model.Product;
 
 public class ProductAdapter extends BaseAdapter {
@@ -34,6 +35,7 @@ public class ProductAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	private ArrayList<Product> mProductRowItem = new ArrayList<Product>();
 	private VegAppDatabaseHelper mDatabaseHelper;
+	private ImageLoader imgLoader;
 	
 	
 	public interface ITotalCount {
@@ -48,6 +50,7 @@ public class ProductAdapter extends BaseAdapter {
 		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		iTotalCount = (ITotalCount) context;
 		mDatabaseHelper=new VegAppDatabaseHelper(context);
+		imgLoader = new ImageLoader(this.context);
 	}
 	
 	@Override
@@ -166,6 +169,7 @@ public class ProductAdapter extends BaseAdapter {
             holder.productImageObj.setImageDrawable(imageDrawable);
         } else {
         	if(rowItem.getProductImage().length()>0) {
+        		imgLoader.DisplayImage(rowItem.getProductImage(), holder.productImageObj);
         		new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
         	} else {
         		holder.productImageObj.setImageResource(R.drawable.no_image);
