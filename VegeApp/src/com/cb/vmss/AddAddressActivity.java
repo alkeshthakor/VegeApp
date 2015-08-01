@@ -1,15 +1,13 @@
 package com.cb.vmss;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.jar.JarOutputStream;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.cb.vmss.model.Address;
-import com.cb.vmss.util.ConnectionDetector;
-import com.cb.vmss.util.Constant;
-import com.cb.vmss.util.Pref;
-import com.cb.vmss.util.ServerConnector;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,10 +20,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cb.vmss.model.Address;
+import com.cb.vmss.model.ZipCode;
+import com.cb.vmss.util.ConnectionDetector;
+import com.cb.vmss.util.Constant;
+import com.cb.vmss.util.Pref;
+import com.cb.vmss.util.ServerConnector;
 
 public class AddAddressActivity extends ActionBarActivity implements OnClickListener {
 
@@ -37,8 +43,9 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private EditText streetEditText;
 	private EditText areaEditText;
 	private EditText cityEditText;
-	private EditText zipEditText;
-
+	//private EditText zipEditText;
+    private Spinner zipSpinner;
+    
 	private TextView createButton;
 	private String mServiceUrl;
 	private String addressBody;
@@ -50,6 +57,10 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private Address item;
 	private boolean isEdit = false;
 	private String[] addressLine;
+	
+	private List<ZipCode> zipCodeArrayList;
+	private List<String> zipNameList;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,17 +108,24 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		streetEditText = (EditText) findViewById(R.id.addStreetEditText);
 		areaEditText = (EditText) findViewById(R.id.addAreaEditText);
 		cityEditText = (EditText) findViewById(R.id.addCityEditText);
-		zipEditText = (EditText) findViewById(R.id.addZipEditText);
-
+		zipSpinner =(Spinner) findViewById(R.id.addZipSpinner);
+		zipCodeArrayList=new ArrayList<ZipCode>();
+		zipNameList=new ArrayList<String>();
 		
-
+		if(cd.isConnectingToInternet()){
+			new GetZipCodeTask().execute(Constant.HOST+Constant.SERVICE_ZIP_CODE);
+		}else{
+		    Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		}
+	
+		
 		if (isEdit) {
 			createButton.setText("Save");
 			nameEditText.setText(item.getAddFullName());
 
 			areaEditText.setText(item.getAddLandmark());
 			cityEditText.setText(item.getAddCity());
-			zipEditText.setText(item.getAddZipCode());
+			//zipEditText.setText(item.getAddZipCode());
 
 			houseEditText.setText(item.getAddAddress1());
 			streetEditText.setText(item.getAddAddress2());
@@ -167,14 +185,14 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 							+ "&add_address1="+ houseEditText.getText().toString() 
 							+ "&add_address2=" + streetEditText.getText().toString() 
 							+ "&add_landmark=" + areaEditText.getText().toString() 
-							+ "&add_zipcode=" + zipEditText.getText().toString();
+							+ "&add_zipcode=" + zipCodeArrayList.get(zipSpinner.getSelectedItemPosition()).getZipId();
 				} else {
 					addressBody = "usr_id=" + userId + "&add_id=" + "&add_fullname=" + nameEditText.getText().toString()
 							+ "&add_phone=" + Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
 							+ "&add_address1="+ houseEditText.getText().toString() 
 							+ "&add_address2=" + streetEditText.getText().toString() 
 							+ "&add_landmark=" + areaEditText.getText().toString() 
-							+ "&add_zipcode=" + zipEditText.getText().toString();
+							+ "&add_zipcode="+zipCodeArrayList.get(zipSpinner.getSelectedItemPosition()).getZipId();
 
 				}
 				mServiceUrl = Constant.HOST + Constant.SERVICE_ADD_ADDRESS;
@@ -239,10 +257,70 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private boolean isEmptyField() {
 		if (nameEditText.getText().toString().length() > 0 && houseEditText.getText().toString().length() > 0
 				&& streetEditText.getText().toString().length() > 0 && areaEditText.getText().toString().length() > 0
-				&& cityEditText.getText().toString().length() > 0 && zipEditText.getText().toString().length() > 0) {
+				&& cityEditText.getText().toString().length() > 0 && zipCodeArrayList.size()>0) {
 			return false;
 		} else {
 			return true;
 		}
 	}
+	
+	
+	private class GetZipCodeTask extends AsyncTask<String, Void, JSONObject> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			mProgressDialog.show();
+		}
+		@Override
+		protected JSONObject doInBackground(String... params) {
+			return connector.getServerResponse(params[0]);
+		}
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			mProgressDialog.dismiss();
+			try {
+				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
+					
+					zipCodeArrayList=new ArrayList<ZipCode>();
+					zipNameList=new  ArrayList<String>();
+					
+					JSONArray zipDataArray=result.getJSONArray("DATA");
+					for(int i=0;i<zipDataArray.length();i++){
+						JSONObject obj=zipDataArray.getJSONObject(i);
+						ZipCode rowitem=new ZipCode();
+						rowitem.setZipId(obj.getString("zip_id"));
+						rowitem.setZipCode(obj.getString("zip_code"));
+						rowitem.setZipName(obj.getString("zip_name"));	
+						zipNameList.add(obj.getString("zip_name"));
+						zipCodeArrayList.add(rowitem);
+					}
+					// Create an ArrayAdapter using the string array and a default spinner layout
+					ArrayAdapter<String> adapterZip = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, zipNameList);
+					// Specify the layout to use when the list of choices appears
+					adapterZip.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					// Apply the adapter to the spinner
+					zipSpinner.setAdapter(adapterZip);
+					
+					if (isEdit){
+						if(item!=null){
+							int zipPosition = 0;
+							
+							for(int i=0;i<zipCodeArrayList.size();i++){
+								if(zipCodeArrayList.get(i).getZipId().equalsIgnoreCase(item.getAddZipCode())){
+									zipPosition=i;
+									break;
+								}
+							}
+							zipSpinner.setSelection(zipPosition);
+							
+						}
+					}					
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
