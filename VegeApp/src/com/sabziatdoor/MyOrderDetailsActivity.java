@@ -149,9 +149,10 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 		txtDeliveryOrdTime = (TextView)findViewById(R.id.txtDeliveryOrdTime);
 		llOrderDeliveryObj = (LinearLayout)findViewById(R.id.llOrderDelivery);
 		
-        if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
+        /*if(item.getOrderStatus().equalsIgnoreCase("Cancelled")) {
         	llCancelOrder.setVisibility(View.GONE);
-        }
+        }*/
+        
         orderId=item.getOrderId();
         
         txtOrdDate.setText(item.getOrderDate());
@@ -174,6 +175,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         	txtOrderIndicator.setText("Delivered on");
         } else if(item.getOrderStatus().equalsIgnoreCase("CANCEL")) {
         	llOrderDeliveryObj.setVisibility(View.GONE);
+        	llCancelOrder.setVisibility(View.GONE);
         }
 		txtDeliveryOrdDate.setText(item.getOrderDeliveryDate());
 		txtDeliveryOrdTime.setText(item.getOrderDeliveryTime());

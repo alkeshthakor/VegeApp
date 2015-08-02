@@ -331,8 +331,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 							String orderDataEncoded = URLEncoder.encode(orderData, "utf-8");
 							
 							mOrderData = "usr_id=" + Pref.getValue(Constant.PREF_USER_ID, "") + "&add_id="
-									+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=\"" + orderDataEncoded
-									+ "\"&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
+									+ Pref.getValue(Constant.PREF_ADD_ID, "") + "&prd_data=" + orderDataEncoded
+									+ "&od_deliverytype=" + dayShift + "&od_delivertytime=" + TimeValue + "&od_promocode="
 									+ validCouponCode + "&gcm_regid="
 									+ Pref.getValue(Constant.PREF_GCM_REGISTRATION_ID, "");
 

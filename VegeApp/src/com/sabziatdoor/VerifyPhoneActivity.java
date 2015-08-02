@@ -243,10 +243,6 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		} else if (resultCode == Constant.CODE_BACK_WITH_CHECK_ORDER) {
 			setResult(Constant.CODE_BACK_WITH_CHECK_ORDER);
 			finish();
-		} else if (resultCode == Constant.CODE_BACK_WITH_COUTINUE_SHOPPING) {
-			setResult(Constant.CODE_BACK_WITH_COUTINUE_SHOPPING);
-			finish();
 		}
-
 	}
 }

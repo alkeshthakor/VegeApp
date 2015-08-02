@@ -99,6 +99,8 @@
             android:layout_marginRight="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
+            android:inputType="numberDecimal"
+            android:maxLength="100"
             android:singleLine="true"
             android:gravity="center_horizontal"
             android:hint="@string/lbl_enter_code"

@@ -1,6 +1,5 @@
 package com.sabziatdoor;
 
-import com.sabziatdoor.R;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.sabziatdoor.adapter.ProductAdapter.ITotalCount;
@@ -30,7 +29,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,7 +37,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	public int defaultPosition;
 
 	protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
-
+	public static boolean isFromHome;
+	
 	RelativeLayout relLayout, qtyCountRelLayoutObj;
 	TextView txtQtyCountObj, productPriceTextViewObj;
 	// public static Fragment currentFragment;
@@ -57,12 +56,15 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private Context mContext;
 
 	private Toolbar mToolbar;
-	private ImageView serachImageView;
-
+	//private ImageView serachImageView;
+	//private String[] mCategoryList;
+	//private ProductSelectionActivity mProductSelectionActivity;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_selection);
+		isFromHome=true;
 		mContext = this;
 		Constant.CONTEXT = mContext;
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,26 +78,22 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			upArrow.setColorFilter(getResources().getColor(android.R.color.white), Mode.SRC_ATOP);
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-			//serachImageView = (ImageView) mToolbar.findViewById(R.id.searchImageView);
-			//serachImageView.setOnClickListener(this);
-
 		}
-		/// currentFragment = new
-		/// ProductSelectionFragment(HomeFragment.mCategoryList.get(0).getCategoryId());
+
+		//mCategoryList=getIntent().getStringArrayExtra("cat_list");
+		
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mPagerAdapter);
 
 		defaultPosition = Integer.parseInt(getIntent().getStringExtra("tabposition"));
-
+		
 		mPager.setCurrentItem(defaultPosition);
 
 		mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
 		mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 		mToolbarHeight = getResources().getDimensionPixelSize(R.dimen.toolbar_height);
 
-		// TextView titleView = (TextView) findViewById(R.id.title);
-		// titleView.setText("Sabji At Door");
 
 		mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
 		mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
@@ -121,6 +119,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			}
 		});
 
+		
+		
 	}
 
 	@Override
@@ -138,7 +138,15 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			txtQtyCountObj.setText("" + totalQtyCount);
 			productPriceTextViewObj.setText("" + totalAmount);
 		}
+		
 
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		isFromHome=true;
 	}
 
 	@Override
@@ -190,10 +198,6 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 
 	private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
-		// private static final String[] TITLES = new String[]{"Applepie",
-		// "Butter Cookie", "Cupcake", "Donut", "Eclair", "Froyo",
-		// "Gingerbread", "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
-		// "KitKat", "Lollipop"};
 		private String[] TITLES;
 		private int mScrollY;
 
@@ -209,16 +213,6 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		@Override
 		protected Fragment createItem(int position) {
 			FlexibleSpaceWithImageBaseFragment mFragment;
-			// final int pattern = position % 4;
-			/*
-			 * switch (pattern) { case 0: { f = new
-			 * ProductSelectionFragment2(HomeFragment.mCategoryList.get(position
-			 * ).getCategoryId()); break; } case 1: { f = new
-			 * ProductSelectionFragment2(); break; } case 2: { f = new
-			 * ProductSelectionFragment2(); break; } case 3: default: { f = new
-			 * ProductSelectionFragment2(); break; } }
-			 */
-
 			mFragment = new ProductSelectionFragment(HomeFragment.mCategoryList.get(position).getCategoryId());
 			mFragment.setArguments(mScrollY);
 			return mFragment;
@@ -367,19 +361,17 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.relLayout:
+			isFromHome=false;
 			Intent myCartIntent = new Intent(getApplicationContext(), MyCartActivity.class);
 			startActivityForResult(myCartIntent, Constant.CODE_MAIN_LOGIN);
 			break;
-/*		case R.id.searchImageView:
-			break;
-*/
 		}
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {	
+		isFromHome=false;	
 		// TODO Auto-generated method stub
-		// Check which request we're responding to
 		if (resultCode == Constant.CODE_MAIN_LOGIN) {
 			// Make sure the request was successful
 			setResult(Constant.CODE_MAIN_LOGIN);

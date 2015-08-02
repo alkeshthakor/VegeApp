@@ -1,19 +1,19 @@
 package com.sabziatdoor.adapter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import com.sabziatdoor.R;
+import com.sabziatdoor.database.VegAppDatabase.VegAppColumn;
+import com.sabziatdoor.database.VegAppDatabaseHelper;
+import com.sabziatdoor.imageutils.ImageLoader;
+import com.sabziatdoor.model.Product;
+
 import android.content.ContentValues;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,12 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.sabziatdoor.R;
-import com.sabziatdoor.database.VegAppDatabaseHelper;
-import com.sabziatdoor.database.VegAppDatabase.VegAppColumn;
-import com.sabziatdoor.imageutils.ImageLoader;
-import com.sabziatdoor.model.Product;
+import android.widget.Toast;
 
 public class ProductAdapter extends BaseAdapter {
 
@@ -122,7 +117,9 @@ public class ProductAdapter extends BaseAdapter {
         holder.icoPlus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				mDatabaseHelper.open();
+				
 				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
 				if(productQtyInCart!=-1){
 					productQtyInCart+=1;
@@ -152,6 +149,9 @@ public class ProductAdapter extends BaseAdapter {
 			     	mDatabaseHelper.addInToMyCart(cartValue);
 			    }
 				
+				if(productQtyInCart>rowItem.getStockQty()){
+					Toast.makeText(context,"Out of stock. Will be delivered tomorrow",Toast.LENGTH_SHORT).show();
+				}
 				holder.txtViewQty.setText(""+productQtyInCart);
 				rowItem.setProductQty(productQtyInCart);				
 				mDatabaseHelper.close();
@@ -170,7 +170,7 @@ public class ProductAdapter extends BaseAdapter {
         } else {
         	if(rowItem.getProductImage().length()>0) {
         		imgLoader.DisplayImage(rowItem.getProductImage(), holder.productImageObj);
-        		new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        		//new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
         	} else {
         		holder.productImageObj.setImageResource(R.drawable.no_image);
         	}
@@ -189,7 +189,7 @@ public class ProductAdapter extends BaseAdapter {
 		ImageView productImageObj;
     }
 	
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	/*private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		int position;
 		public DownloadImageTask(int position,ImageView bmImage) {
@@ -217,5 +217,5 @@ public class ProductAdapter extends BaseAdapter {
 			Drawable imageDrawable = new BitmapDrawable(context.getResources(), result);
 			bmImage.setImageDrawable(imageDrawable);
 		}
-	}
+	}*/
 }
