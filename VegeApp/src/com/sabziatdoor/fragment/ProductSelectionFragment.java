@@ -122,6 +122,8 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		mProgressDialog.setIndeterminate(false);
 		mServiceUrl = Constant.HOST + Constant.SERVICE_PRODUCT_BY_CAT_ID;
 		
+		
+		
 		return view;
 	}
 
@@ -129,11 +131,15 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
 		if(cd.isConnectingToInternet()){
 			 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
 		    }else{
 		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 		 }
+		
+		//Toast.makeText(mContext,"OnResume called "+"cat_id="+mCategoryId,Toast.LENGTH_SHORT).show();
+		
 	}
 	
 	@Override
@@ -182,7 +188,7 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 						productItem.setCategoryName(productArray.getJSONObject(i).getString("cat_name"));
 						productItem.setUnit_key(productArray.getJSONObject(i).getString("unit_key"));
 						productItem.setUnit_value(productArray.getJSONObject(i).getString("unit_value"));
-						
+						productItem.setStockQty(productArray.getJSONObject(i).getInt("st_quantity"));
 					
 						int productQtyInCart=mDatabaseHelper.getCartProductQty(productItem.getProductId());
 						if(productQtyInCart!=-1)

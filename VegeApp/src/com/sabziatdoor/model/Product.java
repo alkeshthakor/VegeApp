@@ -20,6 +20,7 @@ public class Product implements Serializable{
 	private String unit_key;
 	private String unit_value;
 	private String categoryName;
+	private int stockQty;
 	private int productQty;
 	private Bitmap productBitmap;
 	
@@ -95,4 +96,12 @@ public class Product implements Serializable{
 	public void setProductBitmap(Bitmap productBitmap) {
 		this.productBitmap = productBitmap;
 	}
+	public int getStockQty() {
+		return stockQty;
+	}
+	public void setStockQty(int stockQty) {
+		this.stockQty = stockQty;
+	}
+	
+	
 }

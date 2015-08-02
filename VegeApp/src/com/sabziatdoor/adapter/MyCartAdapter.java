@@ -182,7 +182,7 @@ public class MyCartAdapter extends BaseAdapter {
         } else {
         	if(rowItem.getProductImage().length()>0) {
         		imgLoader.DisplayImage(rowItem.getProductImage(), holder.productImageObj);
-        		new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
+        		//new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());
         	} else {
         		holder.productImageObj.setImageResource(R.drawable.no_image);
         	}
@@ -207,7 +207,7 @@ public class MyCartAdapter extends BaseAdapter {
 		
     }
 	
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	/*private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		int position;
 		public DownloadImageTask(int position,ImageView bmImage) {
@@ -238,5 +238,5 @@ public class MyCartAdapter extends BaseAdapter {
 				bmImage.setImageDrawable(imageDrawable);
 			}
 		}
-	}
+	}*/
 }
