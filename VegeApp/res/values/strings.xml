@@ -86,7 +86,11 @@
     <string name="lbl_title_my_order">My Order</string>
     <string name="lbl_title_order_details">Order Details</string>
     <string name="lbl_order_success">Order Successfully Placed</string>
-    <string name="lbl_schedule_date">Scheduled Delivery Date and Time </string>
+    <string name="lbl_schedule_date">Scheduled Delivery Date and Time</string>
+    
+    <string name="lbl_note">Note</string>
+    <string name="lbl_out_stock_msg">Out of stock items, will be delivered tomorrow</string>
+    
     <string name="lbl_delivery_date_time">Preferred Delivery Date and Time</string>
     <string name="lbl_check_order">Check Order Status</string>
     <string name="lbl_continue_shopping">Countinue Shopping</string>

@@ -74,6 +74,16 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/lbl_zero"
                 android:textSize="16sp" />
+            
+            <com.cb.vmss.cusomview.TextViewCustom
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:gravity="center"
+                android:text="@string/lbl_out_stock_msg" />
+            
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +94,7 @@
             android:paddingLeft="10dp"
             android:paddingBottom="25dp"
             android:paddingRight="10dp"
-            android:paddingTop="40dp"
+            android:paddingTop="30dp"
             android:orientation="horizontal" >
 
             <com.cb.vmss.cusomview.ButtonCustom
