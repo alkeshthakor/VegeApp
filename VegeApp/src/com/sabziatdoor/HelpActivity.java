@@ -112,7 +112,7 @@ public class HelpActivity extends ActionBarActivity {
 		
 		FAQBean faq1=new FAQBean();
 		faq1.setQuestion("What is Sabzi@door?");
-		faq1.setAnswer("Sabzi@door is fastest retail chain Ahmedabad based local company which helps you to order all kinds or fruits and vegetables that you need daily. Check out our mobile application at Sabziatdoor.com/download or visit our website www.sabziatdoor.com. You have an option to order also by call or Whatsapp.");
+		faq1.setAnswer("Sabzi@door is fastest retail chain Ahmedabad based local company which helps you to order all kinds or fruits and vegetables that you need daily. Check out our mobile application at Sabziatdoor.com/download or visit our website www.sabziatdoor.com You have an option to order also by call or Whatsapp.");
 		mFAGList.add(faq1);
 		
 		FAQBean faq2=new FAQBean();
@@ -142,7 +142,7 @@ public class HelpActivity extends ActionBarActivity {
 		
 		FAQBean faq7=new FAQBean();
 		faq7.setQuestion("How can I make changes to my order before and after confirmation?");
-		faq7.setAnswer("In case you want to change something in the order after it has been placed, you can write to us at support@sabziatdoor.com or simply call us at9925833511 between 9AM and 9PM.");
+		faq7.setAnswer("In case you want to change something in the order after it has been placed, you can write to us at support@sabziatdoor.com or simply call us at 7228033322 between 9AM and 9PM.");
 		mFAGList.add(faq7);
 		
 		FAQBean faq8=new FAQBean();

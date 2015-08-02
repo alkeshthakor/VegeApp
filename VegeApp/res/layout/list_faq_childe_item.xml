@@ -17,7 +17,6 @@
         android:layout_height="match_parent"
         android:gravity="fill_horizontal"
         android:textColor="@color/GBL2"
-        android:autoLink="all"
         android:textSize="@dimen/font_size_medium" />
 
 </LinearLayout>
