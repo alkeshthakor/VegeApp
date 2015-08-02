@@ -1,6 +1,5 @@
 package com.sabziatdoor;
 
-import com.sabziatdoor.R;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.sabziatdoor.adapter.ProductAdapter.ITotalCount;
@@ -30,7 +29,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,7 +37,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	public int defaultPosition;
 
 	protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
-
+	public static boolean isFromHome;
+	
 	RelativeLayout relLayout, qtyCountRelLayoutObj;
 	TextView txtQtyCountObj, productPriceTextViewObj;
 	// public static Fragment currentFragment;
@@ -57,15 +56,15 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private Context mContext;
 
 	private Toolbar mToolbar;
-	private ImageView serachImageView;
-	private boolean isFromHome;
-	private String[] mCategoryList;
+	//private ImageView serachImageView;
+	//private String[] mCategoryList;
+	//private ProductSelectionActivity mProductSelectionActivity;
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_selection);
+		isFromHome=true;
 		mContext = this;
 		Constant.CONTEXT = mContext;
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,7 +80,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 
 		}
 
-		mCategoryList=getIntent().getStringArrayExtra("cat_list");
+		//mCategoryList=getIntent().getStringArrayExtra("cat_list");
 		
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));
 		mPager = (ViewPager) findViewById(R.id.pager);
@@ -120,6 +119,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			}
 		});
 
+		
+		
 	}
 
 	@Override
@@ -137,7 +138,15 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			txtQtyCountObj.setText("" + totalQtyCount);
 			productPriceTextViewObj.setText("" + totalAmount);
 		}
+		
 
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		isFromHome=true;
 	}
 
 	@Override
@@ -352,17 +361,16 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.relLayout:
+			isFromHome=false;
 			Intent myCartIntent = new Intent(getApplicationContext(), MyCartActivity.class);
 			startActivityForResult(myCartIntent, Constant.CODE_MAIN_LOGIN);
 			break;
-/*		case R.id.searchImageView:
-			break;
-*/
 		}
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {	
+		isFromHome=false;	
 		// TODO Auto-generated method stub
 		if (resultCode == Constant.CODE_MAIN_LOGIN) {
 			// Make sure the request was successful

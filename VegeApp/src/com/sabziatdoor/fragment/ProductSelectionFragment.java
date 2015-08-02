@@ -50,6 +50,8 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 
 	private VegAppDatabaseHelper mDatabaseHelper;
 
+	//private ProductSelectionActivity mProductSelectionActivity;
+	
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
@@ -122,7 +124,11 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		mProgressDialog.setIndeterminate(false);
 		mServiceUrl = Constant.HOST + Constant.SERVICE_PRODUCT_BY_CAT_ID;
 		
-		
+		if(cd.isConnectingToInternet()){
+			 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
+		    }else{
+		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
+		 }
 		
 		return view;
 	}
@@ -133,12 +139,13 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		super.onResume();
 		
 		if(cd.isConnectingToInternet()){
-			 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);
+			 if(ProductSelectionActivity.isFromHome==false){
+				 new LoadProdcutByCategoryTask().execute(mServiceUrl, "cat_id="+mCategoryId);	 
+			 }
 		    }else{
 		    	Toast.makeText(mContext,getString(R.string.lbl_network_connection_fail),Toast.LENGTH_SHORT).show();
 		 }
 		
-		//Toast.makeText(mContext,"OnResume called "+"cat_id="+mCategoryId,Toast.LENGTH_SHORT).show();
 		
 	}
 	
