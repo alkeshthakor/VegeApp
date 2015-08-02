@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:paddingLeft="5dp" >
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productItemNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,20 +31,20 @@
         android:layout_weight="0.25"
         android:gravity="center" >
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productQtyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50"
             android:textSize="14sp" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" X "
             android:textSize="14sp" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,14 +65,14 @@
             android:layout_marginTop="1dp"
             android:src="@drawable/icon_indian_rupee_16" /> -->
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/Rs"
 			android:textColor="#8C8C8C"
 			android:textSize="@dimen/font_size_small" />
         
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productTotalPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -10,7 +10,7 @@
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
-    <com.cb.vmss.cusomview.TextViewCustom
+    <com.sabziatdoor.cusomview.TextViewCustom
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

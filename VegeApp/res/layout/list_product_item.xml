@@ -24,14 +24,14 @@
         android:orientation="vertical"
         android:paddingLeft="10dp" >
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productItemNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_small" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productWeightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     android:layout_marginTop="1dp"
                     android:src="@drawable/icon_indian_rupee_16" /> -->
                
-               <com.cb.vmss.cusomview.TextViewCustom
+               <com.sabziatdoor.cusomview.TextViewCustom
                    android:id="@+id/iv_icon_ruppes_productItem"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
 			        android:textColor="@android:color/black"
 				    android:textSize="@dimen/font_size_small" />
                
-                <com.cb.vmss.cusomview.TextViewCustom
+                <com.sabziatdoor.cusomview.TextViewCustom
                     android:id="@+id/productDisplayPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,14 +83,14 @@
                     android:layout_marginTop="1dp"
                     android:src="@drawable/icon_indian_rupee_16" /> -->
 
-                <com.cb.vmss.cusomview.TextViewCustom
+                <com.sabziatdoor.cusomview.TextViewCustom
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 					android:text="@string/Rs"
 			        android:textColor="@android:color/black"
 				    android:textSize="@dimen/font_size_small" />
                
-                <com.cb.vmss.cusomview.TextViewCustom
+                <com.sabziatdoor.cusomview.TextViewCustom
                     android:id="@+id/productMainPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" >
 
-                    <com.cb.vmss.cusomview.TextViewCustom
+                    <com.sabziatdoor.cusomview.TextViewCustom
                         android:id="@+id/txtQty"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"

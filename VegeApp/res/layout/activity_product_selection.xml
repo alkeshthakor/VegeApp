@@ -58,7 +58,7 @@
                 android:background="@android:color/transparent" />
         </LinearLayout>
 
-        <com.cb.vmss.fadingactionbar.widget.SlidingTabLayout
+        <com.sabziatdoor.fadingactionbar.widget.SlidingTabLayout
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
@@ -136,7 +136,7 @@
             android:src="@drawable/icon_indian_rupee_16"
             android:tint="@android:color/black" /> -->
 
-		<com.cb.vmss.cusomview.TextViewCustom
+		<com.sabziatdoor.cusomview.TextViewCustom
 		    android:id="@+id/indian_rupee"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
 		    android:textColor="@android:color/black"
 			android:textSize="@dimen/font_size_small" />
 		
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/productPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

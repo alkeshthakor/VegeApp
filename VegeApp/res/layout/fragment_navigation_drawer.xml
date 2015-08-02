@@ -28,7 +28,7 @@
                 android:src="@drawable/icon_phone"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:src="@drawable/icon_location_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtLocation"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_location"
@@ -78,7 +78,7 @@
             android:paddingStart="15dp"
             android:paddingTop="@dimen/size_12" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtInfomation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:src="@drawable/icon_person_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtLogin"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_Login" />
@@ -117,7 +117,7 @@
                 android:src="@drawable/icon_my_address"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtAddress"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_address" />
@@ -134,7 +134,7 @@
                 android:src="@drawable/icon_history_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtOrder"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_order" />
@@ -151,7 +151,7 @@
                 android:src="@drawable/icon_shopping_cart_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtCart"
                 style="@style/styleDrowarTextView"
                 android:layout_width="0dp"
@@ -190,7 +190,7 @@
                 android:src="@drawable/icon_notifications_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtNotification"
                 style="@style/styleDrowarTextView"
                 android:layout_width="0dp"
@@ -232,7 +232,7 @@
             android:paddingBottom="@dimen/size_12"
             android:paddingTop="@dimen/size_12" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                 android:src="@drawable/icon_help_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtHelp"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_help" />
@@ -269,7 +269,7 @@
                 android:src="@drawable/icon_call_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtCallUs"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_callus" />
@@ -286,7 +286,7 @@
                 android:src="@drawable/icon_star_border_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtRateUs"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_rateus" />
@@ -303,7 +303,7 @@
                 android:src="@drawable/icon_share_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtShare"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_share" />
@@ -320,7 +320,7 @@
                 android:src="@drawable/icon_referrals"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtReferAFriend"
                 style="@style/styleDrowarTextView"
                 android:text="@string/lbl_refer_a_friend" />
@@ -337,7 +337,7 @@
                 android:src="@drawable/icon_about_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtAbout"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_about" />
@@ -354,7 +354,7 @@
                 android:src="@drawable/icon_person_black"
                 android:visibility="visible" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/txtLogout"
                 style="@style/styleDrowarTextView"
                 android:text="@string/nav_item_logout" />

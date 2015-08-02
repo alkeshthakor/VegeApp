@@ -10,7 +10,7 @@
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:orientation="vertical" >
-     <com.cb.vmss.cusomview.TextViewCustom
+     <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/faqTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

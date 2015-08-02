@@ -20,7 +20,7 @@
         android:layout_marginTop="60dp"
         android:orientation="vertical" >
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -76,7 +76,7 @@
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -118,7 +118,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnResendCodePhoneVerify"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="150dp"
@@ -131,7 +131,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnNextPhoneVerify"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="110dp"

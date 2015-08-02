@@ -28,7 +28,7 @@
             android:layout_marginTop="50dp"
             android:src="@drawable/empty_cart" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -36,7 +36,7 @@
             android:text="Add Some Items!"
             android:textSize="@dimen/font_size_xxxlarge" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -76,7 +76,7 @@
         android:paddingStart="12dp"
         android:visibility="visible" >
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,14 +84,14 @@
             android:textColor="#FFF"
             android:textSize="16sp" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Rs"
             android:textColor="#FFF"
             android:textSize="@dimen/font_size_small" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:id="@+id/priceTextViewMyCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

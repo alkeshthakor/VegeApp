@@ -27,7 +27,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,14 +43,14 @@
                 android:src="@drawable/icon_indian_rupee_16" />
             -->
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Rs"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_size_small" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/subTotalTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,14 +69,14 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/lbl_delivery_charges"
                 android:textSize="@dimen/font_size_small" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/deliveryChargeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:paddingRight="30dp"
             android:visibility="gone" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -114,14 +114,14 @@
                 android:src="@drawable/icon_indian_rupee_16" />
             -->
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Rs"
                 android:textColor="#FFF"
                 android:textSize="@dimen/font_size_small" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/promocodeDiscountTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -157,14 +157,14 @@
                 android:src="@drawable/icon_indian_rupee_16" />
             -->
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Rs"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_size_small" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/totalTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp" >
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnApplyPromocodeFirst"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
@@ -228,7 +228,7 @@
                     android:textAllCaps="false"
                     android:textSize="14sp" />
 
-                <com.cb.vmss.cusomview.ButtonCustom
+                <com.sabziatdoor.cusomview.ButtonCustom
                     android:id="@+id/btnApplyPromocodeSecond"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
@@ -247,7 +247,7 @@
             android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -264,7 +264,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnTodayCheckOut"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
@@ -277,7 +277,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnTommorowCheckOut"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
@@ -290,7 +290,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
-            <com.cb.vmss.cusomview.ButtonCustom
+            <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnDayAfterCheckOut"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
@@ -320,7 +320,7 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_watch" />
 
-            <com.cb.vmss.cusomview.TextViewCustom
+            <com.sabziatdoor.cusomview.TextViewCustom
                 android:id="@+id/timeTextViewCheckOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
             android:layout_weight="1"
             android:background="@android:color/white" />
 
-        <com.cb.vmss.cusomview.TextViewCustom
+        <com.sabziatdoor.cusomview.TextViewCustom
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -353,7 +353,7 @@
             android:textColor="@android:color/black"
             android:textSize="12sp" />
 
-        <com.cb.vmss.cusomview.ButtonCustom
+        <com.sabziatdoor.cusomview.ButtonCustom
             android:id="@+id/btnPlaceOrderCheckOut"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"

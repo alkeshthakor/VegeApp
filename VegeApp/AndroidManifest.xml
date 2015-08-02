@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cb.vmss"
+    package="com.sabziatdoor"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -21,10 +21,10 @@
 
     <!-- Creates a custom permission so only this app can receive its messages. -->
     <permission
-        android:name="com.cb.vmss.permission.C2D_MESSAGE"
+        android:name="com.sabziatdoor.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.cb.vmss.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.sabziatdoor.permission.C2D_MESSAGE" />
 
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -41,7 +41,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.sabziatdoor.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -51,77 +51,77 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.sabziatdoor.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ProductSelectionActivity"
+            android:name="com.sabziatdoor.ProductSelectionActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AddAddressActivity"
+            android:name="com.sabziatdoor.AddAddressActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".CheckOutActivity"
+            android:name="com.sabziatdoor.CheckOutActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".VerifyPhoneActivity"
+            android:name="com.sabziatdoor.VerifyPhoneActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.sabziatdoor.LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ChooseAddressActivity"
+            android:name="com.sabziatdoor.ChooseAddressActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MyPreviousOrderActivity"
+            android:name="com.sabziatdoor.MyPreviousOrderActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MyOrderDetailsActivity"
+            android:name="com.sabziatdoor.MyOrderDetailsActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ProductSelectionActivity2"
+            android:name="com.sabziatdoor.ProductSelectionActivity2"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MyCartActivity"
+            android:name="com.sabziatdoor.MyCartActivity"
             android:label="@string/title_activity_my_cart" 
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".OrderSuccessActivity"
+            android:name="com.sabziatdoor.OrderSuccessActivity"
             android:label="@string/title_activity_order_success"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".HelpActivity"
+            android:name="com.sabziatdoor.HelpActivity"
             android:label="@string/title_activity_help" 
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".AboutUsActivity"
+            android:name="com.sabziatdoor.AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AboutUsActivity2"
+            android:name="com.sabziatdoor.AboutUsActivity2"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PrivacyPolicyActivity"
+            android:name="com.sabziatdoor.PrivacyPolicyActivity"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".TermsConditionsActivity"
+            android:name="com.sabziatdoor.TermsConditionsActivity"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait" >
         </activity>
@@ -136,19 +136,19 @@
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.cb.vmss" />
+                <category android:name="com.sabziatdoor" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".GCMIntentService" />
+        <service android:name="com.sabziatdoor.GCMIntentService" />
 
         <activity
-            android:name=".NotifictaionListActivity"
+            android:name="com.sabziatdoor.NotifictaionListActivity"
             android:label="@string/title_activity_notifictaion_list" 
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ReferFriendActivity"
+            android:name="com.sabziatdoor.ReferFriendActivity"
             android:label="@string/title_activity_refer_friend" 
             android:screenOrientation="portrait">
         </activity>
