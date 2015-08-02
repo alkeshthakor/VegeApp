@@ -154,8 +154,12 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 
 		if (totalQtyCount > 0) {
 			checkOutOutLinearLayout.setVisibility(View.VISIBLE);
+			llEmptyCart.setVisibility(View.GONE);
+			myCartListView.setVisibility(View.VISIBLE);
 		} else {
 			checkOutOutLinearLayout.setVisibility(View.GONE);
+			llEmptyCart.setVisibility(View.VISIBLE);
+			myCartListView.setVisibility(View.GONE);
 		}
 		
 		mTitle.setText("My Cart ("+totalQtyCount+")");

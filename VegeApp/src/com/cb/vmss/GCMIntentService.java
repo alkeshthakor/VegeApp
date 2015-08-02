@@ -118,7 +118,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     	mDatabaseHelper.close();
     	
     	
-    	int icon = R.drawable.icon_app_luancher;
+    	int icon = R.drawable.icon_notification_round;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);

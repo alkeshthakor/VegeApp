@@ -69,7 +69,7 @@ public class MyCartAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
         final Product rowItem = (Product) getItem(position);
@@ -94,6 +94,7 @@ public class MyCartAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
           
+        
         holder.icoMinus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,6 +108,11 @@ public class MyCartAdapter extends BaseAdapter {
 			     	if(productQtyInCart<=0){
 			     		productQtyInCart=0;
 			     		mDatabaseHelper.deleteMyCartItem(rowItem.getProductId());
+			     		if(mProductRowItem!=null&&mProductRowItem.size()>0){
+			     			mProductRowItem.remove(position);
+				     		notifyDataSetChanged();	
+			     		}
+			     		
 			     	} else {
 			     		int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
 				     	ContentValues cartValue=new ContentValues();
@@ -162,21 +168,13 @@ public class MyCartAdapter extends BaseAdapter {
 			}
 		});
         
-        
         holder.productDisplayPriceTextView.setText(rowItem.getProductDisplayPrice());;
         holder.productDisplayPriceTextView.setPaintFlags(holder.productDisplayPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.txtViewProductName.setText(rowItem.getProductName());
         holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
-        holder.txtViewQty.setText(rowItem.getProductQty()+"");
-       
-        /*if(rowItem.getProductBitmap() != null) {
-        	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
-            holder.productImageObj.setImageDrawable(imageDrawable);
-        } else 
-        	new DownloadImageTask(position, holder.productImageObj).execute(rowItem.getProductImage());*/
-        
+        holder.txtViewQty.setText(rowItem.getProductQty()+""); 
         
         if(rowItem.getProductBitmap() != null) {
         	Drawable imageDrawable = new BitmapDrawable(context.getResources(), rowItem.getProductBitmap());
@@ -189,6 +187,9 @@ public class MyCartAdapter extends BaseAdapter {
         		holder.productImageObj.setImageResource(R.drawable.no_image);
         	}
         }
+        
+        
+       
         
         return convertView;
 	}
@@ -230,9 +231,12 @@ public class MyCartAdapter extends BaseAdapter {
 		@SuppressLint("NewApi")
 		protected void onPostExecute(Bitmap result) {
 			//productImageMap.put(this.position, result);
-			mProductRowItem.get(this.position).setProductBitmap(result);
-			Drawable imageDrawable = new BitmapDrawable(context.getResources(), result);
-			bmImage.setImageDrawable(imageDrawable);
+			if(mProductRowItem!=null&&mProductRowItem.size()>0&&position<mProductRowItem.size()){
+				
+				mProductRowItem.get(this.position).setProductBitmap(result);
+				Drawable imageDrawable = new BitmapDrawable(context.getResources(), result);
+				bmImage.setImageDrawable(imageDrawable);
+			}
 		}
 	}
 }

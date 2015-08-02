@@ -92,31 +92,38 @@
         </activity>
         <activity
             android:name=".MyCartActivity"
-            android:label="@string/title_activity_my_cart" >
+            android:label="@string/title_activity_my_cart" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".OrderSuccessActivity"
-            android:label="@string/title_activity_order_success" >
+            android:label="@string/title_activity_order_success"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".HelpActivity"
-            android:label="@string/title_activity_help" >
+            android:label="@string/title_activity_help" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".AboutUsActivity"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".AboutUsActivity2"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".PrivacyPolicyActivity"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".TermsConditionsActivity"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait" >
         </activity>
         
         <receiver
@@ -137,11 +144,13 @@
 
         <activity
             android:name=".NotifictaionListActivity"
-            android:label="@string/title_activity_notifictaion_list" >
+            android:label="@string/title_activity_notifictaion_list" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ReferFriendActivity"
-            android:label="@string/title_activity_refer_friend" >
+            android:label="@string/title_activity_refer_friend" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
