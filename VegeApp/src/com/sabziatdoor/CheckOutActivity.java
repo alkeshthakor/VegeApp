@@ -10,12 +10,15 @@ import org.json.JSONObject;
 
 import com.sabziatdoor.R;
 import com.sabziatdoor.database.VegAppDatabaseHelper;
+import com.sabziatdoor.util.AnimationFactory;
+import com.sabziatdoor.util.AnimationFactory.FlipDirection;
 import com.sabziatdoor.util.ConnectionDetector;
 import com.sabziatdoor.util.Constant;
 import com.sabziatdoor.util.Pref;
 import com.sabziatdoor.util.ServerConnector;
 import com.sabziatdoor.util.TimePickerFragment;
 
+import android.R.anim;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -42,6 +45,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 import android.widget.ViewFlipper;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -100,7 +104,8 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 	private boolean hasText;
 	private String validCouponCode = "";
-
+	ViewAnimator viewAnimator = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -132,6 +137,16 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 		connector = new ServerConnector();
 
 		promoCodeViewFlipper = (ViewFlipper) findViewById(R.id.flipperPromoCode);
+		viewAnimator = (ViewAnimator)this.findViewById(R.id.flipperPromoCode);
+
+		promoCodeViewFlipper.setOnClickListener(new OnClickListener() { 
+             @Override
+             public void onClick(View v) { 
+                     // This is all you need to do to 3D flip
+                     AnimationFactory.flipTransition(viewAnimator, FlipDirection.LEFT_RIGHT);
+             }
+     
+});
 
 		timerLinearLayout = (LinearLayout) findViewById(R.id.timeLinerLayout);
 		promocodeLinearLayout = (LinearLayout) findViewById(R.id.llPromocodeView);
@@ -255,7 +270,9 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			selectDate(mDialogTitle);
 			break;
 		case R.id.btnApplyPromocodeFirst:
-			promoCodeViewFlipper.showNext();
+			
+			AnimationFactory.flipTransition(viewAnimator, FlipDirection.LEFT_RIGHT);
+			//promoCodeViewFlipper.showNext();
 			break;
 		case R.id.btnApplyPromocodeSecond:
 			if (hasText) {
@@ -265,8 +282,9 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				new CheckPromoCodeTask().execute(promoCodeServiceUrl, promoCode);
 
 			} else {
-				promoCodeViewFlipper.showPrevious();
-				promocodeLinearLayout.setVisibility(View.GONE);
+				AnimationFactory.flipTransition(viewAnimator, FlipDirection.LEFT_RIGHT);
+				//promoCodeViewFlipper.showPrevious();
+				//promocodeLinearLayout.setVisibility(View.GONE);
 				totalTextView.setText("" + totalAmount);
 			}
 			break;

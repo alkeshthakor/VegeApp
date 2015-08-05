@@ -185,12 +185,15 @@
             android:id="@+id/flipperPromoCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="20dp" >
 
             <com.sabziatdoor.cusomview.ButtonCustom
                 android:id="@+id/btnApplyPromocodeFirst"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/button_background_with_border_color"
@@ -205,12 +208,11 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/btnEnterPromocode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
+                android:orientation="horizontal" >
 
                 <EditText
                     android:id="@+id/promoCodeEditTextCheckOut"
@@ -218,12 +220,13 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:background="@drawable/button_background_with_border_color"
                     android:hint="@string/lbl_apply_promo_code_hint"
                     android:inputType="text"
                     android:paddingEnd="4dp"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:paddingStart="4dp"
                     android:textAllCaps="false"
                     android:textSize="14sp" />
@@ -345,7 +348,6 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="40dp"
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
