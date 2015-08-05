@@ -85,7 +85,7 @@ public class HelpActivity extends ActionBarActivity {
 		
 		mFAGList=createFAGList();
 		
-		FAQExpandableAdapter mAdapter=new FAQExpandableAdapter(getApplicationContext(), mFAGList);
+		FAQExpandableAdapter mAdapter=new FAQExpandableAdapter(HelpActivity.this, mFAGList);
 		mFaqListView.setAdapter(mAdapter);
 	
 		
