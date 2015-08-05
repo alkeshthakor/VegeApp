@@ -88,7 +88,7 @@ public class FAQExpandableAdapter extends BaseExpandableListAdapter {
 
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.list_faq_childe_item, null);
+			convertView = infalInflater.inflate(R.layout.list_faq_child_item, null);
 		}
 		TextView item = (TextView) convertView.findViewById(R.id.faqsubcontentTextView);
 		item.setText(mFaqBean.getContent().toString());
