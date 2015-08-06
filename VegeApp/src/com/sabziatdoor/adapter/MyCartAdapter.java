@@ -38,7 +38,7 @@ public class MyCartAdapter extends BaseAdapter {
 	private ImageLoader imgLoader;
 	
 	public interface IUpdateMyCart {
-		public void updateMyCart(int updateValue,int prize);
+		public void updateMyCart(int updateValue,float prize);
 	}
 	
 	IUpdateMyCart iUpdateMyCart = null;
@@ -112,9 +112,8 @@ public class MyCartAdapter extends BaseAdapter {
 			     			mProductRowItem.remove(position);
 				     		notifyDataSetChanged();	
 			     		}
-			     		
 			     	} else {
-			     		int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     		float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
 				     	ContentValues cartValue=new ContentValues();
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
@@ -123,7 +122,7 @@ public class MyCartAdapter extends BaseAdapter {
 			     	mDatabaseHelper.close();
 			     	holder.txtViewQty.setText(""+productQtyInCart);
 					rowItem.setProductQty(productQtyInCart);
-					iUpdateMyCart.updateMyCart(-1,Integer.parseInt(rowItem.getProductMainPrice()));
+					iUpdateMyCart.updateMyCart(-1,Float.parseFloat(rowItem.getProductMainPrice()));
 				}
 			}
 		});
@@ -135,21 +134,21 @@ public class MyCartAdapter extends BaseAdapter {
 				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
 				if(productQtyInCart!=-1){
 					productQtyInCart+=1;
-			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     	float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
 			     	ContentValues cartValue=new ContentValues();
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
 			     	mDatabaseHelper.updateMyCart(rowItem.getProductId(),cartValue);
 				} else {
 			     	productQtyInCart=1;
-			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     	float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
 
 			     	ContentValues cartValue=new ContentValues();
 			     	
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_ID,rowItem.getProductId());
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_NAME,rowItem.getProductName());
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_IMAGE_URL,rowItem.getProductImage());
-			     	cartValue.put(VegAppColumn.CART_PRODUCT_MAIN_PRICE,rowItem.getProductMainPrice());
+			     	cartValue.put(VegAppColumn.CART_PRODUCT_MAIN_PRICE,Float.parseFloat(rowItem.getProductMainPrice()));
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_DISPLAY_PRICE,rowItem.getProductDisplayPrice());
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_UNIT_ID,rowItem.getProductUnitId());
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_UNIT_KEY,rowItem.getUnit_key());
@@ -164,7 +163,7 @@ public class MyCartAdapter extends BaseAdapter {
 				holder.txtViewQty.setText(""+productQtyInCart);
 				rowItem.setProductQty(productQtyInCart);				
 				mDatabaseHelper.close();
-				iUpdateMyCart.updateMyCart(1,Integer.parseInt(rowItem.getProductMainPrice()));
+				iUpdateMyCart.updateMyCart(1,Float.parseFloat(rowItem.getProductMainPrice()));
 			}
 		});
         
@@ -187,10 +186,6 @@ public class MyCartAdapter extends BaseAdapter {
         		holder.productImageObj.setImageResource(R.drawable.no_image);
         	}
         }
-        
-        
-       
-        
         return convertView;
 	}
 

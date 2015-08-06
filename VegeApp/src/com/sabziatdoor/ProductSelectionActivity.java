@@ -51,7 +51,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private int mTabHeight;
 	private int mToolbarHeight;
 
-	private int totalAmount;
+	private float totalAmount;
 	private int totalQtyCount;
 	private Context mContext;
 
@@ -127,7 +127,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 		if (totalQtyCount > 0) {
 			relLayout.setVisibility(View.VISIBLE);
@@ -164,9 +164,9 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	}
 
 	@Override
-	public void getTotal(int updateValue, int prize) {
+	public void getTotal(int updateValue, float prize) {
 
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 
 		if (updateValue != -1) {
