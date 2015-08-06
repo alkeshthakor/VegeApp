@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sabziatdoor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/GBL5"
     android:orientation="vertical"
-    android:background="@color/GBL5" 
-    android:padding="16dp">
+    android:padding="16dp" >
 
     <!-- <ImageView
         android:layout_width="match_parent"
@@ -18,17 +19,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp" >
-    </LinearLayout>
+    </LinearLayout> -->
     
- -->
-    <ListView  
+    <com.circularprogressview.android.CircularProgressView
+        android:id="@+id/progress_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:padding="0dp"
+        app:cpv_animAutostart="false"
+        app:cpv_color="#689F38"
+        app:cpv_indeterminate="true"
+        app:cpv_thickness="4dp" />
+
+    <ListView
         android:id="@+id/categoryListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@null"
-        android:orientation="vertical">
-        
+        android:orientation="vertical" >
     </ListView>
-    
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.circularprogressview.android.CircularProgressView;
 import com.sabziatdoor.R;
 import com.sabziatdoor.adapter.AddressAdapter;
 import com.sabziatdoor.model.Address;
@@ -40,7 +41,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 	
 	private Toolbar toolbar;
 	private Button addAddressBtn;
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	private String mServiceUrl;
 	private String mFromScreenName;
 	private LinearLayout llEmptyAddress;
@@ -80,10 +81,11 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 		
 		mFromScreenName=getIntent().getStringExtra("fromscreen");
 		
-		mProgressDialog = new ProgressDialog(ChooseAddressActivity.this);
-		mProgressDialog.setMessage("Please wait...");
+		mProgressDialog = (CircularProgressView) findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(false);*/
         
         addAddressBtn =(Button) findViewById(R.id.btnAddAddressChose);
 		addAddressBtn.setOnClickListener(this);
@@ -142,7 +144,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -153,7 +155,7 @@ public class ChooseAddressActivity extends ActionBarActivity implements OnClickL
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
 					JSONArray addressJsonArray = result.getJSONArray("DATA");

@@ -113,7 +113,6 @@
                 style="?android:attr/editTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/testaaa"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
             
