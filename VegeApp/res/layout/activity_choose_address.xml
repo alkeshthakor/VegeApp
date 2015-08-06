@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sabziatdoor"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
-
+    
+    <com.circularprogressview.android.CircularProgressView
+        android:id="@+id/progress_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:padding="0dp"
+        app:cpv_animAutostart="false"
+        app:cpv_color="#689F38"
+        android:visibility="gone"
+        app:cpv_indeterminate="true"
+        app:cpv_thickness="4dp" />
+    
     <LinearLayout
         android:id="@+id/llEmptyAddress"
         android:layout_width="match_parent"

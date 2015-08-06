@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.circularprogressview.android.CircularProgressView;
 import com.sabziatdoor.R;
 import com.sabziatdoor.util.ConnectionDetector;
 import com.sabziatdoor.util.Constant;
@@ -37,7 +38,7 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 	private Button resendCodeButton;
 	private Button nextButton;
 
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
@@ -70,10 +71,11 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		Constant.CONTEXT = mContext;
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
-		mProgressDialog = new ProgressDialog(VerifyPhoneActivity.this);
-		mProgressDialog.setMessage("Please wait...");
+		mProgressDialog=(CircularProgressView)findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-		mProgressDialog.setCancelable(false);
+		mProgressDialog.setCancelable(false);*/
 
 		phoneNumberTextView = (TextView) findViewById(R.id.phoneNumberTextView);
 		manualCodeEditText = (EditText) findViewById(R.id.manualCodeVerifyEdittext);
@@ -148,7 +150,7 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -160,7 +162,7 @@ public class VerifyPhoneActivity extends ActionBarActivity implements OnClickLis
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
 			if (requestType.equals("CODE_RESEND")) {
 				codeResendResponse(result);
 			} else if (requestType.equals("PHONE_VERIFICATION")) {
