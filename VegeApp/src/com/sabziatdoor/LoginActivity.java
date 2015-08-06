@@ -3,12 +3,6 @@ package com.sabziatdoor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sabziatdoor.R;
-import com.sabziatdoor.util.ConnectionDetector;
-import com.sabziatdoor.util.Constant;
-import com.sabziatdoor.util.Pref;
-import com.sabziatdoor.util.ServerConnector;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff.Mode;
@@ -24,15 +18,20 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.circularprogressview.android.CircularProgressView;
+import com.sabziatdoor.util.ConnectionDetector;
+import com.sabziatdoor.util.Constant;
+import com.sabziatdoor.util.Pref;
+import com.sabziatdoor.util.ServerConnector;
 
 public class LoginActivity extends ActionBarActivity {
 
 	private Toolbar toolbar;
 	private EditText phoneNumberEditText;
-	private ProgressBar progressIndicater;
+	private CircularProgressView progressIndicater;
 	
 	private ConnectionDetector cd;
 	private ServerConnector connector;
@@ -67,7 +66,8 @@ public class LoginActivity extends ActionBarActivity {
 
 		mFromScreen=getIntent().getStringExtra("fromscreen");
 		
-		progressIndicater=(ProgressBar)findViewById(R.id.progressIndicater);
+		progressIndicater=(CircularProgressView)findViewById(R.id.progress_view);
+		progressIndicater.startAnimation();
 		phoneNumberEditText=(EditText)findViewById(R.id.phoneNumberEditText);
 
 		phoneNumberEditText.addTextChangedListener(new TextWatcher() {
@@ -130,7 +130,7 @@ public class LoginActivity extends ActionBarActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			progressIndicater.setVisibility(View.VISIBLE);;
+			progressIndicater.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -141,7 +141,7 @@ public class LoginActivity extends ActionBarActivity {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			progressIndicater.setVisibility(View.INVISIBLE);;
+			progressIndicater.setVisibility(View.GONE);
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")){
 										
