@@ -16,6 +16,7 @@
 
 package com.sabziatdoor.fadingactionbar.observablescrollview;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -67,7 +68,8 @@ public final class ScrollUtils {
     public static void addOnGlobalLayoutListener(final View view, final Runnable runnable) {
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
+            @SuppressLint("NewApi")
+			@Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
