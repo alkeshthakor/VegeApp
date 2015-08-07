@@ -1,25 +1,13 @@
 package com.sabziatdoor.adapter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sabziatdoor.R;
-import com.sabziatdoor.database.VegAppDatabaseHelper;
-import com.sabziatdoor.database.VegAppDatabase.VegAppColumn;
-import com.sabziatdoor.imageutils.ImageLoader;
-import com.sabziatdoor.model.Product;
-
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +16,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.sabziatdoor.R;
+import com.sabziatdoor.database.VegAppDatabase.VegAppColumn;
+import com.sabziatdoor.database.VegAppDatabaseHelper;
+import com.sabziatdoor.imageutils.ImageLoader;
+import com.sabziatdoor.model.Product;
+import com.sabziatdoor.util.Constant;
 
 public class MyCartAdapter extends BaseAdapter {
 
@@ -113,7 +108,7 @@ public class MyCartAdapter extends BaseAdapter {
 				     		notifyDataSetChanged();	
 			     		}
 			     	} else {
-			     		float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
+			     		float productsubTotal=Constant.round(productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice()),2);
 				     	ContentValues cartValue=new ContentValues();
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
@@ -134,7 +129,7 @@ public class MyCartAdapter extends BaseAdapter {
 				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
 				if(productQtyInCart!=-1){
 					productQtyInCart+=1;
-			     	float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
+			     	float productsubTotal=Constant.round(productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice()),2);
 			     	ContentValues cartValue=new ContentValues();
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);

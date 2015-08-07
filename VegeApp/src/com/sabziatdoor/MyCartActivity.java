@@ -162,7 +162,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 			llEmptyCart.setVisibility(View.VISIBLE);
 			myCartListView.setVisibility(View.GONE);
 		}
-		
+		totalAmount  = Constant.round(totalAmount,2);
 		mTitle.setText("My Cart ("+totalQtyCount+")");
 		priceTextViewMyCart.setText("" + totalAmount);
 		Pref.setValue(Constant.PREF_TOTAL_AMOUT, totalAmount + "");

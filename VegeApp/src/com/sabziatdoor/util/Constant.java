@@ -1,5 +1,7 @@
 package com.sabziatdoor.util;
 
+import java.math.BigDecimal;
+
 import android.content.Context;
 
 public class Constant {
@@ -53,7 +55,11 @@ public class Constant {
 	public static final int CODE_BACK_WITH_CHECK_ORDER = 1003;
 	public static final int CODE_BACK_WITH_COUTINUE_SHOPPING = 1004;
 	
-
+	public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 	
 	/*	
 	public static int DEVICE_SCREEN_WIDTH =0;

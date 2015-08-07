@@ -189,7 +189,7 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 		} else {
 			relLayout.setVisibility(View.GONE);
 		}
-
+		totalAmount  = Constant.round(totalAmount,2);
 		txtQtyCountObj.setText("" + totalQtyCount);
 		productPriceTextViewObj.setText("" + totalAmount);
 		Pref.setValue(Constant.PREF_TOTAL_AMOUT, totalAmount + "");
