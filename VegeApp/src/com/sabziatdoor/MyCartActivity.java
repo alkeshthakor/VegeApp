@@ -33,7 +33,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 	private ListView myCartListView;
 	private LinearLayout checkOutOutLinearLayout;
 	
-	private int totalAmount;
+	private float totalAmount;
 	private int totalQtyCount;
 	private Context mContext;
 	
@@ -82,7 +82,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 		myCartListView.setAdapter(new MyCartAdapter(mContext, myCartList));
 		mDatabaseHelper.close();
 		
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 
 		mTitle.setText("My Cart ("+totalQtyCount+")");
@@ -133,9 +133,9 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 	}
 
 	@Override
-	public void updateMyCart(int updateValue, int prize) {
+	public void updateMyCart(int updateValue, float prize) {
 		// TODO Auto-generated method stub
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		totalQtyCount = Integer.parseInt(Pref.getValue(Constant.PREF_QTY_COUNT, "0"));
 
 		if (updateValue != -1) {
@@ -162,7 +162,7 @@ public class MyCartActivity extends ActionBarActivity implements OnClickListener
 			llEmptyCart.setVisibility(View.VISIBLE);
 			myCartListView.setVisibility(View.GONE);
 		}
-		
+		totalAmount  = Constant.round(totalAmount,2);
 		mTitle.setText("My Cart ("+totalQtyCount+")");
 		priceTextViewMyCart.setText("" + totalAmount);
 		Pref.setValue(Constant.PREF_TOTAL_AMOUT, totalAmount + "");

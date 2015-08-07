@@ -64,7 +64,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 	private EditText mPromoEditText;
 
-	private int totalAmount;
+	private Float totalAmount;
 
 	private LinearLayout timerLinearLayout;
 	private LinearLayout promocodeLinearLayout;
@@ -96,7 +96,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 
 	Calendar calender;
 
-	private int totalValueAfterDiscount = 0;
+	private Float totalValueAfterDiscount = 0f;
 
 	private boolean hasText;
 	private String validCouponCode = "";
@@ -196,7 +196,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			}
 		});
 
-		totalAmount = Integer.parseInt(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
 		subTotalTextView.setText(totalAmount + "");
 		totalTextView.setText(totalAmount + "");
 
@@ -459,7 +459,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			} else if (couponType.equals("discount")) {
 				int couponDiscount = promoCodeObject.getInt("Coupon_discount");
 
-				int discountValue = (totalAmount * couponDiscount) / 100;
+				Float discountValue = (totalAmount * couponDiscount) / 100;
 				totalValueAfterDiscount = totalAmount - discountValue;
 				promocodeTextView.setText(discountValue + "");
 				totalTextView.setText("" + totalValueAfterDiscount);

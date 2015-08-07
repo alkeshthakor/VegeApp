@@ -68,7 +68,7 @@ public class ProductDetailsItemsAdapter extends BaseAdapter {
         holder.productItemNameTV.setText(rowItem.getOrdItemName());
         holder.productQtyTextView.setText(rowItem.getOrdItemQty());
         holder.productPriceTextView.setText(rowItem.getOrdItemPrice());
-        holder.productTotalPriceTextView.setText(String.valueOf(Integer.parseInt(rowItem.getOrdItemQty()) * Integer.parseInt(rowItem.getOrdItemPrice())));
+        holder.productTotalPriceTextView.setText(String.valueOf(Float.parseFloat(rowItem.getOrdItemQty()) * Float.parseFloat(rowItem.getOrdItemPrice())));
         return convertView;
 	}
 

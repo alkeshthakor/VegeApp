@@ -8,6 +8,7 @@ import com.sabziatdoor.database.VegAppDatabase.VegAppColumn;
 import com.sabziatdoor.database.VegAppDatabaseHelper;
 import com.sabziatdoor.imageutils.ImageLoader;
 import com.sabziatdoor.model.Product;
+import com.sabziatdoor.util.Constant;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,7 +35,7 @@ public class ProductAdapter extends BaseAdapter {
 	
 	
 	public interface ITotalCount {
-		public void getTotal(int updateValue,int prize);
+		public void getTotal(int updateValue,float prize);
 	}
 	
 	ITotalCount iTotalCount = null;
@@ -100,7 +101,7 @@ public class ProductAdapter extends BaseAdapter {
 			     		productQtyInCart=0;
 			     		mDatabaseHelper.deleteMyCartItem(rowItem.getProductId());
 			     	} else {
-			     		int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     		Float productsubTotal=Constant.round(productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice()),2);
 				     	ContentValues cartValue=new ContentValues();
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 				     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
@@ -109,7 +110,7 @@ public class ProductAdapter extends BaseAdapter {
 			     	mDatabaseHelper.close();
 			     	holder.txtViewQty.setText(""+productQtyInCart);
 					rowItem.setProductQty(productQtyInCart);
-					iTotalCount.getTotal(-1,Integer.parseInt(rowItem.getProductMainPrice()));
+					iTotalCount.getTotal(-1,Float.parseFloat(rowItem.getProductMainPrice()));
 				}
 			}
 		});
@@ -123,14 +124,14 @@ public class ProductAdapter extends BaseAdapter {
 				int productQtyInCart=mDatabaseHelper.getCartProductQty(rowItem.getProductId());
 				if(productQtyInCart!=-1){
 					productQtyInCart+=1;
-			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+					Float productsubTotal=Constant.round(productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice()),2);
 			     	ContentValues cartValue=new ContentValues();
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_QTY,productQtyInCart);
 			     	cartValue.put(VegAppColumn.CART_PRODUCT_SUB_TOTAL,productsubTotal);
 			     	mDatabaseHelper.updateMyCart(rowItem.getProductId(),cartValue);
 				} else {
 			     	productQtyInCart=1;
-			     	int productsubTotal=productQtyInCart*Integer.parseInt(rowItem.getProductMainPrice());
+			     	Float productsubTotal=productQtyInCart*Float.parseFloat(rowItem.getProductMainPrice());
 
 			     	ContentValues cartValue=new ContentValues();
 			     	
@@ -155,7 +156,7 @@ public class ProductAdapter extends BaseAdapter {
 				holder.txtViewQty.setText(""+productQtyInCart);
 				rowItem.setProductQty(productQtyInCart);				
 				mDatabaseHelper.close();
-				iTotalCount.getTotal(1,Integer.parseInt(rowItem.getProductMainPrice()));
+				iTotalCount.getTotal(1,Float.parseFloat(rowItem.getProductMainPrice()));
 			}
 		});
         holder.txtViewProductName.setText(rowItem.getProductName());

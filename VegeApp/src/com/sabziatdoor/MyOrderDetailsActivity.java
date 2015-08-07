@@ -180,7 +180,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 		txtDeliveryOrdDate.setText(item.getOrderDeliveryDate());
 		txtDeliveryOrdTime.setText(item.getOrderDeliveryTime());
         
-        int itemTotalPrice = 0;
+		Float itemTotalPrice = 0f;
         try {
     		
         	JSONObject orderJSONObject = new JSONObject(item.getJsonObject());
@@ -191,7 +191,7 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 				orderItem.setOrdItemName(orderItemJSONArray.getJSONObject(i).getString("prd_name"));
 				orderItem.setOrdItemQty(orderItemJSONArray.getJSONObject(i).getString("item_quantity"));
 				orderItem.setOrdItemPrice(orderItemJSONArray.getJSONObject(i).getString("item_price"));
-				itemTotalPrice = itemTotalPrice + Integer.parseInt(orderItemJSONArray.getJSONObject(i).getString("item_totalprice"));
+				itemTotalPrice = itemTotalPrice + Float.parseFloat(orderItemJSONArray.getJSONObject(i).getString("item_totalprice"));
 				mOrderItemsRowItem.add(orderItem);
 			}
 			
@@ -215,7 +215,6 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
         
         orderItemListViewObj.setAdapter(new ProductDetailsItemsAdapter(MyOrderDetailsActivity.this, mOrderItemsRowItem));
         txtSubTotal.setText(""+itemTotalPrice);
-        int totalPrize = itemTotalPrice;
         txtTotalAmt.setText(item.getOrderTotalPrice());
         
 	}
