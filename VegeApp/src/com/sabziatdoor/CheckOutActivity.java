@@ -211,7 +211,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 			}
 		});
 
-		totalAmount = Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0"));
+		totalAmount = Constant.round(Float.parseFloat(Pref.getValue(Constant.PREF_TOTAL_AMOUT, "0")),2);
 		subTotalTextView.setText(totalAmount + "");
 		totalTextView.setText(totalAmount + "");
 
@@ -452,7 +452,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				int couponMinPrice = promoCodeObject.getInt("coupon_min_price");
 				if (totalAmount >= couponMinPrice) {
 					promocodeLinearLayout.setVisibility(View.VISIBLE);
-					totalValueAfterDiscount = totalAmount - discountAmount;
+					totalValueAfterDiscount = Constant.round(Float.parseFloat(String.valueOf(totalAmount - discountAmount)),2);
 					promocodeTextView.setText(discountAmount + "");
 					totalTextView.setText("" + totalValueAfterDiscount);
 				} else {
@@ -478,7 +478,7 @@ public class CheckOutActivity extends ActionBarActivity implements OnClickListen
 				int couponDiscount = promoCodeObject.getInt("Coupon_discount");
 
 				Float discountValue = (totalAmount * couponDiscount) / 100;
-				totalValueAfterDiscount = totalAmount - discountValue;
+				totalValueAfterDiscount = Constant.round(Float.parseFloat(String.valueOf(totalAmount - discountValue)),2);
 				promocodeTextView.setText(discountValue + "");
 				totalTextView.setText("" + totalValueAfterDiscount);
 				promocodeLinearLayout.setVisibility(View.VISIBLE);
