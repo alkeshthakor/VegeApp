@@ -197,9 +197,9 @@ public class MyOrderDetailsActivity extends ActionBarActivity implements OnClick
 			
 			if(orderJSONObject.getString("od_promocode").length() > 0) {
 				if(orderJSONObject.getString("od_coupon_price").contains("%")) {
-					int subTotal = Integer.parseInt(orderJSONObject.getString("od_subprice"));
-					int couponPrice = Integer.parseInt(orderJSONObject.getString("od_coupon_price").replace("%", ""));
-					int promoDiscount = couponPrice * subTotal / 100;
+					float subTotal = Float.parseFloat(orderJSONObject.getString("od_subprice"));
+					float couponPrice = Float.parseFloat(orderJSONObject.getString("od_coupon_price").replace("%", ""));
+					float promoDiscount = Float.parseFloat(String.valueOf(couponPrice * subTotal / 100));
 					txtPromoDiscount.setText(String.valueOf(promoDiscount));
 				} else {
 					int promoDiscount = Integer.parseInt(orderJSONObject.getString("od_coupon_price").replace("Rs.", ""));

@@ -7,17 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sabziatdoor.R;
-import com.sabziatdoor.ProductSelectionActivity;
-import com.sabziatdoor.adapter.CategoryAdapter;
-import com.sabziatdoor.model.Category;
-import com.sabziatdoor.util.ConnectionDetector;
-import com.sabziatdoor.util.Constant;
-import com.sabziatdoor.util.ServerConnector;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,11 +23,20 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.circularprogressview.android.CircularProgressView;
+import com.sabziatdoor.ProductSelectionActivity;
+import com.sabziatdoor.R;
+import com.sabziatdoor.adapter.CategoryAdapter;
+import com.sabziatdoor.model.Category;
+import com.sabziatdoor.util.ConnectionDetector;
+import com.sabziatdoor.util.Constant;
+import com.sabziatdoor.util.ServerConnector;
+
 @SuppressLint("SetJavaScriptEnabled")
 public class HomeFragment extends Fragment {
 
 	private Activity mActivity;
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
@@ -65,9 +65,10 @@ public class HomeFragment extends Fragment {
 		mContext = mActivity.getApplicationContext();
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
-		mProgressDialog = new ProgressDialog(mActivity);
-		mProgressDialog.setMessage("Please wait...");
-		mProgressDialog.setIndeterminate(false);
+		mProgressDialog = (CircularProgressView) view.findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
+		mProgressDialog.setIndeterminate(false);*/
 		//mCategoryLinearLayout=(LinearLayout)view.findViewById(R.id.categoryLinearLayout);
 	   
 		mCategoryListView=(ListView)view.findViewById(R.id.categoryListView);
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -120,7 +121,7 @@ public class HomeFragment extends Fragment {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
 			parseResponse(result);
 		}
 	}

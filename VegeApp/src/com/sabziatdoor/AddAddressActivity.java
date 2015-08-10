@@ -1,6 +1,8 @@
 package com.sabziatdoor;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarOutputStream;
@@ -188,12 +190,17 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 							+ "&add_landmark=" + areaEditText.getText().toString() 
 							+ "&add_zipcode=" + zipCodeArrayList.get(zipSpinner.getSelectedItemPosition()).getZipId();
 				} else {
-					addressBody = "usr_id=" + userId + "&add_id=" + "&add_fullname=" + nameEditText.getText().toString()
-							+ "&add_phone=" + Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
-							+ "&add_address1="+ houseEditText.getText().toString() 
-							+ "&add_address2=" + streetEditText.getText().toString() 
-							+ "&add_landmark=" + areaEditText.getText().toString() 
-							+ "&add_zipcode="+zipCodeArrayList.get(zipSpinner.getSelectedItemPosition()).getZipId();
+					try {
+						addressBody = "usr_id=" + userId + "&add_id=" + "&add_fullname=" + URLEncoder.encode(nameEditText.getText().toString(), "utf-8").toString()
+								+ "&add_phone=" + Pref.getValue(Constant.PREF_PHONE_NUMBER, "0") 
+								+ "&add_address1="+ URLEncoder.encode(houseEditText.getText().toString(), "utf-8").toString() 
+								+ "&add_address2=" + URLEncoder.encode(streetEditText.getText().toString(), "utf-8").toString() 
+								+ "&add_landmark=" + URLEncoder.encode(areaEditText.getText().toString(), "utf-8").toString() 
+								+ "&add_zipcode="+zipCodeArrayList.get(zipSpinner.getSelectedItemPosition()).getZipId();
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 				}
 				mServiceUrl = Constant.HOST + Constant.SERVICE_ADD_ADDRESS;
@@ -270,7 +277,6 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
 		}
 		@Override
 		protected JSONObject doInBackground(String... params) {
@@ -279,7 +285,6 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
 			try {
 				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
 					

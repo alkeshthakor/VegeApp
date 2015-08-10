@@ -7,18 +7,6 @@ import static com.sabziatdoor.gcm.notification.CommonUtilities.SENDER_ID;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sabziatdoor.R;
-import com.google.android.gcm.GCMRegistrar;
-import com.sabziatdoor.fragment.FragmentDrawer;
-import com.sabziatdoor.fragment.HomeFragment;
-import com.sabziatdoor.gcm.notification.AlertDialogManager;
-import com.sabziatdoor.gcm.notification.ServerUtilities;
-import com.sabziatdoor.gcm.notification.WakeLocker;
-import com.sabziatdoor.util.ConnectionDetector;
-import com.sabziatdoor.util.Constant;
-import com.sabziatdoor.util.Pref;
-import com.sabziatdoor.util.ServerConnector;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -36,9 +24,22 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gcm.GCMRegistrar;
+import com.sabziatdoor.fragment.FragmentDrawer;
+import com.sabziatdoor.fragment.HomeFragment;
+import com.sabziatdoor.gcm.notification.AlertDialogManager;
+import com.sabziatdoor.gcm.notification.ServerUtilities;
+import com.sabziatdoor.gcm.notification.WakeLocker;
+import com.sabziatdoor.util.ConnectionDetector;
+import com.sabziatdoor.util.Constant;
+import com.sabziatdoor.util.Pref;
+import com.sabziatdoor.util.ServerConnector;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -46,6 +47,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 	private Toolbar mToolbar;
 	private FragmentDrawer drawerFragment;
+	private ImageView image;
 	//private TextView mTitleTextView;
 
 	/*
@@ -93,7 +95,17 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 		cd = new ConnectionDetector(getApplicationContext());
 		name = "Alkesh Thakor";
 		email = "";
+		
+		image = (ImageView) findViewById(R.id.image);
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
+		int width = metrics.widthPixels;
+		
+		int imageHeight = (440 * width) / 750; 
+		image.getLayoutParams().height = imageHeight;
+		
 		drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 		drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout),
 				mToolbar);
