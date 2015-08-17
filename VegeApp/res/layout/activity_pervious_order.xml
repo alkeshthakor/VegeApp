@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sabziatdoor"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,45 +15,68 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
-    <LinearLayout
-        android:id="@+id/llEmptyOrder"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone" >
+        android:layout_height="match_parent" >
 
-        <ImageView
+        <com.circularprogressview.android.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:padding="0dp"
+            android:visibility="gone"
+            app:cpv_animAutostart="false"
+            app:cpv_color="#689F38"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="4dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/empty_cart" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center_horizontal"
-            android:text="No Order History"
-            android:textSize="@dimen/font_size_xxxlarge" />
-        
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Look like you don't have any past order "
-            android:textSize="@dimen/font_size_small" />
-    </LinearLayout>
-    
-    <ListView
-        android:id="@+id/previousOrderListView"
-        android:layout_width="match_parent"
-        android:listSelector="@android:color/transparent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="2dp"
-        android:visibility="gone" >
-    </ListView>
+            <LinearLayout
+                android:id="@+id/llEmptyOrder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/empty_cart" />
+
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:text="No Order History"
+                    android:textSize="@dimen/font_size_xxxlarge" />
+
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Look like you don&apos;t have any past order "
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/previousOrderListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:dividerHeight="2dp"
+                android:listSelector="@android:color/transparent"
+                android:visibility="gone" >
+            </ListView>
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

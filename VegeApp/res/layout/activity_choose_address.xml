@@ -14,76 +14,87 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
-    
-    <com.circularprogressview.android.CircularProgressView
-        android:id="@+id/progress_view"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:padding="0dp"
-        app:cpv_animAutostart="false"
-        app:cpv_color="#689F38"
-        android:visibility="gone"
-        app:cpv_indeterminate="true"
-        app:cpv_thickness="4dp" />
-    
-    <LinearLayout
-        android:id="@+id/llEmptyAddress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:visibility="invisible" >
 
-        <ImageView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.circularprogressview.android.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:padding="0dp"
+            android:visibility="gone"
+            app:cpv_animAutostart="false"
+            app:cpv_color="#689F38"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="4dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/empty_address" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="No Stored Address Yet!"
-            android:textSize="@dimen/font_size_xxxlarge" />
+            <LinearLayout
+                android:id="@+id/llEmptyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="invisible" >
 
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Tell your home or office address just once\nand we will save it for future checkout"
-            android:textSize="@dimen/font_size_small" />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/empty_address" />
 
-    <ListView
-        android:id="@+id/addressListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:dividerHeight="2dp"
-        android:listSelector="@null"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:visibility="gone" >
-    </ListView>
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="No Stored Address Yet!"
+                    android:textSize="@dimen/font_size_xxxlarge" />
 
-    <Button
-        android:id="@+id/btnAddAddressChose"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/round_corner_button_background_with_color"
-        android:text="@string/lbl_add_another_address"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/font_size_small" />
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Tell your home or office address just once\nand we will save it for future checkout"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/addressListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:dividerHeight="2dp"
+                android:listSelector="@null"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone" >
+            </ListView>
+
+            <Button
+                android:id="@+id/btnAddAddressChose"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_corner_button_background_with_color"
+                android:text="@string/lbl_add_another_address"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

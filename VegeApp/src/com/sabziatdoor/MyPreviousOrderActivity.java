@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.circularprogressview.android.CircularProgressView;
 import com.sabziatdoor.R;
 import com.sabziatdoor.adapter.AddressAdapter;
 import com.sabziatdoor.adapter.PreviousOrderAdapter;
@@ -41,7 +42,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 {
 	
 	private Toolbar toolbar;
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	ServerConnector connector;
 	private String mServiceUrl;
 	ListView previousOrderListView;
@@ -76,10 +77,11 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
 		}
 		
-		mProgressDialog = new ProgressDialog(MyPreviousOrderActivity.this);
-		mProgressDialog.setMessage("Please wait...");
+		mProgressDialog = (CircularProgressView) findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(false);*/
         
         llEmptyOrder = (LinearLayout) findViewById(R.id.llEmptyOrder);
 		previousOrderListView = (ListView) findViewById(R.id.previousOrderListView);
@@ -126,7 +128,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -137,7 +139,7 @@ public class MyPreviousOrderActivity extends ActionBarActivity implements OnClic
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
 			try {
 				if(result!=null&&result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
 					JSONArray dataJSONArray = result.getJSONArray("DATA");

@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.circularprogressview.android.CircularProgressView;
 import com.sabziatdoor.R;
 import com.sabziatdoor.model.Address;
 import com.sabziatdoor.model.ZipCode;
@@ -53,7 +54,7 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 	private String mServiceUrl;
 	private String addressBody;
 
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
@@ -101,10 +102,11 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
-		mProgressDialog = new ProgressDialog(AddAddressActivity.this);
-		mProgressDialog.setMessage("Please wait...");
+		mProgressDialog = (CircularProgressView) findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
 		mProgressDialog.setIndeterminate(false);
-		mProgressDialog.setCancelable(false);
+		mProgressDialog.setCancelable(false);*/
 
 		nameEditText = (EditText) findViewById(R.id.addNameEditText);
 		houseEditText = (EditText) findViewById(R.id.addHouseEditText);
@@ -223,7 +225,7 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -235,7 +237,7 @@ public class AddAddressActivity extends ActionBarActivity implements OnClickList
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
 			try {
 				if (result != null && result.getString("STATUS").equalsIgnoreCase("SUCCESS")) {
 					if (isEdit)

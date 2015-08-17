@@ -15,148 +15,159 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
-    <com.circularprogressview.android.CircularProgressView
-        android:id="@+id/progress_view"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:padding="0dp"
-        app:cpv_animAutostart="false"
-        app:cpv_color="#689F38"
-        android:visibility="gone"
-        app:cpv_indeterminate="true"
-        app:cpv_thickness="4dp" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_weight="1"
-            android:text="@string/lbl_sms_waiting"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/phoneNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <com.circularprogressview.android.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:padding="0dp"
+            android:visibility="gone"
+            app:cpv_animAutostart="false"
+            app:cpv_color="#689F38"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="4dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0.2dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginStart="5dp"
-                android:text="@string/lbl_Or"
-                android:textSize="16sp" />
+                android:layout_marginTop="60dp"
+                android:orientation="vertical" >
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0.2dp"
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_sms_waiting"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/phoneNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0.2dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/lbl_Or"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0.2dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray" />
+                </LinearLayout>
+
+                <com.sabziatdoor.cusomview.TextViewCustom
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_manual_code_enter"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/manualCodeVerifyEdittext"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:hint="@string/lbl_enter_code"
+                    android:inputType="numberDecimal"
+                    android:maxLength="100"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
+                android:gravity="bottom|center"
+                android:orientation="horizontal"
+                android:paddingBottom="24dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <com.sabziatdoor.cusomview.ButtonCustom
+                    android:id="@+id/btnResendCodePhoneVerify"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_background_with_border_color"
+                    android:text="@string/lbl_resend_verification"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <com.sabziatdoor.cusomview.ButtonCustom
+                    android:id="@+id/btnNextPhoneVerify"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="110dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/button_background_with_fill_color"
+                    android:text="@string/lbl_next"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-
-        <com.sabziatdoor.cusomview.TextViewCustom
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/lbl_manual_code_enter"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/manualCodeVerifyEdittext"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:hint="@string/lbl_enter_code"
-            android:inputType="numberDecimal"
-            android:maxLength="100"
-            android:singleLine="true"
-            android:textColor="@android:color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:gravity="bottom|center"
-        android:orientation="horizontal"
-        android:paddingBottom="24dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
-        <com.sabziatdoor.cusomview.ButtonCustom
-            android:id="@+id/btnResendCodePhoneVerify"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button_background_with_border_color"
-            android:text="@string/lbl_resend_verification"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <com.sabziatdoor.cusomview.ButtonCustom
-            android:id="@+id/btnNextPhoneVerify"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="110dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/button_background_with_fill_color"
-            android:text="@string/lbl_next"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
