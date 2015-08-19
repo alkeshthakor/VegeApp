@@ -7,9 +7,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sabziatdoor.R;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.circularprogressview.android.CircularProgressView;
 import com.nineoldandroids.view.ViewHelper;
 import com.sabziatdoor.ProductSelectionActivity;
+import com.sabziatdoor.R;
 import com.sabziatdoor.adapter.ProductAdapter;
 import com.sabziatdoor.database.VegAppDatabaseHelper;
 import com.sabziatdoor.fadingactionbar.observablescrollview.ObservableListView;
@@ -19,30 +32,17 @@ import com.sabziatdoor.util.ConnectionDetector;
 import com.sabziatdoor.util.Constant;
 import com.sabziatdoor.util.ServerConnector;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Toast;
-
-
 public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment<ObservableListView>{
 
 	private Activity mActivity;
 
 	ObservableListView mProductListView;
-
+	private FrameLayout mFrameLayout; 
 	Bundle argumentBundle;
 	private String mServiceUrl;
 	private String mCategoryId;
 	
-	private ProgressDialog mProgressDialog;
+	private CircularProgressView mProgressDialog;
 	ConnectionDetector cd;
 	ServerConnector connector;
 	Context mContext;
@@ -74,7 +74,7 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		
 		View view = inflater.inflate(R.layout.fragment_layout_product_selection, container, false);
 		mProductListView = (ObservableListView) view.findViewById(R.id.scroll);
-
+		mFrameLayout = (FrameLayout) view.findViewById(R.id.mFrameLayout);
 		// Set padding view for ListView. This is the flexible space.
 		View paddingView = new View(getActivity());
 		final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
@@ -119,9 +119,10 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 
 		cd = new ConnectionDetector(mContext);
 		connector = new ServerConnector();
-		mProgressDialog = new ProgressDialog(mActivity);
-		mProgressDialog.setMessage("Please wait...");
-		mProgressDialog.setIndeterminate(false);
+		mProgressDialog = (CircularProgressView) view.findViewById(R.id.progress_view);
+		mProgressDialog.startAnimation();
+		/*mProgressDialog.setMessage("Please wait...");
+		mProgressDialog.setIndeterminate(false);*/
 		mServiceUrl = Constant.HOST + Constant.SERVICE_PRODUCT_BY_CAT_ID;
 		
 		if(cd.isConnectingToInternet()){
@@ -159,7 +160,8 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			mProgressDialog.show();
+			mProgressDialog.setVisibility(View.VISIBLE);
+			mFrameLayout.setVisibility(View.GONE);
 		}
 
 		@Override
@@ -170,7 +172,8 @@ public class ProductSelectionFragment extends FlexibleSpaceWithImageBaseFragment
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			mProgressDialog.dismiss();
+			mProgressDialog.setVisibility(View.GONE);
+			mFrameLayout.setVisibility(View.VISIBLE);
 			parseResponse(result);
 		}
 	}

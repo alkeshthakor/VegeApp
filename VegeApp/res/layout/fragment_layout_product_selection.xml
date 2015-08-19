@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sabziatdoor"
     android:id="@+id/fragment_root"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
+
+    <com.circularprogressview.android.CircularProgressView
+        android:id="@+id/progress_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:padding="0dp"
+        app:cpv_animAutostart="false"
+        app:cpv_color="#689F38"
+        app:cpv_indeterminate="true"
+        app:cpv_thickness="4dp" />
 
     <FrameLayout
+        android:id="@+id/mFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
 
         <View
             android:id="@+id/list_background"
@@ -23,4 +36,4 @@
             android:scrollbars="none" />
     </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>
