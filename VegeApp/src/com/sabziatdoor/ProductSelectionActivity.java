@@ -26,9 +26,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,6 +58,8 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 	private Context mContext;
 
 	private Toolbar mToolbar;
+	//private ImageView image;
+	//private ImageView overlay;
 	//private ImageView serachImageView;
 	//private String[] mCategoryList;
 	//private ProductSelectionActivity mProductSelectionActivity;
@@ -79,7 +83,18 @@ public class ProductSelectionActivity extends BaseActivity implements ITotalCoun
 			getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
 		}
+		/*image = (ImageView) findViewById(R.id.image);
+		overlay = (ImageView) findViewById(R.id.overlay);
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
+		int width = metrics.widthPixels;
+		
+		int imageHeight = (440 * width) / 750; 
+		image.getLayoutParams().height = imageHeight;
+		image.getLayoutParams().height = imageHeight;*/
+		
 		//mCategoryList=getIntent().getStringArrayExtra("cat_list");
 		
 		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), getIntent().getStringArrayExtra("cat_list"));

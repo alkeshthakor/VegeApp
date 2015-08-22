@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.sabziatdoor"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,131 +15,125 @@
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+            android:layout_height="wrap_content" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lbl_add_name"
-                android:textAllCaps="true"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/addNameEditText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text|textCapSentences"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lbl_add_house_no"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_add_name"
+                    android:textAllCaps="true"
+                    android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addHouseEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text|textCapSentences"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/addNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lbl_add_street"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_add_house_no"
+                    android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addStreetEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text|textCapSentences"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/addHouseEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lbl_add_area"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_add_street"
+                    android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addAreaEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text|textCapSentences"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/addStreetEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lbl_add_city"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_add_area"
+                    android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/addCityEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text|textCapSentences"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/addAreaEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lbl_add_zip_code"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_add_city"
+                    android:textSize="12sp" />
 
-            <Spinner
-                android:id="@+id/addZipSpinner"
-                style="?android:attr/editTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/testaaa"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
-            
-            <!-- <EditText
-                android:id="@+id/addZipEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLength="6"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" /> -->
+                <EditText
+                    android:id="@+id/addCityEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
-            <!-- <Button
-                android:id="@+id/btnCreateAdd"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/round_corner_button_background_with_color"
-                android:text="@string/lbl_add_create"
-                android:textColor="#FFF" /> -->
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_add_zip_code"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/addZipSpinner"
+                    style="?android:attr/editTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <com.circularprogressview.android.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:padding="0dp"
+            android:visibility="gone"
+            app:cpv_animAutostart="false"
+            app:cpv_color="#689F38"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="4dp" />
+    </RelativeLayout>
 
 </LinearLayout>

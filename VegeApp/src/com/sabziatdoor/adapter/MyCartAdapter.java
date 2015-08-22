@@ -162,9 +162,8 @@ public class MyCartAdapter extends BaseAdapter {
 			}
 		});
         
-        holder.productDisplayPriceTextView.setText(rowItem.getProductDisplayPrice());;
+        holder.productDisplayPriceTextView.setText(context.getResources().getString(R.string.Rs)+rowItem.getProductDisplayPrice());
         holder.productDisplayPriceTextView.setPaintFlags(holder.productDisplayPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
         holder.txtViewProductName.setText(rowItem.getProductName());
         holder.txtViewProductWeight.setText(rowItem.getUnit_value().trim()+ " " + rowItem.getUnit_key().trim());
         holder.productMainPriceTextView.setText(rowItem.getProductMainPrice());
